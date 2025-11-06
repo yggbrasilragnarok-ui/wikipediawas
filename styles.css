@@ -1699,12 +1699,13 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 4px;
 }
 
 .monster-name__media img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   image-rendering: pixelated;
 }
 
@@ -1784,14 +1785,14 @@ body {
   background: rgba(4, 26, 44, 0.85);
   border: 1px solid rgba(11, 223, 255, 0.25);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
-  min-width: 120px;
-  max-width: 140px;
+  min-width: 100px;
+  max-width: 120px;
 }
 
 .monster-map-chip__media {
   position: relative;
   width: 100%;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 5 / 4;
   border-radius: var(--radius-sm);
   overflow: hidden;
   background: rgba(0, 0, 0, 0.45);
