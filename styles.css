@@ -1644,7 +1644,7 @@ body {
     min-height: auto;
   }
 .explore-map {
-    --tile-size: clamp(12px, 14vw, 19px);
+    --tile-size: clamp(12px, 14vw, 20px);
   }
 }
 
