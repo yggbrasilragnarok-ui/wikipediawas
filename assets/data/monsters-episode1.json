@@ -12,12 +12,13 @@
   },
   "monsters": [
     {
-      "id": 1002,
-      "name": "Poring",
-      "level": 1,
-      "race": "Planta",
-      "element": "Água 1",
-      "size": "Pequeno",
+      "id": 1053,
+      "name": "Besouro-Ladrão Fêmea",
+      "image": "assets/data/1053.gif",
+      "level": 10,
+      "race": "Inseto",
+      "element": "Sombrio 1",
+      "size": "Médio",
       "spawn": [
         {
           "map": "prt_fild08",
@@ -48,6 +49,7 @@
     {
       "id": 1120,
       "name": "Phreeoni",
+      "image": "assets/ghostring.png",
       "level": 60,
       "race": "Inseto",
       "element": "Neutro 2",
