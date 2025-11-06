@@ -1630,7 +1630,10 @@ body {
   font-size: 0.85rem;
   display: flex;
   align-items: center;
+  justify-content: center;
+  text-align: center;
   gap: 8px;
+  min-height: 64px;
 }
 
 .monster-table {
@@ -1681,13 +1684,13 @@ body {
 .monster-name {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
+  gap: 10px;
 }
 
 .monster-name__media {
   flex: 0 0 auto;
-  width: 72px;
-  height: 72px;
+  width: 48px;
+  height: 48px;
   border-radius: var(--radius-md);
   border: 1px solid rgba(140, 243, 255, 0.35);
   background: rgba(4, 26, 44, 0.85);
@@ -1774,15 +1777,15 @@ body {
   display: inline-flex;
   flex-direction: column;
   align-items: stretch;
-  gap: 8px;
-  padding: 10px;
+  gap: 6px;
+  padding: 8px;
   margin: 6px;
   border-radius: var(--radius-md);
   background: rgba(4, 26, 44, 0.85);
   border: 1px solid rgba(11, 223, 255, 0.25);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
-  min-width: 160px;
-  max-width: 180px;
+  min-width: 120px;
+  max-width: 140px;
 }
 
 .monster-map-chip__media {
@@ -1815,7 +1818,7 @@ body {
 .monster-map-chip__content {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 4px;
 }
 
 .monster-map-chip__name {
@@ -1841,13 +1844,13 @@ body {
 /* RESPONSIVO */
 @media (max-width: 800px) {
   .monster-name__media {
-    width: 56px;
-    height: 56px;
+    width: 44px;
+    height: 44px;
   }
 
   .monster-map-chip {
-    min-width: 140px;
-    max-width: 160px;
+    min-width: 110px;
+    max-width: 130px;
   }
 
   .teleport-map__grid {
@@ -1942,7 +1945,7 @@ body {
   }
 
   .monster-map-chip {
-    min-width: 120px;
+    min-width: 100px;
   }
 }
 

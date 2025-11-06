@@ -4882,6 +4882,22 @@ function applyMonsterFilters(monsters, filters) {
   });
 }
 
+function isMonsterFilterActive(state) {
+  if (!state) {
+    return false;
+  }
+
+  const hasTerm = normalizeStringValue(state.term).length > 0;
+
+  return (
+    hasTerm ||
+    state.region !== "all" ||
+    state.mapType !== "all" ||
+    state.race !== "all" ||
+    state.element !== "all"
+  );
+}
+
 function ensureAssetPath(src) {
   if (!src) {
     return "";
@@ -5025,6 +5041,19 @@ function renderMonsterTable(monsters, context) {
     return;
   }
 
+  if (context?.showPrompt) {
+    statusEl.hidden = false;
+    statusEl.textContent = "aplique um filtro ou pesquise um monstro";
+    table.hidden = true;
+    tableBody.innerHTML = "";
+
+    if (resultCount) {
+      resultCount.textContent = "aplique um filtro ou pesquise um monstro";
+    }
+
+    return;
+  }
+
   statusEl.hidden = true;
   table.hidden = false;
 
@@ -5150,8 +5179,9 @@ function initMonsterDatabase() {
       };
 
       const updateTable = () => {
-        const filtered = applyMonsterFilters(monsters, filterState);
-        renderMonsterTable(filtered, { ...totals });
+        const hasActiveFilters = isMonsterFilterActive(filterState);
+        const filtered = hasActiveFilters ? applyMonsterFilters(monsters, filterState) : [];
+        renderMonsterTable(filtered, { ...totals, showPrompt: !hasActiveFilters });
       };
 
       const searchInput = document.getElementById("monsterSearchInput");
