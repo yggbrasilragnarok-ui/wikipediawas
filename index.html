@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wikipédia da Was</title>
+  <link rel="stylesheet" href="styles.css" />
+  <script defer src="script.js"></script>
+</head>
+<body>
+  <div
+    class="time-warp-overlay is-active"
+    id="timeWarpOverlay"
+    aria-hidden="true"
+  >
+    <canvas class="time-warp-overlay__canvas" id="timeWarpCanvas"></canvas>
+  </div>
+  <canvas
+    class="particle-canvas"
+    id="particleCanvas"
+    aria-hidden="true"
+  ></canvas>
+  <!-- GLOW BACKGROUND -->
+  <div class="bg-glow"></div>
+
+  <header class="topbar">
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Abrir menu de navegação"
+      aria-controls="sidebarNavigation"
+      aria-expanded="false"
+    >
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+      <span class="menu-bar"></span>
+      <span class="menu-label">Início</span>
+    </button>
+    <div class="brand">
+      <div class="brand-icon"><IMG src="assets/logo.png"></div>
+      <div class="brand-text">
+        <h1>Wikipédia da Was</h1>
+        <span class="subtitle">O inicio de uma aventura • Episódio 1</span>
+      </div>
+    </div>
+
+    <div class="search-wrapper">
+      <input
+        type="text"
+        id="searchInput"
+        placeholder="Buscar: classes, mapas, MVPs..."
+        aria-label="Buscar na wiki"
+      />
+      <button id="searchBtn" class="btn-glow">Buscar</button>
+    </div>
+  </header>
+
+  <main class="layout">
+    <!-- SIDEBAR -->
+    <aside class="sidebar" id="sidebarNavigation">
+      <nav class="nav-sections">
+        <h2 class="nav-title">Wikipédia</h2>
+        <ul>
+          <li class="nav-item active" data-page="home">Início</li>
+          <li class="nav-item" data-page="rules">Regras</li>
+          <li class="nav-item" data-page="server">Sobre o Servidor</li>
+          <li class="nav-item" data-page="roadmap">RoadMap</li>
+          <li class="nav-item" data-page="changelog">Changelog</li>
+          <li class="nav-item" data-page="faq">FAQ</li>
+        </ul>
+
+        <h2 class="nav-title">Sistemas</h2>
+        <ul>
+          <li class="nav-item" data-page="teleport">Sistema de Teleporte</li>
+          <li class="nav-item" data-page="seasons">Sistema de Temporada</li>
+          <li class="nav-item" data-page="explore">Sistema de Exploração</li>
+          
+        </ul>
+        <h2 class="nav-title">Database</h2>
+        <ul>
+          <li class="nav-item" data-page="class">Classes</li>
+          <li class="nav-item" data-page="field">Cidades e Campos</li>
+          <li class="nav-item" data-page="dungeon">Calabouços</li>
+          <li class="nav-item" data-page="loot">Itens</li>
+          <li class="nav-item" data-page="monster">Monstros</li>
+          
+        </ul>
+        
+      </nav>
+
+      <footer class="sidebar-footer">
+        <p class="version-label">Was Rag • Ep 1</p>
+        <p class="disclaimer">Fan server • não oficial da Gravity</p>
+      </footer>
+    </aside>
+    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+
+    <!-- CONTENT AREA -->
+    <section class="content-area">
+      <!-- dynamic content goes here -->
+      <article id="pageContent">
+        <!-- Página inicial carregada por padrão -->
+        <h2 class="page-title rune-text">Bem-vindo ao Was Rag</h2>
+        <p class="lead">
+          Este é a database oficial do servidor
+        <strong>Was Rag</strong>, um Ragnarok Online evolutivo que começa no
+        <span class="tag-episode">Episódio 1</span> e avança a cada temporada o conteúdo oficial. </p>
+
+        <div class="cards-grid">
+          <div class="info-card">
+            <div class="info-card-media" aria-hidden="true"><img src=""></div>
+            <div class="info-card-content">
+              <h3>Filosofia do Servidor</h3>
+              <p>
+                O foco é <strong>explorar</strong>, não só rushar level.
+                Teleportes e bônus da conta são desbloqueados fazendo missões nos
+                mapas. Jogar abre caminhos. Literalmente.
+              </p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-media" aria-hidden="true"><img src=""></div>
+            <div class="info-card-content">
+              <h3>Progressão em Episódios</h3>
+              <p>
+                Começamos puro no Episódio 1. Novos episódios são liberados de
+                forma progressiva, trazendo mapas, itens e MVPs clássicos — sem
+                pular etapas.
+              </p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-media" aria-hidden="true"><img src=""></div>
+            <div class="info-card-content">
+              <h3>Temporadas de Dificuldade</h3>
+              <p>
+                Cada conta escolhe uma dificuldade por temporada
+                (<span class="txt-high">Fácil</span>,
+                <span class="txt-high">Normal</span>,
+                <span class="txt-high">Difícil</span>,
+                <span class="txt-high">Impossível</span>).
+                Dificuldades maiores: mobs batem mais forte, mas o drop aumenta.
+              </p>
+            </div>
+          </div>
+
+          <div class="info-card">
+            <div class="info-card-media" aria-hidden="true"><img src=""></div>
+            <div class="info-card-content">
+              <h3>Temporada, de 2 meses, com missões</h3>
+              <p>
+                Toda temporada tem um desafio mundial com prazo real. Completar
+                prova que você jogou “de verdade” naquela dificuldade e garante
+                recompensas de prestígio.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <hr class="divider"/>
+
+        <section class="quick-links">
+          <a
+            class="quick-card quick-card--site"
+            href="https://wasrag.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="quick-card-badge" aria-hidden="true">
+              <img src="">
+            </div>
+            <h4 class="quick-card-title">Site</h4>
+          </a>
+          <a
+            class="quick-card quick-card--download"
+            href="https://wasrag.com/download"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="quick-card-badge" aria-hidden="true">
+        <img src="">
+            </div>
+            <h4 class="quick-card-title">Download</h4>
+          </a>
+          <a
+            class="quick-card quick-card--discord"
+            href="https://discord.gg/wasrag"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <div class="quick-card-badge" aria-hidden="true">
+        <img src="">
+            </div>
+            <h4 class="quick-card-title">Discord</h4>
+          </a>
+        </section>
+      </article>
+    </section>
+  </main>
+
+  <footer class="bottom-footer">
+    <p>&copy; Was Rag. Servidor fã, sem fins comerciais oficiais. Ragnarok Online é propriedade da Gravity Co., Ltd.</p>
+  </footer>
+</body>
+</html>
+
