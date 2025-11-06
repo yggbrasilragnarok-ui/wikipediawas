@@ -664,7 +664,7 @@ body {
   position: relative;
   border-radius: var(--radius-lg);
   overflow: hidden;
-  min-height: 160px;
+  aspect-ratio: 42 / 9;
   border: 1px solid var(--line-outer);
   background: rgba(8, 12, 20, 0.8);
 }

@@ -358,20 +358,19 @@ const EXPLORE_DUNGEON_ORDER = [
   "prt_sewb1",
   "pay_dun00",
   "gef_dun00",
-  "prt_maze01",
   "moc_pryd01",
-  "iz_dun01",
-  "orc_dun01",
+  "iz_dun00",
+  "treasure1",
 ];
 
 const EXPLORE_DUNGEON_BACKGROUNDS = {
-  prt_sewb1: "assets/pronteralarge.gif",
-  pay_dun00: "assets/payonlarge.gif",
-  gef_dun00: "assets/geffenlarge.gif",
-  prt_maze01: "assets/glast_01large.gif",
-  moc_pryd01: "assets/morocclarge.gif",
-  iz_dun01: "assets/izlu2dunlarge.gif",
-  orc_dun01: "assets/gef_fild10large.gif",
+  prt_sewb1: "",
+  pay_dun00: "",
+  gef_dun00: "",
+  prt_maze01: "",
+  moc_pryd01: "",
+  iz_dun00: "",
+  treasure1: "",
 };
 
 let hasInitializedExploreDungeons = false;
@@ -392,24 +391,12 @@ function createExploreMapVariant({ key, label, layout }) {
 }
 
 const EXPLORE_MAP_NAME_OVERRIDES = {
-  prontera: "Prontera",
-  geffen: "Geffen",
-  payon: "Payon",
-  morocc: "Morroc",
-  izlude: "Izlude",
-  alberta: "Alberta",
-  alb2trea: "Al De Baran",
-  pay_gld: "Castelo de Guilda de Payon",
-  pay_arche: "Guilda dos Arqueiros de Payon",
-  moc_ruins: "Ruínas de Morroc",
-  ghostring: "Ilha do Ghostring",
-  prt_sewb1: "Esgotos de Prontera 1F",
-  pay_dun00: "Caverna de Payon 1F",
-  gef_dun00: "Torre de Geffen 1F",
-  moc_pryd01: "Pirâmides de Morroc 1F",
-  iz_dun01: "Caverna Submarina de Byalan 1F",
-  orc_dun01: "Calabouço dos Orcs 1F",
-  prt_maze01: "Labirinto de Prontera 1F",
+  prt_sewb1: "Esgotos de Prontera",
+  pay_dun00: "Caverna de Payon",
+  gef_dun00: "Torre de Geffen",
+  moc_pryd01: "Pirâmides de Morroc",
+  iz_dun01: "Caverna Submarina de Byalan",
+  orc_dun01: "Navio Fantasma",
 };
 
 const EXPLORE_MAP_DETAILS = {
@@ -2838,7 +2825,7 @@ descriptionEntries: [
     ], 
   },
   prt_sewb1: {
-    name: "Esgotos de Prontera 1F",
+    name: "Esgotos de Prontera",
     region: "Subterrâneo de Prontera",
     description:
       "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
@@ -2847,7 +2834,7 @@ descriptionEntries: [
         title: "Entrada pelos bueiros",
         images: [
           {
-            src: "assets/pronteralarge.gif",
+            src: "",
           },
         ],
         text:
@@ -2856,7 +2843,7 @@ descriptionEntries: [
     ],
   },
   pay_dun00: {
-    name: "Caverna de Payon 1F",
+    name: "Caverna de Payon",
     region: "Florestas de Payon",
     description:
       "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
@@ -2865,7 +2852,7 @@ descriptionEntries: [
         title: "Salões ancestrais",
         images: [
           {
-            src: "assets/payonlarge.gif",
+            src: "",
           },
         ],
         text:
@@ -2874,7 +2861,7 @@ descriptionEntries: [
     ],
   },
   gef_dun00: {
-    name: "Torre de Geffen 1F",
+    name: "Torre de Geffen",
     region: "Cidade dos Magos",
     description:
       "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
@@ -2883,7 +2870,7 @@ descriptionEntries: [
         title: "Base da torre",
         images: [
           {
-            src: "assets/geffenlarge.gif",
+            src: "",
           },
         ],
         text:
@@ -2891,26 +2878,8 @@ descriptionEntries: [
       },
     ],
   },
-  prt_maze01: {
-    name: "Labirinto de Prontera 1F",
-    region: "Campos de Prontera",
-    description:
-      "Um labirinto natural formado por rochas ao norte da capital. Kobolds guardam os corredores em busca de invasores.",
-    descriptionEntries: [
-      {
-        title: "Corredores sinuosos",
-        images: [
-          {
-            src: "assets/glast_01large.gif",
-          },
-        ],
-        text:
-          "Paredes altas de pedra criam um cenário claustrofóbico. Movimentação em grupo facilita encontrar o portal para os andares inferiores.",
-      },
-    ],
-  },
   moc_pryd01: {
-    name: "Pirâmides de Morroc 1F",
+    name: "Pirâmides de Morroc",
     region: "Deserto de Sograt",
     description:
       "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
@@ -2919,7 +2888,7 @@ descriptionEntries: [
         title: "Salões arenosos",
         images: [
           {
-            src: "assets/morocclarge.gif",
+            src: "",
           },
         ],
         text:
@@ -2927,8 +2896,8 @@ descriptionEntries: [
       },
     ],
   },
-  iz_dun01: {
-    name: "Caverna Submarina de Byalan 1F",
+  iz_dun00: {
+    name: "Caverna Submarina de Byalan",
     region: "Arquipélago de Byalan",
     description:
       "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
@@ -2937,7 +2906,7 @@ descriptionEntries: [
         title: "Corredores alagados",
         images: [
           {
-            src: "assets/izlu2dunlarge.gif",
+            src: "",
           },
         ],
         text:
@@ -2945,21 +2914,21 @@ descriptionEntries: [
       },
     ],
   },
-  orc_dun01: {
-    name: "Calabouço dos Orcs 1F",
-    region: "Cordilheira de Geffen",
+  treasure1: {
+    name: "Navio Fantasma",
+    region: "....",
     description:
-      "Fortaleza subterrânea dos clãs orcs. Guerreiros e arqueiros defendem o território enquanto planejam invasões aos campos humanos.",
+      ".....",
     descriptionEntries: [
       {
         title: "Acampamento orc",
         images: [
           {
-            src: "assets/gef_fild10large.gif",
+            src: "",
           },
         ],
         text:
-          "Barricadas improvisadas e tochas iluminam o caminho. Elemento Fogo e armas sagradas são eficazes para quebrar a linha de frente inimiga.",
+          ".........",
       },
     ],
   },
@@ -4415,7 +4384,7 @@ loot: {
     html: `
     `
 },
-class: {
+monster: {
     title: "Monstros",
     html: `
     `
