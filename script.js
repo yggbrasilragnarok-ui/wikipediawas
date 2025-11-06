@@ -4548,9 +4548,559 @@ loot: {
 monster: {
     title: "Monstros",
     html: `
+      <section class="monster-database">
+        <header class="monster-database__header">
+          <p class="lead">
+            Consulte todos os monstros disponíveis no <strong>Episódio 1</strong> seguindo a ordem oficial do
+            <abbr title="Korean Ragnarok Online">kRO</abbr>. Utilize os filtros para localizar alvos por região,
+            elemento ou mapas específicos da temporada inicial.
+          </p>
+
+          <dl class="monster-database__meta">
+            <div class="monster-database__meta-item">
+              <dt>Episódio</dt>
+              <dd>Episódio 1 (kRO)</dd>
+            </div>
+            <div class="monster-database__meta-item">
+              <dt>Atualizado em</dt>
+              <dd id="monsterMetadataUpdated">—</dd>
+            </div>
+            <div class="monster-database__meta-item">
+              <dt>Total catalogado</dt>
+              <dd id="monsterMetadataTotal">—</dd>
+            </div>
+          </dl>
+        </header>
+
+        <form class="monster-database__filters" id="monsterFilters" autocomplete="off">
+          <label class="monster-filter">
+            <span class="monster-filter__label">Buscar</span>
+            <input
+              type="search"
+              id="monsterSearchInput"
+              placeholder="Nome, mapa ou observação"
+              aria-label="Buscar monstros por nome, mapa ou anotação"
+            />
+          </label>
+
+          <label class="monster-filter">
+            <span class="monster-filter__label">Região</span>
+            <select id="monsterRegionFilter" aria-label="Filtrar por região">
+              <option value="all">Todas as regiões</option>
+            </select>
+          </label>
+
+          <label class="monster-filter">
+            <span class="monster-filter__label">Tipo de mapa</span>
+            <select id="monsterMapTypeFilter" aria-label="Filtrar por tipo de mapa">
+              <option value="all">Todos os tipos</option>
+            </select>
+          </label>
+
+          <label class="monster-filter">
+            <span class="monster-filter__label">Raça</span>
+            <select id="monsterRaceFilter" aria-label="Filtrar por raça">
+              <option value="all">Todas as raças</option>
+            </select>
+          </label>
+
+          <label class="monster-filter">
+            <span class="monster-filter__label">Elemento</span>
+            <select id="monsterElementFilter" aria-label="Filtrar por elemento">
+              <option value="all">Todos os elementos</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="monster-database__summary">
+          <p class="monster-database__count" id="monsterResultCount" aria-live="polite">
+            Carregando lista de monstros...
+          </p>
+          <p class="monster-database__source">Fonte: cronologia oficial kRO (pré-Renewal).</p>
+        </div>
+
+        <div class="monster-database__table-wrapper" id="monsterTableWrapper">
+          <div class="monster-database__status" id="monsterLoadingStatus" role="status" aria-live="assertive">
+            Carregando bestiário do Episódio 1...
+          </div>
+          <table class="monster-table" id="monsterTable" hidden>
+            <thead>
+              <tr>
+                <th scope="col">Monstro</th>
+                <th scope="col">Nível</th>
+                <th scope="col">Raça</th>
+                <th scope="col">Elemento</th>
+                <th scope="col">Tamanho</th>
+                <th scope="col">HP</th>
+                <th scope="col">EXP (Base/Classe)</th>
+                <th scope="col">Mapas</th>
+              </tr>
+            </thead>
+            <tbody id="monsterTableBody"></tbody>
+          </table>
+        </div>
+      </section>
     `
 },
 };
+
+
+const MONSTER_DATA_URL = "assets/data/monsters-episode1.json";
+let monsterDataCache = null;
+let monsterDataPromise = null;
+
+async function fetchMonsterDatabase() {
+  if (monsterDataCache) {
+    return monsterDataCache;
+  }
+
+  if (monsterDataPromise) {
+    return monsterDataPromise;
+  }
+
+  monsterDataPromise = window
+    .fetch(MONSTER_DATA_URL, { cache: "no-store" })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Falha ao carregar dados de monstros: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => {
+      monsterDataCache = data;
+      return data;
+    })
+    .catch(error => {
+      monsterDataPromise = null;
+      throw error;
+    });
+
+  return monsterDataPromise;
+}
+
+function formatNumberForLocale(value) {
+  if (typeof value !== "number" || Number.isNaN(value)) {
+    return "—";
+  }
+
+  return value.toLocaleString("pt-BR");
+}
+
+function formatDateForLocale(dateString) {
+  if (!dateString) {
+    return "—";
+  }
+
+  const date = new Date(dateString);
+  if (Number.isNaN(date.getTime())) {
+    return dateString;
+  }
+
+  return date.toLocaleDateString("pt-BR", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+}
+
+function normalizeStringValue(value) {
+  return typeof value === "string" ? value.trim() : "";
+}
+
+function normalizeFilterValue(value) {
+  return normalizeStringValue(value).toLowerCase() || "all";
+}
+
+function createOptionHtml({ value, label }) {
+  return `<option value="${value}">${label}</option>`;
+}
+
+function populateSelectOptions(selectEl, placeholderLabel, options) {
+  if (!selectEl) return;
+
+  const optionHtml = [`<option value="all">${placeholderLabel}</option>`].concat(
+    options.map(createOptionHtml)
+  );
+
+  selectEl.innerHTML = optionHtml.join("");
+}
+
+function collectMonsterFilters(monsters) {
+  const raceMap = new Map();
+  const elementMap = new Map();
+  const regionMap = new Map();
+  const typeMap = new Map();
+
+  monsters.forEach(monster => {
+    const raceLabel = normalizeStringValue(monster.race);
+    if (raceLabel) {
+      const key = raceLabel.toLowerCase();
+      if (!raceMap.has(key)) {
+        raceMap.set(key, raceLabel);
+      }
+    }
+
+    const elementLabel = normalizeStringValue(monster.element);
+    if (elementLabel) {
+      const key = elementLabel.toLowerCase();
+      if (!elementMap.has(key)) {
+        elementMap.set(key, elementLabel);
+      }
+    }
+
+    const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
+    spawnList.forEach(spawn => {
+      const regionLabel = normalizeStringValue(spawn.region);
+      if (regionLabel) {
+        const key = regionLabel.toLowerCase();
+        if (!regionMap.has(key)) {
+          regionMap.set(key, regionLabel);
+        }
+      }
+
+      const typeLabel = normalizeStringValue(spawn.type);
+      if (typeLabel) {
+        const key = typeLabel.toLowerCase();
+        if (!typeMap.has(key)) {
+          typeMap.set(key, typeLabel);
+        }
+      }
+    });
+  });
+
+  const sorter = (a, b) => a.label.localeCompare(b.label, "pt-BR");
+
+  return {
+    races: Array.from(raceMap, ([value, label]) => ({ value, label })).sort(sorter),
+    elements: Array.from(elementMap, ([value, label]) => ({ value, label })).sort(sorter),
+    regions: Array.from(regionMap, ([value, label]) => ({ value, label })).sort(sorter),
+    mapTypes: Array.from(typeMap, ([value, label]) => ({ value, label })).sort(sorter),
+  };
+}
+
+function applyMonsterFilters(monsters, filters) {
+  const term = normalizeStringValue(filters.term).toLowerCase();
+  const region = normalizeFilterValue(filters.region);
+  const mapType = normalizeFilterValue(filters.mapType);
+  const race = normalizeFilterValue(filters.race);
+  const element = normalizeFilterValue(filters.element);
+
+  const filtered = monsters.filter(monster => {
+    if (race !== "all" && normalizeStringValue(monster.race).toLowerCase() !== race) {
+      return false;
+    }
+
+    if (element !== "all" && normalizeStringValue(monster.element).toLowerCase() !== element) {
+      return false;
+    }
+
+    const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
+
+    if (region !== "all") {
+      const hasRegion = spawnList.some(spawn => normalizeStringValue(spawn.region).toLowerCase() === region);
+      if (!hasRegion) {
+        return false;
+      }
+    }
+
+    if (mapType !== "all") {
+      const hasType = spawnList.some(spawn => normalizeStringValue(spawn.type).toLowerCase() === mapType);
+      if (!hasType) {
+        return false;
+      }
+    }
+
+    if (term) {
+      const haystackParts = [
+        monster.name,
+        monster.notes,
+        monster.race,
+        monster.element,
+        monster.size,
+      ];
+
+      spawnList.forEach(spawn => {
+        haystackParts.push(spawn.map, spawn.name, spawn.region, spawn.type);
+      });
+
+      const haystack = haystackParts
+        .map(value => normalizeStringValue(value).toLowerCase())
+        .filter(Boolean)
+        .join(" ");
+
+      if (!haystack.includes(term)) {
+        return false;
+      }
+    }
+
+    return true;
+  });
+
+  return filtered.sort((a, b) => {
+    const levelA = typeof a.level === "number" ? a.level : Number.MAX_SAFE_INTEGER;
+    const levelB = typeof b.level === "number" ? b.level : Number.MAX_SAFE_INTEGER;
+
+    if (levelA !== levelB) {
+      return levelA - levelB;
+    }
+
+    return normalizeStringValue(a.name).localeCompare(normalizeStringValue(b.name), "pt-BR");
+  });
+}
+
+function createMonsterRow(monster) {
+  const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
+  const stats = monster.stats ?? null;
+  const hpLabel = stats?.hp != null ? formatNumberForLocale(stats.hp) : "—";
+  const baseExpLabel = stats?.baseExp != null ? formatNumberForLocale(stats.baseExp) : "—";
+  const jobExpLabel = stats?.jobExp != null ? formatNumberForLocale(stats.jobExp) : "—";
+  const expLabel = baseExpLabel === "—" && jobExpLabel === "—" ? "—" : `${baseExpLabel} / ${jobExpLabel}`;
+  const levelLabel = typeof monster.level === "number" ? monster.level : "—";
+
+  const spawnChips = spawnList
+    .map(spawn => {
+      const mapCode = normalizeStringValue(spawn.map);
+      const name = normalizeStringValue(spawn.name) || mapCode;
+      const region = normalizeStringValue(spawn.region);
+      const type = normalizeStringValue(spawn.type);
+
+      const titleParts = [];
+      if (region) titleParts.push(region);
+      if (type) titleParts.push(type);
+      if (mapCode) titleParts.push(mapCode);
+
+      const title = titleParts.join(" • ");
+
+      return `
+        <span class="monster-map-chip" title="${title}">
+          <span class="monster-map-chip__name">${name}</span>
+          ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
+        </span>
+      `;
+    })
+    .join("");
+
+  const badges = [];
+  if (monster.isMvp) {
+    badges.push('<span class="monster-badge monster-badge--mvp">MVP</span>');
+  }
+
+  const notesHtml = normalizeStringValue(monster.notes)
+    ? `<p class="monster-notes">${monster.notes}</p>`
+    : "";
+
+  return `
+    <tr class="monster-row">
+      <th scope="row" class="monster-cell monster-cell--name">
+        <div class="monster-name">
+          <span class="monster-name__label">${monster.name ?? "—"}</span>
+          ${badges.join("")}
+        </div>
+        ${notesHtml}
+      </th>
+      <td class="monster-cell" data-label="Nível">${levelLabel}</td>
+      <td class="monster-cell" data-label="Raça">${monster.race ?? "—"}</td>
+      <td class="monster-cell" data-label="Elemento">${monster.element ?? "—"}</td>
+      <td class="monster-cell" data-label="Tamanho">${monster.size ?? "—"}</td>
+      <td class="monster-cell" data-label="HP">${hpLabel}</td>
+      <td class="monster-cell" data-label="EXP (Base/Classe)">${expLabel}</td>
+      <td class="monster-cell" data-label="Mapas">
+        ${spawnChips || "—"}
+      </td>
+    </tr>
+  `;
+}
+
+function renderMonsterTable(monsters, context) {
+  const tableBody = document.getElementById("monsterTableBody");
+  const table = document.getElementById("monsterTable");
+  const statusEl = document.getElementById("monsterLoadingStatus");
+  const resultCount = document.getElementById("monsterResultCount");
+
+  if (!tableBody || !table || !statusEl) {
+    return;
+  }
+
+  statusEl.hidden = true;
+  table.hidden = false;
+
+  if (monsters.length === 0) {
+    tableBody.innerHTML = `
+      <tr class="monster-row monster-row--empty">
+        <td class="monster-cell" colspan="8">
+          Nenhum monstro encontrado com os filtros atuais. Ajuste os critérios de busca para visualizar outras criaturas.
+        </td>
+      </tr>
+    `;
+  } else {
+    tableBody.innerHTML = monsters.map(createMonsterRow).join("");
+  }
+
+  if (resultCount) {
+    const total = typeof context.total === "number" ? context.total : context.fallbackTotal;
+    const filteredCount = monsters.length;
+    const filteredLabel = filteredCount === 1 ? "monstro" : "monstros";
+    const totalLabel = total === 1 ? "monstro" : "monstros";
+    resultCount.textContent = `${filteredCount} ${filteredLabel} exibido(s) de ${total} ${totalLabel} do Episódio 1.`;
+  }
+}
+
+function handleMonsterFetchError(error) {
+  const statusEl = document.getElementById("monsterLoadingStatus");
+  const table = document.getElementById("monsterTable");
+  const tableBody = document.getElementById("monsterTableBody");
+  const countEl = document.getElementById("monsterResultCount");
+
+  if (statusEl) {
+    statusEl.hidden = false;
+    statusEl.textContent = "Não foi possível carregar o bestiário agora. Tente novamente mais tarde.";
+  }
+
+  if (table) {
+    table.hidden = true;
+  }
+
+  if (tableBody) {
+    tableBody.innerHTML = "";
+  }
+
+  if (countEl) {
+    countEl.textContent = "Erro ao carregar a lista de monstros.";
+  }
+
+  // eslint-disable-next-line no-console
+  console.error(error);
+}
+
+function initMonsterDatabase() {
+  const filtersForm = document.getElementById("monsterFilters");
+  if (filtersForm) {
+    filtersForm.addEventListener("submit", event => {
+      event.preventDefault();
+    });
+  }
+
+  const loadingStatus = document.getElementById("monsterLoadingStatus");
+  const table = document.getElementById("monsterTable");
+  if (loadingStatus) {
+    loadingStatus.hidden = false;
+  }
+  if (table) {
+    table.hidden = true;
+  }
+
+  fetchMonsterDatabase()
+    .then(data => {
+      const monsters = Array.isArray(data?.monsters) ? data.monsters : [];
+      const metadata = data?.metadata ?? {};
+      const totals = {
+        total: typeof metadata.total === "number" ? metadata.total : null,
+        fallbackTotal: monsters.length,
+      };
+
+      const updatedEl = document.getElementById("monsterMetadataUpdated");
+      const totalEl = document.getElementById("monsterMetadataTotal");
+
+      if (updatedEl) {
+        updatedEl.textContent = formatDateForLocale(metadata.updatedAt);
+      }
+
+      const totalValue = totals.total ?? totals.fallbackTotal;
+      if (totalEl) {
+        const totalLabel = totalValue === 1 ? "1 monstro" : `${totalValue} monstros`;
+        totalEl.textContent = totalLabel;
+      }
+
+      const filters = collectMonsterFilters(monsters);
+
+      populateSelectOptions(
+        document.getElementById("monsterRegionFilter"),
+        "Todas as regiões",
+        filters.regions
+      );
+
+      populateSelectOptions(
+        document.getElementById("monsterMapTypeFilter"),
+        "Todos os tipos",
+        filters.mapTypes
+      );
+
+      populateSelectOptions(
+        document.getElementById("monsterRaceFilter"),
+        "Todas as raças",
+        filters.races
+      );
+
+      populateSelectOptions(
+        document.getElementById("monsterElementFilter"),
+        "Todos os elementos",
+        filters.elements
+      );
+
+      const filterState = {
+        term: "",
+        region: "all",
+        mapType: "all",
+        race: "all",
+        element: "all",
+      };
+
+      const updateTable = () => {
+        const filtered = applyMonsterFilters(monsters, filterState);
+        renderMonsterTable(filtered, { ...totals });
+      };
+
+      const searchInput = document.getElementById("monsterSearchInput");
+      if (searchInput) {
+        searchInput.value = "";
+        searchInput.addEventListener("input", event => {
+          filterState.term = event.target.value;
+          updateTable();
+        });
+      }
+
+      const regionSelect = document.getElementById("monsterRegionFilter");
+      if (regionSelect) {
+        regionSelect.value = "all";
+        regionSelect.addEventListener("change", event => {
+          filterState.region = event.target.value;
+          updateTable();
+        });
+      }
+
+      const typeSelect = document.getElementById("monsterMapTypeFilter");
+      if (typeSelect) {
+        typeSelect.value = "all";
+        typeSelect.addEventListener("change", event => {
+          filterState.mapType = event.target.value;
+          updateTable();
+        });
+      }
+
+      const raceSelect = document.getElementById("monsterRaceFilter");
+      if (raceSelect) {
+        raceSelect.value = "all";
+        raceSelect.addEventListener("change", event => {
+          filterState.race = event.target.value;
+          updateTable();
+        });
+      }
+
+      const elementSelect = document.getElementById("monsterElementFilter");
+      if (elementSelect) {
+        elementSelect.value = "all";
+        elementSelect.addEventListener("change", event => {
+          filterState.element = event.target.value;
+          updateTable();
+        });
+      }
+
+      updateTable();
+    })
+    .catch(error => {
+      handleMonsterFetchError(error);
+    });
+}
 
 
 const TELEPORT_MAP_CONFIG = {
@@ -4754,6 +5304,12 @@ function loadPage(pageKey) {
   if (pageKey === "teleport") {
     window.requestAnimationFrame(() => {
       initTeleportMap();
+    });
+  }
+
+  if (pageKey === "monster") {
+    window.requestAnimationFrame(() => {
+      initMonsterDatabase();
     });
   }
 
