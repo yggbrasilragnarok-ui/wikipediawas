@@ -11,7 +11,20 @@ function initTimeWarpEffect() {
     return null;
   }
 
-  const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const prefersReducedMotion = window
+    .matchMedia("(prefers-reduced-motion: reduce)")
+    .matches;
+
+  const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
+  const hasMobileUserAgent = /Mobi|Android|iPhone|iPad|iPod/i.test(
+    navigator.userAgent || ""
+  );
+  const isMobileExperience = isMobileViewport || hasMobileUserAgent;
+
+  if (isMobileExperience) {
+    overlay.remove();
+    return null;
+  }
 
   if (prefersReducedMotion) {
     overlay.classList.add("is-fading");
@@ -3730,574 +3743,722 @@ function renderExploreMap(variantKey = currentExploreMapVariant) {
 
 const PAGES = {
   home: {
-    title: "Bem-vindo ao Was Rag",
+    title: "Wikipédia da Was",
     html: `
-   <p class="lead">
-          Este é a database oficial do servidor
-        <strong>Was Rag</strong>, um Ragnarok Online evolutivo que começa no
-        <span class="tag-episode">Episódio 1</span> e avança a cada temporada o conteúdo oficial. </p>
-
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"><img src=""></div>
-          <div class="info-card-content">
-            <h3>Filosofia do Servidor</h3>
-            <p>
-              O foco é <strong>explorar</strong>, não só rushar level.
-              Teleportes e bônus da conta são desbloqueados fazendo missões nos
-              mapas. Jogar abre caminhos. Literalmente.
+      <section class="server-section server-section--general">
+        <div class="">
+          <header class="server-general-card__header">
+         
+            <p class="server-general-card__subtitle">
+             
             </p>
+          </header>
+
+          <div class="server-general-card__grid" role="list">
+            <dl class="server-stat" role="listitem">
+              <dt>Filosofia do servidor</dt>
+              <dd>
+                <p class="server-stat__description">
+                  O foco é <strong>explorar</strong>, não só rushar nível.
+                  Missões em mapas desbloqueiam teleporte e bônus de conta — jogar abre caminhos.
+                </p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Progressão</dt>
+              <dd>
+                <p class="server-stat__description">
+                  Iniciamos no <span class="tag-episode">Episódio 1</span>.
+                  O conteúdo evolui temporada após temporada, acompanhando a cronologia oficial sem pular etapas.
+                </p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Temporadas</dt>
+              <dd>
+                <p class="server-stat__description">
+                  Cada conta escolhe uma dificuldade: Fácil, Normal, Difícil ou Impossível.
+                  Cuide das metas sazonais para provar sua jornada e garantir recompensas únicas.
+                </p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Missões mundiais</dt>
+              <dd>
+                <p class="server-stat__description">
+                  A cada ciclo abrimos um desafio global com duração real.
+                  Complete dentro do prazo para registrar sua façanha naquela temporada.
+                </p>
+              </dd>
+            </dl>
           </div>
         </div>
+      </section>
 
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"><img src=""></div>
-          <div class="info-card-content">
-            <h3>Progressão em Episódios</h3>
-            <p>
-              Começamos puro no Episódio 1. Novos episódios são liberados de
-              forma progressiva, trazendo mapas, itens e MVPs clássicos — sem
-              pular etapas.
-            </p>
-          </div>
+      <section class="server-section">
+        <h3 class="section-title">Links rápidos</h3>
+        <div class="stat-grid">
+          <a
+            class="server-stat server-stat--link"
+            href="https://wasrag.com"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="server-stat__eyebrow">Portal oficial</span>
+            <span class="server-stat__value">Site do Was Rag</span>
+            <span class="server-stat__hint">wasrag.com</span>
+          </a>
+          <a
+            class="server-stat server-stat--link"
+            href="https://wasrag.com/download"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="server-stat__eyebrow">Cliente atualizado</span>
+            <span class="server-stat__value">Download do jogo</span>
+            <span class="server-stat__hint">Instale e comece a explorar</span>
+          </a>
+          <a
+            class="server-stat server-stat--link"
+            href="https://discord.gg/wasrag"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span class="server-stat__eyebrow">Comunidade</span>
+            <span class="server-stat__value">Discord oficial</span>
+            <span class="server-stat__hint">Eventos, grupos e suporte</span>
+          </a>
         </div>
+      </section>
 
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"><img src=""></div>
-          <div class="info-card-content">
-            <h3>Temporadas de Dificuldade</h3>
-            <p>
-              Cada conta escolhe uma dificuldade por temporada
-              (<span class="txt-high">Fácil</span>,
-              <span class="txt-high">Normal</span>,
-              <span class="txt-high">Difícil</span>,
-              <span class="txt-high">Impossível</span>).
-              Dificuldades maiores: mobs batem mais forte, mas o drop aumenta.
-            </p>
-          </div>
+      <section class="server-section">
+        <h3 class="section-title">O que você encontra na wiki</h3>
+        <div class="stat-grid">
+          <dl class="server-stat" role="listitem">
+            <dt>Guias de sistemas</dt>
+            <dd>
+              <p class="server-stat__description">Entenda teleporte, temporadas, exploração e outros recursos exclusivos do servidor.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Database atualizada</dt>
+            <dd>
+              <p class="server-stat__description">Informações de classes, mapas, monstros, itens e progressão alinhadas ao episódio vigente.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Roadmap transparente</dt>
+            <dd>
+              <p class="server-stat__description">Acompanhe o que está em desenvolvimento e prepare seu clã para as próximas aventuras.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Atualizações e regras</dt>
+            <dd>
+              <p class="server-stat__description">Leia o changelog, consulte as normas e garanta que todo mundo jogue de forma justa.</p>
+            </dd>
+          </dl>
         </div>
-
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"><img src=""></div>
-          <div class="info-card-content">
-            <h3>Temporada, de 2 meses, com missões</h3>
-            <p>
-              Toda temporada tem um desafio mundial com prazo real. Completar
-              prova que você jogou “de verdade” naquela dificuldade e garante
-              recompensas de prestígio.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <hr class="divider" />
-
-      <section class="quick-links">
-        <a
-          class="quick-card"
-          href="https://wasrag.com"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-            <div class="quick-card-badge" aria-hidden="true">
-            <img src="">
-            </div>
-          <h4 class="quick-card-title">Site</h4>
-        </a>
-        <a
-          class="quick-card"
-          href="https://wasrag.com/download"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-           <div class="quick-card-badge" aria-hidden="true">
-             <img src="">
-            </div>
-          <h4 class="quick-card-title">Download</h4>
-        </a>
-        <a
-          class="quick-card"
-          href="https://discord.gg/wasrag"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-<div class="quick-card-badge" aria-hidden="true">
-             <img src="">
-            </div>
-            <h4 class="quick-card-title">Discord</h4>
-        </a>
       </section>
     `
   },
 
   rules: {
-    title: "Regras",
+    title: "Respeito em primeiro lugar",
     html: `
-      <p class="lead">
-        O Was Rag é uma comunidade nostálgica, construída sobre respeito, honestidade e paixão por um Ragnarok autêntico. Nosso foco é reviver a experiência clássica, com maturidade e cooperação — não apenas grindar, mas criar histórias.
-      </p>
+      <section class="server-section server-section--general">
+        <div class="">
+          <header class="server-general-card__header">
+          
+          </header>
 
-      <div class="rules-grid">
-        <section class="rules-section">
-          <h3>1. Respeito</h3>
-          <p><span class="bullet-rune"></span>Trate todos com respeito, dentro e fora do jogo.</p>
-          <p><span class="bullet-rune"></span>
-            Insultos, humilhações, ironias ofensivas, assédio, racismo,
-            homofobia ou qualquer tipo de preconceito resultam em punição
-            imediata.
-          </p>
-          <p><span class="bullet-rune"></span>Discussões acaloradas são normais — ataques pessoais, não.</p>
-          <p><span class="bullet-rune"></span>
-            Respeite staff, moderadores e GMs — mesmo que discorde, mantenha
-            civilidade.
-          </p>
-        </section>
+          <div class="server-general-card__grid" role="list">
+            <dl class="server-stat" role="listitem">
+              <dt>Convivência</dt>
+              <dd>
+                <p class="server-stat__description">Respeite todos dentro e fora do jogo. Discussões acontecem, ataques pessoais não.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Jogo limpo</dt>
+              <dd>
+                <p class="server-stat__description">Nada de bots, exploits ou vantagens indevidas. Vitória boa é a conquistada na raça.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Comunidade</dt>
+              <dd>
+                <p class="server-stat__description">Ajude, compartilhe, denuncie com responsabilidade. Todo mundo cresce junto.</p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </section>
 
-        <section class="rules-section">
-          <h3>2. Comunicação e Convivência</h3>
-          <p><span class="bullet-rune"></span>Evite flood, spam e CAPS LOCK excessivo.</p>
-          <p><span class="bullet-rune"></span>Proibido divulgar outros servidores.</p>
-          <p><span class="bullet-rune"></span>Linguagem sexual explícita, política ou religiosa é proibida.</p>
-          <p><span class="bullet-rune"></span>
-            Denúncias devem ser feitas em privado, com provas (prints, vídeos,
-            etc.).
-          </p>
-        </section>
+      <section class="server-section">
+        <h3 class="section-title">Diretrizes do servidor</h3>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Respeito</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Trate todos com respeito, mesmo em desacordos.</li>
+                <li><span class="bullet-rune"></span>Insultos, humilhações, assédio ou preconceito geram punição imediata.</li>
+                <li><span class="bullet-rune"></span>Respeite a staff, moderadores e GMs — discordar faz parte, falta de civilidade não.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Comunicação</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Evite flood, spam e uso excessivo de CAPS LOCK.</li>
+                <li><span class="bullet-rune"></span>Proibido divulgar outros servidores.</li>
+                <li><span class="bullet-rune"></span>Conteúdos sexualmente explícitos, políticos ou religiosos não são permitidos.</li>
+                <li><span class="bullet-rune"></span>Denúncias devem ser feitas em privado com provas (prints, vídeos, etc.).</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Jogo justo</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>É proibido usar bots, macros, exploits ou qualquer tipo de cheat.</li>
+                <li><span class="bullet-rune"></span>Encontrou bug? Reporte imediatamente à staff.</li>
+                <li><span class="bullet-rune"></span>Venda de itens ou contas por dinheiro real é proibida e gera banimento.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Comércio e economia</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Negociações acontecem dentro do jogo, sem intermediários externos.</li>
+                <li><span class="bullet-rune"></span>Não há reembolso para trocas feitas sem atenção do jogador.</li>
+                <li><span class="bullet-rune"></span>Perdas por descuido ou golpe entre jogadores não são reembolsadas.</li>
+                <li><span class="bullet-rune"></span>Golpes intencionais resultam em ban permanente.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Nomes e aparência</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Nomes de personagens, pets, lojas ou guildas ofensivos ou obscenos são proibidos.</li>
+                <li><span class="bullet-rune"></span>Não se passe por staff ("GM", "Admin", "Helper"...).</li>
+                <li><span class="bullet-rune"></span>Nomes enganosos para aplicar golpes resultam em banimento.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Equipe GM</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>GMs não participam de guildas ou eventos competitivos.</li>
+                <li><span class="bullet-rune"></span>Tratamento igual para todos — não existe “GM amigo”.</li>
+                <li><span class="bullet-rune"></span>Denúncias contra staff devem ser formais no Discord, com provas.</li>
+                <li><span class="bullet-rune"></span>Desrespeitar a equipe em público pode gerar mute ou suspensão.</li>
+                <li><span class="bullet-rune"></span>Decisões podem ser revistas se houver recurso bem fundamentado.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Eventos</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Regras específicas dos eventos se sobrepõem às gerais.</li>
+                <li><span class="bullet-rune"></span>Explorar falhas, usar bots ou sabotar garante desclassificação e ban.</li>
+                <li><span class="bullet-rune"></span>Premiações são intransferíveis e não possuem substituição.</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </section>
 
-        <section class="rules-section">
-          <h3>3. Jogo Justo</h3>
-          <p><span class="bullet-rune"></span>Proibido uso de bots, macros, exploits, cheats e afins.</p>
-          <p><span class="bullet-rune"></span>Proibido o uso de bugs — relatar imediatamente à staff.</p>
-          <p><span class="bullet-rune"></span>Proibido venda de itens ou contas por dinheiro real.</p>
-          <p><span class="bullet-rune"></span>(Isso destrói a economia e causa golpes.)</p>
-        </section>
-
-        <section class="rules-section">
-          <h3>4. Comércio e Economia</h3>
-          <p><span class="bullet-rune"></span>Negociações devem ocorrer dentro do jogo — sem uso de intermediários externos.</p>
-          <p><span class="bullet-rune"></span>Não existe reembolso de trocas feitas sem atenção do jogador.</p>
-          <p><span class="bullet-rune"></span>Não existe devolução de itens perdidos por descuido ou golpe entre jogadores.</p>
-          <p><span class="bullet-rune"></span>(O servidor não se responsabiliza por falta de cautela.)</p>
-          <p><span class="bullet-rune"></span>Golpes intencionais.</p>
-        </section>
-
-        <section class="rules-section">
-          <h3>5. Nomes e Aparência</h3>
-          <p><span class="bullet-rune"></span>Nicknames, nomes de pets, lojas e guildas ofensivos ou obscenos são proibidos.</p>
-          <p><span class="bullet-rune"></span>Evite se passar por membros da staff (ex: “GM”, “Admin”, “Helper”).</p>
-          <p><span class="bullet-rune"></span>Nomes enganosos ou idênticos a outros jogadores para aplicar golpes resultam em ban.</p>
-        </section>
-
-        <section class="rules-section">
-          <h3>6. GMs</h3>
-          <p><span class="bullet-rune"></span>GMs não participam de guildas nem eventos competitivos.</p>
-          <p><span class="bullet-rune"></span>Não existe GM amigo — tratamento igual a todos.</p>
-          <p><span class="bullet-rune"></span>
-            Denúncias contra membros da staff devem ser feitas de forma formal no
-            Discord, com provas.
-          </p>
-          <p><span class="bullet-rune"></span>
-            Desrespeito à equipe em público pode resultar em silenciamento ou
-            suspensão.
-          </p>
-          <p><span class="bullet-rune"></span>
-            Decisões da staff são finais, mas podem ser revisadas mediante
-            recurso bem fundamentado.
-          </p>
-        </section>
-
-        <section class="rules-section">
-          <h3>7. Eventos e Participação</h3>
-          <p><span class="bullet-rune"></span>Em eventos, as regras específicas publicadas valem acima das gerais.</p>
-          <p><span class="bullet-rune"></span>Explorar falhas em eventos, usar bots ou sabotagem = desclassificação e ban.</p>
-          <p><span class="bullet-rune"></span>Premiações são intransferíveis e não substituíveis.</p>
-        </section>
-      </div>
-
-      <div class="rules-table-wrapper">
-        <table class="rules-penalties" aria-label="Tabela de penalidades por infração">
-          <thead>
-            <tr>
-              <th scope="col">Tipo de Infração</th>
-              <th scope="col">Primeira ocorrência</th>
-              <th scope="col">Reincidência</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Flood / Spam</th>
-              <td>Aviso / Mute 15 min</td>
-              <td>Mute 24h</td>
-            </tr>
-            <tr>
-              <th scope="row">Ofensas leves</th>
-              <td>Aviso</td>
-              <td>Ban 3 dias</td>
-            </tr>
-            <tr>
-              <th scope="row">Discurso de ódio / assédio</th>
-              <td>Ban 7 dias</td>
-              <td>Ban permanente</td>
-            </tr>
-            <tr>
-              <th scope="row">Uso de bot / macro / cheat</th>
-              <td>Ban permanente</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <th scope="row">Bug abuse</th>
-              <td>Ban 7 dias + perda de itens</td>
-              <td>Ban permanente</td>
-            </tr>
-            <tr>
-              <th scope="row">Golpe comercial</th>
-              <td>Ban permanente</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <th scope="row">Venda por dinheiro real</th>
-              <td>Ban permanente</td>
-              <td>—</td>
-            </tr>
-            <tr>
-              <th scope="row">Fake GM / fraude</th>
-              <td>Ban permanente</td>
-              <td>—</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <section class="server-section">
+        <h3 class="section-title">Penalidades padrão</h3>
+        <p class="section-subtitle">Infrações graves podem resultar em banimento imediato, independente da coluna “Primeira ocorrência”.</p>
+        <div class="rules-table-wrapper">
+          <div class="table-card">
+            <table class="rules-penalties" aria-label="Tabela de penalidades por infração">
+              <thead>
+                <tr>
+                  <th scope="col">Tipo de infração</th>
+                  <th scope="col">Primeira ocorrência</th>
+                  <th scope="col">Reincidência</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">Flood / Spam</th>
+                  <td>Aviso / Mute 15 min</td>
+                  <td>Mute 24h</td>
+                </tr>
+                <tr>
+                  <th scope="row">Ofensas leves</th>
+                  <td>Aviso</td>
+                  <td>Ban 3 dias</td>
+                </tr>
+                <tr>
+                  <th scope="row">Discurso de ódio / assédio</th>
+                  <td>Ban 7 dias</td>
+                  <td>Ban permanente</td>
+                </tr>
+                <tr>
+                  <th scope="row">Uso de bot / macro / cheat</th>
+                  <td>Ban permanente</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Bug abuse</th>
+                  <td>Ban 7 dias + perda de itens</td>
+                  <td>Ban permanente</td>
+                </tr>
+                <tr>
+                  <th scope="row">Golpe comercial</th>
+                  <td>Ban permanente</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Venda por dinheiro real</th>
+                  <td>Ban permanente</td>
+                  <td>—</td>
+                </tr>
+                <tr>
+                  <th scope="row">Fake GM / fraude</th>
+                  <td>Ban permanente</td>
+                  <td>—</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
     `
   },
   server: {
-    title: "Sobre o Servidor",
+    title: "Base do Servidor",
     html: `
-      <section class="server-section">
-        <h3 class="section-title">Informações Gerais</h3>
-        <div class="cards-grid cards-grid--six">
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Episódio:</h3>
-              <p>
-                1 — Evolutivo
-              </p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Tipo:</h3>
-              <p>
-                Pré-Renewall
-              </p>
-            </div>
-          </div>
-           <div class="info-card">
-            <div class="info-card-content">
-              <h3>Nível Máximo:</h3>
-              <p>
-                99
-              </p>
-            </div>
-          </div>
-           <div class="info-card">
-            <div class="info-card-content">
-              <h3>Classe Máxima:</h3>
-              <p>
-                50
-              </p>
-            </div>
-          </div>
-                  <div class="info-card">
-            <div class="info-card-content">
-              <h3>ASPD Máxima:</h3>
-              <p>
-                190
-              </p>
-            </div>
-          </div>
-                  <div class="info-card">
-            <div class="info-card-content">
-              <h3>Status Máximo:</h3>
-              <p>
-                99
-              </p>
-            </div>
+      <section class="server-section server-section--general">
+        <div class="">
+          <div class="server-general-card__grid" role="list">
+            <dl class="server-stat" role="listitem">
+              <dt>Episódio</dt>
+              <dd>
+                <span class="server-stat__value">Episódio 1</span>
+                <p class="server-stat__description">Conteúdo avança com a comunidade a cada temporada.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Tipo</dt>
+              <dd>
+                <span class="server-stat__value">Pré-renewal</span>
+                <p class="server-stat__description">Atmosfera clássica com sistemas customizados.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Nível Máximo</dt>
+              <dd>
+                <span class="server-stat__value">Base 99</span>
+                <p class="server-stat__description">Focus na jornada clássica antes do trans.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Classe Máxima</dt>
+              <dd>
+                <span class="server-stat__value">Job 50</span>
+                <p class="server-stat__description">Pontos suficientes para builds variadas.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>ASPD Máxima</dt>
+              <dd>
+                <span class="server-stat__value">190</span>
+                <p class="server-stat__description">Mantemos o ritmo clássico de ataques.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Status Máximo</dt>
+              <dd>
+                <span class="server-stat__value">99</span>
+                <p class="server-stat__description">Builds equilibradas, sem status absurdos.</p>
+              </dd>
+            </dl>
           </div>
         </div>
       </section>
 
       <section class="server-section">
-        <h3 class="section-title">Rates do Servidor</h3>
-        <div class="cards-grid cards-grid--six">
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Rate de Nível</h3>
-              <p>
-                1x
-              </p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Rate de Clase</h3>
-              <p>
-                1x
-              </p>
-            </div>
-          </div>
-                  <div class="info-card">
-            <div class="info-card-content">
-              <h3>Rate de Quest</h3>
-              <p>
-                1x
-              </p>
-            </div>
-          </div>
-                  <div class="info-card">
-            <div class="info-card-content">
-              <h3>Rate de Drop</h3>
-              <p>
-                1x
-              </p>
-            </div>
-          </div>
+        <h3 class="section-title">Rates do servidor</h3>
+        <div class="stat-grid stat-grid--compact" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Experiência Base</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Experiência de Classe</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Quests</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Drop comum</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Drop de cartas</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Drop de MVP</dt>
+            <dd><span class="server-stat__value">1x</span></dd>
+          </dl>
         </div>
       </section>
 
       <section class="server-section">
-        <h3 class="section-title">Dificuldade de Temporada — Buff e Debuff não se aplicam a PVP.</h3>
-        <div class="cards-grid">
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Fácil</h3>
-              <p>
-                <span class="bullet-rune"></span> Debuff: Não dropa nenhuma carta de monstro normal e loot de Mini-boss e MVP.<br>
-                <span class="bullet-rune"></span> Debuff: Não participa da temporada.<br>
-                <span class="bullet-rune"></span> Buff: Inflige 30% a mais de dano em todos os monstros.<br>
-                <span class="bullet-rune"></span> Buff: Recebe 30% a menos de dano de todo os monstros.<br>
-              </p>
-            </div>
-          </div>
-          <div class="info-card">
-            <div class="info-card-content">
-              <h3>Médio</h3>
-              <p>
-                <span class="bullet-rune"></span> Nenhum Buff ou Debuff aplicado<br>
-              </p>
-            </div>
-          </div>
-              <div class="info-card">
-            <div class="info-card-content">
-              <h3>Difícil</h3>
-              <p>
-                <span class="bullet-rune"></span> Buff: 10% de Bonus de Drop.<br>
-                <span class="bullet-rune"></span> Debuff: Inflige 20% a menos de dano em todos os monstros.<br>
-                <span class="bullet-rune"></span> Debuff: Recebe 20% a mais de dano de todo os monstros.<br>
-              </p>
-            </div>
-          </div>
-              <div class="info-card">
-            <div class="info-card-content">
-              <h3>Impossível</h3>
-              <p>
-                <span class="bullet-rune"></span> Buff: 25% de Bonus de Drop.<br>
-                <span class="bullet-rune"></span> Debuff: Inflige 50% a menos de dano em todos os monstros.<br>
-                <span class="bullet-rune"></span> Debuff: Recebe 50% a mais de dano de todo os monstros.<br>
-              </p>
-            </div>
-          </div>
+        <h3 class="section-title">Dificuldade de temporada</h3>
+        <p class="section-subtitle">Buffs e debuffs não se aplicam a PVP.</p>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Fácil</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Não dropa cartas de monstros normais nem loot de Mini-boss/MVP.</li>
+                <li><span class="bullet-rune"></span>Não participa da temporada ranqueada.</li>
+                <li><span class="bullet-rune"></span>+30% de dano em monstros.</li>
+                <li><span class="bullet-rune"></span>-30% de dano recebido de monstros.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Médio</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Experiência clássica, sem modificadores adicionais.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Difícil</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>+10% de bônus de drop.</li>
+                <li><span class="bullet-rune"></span>-20% de dano causado em monstros.</li>
+                <li><span class="bullet-rune"></span>+20% de dano recebido de monstros.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Impossível</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>+25% de bônus de drop.</li>
+                <li><span class="bullet-rune"></span>-50% de dano causado em monstros.</li>
+                <li><span class="bullet-rune"></span>+50% de dano recebido de monstros.</li>
+              </ul>
+            </dd>
+          </dl>
         </div>
       </section>
     `
   },
 
   roadmap: {
-    title: "RoadMap",
+    title: "Próximos passos da Was",
     html: `
-      <p class="lead">
-        Visão geral do que está sendo planejado para o Was RAG. As datas podem mudar, mas a direção deixa claro como o servidor vai evoluir.
-      </p>
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3></h3>
-            <p>
-              ...
-            </p>
+      <section class="server-section server-section--general">
+        <div class="">
+          
+
+          <div class="server-general-card__grid" role="list">
+            <dl class="server-stat" role="listitem">
+              <dt>Estado atual</dt>
+              <dd>
+                <p class="server-stat__description">Temporada 1 em andamento, refinando sistemas base (teleporte, exploração, eventos semanais).</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Próxima entrega</dt>
+              <dd>
+                <p class="server-stat__description">Concluir balanceamentos iniciais e preparar a abertura dos mapas do Episódio 2.</p>
+              </dd>
+            </dl>
+            <dl class="server-stat" role="listitem">
+              <dt>Visão de longo prazo</dt>
+              <dd>
+                <p class="server-stat__description">Rotacionar temporadas com desafios únicos, mantendo o conteúdo clássico relevante e vivo.</p>
+              </dd>
+            </dl>
           </div>
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>...</h3>
-            <ul class="feature-list">
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-            </ul>
-          </div>
+      </section>
+
+      <section class="server-section">
+        <h3 class="section-title">Linha do tempo</h3>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Temporada 1 · Episódio 1</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Refinamento dos sistemas de teleporte e exploração.</li>
+                <li><span class="bullet-rune"></span>Eventos semanais temáticos para apresentar regiões do episódio.</li>
+                <li><span class="bullet-rune"></span>Database completa para classes iniciais e MVPs clássicos.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Temporada 2 · Episódio 2</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Abertura das ruínas de Morroc e novos calabouços.</li>
+                <li><span class="bullet-rune"></span>Missões de exploração avançadas com recompensas cosméticas.</li>
+                <li><span class="bullet-rune"></span>Revisão de classes e equipamentos ligados ao novo conteúdo.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Temporada 3 · Evolução contínua</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Introdução gradual de sistemas especiais (Guild Dungeon, WoE experimental).</li>
+                <li><span class="bullet-rune"></span>Ranking sazonal com conquistas e títulos permanentes.</li>
+                <li><span class="bullet-rune"></span>Expansão da wiki com guias colaborativos da comunidade.</li>
+              </ul>
+            </dd>
+          </dl>
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>...</h3>
-            <p>
-            </p>
-          </div>
-        </div>
-      </div>
+      </section>
     `
   },
 
   changelog: {
-    title: "Changelog",
+    title: "Atualizações recentes",
     html: `
-      <p class="lead">
-        Histórico das atualizações aplicadas ao servidor. Use como
-        referência para saber o que mudou desde sua última visita.
-      </p>
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>...</h3>
-            <ul class="feature-list">
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-            </ul>
-          </div>
+      <section class="server-section server-section--general">
+        <div class="">
+          
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>...</h3>
-            <ul class="feature-list">
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-              <li><span class="bullet-rune"></span> </li>
-            </ul>
-          </div>
+      </section>
+
+      <section class="server-section">
+        <h3 class="section-title">Versões</h3>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>v1.0.2 · Ajustes iniciais</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Balanceamento de EXP para archer e mage nos mapas iniciais.</li>
+                <li><span class="bullet-rune"></span>Correção de teleporte duplicado em Payon Forest.</li>
+                <li><span class="bullet-rune"></span>Interface da wiki atualizada com estatísticas de temporada.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>v1.0.1 · Lançamento da temporada</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Abertura oficial do Episódio 1 com progressão evolutiva.</li>
+                <li><span class="bullet-rune"></span>Sistema de dificuldades sazonais habilitado (Fácil → Impossível).</li>
+                <li><span class="bullet-rune"></span>Teleporters liberáveis via missões regionais.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Pré-temporada</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Stress test com a comunidade para ajustes de infraestrutura.</li>
+                <li><span class="bullet-rune"></span>Configuração de taxas 1x e revisão de drops conforme feedback.</li>
+                <li><span class="bullet-rune"></span>Implementação dos sistemas de exploração e teleporte.</li>
+              </ul>
+            </dd>
+          </dl>
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>...</h3>
-            <p>
-            
-            </p>
-          </div>
-        </div>
-      </div>
+      </section>
     `
   },
 
   faq: {
     title: "FAQ",
     html: `
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>O servidor é pay to win?</h3>
-            <p>
-              A ideia é longe disso. O foco é progressão jogando, não comprar
-              atalho que quebra o que foi pensado e desenvolvido com tanto carinho.
-            </p>
-          </div>
+  
+
+      <section class="server-section">
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>O servidor é pay to win?</dt>
+            <dd>
+              <p class="server-stat__description">Não. A progressão é conquistada jogando: teleporte, bônus de conta e recompensas vêm de missões e temporadas.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Vai ter wipe?</dt>
+            <dd>
+              <p class="server-stat__description">A proposta é evitar wipes. Trabalhamos com temporadas — você mantém conta, personagens e conquistas.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Como falo com a comunidade?</dt>
+            <dd>
+              <p class="server-stat__description">Nosso Discord oficial concentra anúncios, suporte, grupos e feedback. O link está nos <strong>Links rápidos</strong> do menu inicial.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Posso contribuir com a wiki?</dt>
+            <dd>
+              <p class="server-stat__description">Sim! Envie feedback, correções ou novos guias no canal apropriado do Discord — damos crédito à comunidade.</p>
+            </dd>
+          </dl>
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>Vai ter wipe?</h3>
-            <p>
-              Faremos de tudo para que não seja necessário. Existirão apenas <strong>temporadas</strong> mas você mantém sua conta e progresso.
-            </p>
-          </div>
-        </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>Tem grupo oficial?</h3>
-            <p>
-              (Colocar link do Discord depois)
-            </p>
-          </div>
-        </div>
-      </div>
+      </section>
     `
   },
 
   teleport: {
     title: "Sistema de Teleporte",
     html: `
-      <p class="lead">
-        Teleporte não é dado de graça. Você conquista.
-      </p>
-      <div class="cards-grid">
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>Como funciona</h3>
-            <p>
-              Faça missões específicas em uma região para desbloquear o Teleporter
-              daquela região. Depois disso sua CONTA inteira pode pular pra lá.
-            </p>
-          </div>
+
+      <section class="server-section">
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Como funciona</dt>
+            <dd>
+              <p class="server-stat__description">Complete missões regionais para habilitar o teleporter daquela área. O desbloqueio vale para toda a conta.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Benefícios</dt>
+            <dd>
+              <p class="server-stat__description">Rotas de farm otimizadas, corridas de MVP mais estratégicas e logística ágil para grupos e guerras.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Progressão</dt>
+            <dd>
+              <p class="server-stat__description">Teleportes são ligados à temporada: complete os desafios atuais para manter o acesso nas próximas fases.</p>
+            </dd>
+          </dl>
         </div>
-        <div class="info-card">
-          <div class="info-card-media" aria-hidden="true"></div>
-          <div class="info-card-content">
-            <h3>Benefícios</h3>
-            <p>
-              Mobilidade transforma rotas de farm, MVP race e logística de grupo.
-            </p>
-          </div>
-        </div>
-      </div>
+      </section>
     `
   },
 
   seasons: {
     title: "Sistema de Temporada",
     html: `
-      <p class="lead">
-        Cada temporada dura ~3 meses e exige completar uma missão global.
-        Você escolhe a dificuldade pra sua conta:
-        Normal, Difícil ou Impossível.
-      </p>
-      <ul class="feature-list">
-        <li><span class="bullet-rune"></span> Normal: experiência clássica.</li>
-        <li><span class="bullet-rune"></span> Difícil: mobs batem mais, drop aumenta.</li>
-        <li><span class="bullet-rune"></span> Impossível: dor e glória. Recompensas cosméticas de respeito eterno.</li>
-      </ul>
-      <div class="callout-glow">
-        <h4>Por que isso existe?</h4>
-        <p>
-          Pra você não precisar criar 30 chars novos só pra “recomeçar o jogo”.
-          A dificuldade é por conta, por temporada.
-        </p>
-      </div>
+      
+
+      <section class="server-section">
+        <h3 class="section-title">Como funciona</h3>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Duração</dt>
+            <dd>
+              <p class="server-stat__description">Ciclos de ~3 meses, com calendário divulgado antecipadamente.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Missão global</dt>
+            <dd>
+              <p class="server-stat__description">Cada temporada tem um objetivo coletivo. Cumpriu? Recebe selo permanente da dificuldade escolhida.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Recompensas</dt>
+            <dd>
+              <p class="server-stat__description">Título cosmético, registro na wiki e acesso antecipado a certas comodidades em temporadas futuras.</p>
+            </dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="server-section">
+        <h3 class="section-title">Dificuldades disponíveis</h3>
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Normal</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Experiência clássica sem bônus ou penalidades extras.</li>
+                <li><span class="bullet-rune"></span>Ideal para conhecer os sistemas e completar a missão global com o clã.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Difícil</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Mobs batem mais forte, mas o drop aumenta.</li>
+                <li><span class="bullet-rune"></span>Recompensas adicionais ao concluir a missão global.</li>
+              </ul>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Impossível</dt>
+            <dd>
+              <ul class="stat-list">
+                <li><span class="bullet-rune"></span>Desafio extremo: dano causado reduzido, dano recebido ampliado.</li>
+                <li><span class="bullet-rune"></span>Recompensas cosméticas exclusivas e prestígio eterno.</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="server-section">
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Por que temporadas?</dt>
+            <dd>
+              <p class="server-stat__description">Para você não precisar criar 30 personagens novos só para “recomeçar”. A dificuldade é definida por conta a cada ciclo, mantendo seu progresso vivo.</p>
+            </dd>
+          </dl>
+        </div>
+      </section>
     `
   },
 
   explore: {
     title: "Sistema de Exploração",
     html: `
-      <p class="lead">
-        O drop base é clássico, mas certas dificuldades de temporada aplicam
-        bônus no loot para recompensar o risco.
-      </p>
-      <div class="callout-glow">
-        <h4>Explorar dá acesso ao mundo</h4>
-        <p>
-          Faça missões nas regiões para desbloquear teletransportes, bônus de conta e
-          descobrir histórias exclusivas. Consulte as seções de
-          <strong>Cidades e Campos</strong> e <strong>Calabouços</strong> para ver o
-          mosaico de mapas e os calabouços disponíveis.
-        </p>
-      </div>
+      
+
+      <section class="server-section">
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Missões regionais</dt>
+            <dd>
+              <p class="server-stat__description">Complete tarefas exclusivas de cada área para desbloquear teleporte e narrativa extra.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Bônus de conta</dt>
+            <dd>
+              <p class="server-stat__description">Explorar concede buffs permanentes para toda a conta, como atalhos, equipamentos e consumíveis especiais.</p>
+            </dd>
+          </dl>
+          <dl class="server-stat" role="listitem">
+            <dt>Sinergia com temporadas</dt>
+            <dd>
+              <p class="server-stat__description">Quanto maior a dificuldade escolhida, maiores os bônus de loot ao explorar e concluir missões.</p>
+            </dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="server-section">
+        <div class="stat-grid" role="list">
+          <dl class="server-stat" role="listitem">
+            <dt>Onde explorar primeiro?</dt>
+            <dd>
+              <p class="server-stat__description">Use os mosaicos de <strong>Cidades e Campos</strong> e <strong>Calabouços</strong> para planejar rotas. Cada tile mostra objetivos e recompensas.</p>
+            </dd>
+          </dl>
+        </div>
+      </section>
     `
   },
 class: {
