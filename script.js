@@ -3471,6 +3471,40 @@ function resolveExploreMapDetail(slug, label) {
   };
 }
 
+const EXPLORE_MAP_IMAGE_CACHE = new Map();
+
+function resolveExploreMapImage(slug) {
+  const normalizedSlug = normalizeStringValue(slug).toLowerCase();
+
+  if (!normalizedSlug) {
+    return "";
+  }
+
+  if (EXPLORE_MAP_IMAGE_CACHE.has(normalizedSlug)) {
+    return EXPLORE_MAP_IMAGE_CACHE.get(normalizedSlug);
+  }
+
+  let imageSrc = "";
+  const detail = resolveExploreMapDetail(normalizedSlug);
+
+  if (detail && Array.isArray(detail.entries)) {
+    for (const entry of detail.entries) {
+      if (!entry || !Array.isArray(entry.images)) {
+        continue;
+      }
+
+      const firstImage = entry.images.find(image => image && image.src);
+      if (firstImage) {
+        imageSrc = firstImage.src;
+        break;
+      }
+    }
+  }
+
+  EXPLORE_MAP_IMAGE_CACHE.set(normalizedSlug, imageSrc);
+  return imageSrc;
+}
+
 function setActiveExploreTile(tile) {
   if (activeExploreTile === tile) {
     return;
@@ -4848,6 +4882,49 @@ function applyMonsterFilters(monsters, filters) {
   });
 }
 
+function ensureAssetPath(src) {
+  if (!src) {
+    return "";
+  }
+
+  if (/^(?:https?:|data:)/i.test(src)) {
+    return src;
+  }
+
+  if (src.startsWith("/")) {
+    return src;
+  }
+
+  return src.startsWith("assets/") ? src : `assets/${src}`;
+}
+
+function resolveMonsterImage(monster) {
+  if (!monster) {
+    return "";
+  }
+
+  const direct = ensureAssetPath(normalizeStringValue(monster.image));
+  if (direct) {
+    return direct;
+  }
+
+  const id = typeof monster.id === "number" ? String(monster.id) : normalizeStringValue(monster.id);
+  if (!id) {
+    return "";
+  }
+
+  return ensureAssetPath(`assets/data/${id}.gif`);
+}
+
+function resolveSpawnMapImage(mapCode) {
+  const normalizedMap = normalizeStringValue(mapCode);
+  if (!normalizedMap) {
+    return "";
+  }
+
+  return resolveExploreMapImage(normalizedMap);
+}
+
 function createMonsterRow(monster) {
   const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
   const stats = monster.stats ?? null;
@@ -4857,12 +4934,24 @@ function createMonsterRow(monster) {
   const expLabel = baseExpLabel === "—" && jobExpLabel === "—" ? "—" : `${baseExpLabel} / ${jobExpLabel}`;
   const levelLabel = typeof monster.level === "number" ? monster.level : "—";
 
+  const monsterImageSrc = resolveMonsterImage(monster);
+  const monsterName = normalizeStringValue(monster.name) || "Monstro desconhecido";
+  const monsterInitial = monsterName.charAt(0) || "?";
+  const monsterImageAlt = `Retrato de ${monsterName}`;
+
+  const monsterMedia = monsterImageSrc
+    ? `<span class="monster-name__media"><img src="${monsterImageSrc}" alt="${monsterImageAlt}" loading="lazy" decoding="async" /></span>`
+    : `<span class="monster-name__media"><span class="monster-avatar__placeholder" aria-hidden="true">${monsterInitial}</span></span>`;
+
   const spawnChips = spawnList
     .map(spawn => {
       const mapCode = normalizeStringValue(spawn.map);
       const name = normalizeStringValue(spawn.name) || mapCode;
       const region = normalizeStringValue(spawn.region);
       const type = normalizeStringValue(spawn.type);
+
+      const mapImageSrc = resolveSpawnMapImage(mapCode);
+      const mapAltLabel = name && mapCode ? `${name} (${mapCode})` : name || mapCode || "Mapa";
 
       const titleParts = [];
       if (region) titleParts.push(region);
@@ -4872,9 +4961,19 @@ function createMonsterRow(monster) {
       const title = titleParts.join(" • ");
 
       return `
-        <span class="monster-map-chip" title="${title}">
-          <span class="monster-map-chip__name">${name}</span>
-          ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
+        <span class="monster-map-chip"${title ? ` title="${title}"` : ""}>
+          <span class="monster-map-chip__media">
+            ${mapImageSrc
+              ? `<img src="${mapImageSrc}" alt="${mapAltLabel}" loading="lazy" decoding="async" />`
+              : `<span class="monster-map-chip__placeholder" aria-hidden="true">${(mapCode || mapAltLabel || "?")
+                  .toString()
+                  .slice(0, 2)
+                  .toUpperCase()}</span>`}
+          </span>
+          <span class="monster-map-chip__content">
+            <span class="monster-map-chip__name">${name || "—"}</span>
+            ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
+          </span>
         </span>
       `;
     })
@@ -4893,10 +4992,15 @@ function createMonsterRow(monster) {
     <tr class="monster-row">
       <th scope="row" class="monster-cell monster-cell--name">
         <div class="monster-name">
-          <span class="monster-name__label">${monster.name ?? "—"}</span>
-          ${badges.join("")}
+          ${monsterMedia}
+          <div class="monster-name__content">
+            <div class="monster-name__header">
+              <span class="monster-name__label">${monster.name ?? "—"}</span>
+              ${badges.length ? `<span class="monster-name__badges">${badges.join("")}</span>` : ""}
+            </div>
+            ${notesHtml}
+          </div>
         </div>
-        ${notesHtml}
       </th>
       <td class="monster-cell" data-label="Nível">${levelLabel}</td>
       <td class="monster-cell" data-label="Raça">${monster.race ?? "—"}</td>
