@@ -4986,7 +4986,7 @@ function createMonsterRow(monster) {
                   .slice(0, 2)
                   .toUpperCase()}</span>`}
           </span>
-          <span class="monster-map-chip__content">
+          <span class="monster-map-chip__content u-visually-hidden">
             <span class="monster-map-chip__name">${name || "—"}</span>
             ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
           </span>
