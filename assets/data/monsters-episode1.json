@@ -1,14 +1,13 @@
 {
   "episode": {
     "code": "ep1",
-    "title": "Episódio 1 - Advent of the World",
+    "title": "Episódio 1 - Was",
     "client": "kRO",
-    "description": "Lista de monstros liberados oficialmente no Episódio 1 do Ragnarok Online na cronologia do kRO. Os valores referem-se ao balanceamento pré-Renewal."
+    "description": "Monstros presentes atualmente no servidor Was."
   },
   "metadata": {
-    "updatedAt": "2024-05-01",
-    "total": 46,
-    "notes": "Mapas indicam os códigos originais do kRO e os nomes localizados para o público brasileiro."
+    "updatedAt": "11/2026",
+    "total": 46
   },
   "monsters": [
     {
@@ -21,50 +20,59 @@
       "size": "Médio",
       "spawn": [
         {
-          "map": "prt_fild08",
-          "name": "Campos de Prontera (Sudoeste)",
-          "region": "Prontera",
+          "map": "mjolnir_12",
+          "name": "Campos de Mjolnir",
+          "region": "Mjolnir",
           "type": "Campo"
         },
         {
-          "map": "prt_fild05",
-          "name": "Campos de Prontera (Oeste)",
-          "region": "Prontera",
+          "map": "pay_fild06",
+          "name": "Campos de Payon",
+          "region": "Payon",
           "type": "Campo"
         },
         {
-          "map": "prt_fild01",
-          "name": "Campos de Prontera (Norte)",
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
           "region": "Prontera",
-          "type": "Campo"
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
         }
       ],
-      "notes": "Mascote icônico, usado como monstro introdutório para novos aventureiros.",
       "stats": {
-        "hp": 50,
-        "baseExp": 2,
-        "jobExp": 1
+        "hp": 170,
+        "baseExp": 35,
+        "jobExp": 18
       }
     },
     {
       "id": 1120,
       "name": "Phreeoni",
-      "image": "assets/ghostring.png",
-      "level": 60,
-      "race": "Inseto",
-      "element": "Neutro 2",
+      "image": "assets/data/1159.gif",
+      "level": 69,
+      "race": "Bruto",
+      "element": "Neutro 3",
       "size": "Grande",
       "isMvp": true,
       "spawn": [
         {
           "map": "moc_fild16",
-          "name": "Selvas de Morroc (Nordeste)",
+          "name": "Deserto de Sograt",
           "region": "Morroc",
           "type": "Campo"
         }
-      ],
-      "notes": "MVP do Episódio 1 encontrado nas selvas de Morroc.",
-      "stats": null
+      ]
     }
     
   ]
