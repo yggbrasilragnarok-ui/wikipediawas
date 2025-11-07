@@ -4845,24 +4845,9 @@ function applyMonsterFilters(monsters, filters) {
     }
 
     if (term) {
-      const haystackParts = [
-        monster.name,
-        monster.notes,
-        monster.race,
-        monster.element,
-        monster.size,
-      ];
+      const monsterName = normalizeStringValue(monster.name).toLowerCase();
 
-      spawnList.forEach(spawn => {
-        haystackParts.push(spawn.map, spawn.name, spawn.region, spawn.type);
-      });
-
-      const haystack = haystackParts
-        .map(value => normalizeStringValue(value).toLowerCase())
-        .filter(Boolean)
-        .join(" ");
-
-      if (!haystack.includes(term)) {
+      if (!monsterName || !monsterName.includes(term)) {
         return false;
       }
     }
