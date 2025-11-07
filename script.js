@@ -4642,30 +4642,26 @@ monster: {
 
         <div class="monster-database__summary">
           <p class="monster-database__count" id="monsterResultCount" aria-live="polite">
-            Carregando lista de monstros...
+            Aplique um filtro ou pesquise um monstro para começar.
           </p>
           <p class="monster-database__source">Fonte: cronologia oficial kRO (pré-Renewal).</p>
         </div>
 
-        <div class="monster-database__table-wrapper" id="monsterTableWrapper">
-          <div class="monster-database__status" id="monsterLoadingStatus" role="status" aria-live="assertive">
-            Carregando bestiário do Episódio 1...
-          </div>
-          <table class="monster-table" id="monsterTable" hidden>
-            <thead>
-              <tr>
-                <th scope="col">Monstro</th>
-                <th scope="col">Nível</th>
-                <th scope="col">Raça</th>
-                <th scope="col">Elemento</th>
-                <th scope="col">Tamanho</th>
-                <th scope="col">HP</th>
-                <th scope="col">EXP (Base/Classe)</th>
-                <th scope="col">Mapas</th>
-              </tr>
-            </thead>
-            <tbody id="monsterTableBody"></tbody>
-          </table>
+        <div class="monster-database__layout" id="monsterLayout">
+          <aside class="monster-database__list-panel">
+            <div class="monster-database__status" id="monsterLoadingStatus" role="status" aria-live="assertive">
+              Carregando bestiário do Episódio 1...
+            </div>
+            <ul class="monster-list" id="monsterList" hidden></ul>
+          </aside>
+          <article class="monster-database__details" id="monsterDetails" aria-live="polite">
+            <div class="monster-placeholder">
+              <h3 class="monster-placeholder__title">Encontre um monstro</h3>
+              <p class="monster-placeholder__description">
+                Use a busca ou os filtros para listar as criaturas disponíveis no Episódio 1.
+              </p>
+            </div>
+          </article>
         </div>
       </section>
     `
@@ -4920,147 +4916,257 @@ function resolveSpawnMapImage(mapCode) {
   return resolveExploreMapImage(normalizedMap);
 }
 
-function createMonsterRow(monster) {
-  const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
-  const stats = monster.stats ?? null;
-  const hpLabel = stats?.hp != null ? formatNumberForLocale(stats.hp) : "—";
-  const baseExpLabel = stats?.baseExp != null ? formatNumberForLocale(stats.baseExp) : "—";
-  const jobExpLabel = stats?.jobExp != null ? formatNumberForLocale(stats.jobExp) : "—";
-  const expLabel = baseExpLabel === "—" && jobExpLabel === "—" ? "—" : `${baseExpLabel} / ${jobExpLabel}`;
-  const levelLabel = typeof monster.level === "number" ? monster.level : "—";
+function getMonsterId(monster) {
+  if (!monster) {
+    return "";
+  }
 
-  const monsterImageSrc = resolveMonsterImage(monster);
+  if (monster.id != null) {
+    return String(monster.id);
+  }
+
+  return normalizeStringValue(monster.name) || "";
+}
+
+function createMonsterMapChip(spawn) {
+  const mapCode = normalizeStringValue(spawn?.map);
+  const name = normalizeStringValue(spawn?.name) || mapCode;
+  const region = normalizeStringValue(spawn?.region);
+  const type = normalizeStringValue(spawn?.type);
+
+  const mapImageSrc = resolveSpawnMapImage(mapCode);
+  const mapAltLabel = name && mapCode ? `${name} (${mapCode})` : name || mapCode || "Mapa";
+
+  const titleParts = [];
+  if (region) titleParts.push(region);
+  if (type) titleParts.push(type);
+  if (mapCode) titleParts.push(mapCode);
+
+  const title = titleParts.join(" • ");
+
+  return `
+    <span class="monster-map-chip"${title ? ` title="${title}"` : ""}>
+      <span class="monster-map-chip__media">
+        ${mapImageSrc
+          ? `<img src="${mapImageSrc}" alt="${mapAltLabel}" loading="lazy" decoding="async" />`
+          : `<span class="monster-map-chip__placeholder" aria-hidden="true">${(mapCode || mapAltLabel || "?")
+              .toString()
+              .slice(0, 2)
+              .toUpperCase()}</span>`}
+      </span>
+      <span class="monster-map-chip__content u-visually-hidden">
+        <span class="monster-map-chip__name">${name || "—"}</span>
+        ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
+      </span>
+    </span>
+  `;
+}
+
+function createMonsterListItem(monster, id, isActive) {
+  const imageSrc = resolveMonsterImage(monster);
   const monsterName = normalizeStringValue(monster.name) || "Monstro desconhecido";
   const monsterInitial = monsterName.charAt(0) || "?";
   const monsterImageAlt = `Retrato de ${monsterName}`;
+  const levelLabel = typeof monster.level === "number" ? `Nv. ${monster.level}` : null;
+  const raceLabel = normalizeStringValue(monster.race);
+  const elementLabel = normalizeStringValue(monster.element);
 
-  const monsterMedia = monsterImageSrc
-    ? `<span class="monster-name__media"><img src="${monsterImageSrc}" alt="${monsterImageAlt}" loading="lazy" decoding="async" /></span>`
-    : `<span class="monster-name__media"><span class="monster-avatar__placeholder" aria-hidden="true">${monsterInitial}</span></span>`;
+  const metaParts = [levelLabel, raceLabel, elementLabel].filter(Boolean);
 
-  const spawnChips = spawnList
-    .map(spawn => {
-      const mapCode = normalizeStringValue(spawn.map);
-      const name = normalizeStringValue(spawn.name) || mapCode;
-      const region = normalizeStringValue(spawn.region);
-      const type = normalizeStringValue(spawn.type);
-
-      const mapImageSrc = resolveSpawnMapImage(mapCode);
-      const mapAltLabel = name && mapCode ? `${name} (${mapCode})` : name || mapCode || "Mapa";
-
-      const titleParts = [];
-      if (region) titleParts.push(region);
-      if (type) titleParts.push(type);
-      if (mapCode) titleParts.push(mapCode);
-
-      const title = titleParts.join(" • ");
-
-      return `
-        <span class="monster-map-chip"${title ? ` title="${title}"` : ""}>
-          <span class="monster-map-chip__media">
-            ${mapImageSrc
-              ? `<img src="${mapImageSrc}" alt="${mapAltLabel}" loading="lazy" decoding="async" />`
-              : `<span class="monster-map-chip__placeholder" aria-hidden="true">${(mapCode || mapAltLabel || "?")
-                  .toString()
-                  .slice(0, 2)
-                  .toUpperCase()}</span>`}
-          </span>
-          <span class="monster-map-chip__content u-visually-hidden">
-            <span class="monster-map-chip__name">${name || "—"}</span>
-            ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
-          </span>
+  return `
+    <li class="monster-list__row">
+      <button type="button" class="monster-list__item${isActive ? " is-active" : ""}" data-monster-id="${id}">
+        <span class="monster-list__media">
+          ${imageSrc
+            ? `<img src="${imageSrc}" alt="${monsterImageAlt}" loading="lazy" decoding="async" />`
+            : `<span class="monster-list__media-placeholder" aria-hidden="true">${monsterInitial}</span>`}
         </span>
-      `;
-    })
-    .join("");
+        <span class="monster-list__content">
+          <span class="monster-list__name">${monsterName}</span>
+          ${metaParts.length ? `<span class="monster-list__meta">${metaParts.join(" • ")}</span>` : ""}
+        </span>
+      </button>
+    </li>
+  `;
+}
 
+function renderMonsterDetails(monster, context = {}) {
+  const detailsEl = document.getElementById("monsterDetails");
+  if (!detailsEl) {
+    return;
+  }
+
+  if (!monster) {
+    let title = "Encontre um monstro";
+    let description = "Use a busca ou os filtros para listar as criaturas disponíveis no Episódio 1.";
+
+    if (context.reason === "empty") {
+      title = "Nenhum resultado";
+      description = "Nenhum monstro atende aos filtros atuais. Ajuste os critérios e tente novamente.";
+    } else if (context.reason === "error") {
+      title = "Erro ao carregar";
+      description = "Não foi possível carregar os detalhes do monstro. Tente novamente mais tarde.";
+    }
+
+    detailsEl.innerHTML = `
+      <div class="monster-placeholder">
+        <h3 class="monster-placeholder__title">${title}</h3>
+        <p class="monster-placeholder__description">${description}</p>
+      </div>
+    `;
+    return;
+  }
+
+  const monsterName = normalizeStringValue(monster.name) || "Monstro desconhecido";
+  const monsterInitial = monsterName.charAt(0) || "?";
+  const imageSrc = resolveMonsterImage(monster);
+  const monsterImageAlt = `Retrato de ${monsterName}`;
   const badges = [];
+
   if (monster.isMvp) {
     badges.push('<span class="monster-badge monster-badge--mvp">MVP</span>');
   }
 
+  const stats = monster.stats ?? {};
+  const hpLabel = stats?.hp != null ? formatNumberForLocale(stats.hp) : "—";
+  const baseExpLabel = stats?.baseExp != null ? formatNumberForLocale(stats.baseExp) : "—";
+  const jobExpLabel = stats?.jobExp != null ? formatNumberForLocale(stats.jobExp) : "—";
+  const levelLabel = typeof monster.level === "number" ? monster.level : "—";
+
+  const infoBlocks = [
+    { label: "Nível", value: levelLabel },
+    { label: "HP", value: hpLabel },
+    { label: "Raça", value: monster.race ?? "—" },
+    { label: "Elemento", value: monster.element ?? "—" },
+    { label: "Tamanho", value: monster.size ?? "—" },
+    { label: "EXP Base", value: baseExpLabel },
+    { label: "EXP Classe", value: jobExpLabel },
+  ];
+
+  const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
+  const spawnHtml = spawnList.length
+    ? `<div class="monster-card__maps">${spawnList.map(createMonsterMapChip).join("")}</div>`
+    : '<p class="monster-card__empty">Nenhum mapa de aparição registrado.</p>';
+
   const notesHtml = normalizeStringValue(monster.notes)
-    ? `<p class="monster-notes">${monster.notes}</p>`
+    ? `<p class="monster-card__notes">${monster.notes}</p>`
     : "";
 
-  return `
-    <tr class="monster-row">
-      <th scope="row" class="monster-cell monster-cell--name">
-        <div class="monster-name">
-          ${monsterMedia}
-          <div class="monster-name__content">
-            <div class="monster-name__header">
-              <span class="monster-name__label">${monster.name ?? "—"}</span>
-              ${badges.length ? `<span class="monster-name__badges">${badges.join("")}</span>` : ""}
-            </div>
-            ${notesHtml}
-          </div>
+  detailsEl.innerHTML = `
+    <div class="monster-card">
+      <header class="monster-card__header">
+        <div class="monster-card__media">
+          ${imageSrc
+            ? `<img src="${imageSrc}" alt="${monsterImageAlt}" loading="lazy" decoding="async" />`
+            : `<span class="monster-card__media-placeholder" aria-hidden="true">${monsterInitial}</span>`}
         </div>
-      </th>
-      <td class="monster-cell" data-label="Nível">${levelLabel}</td>
-      <td class="monster-cell" data-label="Raça">${monster.race ?? "—"}</td>
-      <td class="monster-cell" data-label="Elemento">${monster.element ?? "—"}</td>
-      <td class="monster-cell" data-label="Tamanho">${monster.size ?? "—"}</td>
-      <td class="monster-cell" data-label="HP">${hpLabel}</td>
-      <td class="monster-cell" data-label="EXP (Base/Classe)">${expLabel}</td>
-      <td class="monster-cell" data-label="Mapas">
-        ${spawnChips || "—"}
-      </td>
-    </tr>
+        <div class="monster-card__header-content">
+          <h3 class="monster-card__title">${monsterName}</h3>
+          ${badges.length ? `<div class="monster-card__badges">${badges.join("")}</div>` : ""}
+          ${notesHtml}
+        </div>
+      </header>
+
+      <section class="monster-card__section" aria-label="Informações gerais do monstro">
+        <h4 class="monster-card__section-title">Informações gerais</h4>
+        <div class="monster-card__stats">
+          ${infoBlocks
+            .map(
+              block => `
+                <div class="monster-card__stat">
+                  <span class="monster-card__stat-label">${block.label}</span>
+                  <span class="monster-card__stat-value">${block.value}</span>
+                </div>
+              `
+            )
+            .join("")}
+        </div>
+      </section>
+
+      <section class="monster-card__section" aria-label="Locais de aparição">
+        <h4 class="monster-card__section-title">Mapas de aparição</h4>
+        ${spawnHtml}
+      </section>
+    </div>
   `;
 }
 
-function renderMonsterTable(monsters, context) {
-  const tableBody = document.getElementById("monsterTableBody");
-  const table = document.getElementById("monsterTable");
+function renderMonsterExplorer(monsters, context) {
+  const listEl = document.getElementById("monsterList");
   const statusEl = document.getElementById("monsterLoadingStatus");
-  const resultCount = document.getElementById("monsterResultCount");
+  const countEl = document.getElementById("monsterResultCount");
 
-  if (!tableBody || !table || !statusEl) {
+  if (!listEl || !statusEl || !countEl) {
     return;
   }
 
   if (context?.showPrompt) {
     statusEl.hidden = false;
-    statusEl.textContent = "aplique um filtro ou pesquise um monstro";
-    table.hidden = true;
-    tableBody.innerHTML = "";
+    statusEl.textContent = "Aplique um filtro ou pesquise um monstro.";
+    listEl.hidden = true;
+    listEl.innerHTML = "";
+    countEl.textContent = "Aplique um filtro ou pesquise um monstro para começar.";
+    renderMonsterDetails(null, { reason: "prompt" });
+    return;
+  }
 
-    if (resultCount) {
-      resultCount.textContent = "aplique um filtro ou pesquise um monstro";
-    }
+  const total = typeof context?.total === "number" ? context.total : context?.fallbackTotal;
 
+  if (monsters.length === 0) {
+    statusEl.hidden = false;
+    statusEl.textContent = "Nenhum monstro encontrado com os filtros atuais.";
+    listEl.hidden = true;
+    listEl.innerHTML = "";
+    countEl.textContent = "Nenhum monstro encontrado com os filtros atuais.";
+    renderMonsterDetails(null, { reason: "empty" });
     return;
   }
 
   statusEl.hidden = true;
-  table.hidden = false;
+  listEl.hidden = false;
 
-  if (monsters.length === 0) {
-    tableBody.innerHTML = `
-      <tr class="monster-row monster-row--empty">
-        <td class="monster-cell" colspan="8">
-          Nenhum monstro encontrado com os filtros atuais. Ajuste os critérios de busca para visualizar outras criaturas.
-        </td>
-      </tr>
-    `;
-  } else {
-    tableBody.innerHTML = monsters.map(createMonsterRow).join("");
+  const items = monsters.map(monster => ({ monster, id: getMonsterId(monster) })).filter(item => item.id);
+
+  let activeId = context?.selectedMonsterId ? String(context.selectedMonsterId) : "";
+  if (!activeId || !items.some(item => item.id === activeId)) {
+    activeId = items[0]?.id ?? "";
+    if (activeId && activeId !== context?.selectedMonsterId && typeof context?.onSelectedChange === "function") {
+      context.onSelectedChange(activeId);
+      return;
+    }
   }
 
-  if (resultCount) {
-    const total = typeof context.total === "number" ? context.total : context.fallbackTotal;
+  listEl.innerHTML = items
+    .map(({ monster, id }) => createMonsterListItem(monster, id, id === activeId))
+    .join("");
+
+  listEl
+    .querySelectorAll(".monster-list__item")
+    .forEach(button => {
+      button.addEventListener("click", () => {
+        const clickedId = button.dataset.monsterId || "";
+        if (typeof context?.onSelectedChange === "function") {
+          context.onSelectedChange(clickedId);
+        }
+      });
+    });
+
+  const activeMonster = items.find(item => item.id === activeId)?.monster ?? null;
+  renderMonsterDetails(activeMonster);
+
+  if (total != null) {
     const filteredCount = monsters.length;
     const filteredLabel = filteredCount === 1 ? "monstro" : "monstros";
     const totalLabel = total === 1 ? "monstro" : "monstros";
-    resultCount.textContent = `${filteredCount} ${filteredLabel} exibido(s) de ${total} ${totalLabel} do Episódio 1.`;
+    countEl.textContent = `${filteredCount} ${filteredLabel} exibido(s) de ${total} ${totalLabel} do Episódio 1.`;
+  } else {
+    countEl.textContent = `${monsters.length} monstros encontrados.`;
   }
 }
 
 function handleMonsterFetchError(error) {
   const statusEl = document.getElementById("monsterLoadingStatus");
-  const table = document.getElementById("monsterTable");
-  const tableBody = document.getElementById("monsterTableBody");
+  const listEl = document.getElementById("monsterList");
   const countEl = document.getElementById("monsterResultCount");
 
   if (statusEl) {
@@ -5068,17 +5174,16 @@ function handleMonsterFetchError(error) {
     statusEl.textContent = "Não foi possível carregar o bestiário agora. Tente novamente mais tarde.";
   }
 
-  if (table) {
-    table.hidden = true;
-  }
-
-  if (tableBody) {
-    tableBody.innerHTML = "";
+  if (listEl) {
+    listEl.hidden = true;
+    listEl.innerHTML = "";
   }
 
   if (countEl) {
     countEl.textContent = "Erro ao carregar a lista de monstros.";
   }
+
+  renderMonsterDetails(null, { reason: "error" });
 
   // eslint-disable-next-line no-console
   console.error(error);
@@ -5093,12 +5198,14 @@ function initMonsterDatabase() {
   }
 
   const loadingStatus = document.getElementById("monsterLoadingStatus");
-  const table = document.getElementById("monsterTable");
+  const listEl = document.getElementById("monsterList");
   if (loadingStatus) {
     loadingStatus.hidden = false;
+    loadingStatus.textContent = "Carregando bestiário do Episódio 1...";
   }
-  if (table) {
-    table.hidden = true;
+  if (listEl) {
+    listEl.hidden = true;
+    listEl.innerHTML = "";
   }
 
   fetchMonsterDatabase()
@@ -5157,10 +5264,22 @@ function initMonsterDatabase() {
         element: "all",
       };
 
-      const updateTable = () => {
+      let selectedMonsterId = "";
+
+      const updateExplorer = () => {
         const hasActiveFilters = isMonsterFilterActive(filterState);
         const filtered = hasActiveFilters ? applyMonsterFilters(monsters, filterState) : [];
-        renderMonsterTable(filtered, { ...totals, showPrompt: !hasActiveFilters });
+        renderMonsterExplorer(filtered, {
+          ...totals,
+          showPrompt: !hasActiveFilters,
+          selectedMonsterId,
+          onSelectedChange(id) {
+            if (id !== selectedMonsterId) {
+              selectedMonsterId = id;
+              updateExplorer();
+            }
+          },
+        });
       };
 
       const searchInput = document.getElementById("monsterSearchInput");
@@ -5168,7 +5287,8 @@ function initMonsterDatabase() {
         searchInput.value = "";
         searchInput.addEventListener("input", event => {
           filterState.term = event.target.value;
-          updateTable();
+          selectedMonsterId = "";
+          updateExplorer();
         });
       }
 
@@ -5177,7 +5297,8 @@ function initMonsterDatabase() {
         regionSelect.value = "all";
         regionSelect.addEventListener("change", event => {
           filterState.region = event.target.value;
-          updateTable();
+          selectedMonsterId = "";
+          updateExplorer();
         });
       }
 
@@ -5186,7 +5307,8 @@ function initMonsterDatabase() {
         typeSelect.value = "all";
         typeSelect.addEventListener("change", event => {
           filterState.mapType = event.target.value;
-          updateTable();
+          selectedMonsterId = "";
+          updateExplorer();
         });
       }
 
@@ -5195,7 +5317,8 @@ function initMonsterDatabase() {
         raceSelect.value = "all";
         raceSelect.addEventListener("change", event => {
           filterState.race = event.target.value;
-          updateTable();
+          selectedMonsterId = "";
+          updateExplorer();
         });
       }
 
@@ -5204,16 +5327,18 @@ function initMonsterDatabase() {
         elementSelect.value = "all";
         elementSelect.addEventListener("change", event => {
           filterState.element = event.target.value;
-          updateTable();
+          selectedMonsterId = "";
+          updateExplorer();
         });
       }
 
-      updateTable();
+      updateExplorer();
     })
     .catch(error => {
       handleMonsterFetchError(error);
     });
 }
+
 
 
 const TELEPORT_MAP_CONFIG = {
