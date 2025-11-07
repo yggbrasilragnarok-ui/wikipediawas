@@ -1738,6 +1738,7 @@ body {
 .monster-list__media {
   width: 52px;
   height: 52px;
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
   background: rgba(3, 16, 28, 0.85);
   border: 1px solid rgba(11, 223, 255, 0.2);
@@ -1795,6 +1796,7 @@ body {
 .monster-card__media {
   width: clamp(96px, 12vw, 124px);
   height: clamp(96px, 12vw, 124px);
+  aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(140, 243, 255, 0.35);
   background: rgba(3, 16, 28, 0.85);
@@ -2036,6 +2038,7 @@ body {
   .monster-list__media {
     width: 44px;
     height: 44px;
+    aspect-ratio: 1 / 1;
   }
 
   .monster-card__header {
@@ -2055,6 +2058,7 @@ body {
   .monster-card__media {
     width: 92px;
     height: 92px;
+    aspect-ratio: 1 / 1;
   }
 
   .monster-card__maps {
