@@ -4731,6 +4731,19 @@ function normalizeStringValue(value) {
   return typeof value === "string" ? value.trim() : "";
 }
 
+function escapeHtmlAttribute(value) {
+  const text = normalizeStringValue(value);
+  if (!text) {
+    return "";
+  }
+
+  return text
+    .replace(/&/g, "&amp;")
+    .replace(/"/g, "&quot;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;");
+}
+
 function normalizeFilterValue(value) {
   return normalizeStringValue(value).toLowerCase() || "all";
 }
@@ -4857,22 +4870,6 @@ function applyMonsterFilters(monsters, filters) {
   });
 }
 
-function isMonsterFilterActive(state) {
-  if (!state) {
-    return false;
-  }
-
-  const hasTerm = normalizeStringValue(state.term).length > 0;
-
-  return (
-    hasTerm ||
-    state.region !== "all" ||
-    state.mapType !== "all" ||
-    state.race !== "all" ||
-    state.element !== "all"
-  );
-}
-
 function ensureAssetPath(src) {
   if (!src) {
     return "";
@@ -4942,10 +4939,24 @@ function createMonsterMapChip(spawn) {
   if (type) titleParts.push(type);
   if (mapCode) titleParts.push(mapCode);
 
-  const title = titleParts.join(" • ");
+  const title = escapeHtmlAttribute(titleParts.join(" • "));
+
+  const attributes = [];
+
+  if (title) {
+    attributes.push(`title="${title}"`);
+  }
+
+  if (mapCode) {
+    attributes.push(`data-map-code="${escapeHtmlAttribute(mapCode)}"`);
+  }
+
+  if (name) {
+    attributes.push(`data-map-name="${escapeHtmlAttribute(name)}"`);
+  }
 
   return `
-    <span class="monster-map-chip"${title ? ` title="${title}"` : ""}>
+    <button type="button" class="monster-map-chip"${attributes.length ? ` ${attributes.join(" ")}` : ""}>
       <span class="monster-map-chip__media">
         ${mapImageSrc
           ? `<img src="${mapImageSrc}" alt="${mapAltLabel}" loading="lazy" decoding="async" />`
@@ -4958,7 +4969,7 @@ function createMonsterMapChip(spawn) {
         <span class="monster-map-chip__name">${name || "—"}</span>
         ${mapCode ? `<span class="monster-map-chip__code">${mapCode}</span>` : ""}
       </span>
-    </span>
+    </button>
   `;
 }
 
@@ -5045,7 +5056,12 @@ function renderMonsterDetails(monster, context = {}) {
 
   const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
   const spawnHtml = spawnList.length
-    ? `<div class="monster-card__maps">${spawnList.map(createMonsterMapChip).join("")}</div>`
+    ? `
+        <div class="monster-card__maps" data-monster-map-list>
+          ${spawnList.map(createMonsterMapChip).join("")}
+        </div>
+        <p class="monster-card__map-message" data-monster-map-message hidden aria-live="polite"></p>
+      `
     : '<p class="monster-card__empty">Nenhum mapa de aparição registrado.</p>';
 
   const notesHtml = normalizeStringValue(monster.notes)
@@ -5089,6 +5105,68 @@ function renderMonsterDetails(monster, context = {}) {
       </section>
     </div>
   `;
+
+  setupMonsterMapChipInteractions(detailsEl);
+}
+
+function setupMonsterMapChipInteractions(container) {
+  if (!container) {
+    return;
+  }
+
+  const messageEl = container.querySelector("[data-monster-map-message]");
+  const chips = Array.from(container.querySelectorAll(".monster-map-chip"));
+
+  if (!messageEl || chips.length === 0) {
+    return;
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener("click", () => {
+      chips.forEach(item => item.classList.remove("is-selected"));
+      chip.classList.add("is-selected");
+
+      const mapCode = normalizeStringValue(chip.dataset.mapCode);
+      const mapName = normalizeStringValue(chip.dataset.mapName);
+      const hasDistinctName = mapName && mapName !== mapCode;
+
+      let messageBase = "Mapa selecionado.";
+
+      if (mapCode && hasDistinctName) {
+        messageBase = `${mapName} — comando /where: ${mapCode}`;
+      } else if (mapCode) {
+        messageBase = `Comando /where: ${mapCode}`;
+      } else if (mapName) {
+        messageBase = `Mapa selecionado: ${mapName}`;
+      }
+
+      messageEl.textContent = messageBase;
+      messageEl.hidden = false;
+
+      if (mapCode) {
+        messageEl.dataset.activeMapCode = mapCode;
+      } else {
+        delete messageEl.dataset.activeMapCode;
+      }
+
+      const canUseClipboard =
+        mapCode &&
+        typeof navigator !== "undefined" &&
+        navigator.clipboard &&
+        typeof navigator.clipboard.writeText === "function";
+
+      if (canUseClipboard) {
+        navigator.clipboard.writeText(mapCode).then(
+          () => {
+            if (messageEl.dataset.activeMapCode === mapCode) {
+              messageEl.textContent = `${messageBase} (copiado)`;
+            }
+          },
+          () => {}
+        );
+      }
+    });
+  });
 }
 
 function renderMonsterExplorer(monsters, context) {
@@ -5267,11 +5345,10 @@ function initMonsterDatabase() {
       let selectedMonsterId = "";
 
       const updateExplorer = () => {
-        const hasActiveFilters = isMonsterFilterActive(filterState);
-        const filtered = hasActiveFilters ? applyMonsterFilters(monsters, filterState) : [];
+        const filtered = applyMonsterFilters(monsters, filterState);
         renderMonsterExplorer(filtered, {
           ...totals,
-          showPrompt: !hasActiveFilters,
+          showPrompt: false,
           selectedMonsterId,
           onSelectedChange(id) {
             if (id !== selectedMonsterId) {

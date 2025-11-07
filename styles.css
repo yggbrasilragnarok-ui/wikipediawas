@@ -1934,6 +1934,13 @@ body {
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
   min-width: 70px;
   max-width: 70px;
+  cursor: pointer;
+  text-align: left;
+  color: inherit;
+  font: inherit;
+  outline: none;
+  appearance: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
 .monster-map-chip__media {
@@ -1979,6 +1986,23 @@ body {
   font-size: 0.65rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
+}
+
+.monster-map-chip:hover {
+  border-color: rgba(140, 243, 255, 0.55);
+  transform: translateY(-2px);
+}
+
+.monster-map-chip:focus-visible,
+.monster-map-chip.is-selected {
+  border-color: rgba(140, 243, 255, 0.75);
+  box-shadow: 0 0 0 2px rgba(140, 243, 255, 0.35), inset 0 0 14px rgba(0, 0, 0, 0.45);
+}
+
+.monster-card__map-message {
+  margin: 12px 6px 0;
+  font-size: 0.78rem;
+  color: rgba(140, 243, 255, 0.88);
 }
 
 
