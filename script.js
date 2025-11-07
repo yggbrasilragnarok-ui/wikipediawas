@@ -4584,16 +4584,10 @@ monster: {
     html: `
       <section class="monster-database">
         <header class="monster-database__header">
-          <p class="lead">
-            Consulte todos os monstros disponíveis no <strong>Episódio 1</strong> seguindo a ordem oficial do
-            <abbr title="Korean Ragnarok Online">kRO</abbr>. Utilize os filtros para localizar alvos por região,
-            elemento ou mapas específicos da temporada inicial.
-          </p>
-
           <dl class="monster-database__meta">
             <div class="monster-database__meta-item">
               <dt>Episódio</dt>
-              <dd>Episódio 1 (kRO)</dd>
+              <dd>Episódio 1</dd>
             </div>
             <div class="monster-database__meta-item">
               <dt>Atualizado em</dt>
@@ -4612,8 +4606,8 @@ monster: {
             <input
               type="search"
               id="monsterSearchInput"
-              placeholder="Nome, mapa ou observação"
-              aria-label="Buscar monstros por nome, mapa ou anotação"
+              placeholder="Nome"
+              aria-label="Buscar monstros por nome"
             />
           </label>
 
