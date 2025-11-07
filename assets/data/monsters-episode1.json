@@ -10,6 +10,231 @@
     "total": 46
   },
   "monsters": [
+        {
+      "id": 1031,
+      "name": "Poporing",
+      "image": "assets/data/1031.gif",
+      "level": 14,
+      "race": "Planta",
+      "element": "Veneno 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "gef_dun00",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_fild03",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+          {
+          "map": "gef_fild06",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+          {
+          "map": "gef_fild09",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+          {
+          "map": "gef_fild10",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+          {
+          "map": "mjolnir_02",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_03",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_04",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_05",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_06",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_07",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_08",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_09",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_10",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "mjolnir_11",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+            {
+          "map": "moc_fild03",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+            {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+          {
+          "map": "moc_pryd01",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+         {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+             {
+          "map": "pay_dun00",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+             {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild01",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild02",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild04",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild05",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild06",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild07",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild09",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild07",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild10",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+
+      ],
+      "stats": {
+        "hp": 344,
+        "baseExp": 81,
+        "jobExp": 44
+      }
+    },
+    {
+      "id": 1215,
+      "name": "Talo de Verme",
+      "image": "assets/data/1215.gif",
+      "level": 40,
+      "race": "Planta",
+      "element": "Vento 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_12",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 6136,
+        "baseExp": 1452,
+        "jobExp": 939
+      }
+    },
     {
       "id": 1053,
       "name": "Besouro-Ladrão Fêmea",
@@ -22,7 +247,7 @@
         {
           "map": "mjolnir_12",
           "name": "Campos de Mjolnir",
-          "region": "Mjolnir",
+          "region": "Prontera",
           "type": "Campo"
         },
         {
@@ -54,6 +279,57 @@
         "hp": 170,
         "baseExp": 35,
         "jobExp": 18
+      }
+    },
+
+    {
+      "id": 1114,
+      "name": "Poeira",
+      "image": "assets/data/1114.gif",
+      "level": 21,
+      "race": "Inseto",
+      "element": "Vento 2",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "mjolnir_12",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild05",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1044,
+        "baseExp": 218,
+        "jobExp": 140
+      }
+    },
+    {
+      "id": 1215,
+      "name": "Talo de Verme",
+      "image": "assets/data/1215.gif",
+      "level": 40,
+      "race": "Planta",
+      "element": "Vento 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_12",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 6136,
+        "baseExp": 1452,
+        "jobExp": 939
       }
     },
     {
