@@ -1737,25 +1737,21 @@ body {
 
 .monster-list__media {
   width: 52px;
-  height: 52px;
-  aspect-ratio: 1 / 1;
   border-radius: var(--radius-sm);
   background: rgba(3, 16, 28, 0.85);
   border: 1px solid rgba(11, 223, 255, 0.2);
-  display: grid;
-  justify-items: center;
-  align-items: end;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   flex-shrink: 0;
 }
 
 .monster-list__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   object-position: bottom center;
   image-rendering: pixelated;
-  align-self: end;
 }
 
 .monster-list__media-placeholder {
@@ -1799,26 +1795,22 @@ body {
 
 .monster-card__media {
   width: clamp(96px, 12vw, 124px);
-  height: clamp(96px, 12vw, 124px);
-  aspect-ratio: 1 / 1;
   border-radius: var(--radius-lg);
   border: 1px solid rgba(140, 243, 255, 0.35);
   background: rgba(3, 16, 28, 0.85);
-  display: grid;
-  justify-items: center;
-  align-items: end;
-  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
   flex-shrink: 0;
   box-shadow: inset 0 0 18px rgba(0, 0, 0, 0.55);
 }
 
 .monster-card__media img {
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: contain;
   object-position: bottom center;
   image-rendering: pixelated;
-  align-self: end;
 }
 
 .monster-card__media-placeholder {
