@@ -214,28 +214,6 @@
       }
     },
     {
-      "id": 1215,
-      "name": "Talo de Verme",
-      "image": "assets/data/1215.gif",
-      "level": 40,
-      "race": "Planta",
-      "element": "Vento 1",
-      "size": "Médio",
-      "spawn": [
-        {
-          "map": "mjolnir_12",
-          "name": "Campos de Mjolnir",
-          "region": "Prontera",
-          "type": "Campo"
-        }
-      ],
-      "stats": {
-        "hp": 6136,
-        "baseExp": 1452,
-        "jobExp": 939
-      }
-    },
-    {
       "id": 1053,
       "name": "Besouro-Ladrão Fêmea",
       "image": "assets/data/1053.gif",
@@ -282,6 +260,184 @@
       }
     },
 
+     {
+      "id": 1068,
+      "name": "Hidra",
+      "image": "assets/data/1068.gif",
+      "level": 14,
+      "race": "Planta",
+      "element": "Água 2",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Clabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 660,
+        "baseExp": 59,
+        "jobExp": 40
+      }
+    }, 
+    {
+      "id": 1070,
+      "name": "Kukre",
+      "image": "assets/data/1070.gif",
+      "level": 11,
+      "race": "Peixe",
+      "element": "Água 1",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 507,
+        "baseExp": 38,
+        "jobExp": 28
+      }
+    },
+    {
+      "id": 1070,
+      "name": "Kukre",
+      "image": "assets/data/1070.gif",
+      "level": 22,
+      "race": "Peixe",
+      "element": "Água 1",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1044,
+        "baseExp": 218,
+        "jobExp": 140
+      }
+    },
+    {
+      "id": 1071,
+      "name": "Esqueleto Pirata",
+      "image": "assets/data/1071.gif",
+      "level": 25,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1676,
+        "baseExp": 233,
+        "jobExp": 142
+      }
+    },
     {
       "id": 1114,
       "name": "Poeira",
