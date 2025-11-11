@@ -16,7 +16,7 @@
       "image": "assets/data/1031.gif",
       "level": 14,
       "race": "Planta",
-      "element": "Veneno 1",
+      "element": "Veneno",
       "size": "Médio",
       "spawn": [
         {
@@ -219,7 +219,7 @@
       "image": "assets/data/1053.gif",
       "level": 10,
       "race": "Inseto",
-      "element": "Sombrio 1",
+      "element": "Sombrio",
       "size": "Médio",
       "spawn": [
         {
@@ -266,7 +266,7 @@
       "image": "assets/data/1068.gif",
       "level": 14,
       "race": "Planta",
-      "element": "Água 2",
+      "element": "Água",
       "size": "Pequeno",
       "spawn": [
         {
@@ -337,7 +337,7 @@
       "image": "assets/data/1070.gif",
       "level": 22,
       "race": "Peixe",
-      "element": "Água 1",
+      "element": "Água",
       "size": "Pequeno",
       "spawn": [
         {
@@ -377,7 +377,7 @@
       "image": "assets/data/1071.gif",
       "level": 25,
       "race": "Morto-Vivo",
-      "element": "Morto-Vivo 1",
+      "element": "Morto-Vivo",
       "size": "Médio",
       "spawn": [
         {
@@ -405,7 +405,7 @@
       "image": "assets/data/1077.gif",
       "level": 19,
       "race": "Planta",
-      "element": "Veneno 1",
+      "element": "Veneno",
       "size": "Médio",
       "spawn": [
         {
@@ -469,7 +469,7 @@
       "image": "assets/data/1114.gif",
       "level": 21,
       "race": "Inseto",
-      "element": "Vento 2",
+      "element": "Vento",
       "size": "Pequeno",
       "spawn": [
         {
@@ -497,7 +497,7 @@
       "image": "assets/data/1179.gif",
       "level": 34,
       "race": "Demônio",
-      "element": "Fantasma 3",
+      "element": "Fantasma",
       "size": "Pequeno",
       "spawn": [
         {
@@ -531,7 +531,7 @@
       "image": "assets/data/1215.gif",
       "level": 40,
       "race": "Planta",
-      "element": "Vento 1",
+      "element": "Vento",
       "size": "Médio",
       "spawn": [
         {
@@ -553,7 +553,7 @@
       "image": "assets/data/1216.gif",
       "level": 57,
       "race": "Peixe",
-      "element": "Veneno 1",
+      "element": "Veneno",
       "size": "Médio",
       "spawn": [
         {
@@ -575,7 +575,7 @@
       "image": "assets/data/1120.gif",
       "level": 18,
       "race": "Demônio",
-      "element": "Fantasma 4",
+      "element": "Fantasma",
       "size": "Médio",
       "spawn": [
         {
@@ -603,7 +603,7 @@
       "image": "assets/data/1143.gif",
       "level": 41,
       "race": "Demônio",
-      "element": "Fantasma 3",
+      "element": "Fantasma",
       "size": "Pequeno",
       "spawn": [
         {
@@ -631,7 +631,7 @@
       "image": "assets/data/1208.gif",
       "level": 74,
       "race": "Demônio",
-      "element": "Vento 1",
+      "element": "Vento",
       "size": "Médio",
       "spawn": [
         {
@@ -653,7 +653,7 @@
       "image": "assets/data/1159.gif",
       "level": 69,
       "race": "Bruto",
-      "element": "Neutro 3",
+      "element": "Neutro",
       "size": "Grande",
       "isMvp": true,
       "spawn": [
@@ -671,7 +671,7 @@
       "image": "assets/data/1112.gif",
       "level": 70,
       "race": "Morto-Vivo",
-      "element": "Morto-Vivo 1",
+      "element": "Morto-Vivo",
       "size": "Médio",
       "isMvp": true,
       "spawn": [
