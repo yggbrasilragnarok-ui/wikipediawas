@@ -945,29 +945,6 @@
       }
     },
     {
-      "id": 1159,
-      "name": "Phreeoni",
-      "image": "assets/data/1159.gif",
-      "level": 69,
-      "race": "Bruto",
-      "element": "Neutro",
-      "size": "Grande",
-      "isMvp": true,
-      "spawn": [
-        {
-          "map": "moc_fild16",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        }
-      ],
-      "stats": {
-        "hp": 188000,
-        "baseExp": 32175,
-        "jobExp": 16445
-      }
-    },
-    {
       "id": 1014,
       "name": "Esporo",
       "image": "assets/data/1014.gif",
