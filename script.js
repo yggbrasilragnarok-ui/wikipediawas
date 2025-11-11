@@ -3948,30 +3948,26 @@ const PAGES = {
         <div class="feature-grid" role="list">
           <article class="feature-card" role="listitem">
             <span class="feature-card__icon" aria-hidden="true">✨</span>
-            <h4 class="feature-card__title">Guias cinematográficos</h4>
+            <h4 class="feature-card__title"></h4>
             <p class="feature-card__description">
-              Cada sistema — teleporte, temporadas ou exploração — ganha painéis passo a passo com âncoras, mapas e infográficos em pixel art.
             </p>
           </article>
           <article class="feature-card" role="listitem">
             <span class="feature-card__icon" aria-hidden="true">📚</span>
-            <h4 class="feature-card__title">Database viva</h4>
+            <h4 class="feature-card__title"></h4>
             <p class="feature-card__description">
-              Consulte monstros, itens e cidades alinhados ao episódio vigente com filtros rápidos e chips de mapa para copiar o /where.
             </p>
           </article>
           <article class="feature-card" role="listitem">
             <span class="feature-card__icon" aria-hidden="true">🛡️</span>
-            <h4 class="feature-card__title">Regra clara, diversão justa</h4>
+            <h4 class="feature-card__title"></h4>
             <p class="feature-card__description">
-              Roadmap transparente, changelog elegante e painéis de temporada ajudam seu clã a se organizar sem perder o clima nostálgico.
             </p>
           </article>
           <article class="feature-card" role="listitem">
             <span class="feature-card__icon" aria-hidden="true">🎵</span>
-            <h4 class="feature-card__title">Atmosfera sonora</h4>
+            <h4 class="feature-card__title"></h4>
             <p class="feature-card__description">
-              Sugestões de playlists e efeitos sonoros temáticos acompanham os guias para trazer de volta a sensação de logar no começo dos anos 2000.
             </p>
           </article>
         </div>
