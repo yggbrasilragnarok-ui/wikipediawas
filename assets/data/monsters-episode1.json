@@ -1682,6 +1682,449 @@
         "baseExp": 4,
         "jobExp": 3
       }
+      
+    },
+    {
+      "id": 1079,
+      "name": "Planta Azul",
+      "image": "assets/data/1079.gif",
+      "level": 1,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild07",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild10",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_05",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_06",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_08",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_11",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild01",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild05",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 10,
+        "baseExp": 0,
+        "jobExp": 0
+      }
+      
+    },
+     {
+      "id": 1110,
+      "name": "Dokebi",
+      "image": "assets/data/1110.gif",
+      "level": 33,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2697,
+        "baseExp": 889,
+        "jobExp": 455
+      }
+    },
+     {
+      "id": 1180,
+      "name": "Nove Caudas",
+      "image": "assets/data/1180.gif",
+      "level": 51,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild11",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 7766,
+        "baseExp": 2812,
+        "jobExp": 825
+      }
+    },
+    {
+      "id": 1277,
+      "name": "Guardião da Floresta",
+      "image": "assets/data/1277.gif",
+      "level": 40,
+      "race": "Humanóide",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild03",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild11",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3632,
+        "baseExp": 1238,
+        "jobExp": 752
+      }
+    },
+     {
+      "id": 1024,
+      "name": "Rabo de Verme",
+      "image": "assets/data/1024.gif",
+      "level": 14,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_fild06",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 426,
+        "baseExp": 59,
+        "jobExp": 40
+      }
+    },
+     {
+      "id": 1033,
+      "name": "Salgueiro Ancião",
+      "image": "assets/data/1033.gif",
+      "level": 20,
+      "race": "Planta",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild03",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild07",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 693,
+        "baseExp": 163,
+        "jobExp": 101
+      }
+    },
+     {
+      "id": 1060,
+      "name": "Pé Grande",
+      "image": "assets/data/1060.gif",
+      "level": 25,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "pay_fild07",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild09",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1619,
+        "baseExp": 310,
+        "jobExp": 188
+      }
+    },
+     {
+      "id": 1116,
+      "name": "Eggyra",
+      "image": "assets/data/1116.gif",
+      "level": 24,
+      "race": "Humanóide",
+      "element": "Fantasma",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild03",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_fild07",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 633,
+        "baseExp": 215,
+        "jobExp": 220
+      }
+    },
+    {
+      "id": 1056,
+      "name": "Fumacento",
+      "image": "assets/data/1056.gif",
+      "level": 18,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild09",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 641,
+        "baseExp": 134,
+        "jobExp": 86
+      }
+    },
+    {
+      "id": 1321,
+      "name": "Lavadeira",
+      "image": "assets/data/1321.gif",
+      "level": 31,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_fild05",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild11",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 8368,
+        "baseExp": 3587,
+        "jobExp": 1453
+      }
+    },
+    {
+      "id": 1115,
+      "name": "Eddga",
+      "image": "assets/data/1115.gif",
+      "level": 65,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "pay_fild11",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 152000,
+        "baseExp": 25025,
+        "jobExp": 12870
+      }
     },
     {
       "id": 1112,
