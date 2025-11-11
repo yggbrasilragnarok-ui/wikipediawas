@@ -273,7 +273,7 @@
           "map": "iz_dun00",
           "name": "Túnel Submarino",
           "region": "Izlude",
-          "type": "Clabouço"
+          "type": "Calabouço"
         },
         {
           "map": "iz_dun01",
@@ -330,46 +330,7 @@
         "jobExp": 40
       }
     }, 
-    {
-      "id": 1070,
-      "name": "Kukre",
-      "image": "assets/data/1070.gif",
-      "level": 11,
-      "race": "Peixe",
-      "element": "Água 1",
-      "size": "Pequeno",
-      "spawn": [
-        {
-          "map": "iz_dun00",
-          "name": "Túnel Submarino",
-          "region": "Izlude",
-          "type": "Calabouço"
-        },
-        {
-          "map": "iz_dun01",
-          "name": "Túnel Submarino",
-          "region": "Izlude",
-          "type": "Calabouço"
-        },
-        {
-          "map": "treasure01",
-          "name": "Navio Fantasma",
-          "region": "Navio Fantasma",
-          "type": "Calabouço"
-        },
-        {
-          "map": "treasure02",
-          "name": "Navio Fantasma",
-          "region": "Navio Fantasma",
-          "type": "Calabouço"
-        }
-      ],
-      "stats": {
-        "hp": 507,
-        "baseExp": 38,
-        "jobExp": 28
-      }
-    },
+   
     {
       "id": 1070,
       "name": "Kukre",
@@ -439,6 +400,70 @@
       }
     },
     {
+      "id": 1077,
+      "name": "Esporo Venenoso",
+      "image": "assets/data/1077.gif",
+      "level": 19,
+      "race": "Planta",
+      "element": "Veneno 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "gef_dun00",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild09",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Campos de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild05",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 665,
+        "baseExp": 186,
+        "jobExp": 93
+      }
+    },
+    {
       "id": 1114,
       "name": "Poeira",
       "image": "assets/data/1114.gif",
@@ -466,6 +491,40 @@
         "jobExp": 140
       }
     },
+       {
+      "id": 1179,
+      "name": "Sussurro",
+      "image": "assets/data/1179.gif",
+      "level": 34,
+      "race": "Demônio",
+      "element": "Fantasma 3",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure01",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1796,
+        "baseExp": 591,
+        "jobExp": 599
+      }
+    },
     {
       "id": 1215,
       "name": "Talo de Verme",
@@ -488,8 +547,108 @@
         "jobExp": 939
       }
     },
+        {
+      "id": 1216,
+      "name": "Penonena",
+      "image": "assets/data/1216.gif",
+      "level": 57,
+      "race": "Peixe",
+      "element": "Veneno 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 7256,
+        "baseExp": 2870,
+        "jobExp": 2200
+      }
+    },
     {
       "id": 1120,
+      "name": "Ghostring",
+      "image": "assets/data/1120.gif",
+      "level": 18,
+      "race": "Demônio",
+      "element": "Fantasma 4",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_fild04",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 73300,
+        "baseExp": 101,
+        "jobExp": 108
+      }
+    },
+    {
+      "id": 1143,
+      "name": "Marionete",
+      "image": "assets/data/1143.gif",
+      "level": 41,
+      "race": "Demônio",
+      "element": "Fantasma 3",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3222,
+        "baseExp": 1078,
+        "jobExp": 1276
+      }
+    },
+        {
+      "id": 1208,
+      "name": "Andarilho",
+      "image": "assets/data/1208.gif",
+      "level": 74,
+      "race": "Demônio",
+      "element": "Vento 1",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 8170,
+        "baseExp": 5786,
+        "jobExp": 4730
+      }
+    },
+    {
+      "id": 1159,
       "name": "Phreeoni",
       "image": "assets/data/1159.gif",
       "level": 69,
@@ -503,6 +662,24 @@
           "name": "Deserto de Sograt",
           "region": "Morroc",
           "type": "Campo"
+        }
+      ]
+    },
+    {
+      "id": 1112,
+      "name": "Drake",
+      "image": "assets/data/1112.gif",
+      "level": 70,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo 1",
+      "size": "Médio",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "treasure02",
+          "name": "Navio Fantasma",
+          "region": "Navio Fantasma",
+          "type": "Calabouço"
         }
       ]
     }
