@@ -4717,16 +4717,18 @@ monster: {
           </label>
 
           <label class="monster-filter">
-            <span class="monster-filter__label">Região</span>
-            <select id="monsterRegionFilter" aria-label="Filtrar por região">
-              <option value="all">Todas as regiões</option>
+            <span class="monster-filter__label">Tipo de mapa</span>
+            <select id="monsterMapTypeFilter" aria-label="Filtrar por tipo de mapa">
+              <option value="all">Todos os tipos</option>
             </select>
           </label>
 
           <label class="monster-filter">
-            <span class="monster-filter__label">Tipo de mapa</span>
-            <select id="monsterMapTypeFilter" aria-label="Filtrar por tipo de mapa">
-              <option value="all">Todos os tipos</option>
+            <span class="monster-filter__label">Ordenar</span>
+            <select id="monsterSortFilter" aria-label="Ordenar lista de monstros">
+              <option value="default">Padrão (nível)</option>
+              <option value="exp-desc">EXP Base + Classe (maior → menor)</option>
+              <option value="exp-asc">EXP Base + Classe (menor → maior)</option>
             </select>
           </label>
 
@@ -4870,7 +4872,6 @@ function populateSelectOptions(selectEl, placeholderLabel, options) {
 function collectMonsterFilters(monsters) {
   const raceMap = new Map();
   const elementMap = new Map();
-  const regionMap = new Map();
   const typeMap = new Map();
 
   monsters.forEach(monster => {
@@ -4892,14 +4893,6 @@ function collectMonsterFilters(monsters) {
 
     const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
     spawnList.forEach(spawn => {
-      const regionLabel = normalizeStringValue(spawn.region);
-      if (regionLabel) {
-        const key = regionLabel.toLowerCase();
-        if (!regionMap.has(key)) {
-          regionMap.set(key, regionLabel);
-        }
-      }
-
       const typeLabel = normalizeStringValue(spawn.type);
       if (typeLabel) {
         const key = typeLabel.toLowerCase();
@@ -4915,17 +4908,16 @@ function collectMonsterFilters(monsters) {
   return {
     races: Array.from(raceMap, ([value, label]) => ({ value, label })).sort(sorter),
     elements: Array.from(elementMap, ([value, label]) => ({ value, label })).sort(sorter),
-    regions: Array.from(regionMap, ([value, label]) => ({ value, label })).sort(sorter),
     mapTypes: Array.from(typeMap, ([value, label]) => ({ value, label })).sort(sorter),
   };
 }
 
 function applyMonsterFilters(monsters, filters) {
   const term = normalizeStringValue(filters.term).toLowerCase();
-  const region = normalizeFilterValue(filters.region);
   const mapType = normalizeFilterValue(filters.mapType);
   const race = normalizeFilterValue(filters.race);
   const element = normalizeFilterValue(filters.element);
+  const sort = normalizeFilterValue(filters.sort ?? "default");
 
   const filtered = monsters.filter(monster => {
     if (race !== "all" && normalizeStringValue(monster.race).toLowerCase() !== race) {
@@ -4937,14 +4929,6 @@ function applyMonsterFilters(monsters, filters) {
     }
 
     const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
-
-    if (region !== "all") {
-      const hasRegion = spawnList.some(spawn => normalizeStringValue(spawn.region).toLowerCase() === region);
-      if (!hasRegion) {
-        return false;
-      }
-    }
-
     if (mapType !== "all") {
       const hasType = spawnList.some(spawn => normalizeStringValue(spawn.type).toLowerCase() === mapType);
       if (!hasType) {
@@ -4963,7 +4947,23 @@ function applyMonsterFilters(monsters, filters) {
     return true;
   });
 
+  const getTotalExp = monster => {
+    const stats = monster.stats ?? {};
+    const base = typeof stats.baseExp === "number" ? stats.baseExp : 0;
+    const job = typeof stats.jobExp === "number" ? stats.jobExp : 0;
+    return base + job;
+  };
+
   return filtered.sort((a, b) => {
+    if (sort === "exp-desc" || sort === "exp-asc") {
+      const expA = getTotalExp(a);
+      const expB = getTotalExp(b);
+
+      if (expA !== expB) {
+        return sort === "exp-desc" ? expB - expA : expA - expB;
+      }
+    }
+
     const levelA = typeof a.level === "number" ? a.level : Number.MAX_SAFE_INTEGER;
     const levelB = typeof b.level === "number" ? b.level : Number.MAX_SAFE_INTEGER;
 
@@ -5416,12 +5416,6 @@ function initMonsterDatabase() {
       const filters = collectMonsterFilters(monsters);
 
       populateSelectOptions(
-        document.getElementById("monsterRegionFilter"),
-        "Todas as regiões",
-        filters.regions
-      );
-
-      populateSelectOptions(
         document.getElementById("monsterMapTypeFilter"),
         "Todos os tipos",
         filters.mapTypes
@@ -5441,10 +5435,10 @@ function initMonsterDatabase() {
 
       const filterState = {
         term: "",
-        region: "all",
         mapType: "all",
         race: "all",
         element: "all",
+        sort: "default",
       };
 
       let selectedMonsterId = "";
@@ -5474,21 +5468,21 @@ function initMonsterDatabase() {
         });
       }
 
-      const regionSelect = document.getElementById("monsterRegionFilter");
-      if (regionSelect) {
-        regionSelect.value = "all";
-        regionSelect.addEventListener("change", event => {
-          filterState.region = event.target.value;
-          selectedMonsterId = "";
-          updateExplorer();
-        });
-      }
-
       const typeSelect = document.getElementById("monsterMapTypeFilter");
       if (typeSelect) {
         typeSelect.value = "all";
         typeSelect.addEventListener("change", event => {
           filterState.mapType = event.target.value;
+          selectedMonsterId = "";
+          updateExplorer();
+        });
+      }
+
+      const sortSelect = document.getElementById("monsterSortFilter");
+      if (sortSelect) {
+        sortSelect.value = "default";
+        sortSelect.addEventListener("change", event => {
+          filterState.sort = event.target.value;
           selectedMonsterId = "";
           updateExplorer();
         });
