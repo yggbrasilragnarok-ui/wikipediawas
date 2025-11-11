@@ -2948,6 +2948,104 @@ descriptionEntries: [
 
 };
 
+const EXPLORE_MAP_IMAGE_FALLBACKS = {
+  "alb2trea": "assets/alb2trealarge.gif",
+  "alberta": "assets/albertalarge.gif",
+  "gef_dun00": "assets/gef_dun00large.gif",
+  "gef_dun01": "assets/gef_dun01large.gif",
+  "gef_dun02": "assets/gef_dun02large.gif",
+  "gef_fild00": "assets/gef_fild00large.gif",
+  "gef_fild01": "assets/gef_fild01large.gif",
+  "gef_fild02": "assets/gef_fild02large.gif",
+  "gef_fild03": "assets/gef_fild03large.gif",
+  "gef_fild04": "assets/gef_fild04large.gif",
+  "gef_fild05": "assets/gef_fild05large.gif",
+  "gef_fild06": "assets/gef_fild06large.gif",
+  "gef_fild07": "assets/gef_fild07large.gif",
+  "gef_fild08": "assets/gef_fild08large.gif",
+  "gef_fild09": "assets/gef_fild09large.gif",
+  "gef_fild10": "assets/gef_fild10large.gif",
+  "gef_fild11": "assets/gef_fild11large.gif",
+  "gef_fild12": "assets/gef_fild12large.gif",
+  "gef_fild13": "assets/gef_fild13large.gif",
+  "gef_fild14": "assets/gef_fild14large.gif",
+  "geffen": "assets/geffenlarge.gif",
+  "glast_01": "assets/glast_01large.gif",
+  "iz_dun00": "assets/iz_dun00large.gif",
+  "iz_dun01": "assets/iz_dun01large.gif",
+  "iz_dun02": "assets/iz_dun02large.gif",
+  "iz_dun03": "assets/iz_dun03large.gif",
+  "iz_dun04": "assets/iz_dun04large.gif",
+  "izlu2dun": "assets/izlu2dunlarge.gif",
+  "izlude": "assets/izludelarge.gif",
+  "mjolnir_01": "assets/mjolnir_01large.gif",
+  "mjolnir_02": "assets/mjolnir_02large.gif",
+  "mjolnir_03": "assets/mjolnir_03large.gif",
+  "mjolnir_04": "assets/mjolnir_04large.gif",
+  "mjolnir_05": "assets/mjolnir_05large.gif",
+  "mjolnir_06": "assets/mjolnir_06large.gif",
+  "mjolnir_07": "assets/mjolnir_07large.gif",
+  "mjolnir_08": "assets/mjolnir_08large.gif",
+  "mjolnir_09": "assets/mjolnir_09large.gif",
+  "mjolnir_10": "assets/mjolnir_10large.gif",
+  "mjolnir_11": "assets/mjolnir_11large.gif",
+  "mjolnir_12": "assets/mjolnir_12large.gif",
+  "moc_fild01": "assets/moc_fild01large.gif",
+  "moc_fild02": "assets/moc_fild02large.gif",
+  "moc_fild03": "assets/moc_fild03large.gif",
+  "moc_fild07": "assets/moc_fild07large.gif",
+  "moc_fild11": "assets/moc_fild11large.gif",
+  "moc_fild12": "assets/moc_fild12large.gif",
+  "moc_fild13": "assets/moc_fild13large.gif",
+  "moc_fild16": "assets/moc_fild16large.gif",
+  "moc_fild17": "assets/moc_fild17large.gif",
+  "moc_fild18": "assets/moc_fild18large.gif",
+  "moc_fild19": "assets/moc_fild19large.gif",
+  "moc_pryd01": "assets/moc_pryd01large.gif",
+  "moc_pryd02": "assets/moc_pryd02large.gif",
+  "moc_pryd03": "assets/moc_pryd03large.gif",
+  "moc_pryd04": "assets/moc_pryd04large.gif",
+  "moc_ruins": "assets/moc_ruinslarge.gif",
+  "morocc": "assets/morocclarge.gif",
+  "pay_arche": "assets/pay_archelarge.gif",
+  "pay_dun00": "assets/pay_dun00large.gif",
+  "pay_dun01": "assets/pay_dun01large.gif",
+  "pay_dun02": "assets/pay_dun02large.gif",
+  "pay_dun03": "assets/pay_dun03large.gif",
+  "pay_dun04": "assets/pay_dun04large.gif",
+  "pay_fild01": "assets/pay_fild01large.gif",
+  "pay_fild02": "assets/pay_fild02large.gif",
+  "pay_fild03": "assets/pay_fild03large.gif",
+  "pay_fild04": "assets/pay_fild04large.gif",
+  "pay_fild05": "assets/pay_fild05large.gif",
+  "pay_fild06": "assets/pay_fild06large.gif",
+  "pay_fild07": "assets/pay_fild07large.gif",
+  "pay_fild08": "assets/pay_fild08large.gif",
+  "pay_fild09": "assets/pay_fild09large.gif",
+  "pay_fild10": "assets/pay_fild10large.gif",
+  "pay_fild11": "assets/pay_fild11large.gif",
+  "payon": "assets/payonlarge.gif",
+  "prontera": "assets/pronteralarge.gif",
+  "prt_fild00": "assets/prt_fild00large.gif",
+  "prt_fild01": "assets/prt_fild01large.gif",
+  "prt_fild02": "assets/prt_fild02large.gif",
+  "prt_fild03": "assets/prt_fild03large.gif",
+  "prt_fild04": "assets/prt_fild04large.gif",
+  "prt_fild05": "assets/prt_fild05large.gif",
+  "prt_fild06": "assets/prt_fild06large.gif",
+  "prt_fild07": "assets/prt_fild07large.gif",
+  "prt_fild08": "assets/prt_fild08large.gif",
+  "prt_fild09": "assets/prt_fild09large.gif",
+  "prt_fild10": "assets/prt_fild10large.gif",
+  "prt_fild11": "assets/prt_fild11large.gif",
+  "prt_sewb1": "assets/prt_sewb1large.gif",
+  "prt_sewb2": "assets/prt_sewb2large.gif",
+  "prt_sewb3": "assets/prt_sewb3large.gif",
+  "prt_sewb4": "assets/prt_sewb4large.gif",
+  "treasure01": "assets/treasure01large.gif",
+  "treasure02": "assets/treasure02large.gif",
+};
+
 const EXPLORE_MAP_DEFAULT_DETAIL = {
   title: "Detalhes do mapa",
   description:
@@ -3498,6 +3596,13 @@ function resolveExploreMapImage(slug) {
         imageSrc = firstImage.src;
         break;
       }
+    }
+  }
+
+  if (!imageSrc) {
+    const fallback = EXPLORE_MAP_IMAGE_FALLBACKS[normalizedSlug];
+    if (fallback) {
+      imageSrc = ensureAssetPath(fallback);
     }
   }
 
