@@ -3892,7 +3892,6 @@ const PAGES = {
           </div>
 
           <header class="hero-card__content">
-            <span class="hero-card__badge">Wiki oficial do Was Rag</span>
             <h2 class="page-title rune-text hero-card__title" id="heroTitle">
               O retorno a Rune-Midgard começa aqui
             </h2>
@@ -3901,12 +3900,14 @@ const PAGES = {
               Monte seu grupo, reviva Prontera ao luar e acompanhe cada passo do servidor em um único lugar.
             </p>
 
-            <div class="hero-card__actions">
-              <a class="btn-glow hero-card__cta" href="#" data-page="server">Explorar o universo Was Rag</a>
-              <a class="btn-secondary" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
-                Entrar na taverna (Discord)
-              </a>
-            </div>
+             <div class="hero-card__actions">
+                <a class="btn-glow" href="https://wasrag.com.br" target="_blank" rel="noopener noreferrer">Entre no Site</a>
+                <a class="btn-secondary" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
+                   Entre no Discord
+                </a>
+                <a class="btn-glow" href="https://download" target="_blank" rel="noopener noreferrer">Faça o Download</a>
+
+              </div>
           </header>
 
           <dl class="hero-card__highlight-grid">
@@ -3939,37 +3940,9 @@ const PAGES = {
 
  
 
-      <section class="server-section" aria-labelledby="quickLinksTitle">
-        <div class="section-header">
-          <h3 class="section-title" id="quickLinksTitle">Portal rápido</h3>
-          <p class="section-subtitle">Chegue em segundos aos lugares que importam para a sua jornada.</p>
-        </div>
-
-        <div class="portal-grid">
-          <a class="portal-card" href="https://wasrag.com" target="_blank" rel="noopener noreferrer">
-            <span class="portal-card__tag">Portal oficial</span>
-            <strong class="portal-card__title">Site do Was Rag</strong>
-            <span class="portal-card__hint">wasrag.com</span>
-          </a>
-          <a class="portal-card" href="https://wasrag.com/download" target="_blank" rel="noopener noreferrer">
-            <span class="portal-card__tag">Cliente atualizado</span>
-            <strong class="portal-card__title">Download do jogo</strong>
-            <span class="portal-card__hint">Instale e comece a explorar</span>
-          </a>
-          <a class="portal-card" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
-            <span class="portal-card__tag">Comunidade</span>
-            <strong class="portal-card__title">Discord oficial</strong>
-            <span class="portal-card__hint">Eventos, grupos e suporte</span>
-          </a>
-        </div>
-      </section>
-
       <section class="server-section" aria-labelledby="wikiHighlightsTitle">
         <div class="section-header">
-          <h3 class="section-title" id="wikiHighlightsTitle">O que brilha na wiki</h3>
-          <p class="section-subtitle">
-            Conteúdo construído para ser lido em pílulas, com referências visuais e links rápidos para quem quer reviver o grind com estilo.
-          </p>
+          <h3 class="section-title" id="wikiHighlightsTitle">O que você encontrará aqui...</h3>
         </div>
 
         <div class="feature-grid" role="list">

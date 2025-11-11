@@ -288,12 +288,12 @@ body {
   font-size: .8rem;
   font-weight: 500;
   padding: 8px 12px;
-  line-height: 1;
   border-radius: var(--radius-sm);
   cursor: pointer;
   text-shadow: 0 0 8px rgba(11, 223, 255, 0.8);
   box-shadow: var(--border-glow), 0 10px 24px rgba(0,0,0,.9);
   transition: all var(--speed-fast) ease;
+  text-decoration: none;
 }
 
 .btn-glow:hover {
