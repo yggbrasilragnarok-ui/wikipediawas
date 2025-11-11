@@ -100,122 +100,269 @@
       <!-- dynamic content goes here -->
       <article id="pageContent">
         <!-- Página inicial carregada por padrão -->
-        <section class="server-section server-section--general">
-          <div class="server-general-card">
-            <header class="server-general-card__header">
-              <span class="server-general-card__badge">Wiki oficial do Was Rag</span>
-              <h2 class="page-title rune-text">Bem-vindo ao Was Rag</h2>
-              <p class="server-general-card__subtitle">
-                Este é o hub de conhecimento do servidor <strong>Was Rag</strong>.
-                Aqui você encontra a filosofia, sistemas especiais e tudo o que precisa para acompanhar cada temporada.
+        <section class="server-section server-section--general hero-section" aria-labelledby="heroTitle">
+          <div class="server-general-card hero-card">
+            <div class="hero-card__background" aria-hidden="true">
+              <img src="assets/mapraganrok.jpg" alt="" loading="lazy" decoding="async" />
+              <div class="hero-card__background-overlay"></div>
+            </div>
+
+            <header class="hero-card__content">
+              <span class="hero-card__badge">Wiki oficial do Was Rag</span>
+              <h2 class="page-title rune-text hero-card__title" id="heroTitle">
+                O retorno a Rune-Midgard começa aqui
+              </h2>
+              <p class="hero-card__lede">
+                Respire o ar nostálgico de <strong>Ragnarok Online</strong> com um toque moderno.
+                Monte seu grupo, reviva Prontera ao luar e acompanhe cada passo do servidor em um único lugar.
               </p>
+
+              <div class="hero-card__actions">
+                <a class="btn-glow hero-card__cta" href="#" data-page="server">Explorar o universo Was Rag</a>
+                <a class="btn-secondary" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
+                  Entrar na taverna (Discord)
+                </a>
+              </div>
             </header>
 
-            <div class="server-general-card__grid" role="list">
-              <dl class="server-stat" role="listitem">
-                <dt>Filosofia do servidor</dt>
+            <dl class="hero-card__highlight-grid">
+              <div class="hero-card__highlight">
+                <dt>Episódio atual</dt>
                 <dd>
-                  <p class="server-stat__description">
-                    O foco é <strong>explorar</strong>, não só rushar nível.
-                    Missões em mapas desbloqueiam teleporte e bônus de conta — jogar abre caminhos.
-                  </p>
+                  <span class="hero-card__highlight-value">Episódio 1</span>
+                  <span class="hero-card__highlight-note">Prontera renasce e abre as portas da aventura</span>
                 </dd>
-              </dl>
-              <dl class="server-stat" role="listitem">
-                <dt>Progressão</dt>
+              </div>
+              <div class="hero-card__highlight">
+                <dt>Estilo de progressão</dt>
                 <dd>
-                  <p class="server-stat__description">
-                    Iniciamos no <span class="tag-episode">Episódio 1</span>.
-                    O conteúdo evolui temporada após temporada, acompanhando a cronologia oficial sem pular etapas.
-                  </p>
+                  <span class="hero-card__highlight-value">Temporadas escaláveis</span>
+                  <span class="hero-card__highlight-note">Do casual ao impossível, escolha seu desafio</span>
                 </dd>
-              </dl>
-              <dl class="server-stat" role="listitem">
-                <dt>Temporadas</dt>
+              </div>
+              <div class="hero-card__highlight">
+                <dt>Missões do mundo</dt>
                 <dd>
-                  <p class="server-stat__description">
-                    Cada conta escolhe uma dificuldade: Fácil, Normal, Difícil ou Impossível.
-                    Cuide das metas sazonais para provar sua jornada e garantir recompensas únicas.
-                  </p>
+                  <span class="hero-card__highlight-value">Eventos em tempo real</span>
+                  <span class="hero-card__highlight-note">Reviva raids clássicas com recompensas inéditas</span>
                 </dd>
-              </dl>
-              <dl class="server-stat" role="listitem">
-                <dt>Missões mundiais</dt>
-                <dd>
-                  <p class="server-stat__description">
-                    A cada ciclo abrimos um desafio global com duração real.
-                    Complete dentro do prazo para registrar sua façanha naquela temporada.
-                  </p>
-                </dd>
-              </dl>
+              </div>
+            </dl>
+
+        <section class="hero-intro" aria-labelledby="heroHeading">
+          <div class="hero-intro__inner">
+            <div class="hero-intro__copy">
+              <p class="hero-intro__badge">Wiki oficial do Was Rag</p>
+              <h2 class="hero-intro__title" id="heroHeading">
+                Aventuras clássicas, interface moderna
+              </h2>
+              <p class="hero-intro__subtitle">
+                Reviva a magia de <strong>Ragnarok Online</strong> com o brilho do presente. Explore mapas, sistemas sazonais
+                e eventos especiais preparados para quem sente saudade dos velhos tempos – e quer viver histórias novas.
+              </p>
+              <div class="hero-intro__cta">
+                <a class="btn-pill" href="https://wasrag.com" target="_blank" rel="noopener noreferrer">
+                  <span class="btn-pill__label">Portal oficial</span>
+                  <span class="btn-pill__hint">wasrag.com</span>
+                </a>
+                <a class="btn-pill is-secondary" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
+                  <span class="btn-pill__label">Entre na guilda</span>
+                  <span class="btn-pill__hint">Discord do Was Rag</span>
+                </a>
+              </div>
+            </div>
+
+            <div class="hero-intro__display" aria-hidden="true">
+              <div class="hero-intro__glass">
+                <img src="assets/maparagna.jpg" alt="Mapa clássico de Ragnarok" loading="lazy" />
+                <div class="hero-intro__glow"></div>
+              </div>
+              <ul class="hero-intro__stats" role="list">
+                <li class="hero-stat">
+                  <span class="hero-stat__label">Episódio ativo</span>
+                  <span class="hero-stat__value">1 • Ato da chegada</span>
+                </li>
+                <li class="hero-stat">
+                  <span class="hero-stat__label">Dificuldades sazonais</span>
+                  <span class="hero-stat__value">Fácil • Normal • Difícil • Impossível</span>
+                </li>
+                <li class="hero-stat">
+                  <span class="hero-stat__label">Missões mundiais</span>
+                  <span class="hero-stat__value">Eventos com tempo real e recompensas únicas</span>
+                </li>
+              </ul>
             </div>
           </div>
         </section>
 
-        <section class="server-section">
-          <h3 class="section-title">Links rápidos</h3>
-          <div class="stat-grid">
-            <a
-              class="server-stat server-stat--link"
-              href="https://wasrag.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="server-stat__eyebrow">Portal oficial</span>
-              <span class="server-stat__value">Site do Was Rag</span>
-              <span class="server-stat__hint">wasrag.com</span>
+        <section class="feature-highlights" aria-label="Pilares do servidor">
+          <article class="feature-card">
+            <h3 class="feature-card__title">Filosofia</h3>
+            <p class="feature-card__body">
+              Desbrave mapas, libere teleportes e desbloqueie bônus permanentes. O caminho é tão importante quanto o destino.
+            </p>
+            <span class="feature-card__tag">Exploração</span>
+          </article>
+          <article class="feature-card">
+            <h3 class="feature-card__title">Progressão</h3>
+            <p class="feature-card__body">
+              Avance com calma. Seguimos a cronologia oficial de Rune-Midgard sem saltos bruscos, temporada por temporada.
+            </p>
+            <span class="feature-card__tag">Episódio 1</span>
+          </article>
+          <article class="feature-card">
+            <h3 class="feature-card__title">Temporadas</h3>
+            <p class="feature-card__body">
+              Encare desafios sazonais no seu ritmo preferido e registre seu legado com conquistas que atravessam gerações.
+            </p>
+            <span class="feature-card__tag">Metas &amp; Recompensas</span>
+          </article>
+          <article class="feature-card">
+            <h3 class="feature-card__title">Missões globais</h3>
+            <p class="feature-card__body">
+              Mobilize a comunidade para concluir objetivos compartilhados antes que a ampulheta se esgote.
+            </p>
+            <span class="feature-card__tag">Eventos vivos</span>
+          </article>
+        </section>
+
+        <section class="season-timeline" aria-labelledby="timelineHeading">
+          <h3 class="section-title" id="timelineHeading">Linha do tempo da temporada</h3>
+          <ol class="timeline" role="list">
+            <li class="timeline__item">
+              <span class="timeline__index">1</span>
+              <div class="timeline__content">
+                <h4>Escolha sua dificuldade</h4>
+                <p>Monte sua build e selecione entre quatro graus de desafio. Cada caminho concede bônus exclusivos.</p>
+              </div>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__index">2</span>
+              <div class="timeline__content">
+                <h4>Explore para evoluir</h4>
+                <p>Conclua missões regionais, libere teleportes e acesse áreas inéditas do Episódio 1 com seus aliados.</p>
+              </div>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__index">3</span>
+              <div class="timeline__content">
+                <h4>Participe das missões mundiais</h4>
+                <p>Eventos de tempo real unem toda a comunidade. Complete antes do prazo para registrar seu feito.</p>
+              </div>
+            </li>
+            <li class="timeline__item">
+              <span class="timeline__index">4</span>
+              <div class="timeline__content">
+                <h4>Garanta recompensas</h4>
+                <p>Troque conquistas por visuais nostálgicos, consumíveis e vantagens de conta que perduram temporada após temporada.</p>
+              </div>
+            </li>
+          </ol>
+        </section>
+
+        <section class="server-section" aria-labelledby="quickLinksTitle">
+          <div class="section-header">
+            <h3 class="section-title" id="quickLinksTitle">Portal rápido</h3>
+            <p class="section-subtitle">Chegue em segundos aos lugares que importam para a sua jornada.</p>
+          </div>
+
+          <div class="portal-grid">
+            <a class="portal-card" href="https://wasrag.com" target="_blank" rel="noopener noreferrer">
+              <span class="portal-card__tag">Portal oficial</span>
+              <strong class="portal-card__title">Site do Was Rag</strong>
+              <span class="portal-card__hint">wasrag.com</span>
             </a>
-            <a
-              class="server-stat server-stat--link"
-              href="https://wasrag.com/download"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="server-stat__eyebrow">Cliente atualizado</span>
-              <span class="server-stat__value">Download do jogo</span>
-              <span class="server-stat__hint">Instale e comece a explorar</span>
+            <a class="portal-card" href="https://wasrag.com/download" target="_blank" rel="noopener noreferrer">
+              <span class="portal-card__tag">Cliente atualizado</span>
+              <strong class="portal-card__title">Download do jogo</strong>
+              <span class="portal-card__hint">Instale e comece a explorar</span>
             </a>
-            <a
-              class="server-stat server-stat--link"
-              href="https://discord.gg/wasrag"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <span class="server-stat__eyebrow">Comunidade</span>
-              <span class="server-stat__value">Discord oficial</span>
-              <span class="server-stat__hint">Eventos, grupos e suporte</span>
+            <a class="portal-card" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
+              <span class="portal-card__tag">Comunidade</span>
+              <strong class="portal-card__title">Discord oficial</strong>
+              <span class="portal-card__hint">Eventos, grupos e suporte</span>
             </a>
           </div>
         </section>
 
-        <section class="server-section">
-          <h3 class="section-title">O que você encontra na wiki</h3>
-          <div class="stat-grid">
-            <dl class="server-stat" role="listitem">
-              <dt>Guias de sistemas</dt>
-            <dd>
-              <p class="server-stat__description">Entenda teleporte, temporadas, exploração e outros recursos exclusivos do servidor.</p>
-            </dd>
-            </dl>
-            <dl class="server-stat" role="listitem">
-              <dt>Database atualizada</dt>
-            <dd>
-              <p class="server-stat__description">Informações de classes, mapas, monstros, itens e progressão alinhadas ao episódio vigente.</p>
-            </dd>
-            </dl>
-            <dl class="server-stat" role="listitem">
-              <dt>Roadmap transparente</dt>
-            <dd>
-              <p class="server-stat__description">Acompanhe o que está em desenvolvimento e prepare seu clã para as próximas aventuras.</p>
-            </dd>
-            </dl>
-            <dl class="server-stat" role="listitem">
-              <dt>Atualizações e regras</dt>
-            <dd>
-              <p class="server-stat__description">Leia o changelog, consulte as normas e garanta que todo mundo jogue de forma justa.</p>
-            </dd>
-            </dl>
+        <section class="server-section" aria-labelledby="wikiHighlightsTitle">
+          <div class="section-header">
+            <h3 class="section-title" id="wikiHighlightsTitle">O que brilha na wiki</h3>
+            <p class="section-subtitle">
+              Conteúdo construído para ser lido em pílulas, com referências visuais e links rápidos para quem quer
+              reviver o grind com estilo.
+            </p>
           </div>
+
+          <div class="feature-grid" role="list">
+            <article class="feature-card" role="listitem">
+              <span class="feature-card__icon" aria-hidden="true">✨</span>
+              <h4 class="feature-card__title">Guias cinematográficos</h4>
+              <p class="feature-card__description">
+                Cada sistema — teleporte, temporadas ou exploração — ganha painéis passo a passo com âncoras, mapas e
+                infográficos em pixel art.
+              </p>
+            </article>
+            <article class="feature-card" role="listitem">
+              <span class="feature-card__icon" aria-hidden="true">📚</span>
+              <h4 class="feature-card__title">Database viva</h4>
+              <p class="feature-card__description">
+                Consulte monstros, itens e cidades alinhados ao episódio vigente com filtros rápidos e chips de mapa
+                para copiar o /where.
+              </p>
+            </article>
+            <article class="feature-card" role="listitem">
+              <span class="feature-card__icon" aria-hidden="true">🛡️</span>
+              <h4 class="feature-card__title">Regra clara, diversão justa</h4>
+              <p class="feature-card__description">
+                Roadmap transparente, changelog elegante e painéis de temporada ajudam seu clã a se organizar sem
+                perder o clima nostálgico.
+              </p>
+            </article>
+            <article class="feature-card" role="listitem">
+              <span class="feature-card__icon" aria-hidden="true">🎵</span>
+              <h4 class="feature-card__title">Atmosfera sonora</h4>
+              <p class="feature-card__description">
+                Sugestões de playlists e efeitos sonoros temáticos acompanham os guias para trazer de volta a sensação
+                de logar no começo dos anos 2000.
+              </p>
+            </article>
+        <section class="wiki-preview" aria-labelledby="previewHeading">
+          <div class="wiki-preview__header">
+            <h3 class="section-title" id="previewHeading">O que você encontra por aqui</h3>
+            <p class="section-subtitle">
+              Use a navegação lateral para mergulhar em sistemas, regras e banco de dados sempre alinhados ao episódio atual.
+            </p>
+          </div>
+          <div class="wiki-preview__grid">
+            <article class="wiki-panel">
+              <h4 class="wiki-panel__title">Guias de sistemas</h4>
+              <p class="wiki-panel__body">Entenda teleporte, temporadas, exploração e recursos exclusivos do Was Rag.</p>
+            </article>
+            <article class="wiki-panel">
+              <h4 class="wiki-panel__title">Database atualizada</h4>
+              <p class="wiki-panel__body">Classes, mapas, monstros e itens revisados para o conteúdo vigente.</p>
+            </article>
+            <article class="wiki-panel">
+              <h4 class="wiki-panel__title">Roadmap transparente</h4>
+              <p class="wiki-panel__body">Veja o que está em construção e organize seu clã para o próximo episódio.</p>
+            </article>
+            <article class="wiki-panel">
+              <h4 class="wiki-panel__title">Atualizações e regras</h4>
+              <p class="wiki-panel__body">Consulte changelog, normas e políticas para garantir partidas justas.</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="cta-banner" aria-label="Convite para jogar">
+          <div class="cta-banner__content">
+            <h3 class="cta-banner__title">Pronto para reunir a party?</h3>
+            <p class="cta-banner__subtitle">Baixe o cliente atualizado e embarque com a comunidade no universo do Was Rag.</p>
+          </div>
+          <a class="btn-pill" href="https://wasrag.com/download" target="_blank" rel="noopener noreferrer">
+            <span class="btn-pill__label">Download do jogo</span>
+            <span class="btn-pill__hint">Instale e comece já</span>
+          </a>
         </section>
       </article>
     </section>
