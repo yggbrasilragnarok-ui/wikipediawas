@@ -4724,11 +4724,20 @@ monster: {
           </label>
 
           <label class="monster-filter">
-            <span class="monster-filter__label">Ordenar</span>
-            <select id="monsterSortFilter" aria-label="Ordenar lista de monstros">
+            <span class="monster-filter__label">Ordenar EXP Base</span>
+            <select id="monsterBaseSortFilter" aria-label="Ordenar lista de monstros por EXP Base">
               <option value="default">Padrão (nível)</option>
-              <option value="exp-desc">EXP Base + Classe (maior → menor)</option>
-              <option value="exp-asc">EXP Base + Classe (menor → maior)</option>
+              <option value="base-desc">EXP Base (maior → menor)</option>
+              <option value="base-asc">EXP Base (menor → maior)</option>
+            </select>
+          </label>
+
+          <label class="monster-filter">
+            <span class="monster-filter__label">Ordenar EXP Classe</span>
+            <select id="monsterJobSortFilter" aria-label="Ordenar lista de monstros por EXP Classe">
+              <option value="default">Padrão (nível)</option>
+              <option value="job-desc">EXP Classe (maior → menor)</option>
+              <option value="job-asc">EXP Classe (menor → maior)</option>
             </select>
           </label>
 
@@ -4917,7 +4926,12 @@ function applyMonsterFilters(monsters, filters) {
   const mapType = normalizeFilterValue(filters.mapType);
   const race = normalizeFilterValue(filters.race);
   const element = normalizeFilterValue(filters.element);
-  const sort = normalizeFilterValue(filters.sort ?? "default");
+  const normalizeSortValue = value => {
+    const normalized = normalizeStringValue(value).toLowerCase();
+    return normalized || "default";
+  };
+  const baseSort = normalizeSortValue(filters.baseSort);
+  const jobSort = normalizeSortValue(filters.jobSort);
 
   const filtered = monsters.filter(monster => {
     if (race !== "all" && normalizeStringValue(monster.race).toLowerCase() !== race) {
@@ -4947,20 +4961,32 @@ function applyMonsterFilters(monsters, filters) {
     return true;
   });
 
-  const getTotalExp = monster => {
+  const getBaseExp = monster => {
     const stats = monster.stats ?? {};
-    const base = typeof stats.baseExp === "number" ? stats.baseExp : 0;
-    const job = typeof stats.jobExp === "number" ? stats.jobExp : 0;
-    return base + job;
+    return typeof stats.baseExp === "number" ? stats.baseExp : 0;
+  };
+
+  const getJobExp = monster => {
+    const stats = monster.stats ?? {};
+    return typeof stats.jobExp === "number" ? stats.jobExp : 0;
   };
 
   return filtered.sort((a, b) => {
-    if (sort === "exp-desc" || sort === "exp-asc") {
-      const expA = getTotalExp(a);
-      const expB = getTotalExp(b);
+    if (baseSort === "base-desc" || baseSort === "base-asc") {
+      const baseA = getBaseExp(a);
+      const baseB = getBaseExp(b);
 
-      if (expA !== expB) {
-        return sort === "exp-desc" ? expB - expA : expA - expB;
+      if (baseA !== baseB) {
+        return baseSort === "base-desc" ? baseB - baseA : baseA - baseB;
+      }
+    }
+
+    if (jobSort === "job-desc" || jobSort === "job-asc") {
+      const jobA = getJobExp(a);
+      const jobB = getJobExp(b);
+
+      if (jobA !== jobB) {
+        return jobSort === "job-desc" ? jobB - jobA : jobA - jobB;
       }
     }
 
@@ -5438,7 +5464,8 @@ function initMonsterDatabase() {
         mapType: "all",
         race: "all",
         element: "all",
-        sort: "default",
+        baseSort: "default",
+        jobSort: "default",
       };
 
       let selectedMonsterId = "";
@@ -5478,11 +5505,34 @@ function initMonsterDatabase() {
         });
       }
 
-      const sortSelect = document.getElementById("monsterSortFilter");
-      if (sortSelect) {
-        sortSelect.value = "default";
-        sortSelect.addEventListener("change", event => {
-          filterState.sort = event.target.value;
+      const baseSortSelect = document.getElementById("monsterBaseSortFilter");
+      const jobSortSelect = document.getElementById("monsterJobSortFilter");
+
+      if (baseSortSelect) {
+        baseSortSelect.value = "default";
+        baseSortSelect.addEventListener("change", event => {
+          filterState.baseSort = event.target.value;
+          if (filterState.baseSort !== "default") {
+            filterState.jobSort = "default";
+            if (jobSortSelect && jobSortSelect.value !== "default") {
+              jobSortSelect.value = "default";
+            }
+          }
+          selectedMonsterId = "";
+          updateExplorer();
+        });
+      }
+
+      if (jobSortSelect) {
+        jobSortSelect.value = "default";
+        jobSortSelect.addEventListener("change", event => {
+          filterState.jobSort = event.target.value;
+          if (filterState.jobSort !== "default") {
+            filterState.baseSort = "default";
+            if (baseSortSelect && baseSortSelect.value !== "default") {
+              baseSortSelect.value = "default";
+            }
+          }
           selectedMonsterId = "";
           updateExplorer();
         });
