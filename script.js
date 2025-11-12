@@ -2400,19 +2400,37 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1001.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1042.gif",
+          },
+           {
+            src: "assets/data/1079.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1097.gif",
+          },
+           {
+            src: "assets/data/1119.gif",
+          },
+          {
+            src: "assets/data/1127.gif",
+          },
+          {
+            src: "assets/data/1138.gif",
+          },
+           {
+            src: "assets/data/1159.gif",
+          },
+          {
+            src: "assets/data/1039.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
