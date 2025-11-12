@@ -300,6 +300,122 @@
       }
     },
     {
+      "id": 1048,
+      "name": "Ovo de Besouro-Ladrão",
+      "image": "assets/data/1048.gif",
+      "level": 4,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "prt_fild05",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild06",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_sewb1",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }                
+      ],
+      "stats": {
+        "hp": 48,
+        "baseExp": 8,
+        "jobExp": 4
+      }
+    },
+    {
+      "id": 1051,
+      "name": "Besouro-Ladrão",
+      "image": "assets/data/1048.gif",
+      "level": 4,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "prt_fild01",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild05",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild06",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild10",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_sewb1",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }                
+      ],
+      "stats": {
+        "hp": 126,
+        "baseExp": 17,
+        "jobExp": 5
+      }
+    },
+    {
       "id": 1020,
       "name": "Mandragora",
       "image": "assets/data/1020.gif",
