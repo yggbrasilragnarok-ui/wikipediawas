@@ -1275,19 +1275,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1007.gif",
           },
+          {
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1051.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1079.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },          
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1308,19 +1317,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1007.gif",
           },
+          {
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1020.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
+          },
+          {
+            src: "assets/data/1093.gif",
+          }, 
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1341,19 +1359,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1056.gif",
           },
+          {
+            src: "assets/data/1057.gif",
+          },
+          {
+            src: "assets/data/1079.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1214.gif",
+          },          
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1374,19 +1398,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
           },
+          {
+            src: "assets/data/1018.gif",
+          },
+          {
+            src: "assets/data/1052.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1088.gif",
+          },          
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2845,135 +2875,8 @@ descriptionEntries: [
         ],
         text: "Conjunto de ilhas e cavernas submersas. Monstros aquáticos protegem o acesso às profundezas marinhas.",
       },
-            {
-        title: "Monstros",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
     ], 
   },
-  prt_sewb1: {
-    name: "Esgotos de Prontera",
-    region: "Subterrâneo de Prontera",
-    description:
-      "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
-    descriptionEntries: [
-      {
-        title: "Entrada pelos bueiros",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          "Bueiros espalhados pela capital levam aos túneis. É uma área recomendada para aprendizes treinarem antes das cavernas mais perigosas.",
-      },
-    ],
-  },
-  pay_dun00: {
-    name: "Caverna de Payon",
-    region: "Florestas de Payon",
-    description:
-      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
-    descriptionEntries: [
-      {
-        title: "Salões ancestrais",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          "O primeiro andar apresenta corredores amplos com armadilhas simples. A expedição exige tochas e cura para enfrentar mortos-vivos.",
-      },
-    ],
-  },
-  gef_dun00: {
-    name: "Torre de Geffen",
-    region: "Cidade dos Magos",
-    description:
-      "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
-    descriptionEntries: [
-      {
-        title: "Base da torre",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          "A torre fica no coração de Geffen. Portais mágicos controlam o acesso entre os andares e permitem treinos supervisionados.",
-      },
-    ],
-  },
-  moc_pryd01: {
-    name: "Pirâmides de Morroc",
-    region: "Deserto de Sograt",
-    description:
-      "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
-    descriptionEntries: [
-      {
-        title: "Salões arenosos",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          "Escadarias escondidas levam aos níveis inferiores. O calor seco mistura-se com energia mística deixada pelos antigos guardiões.",
-      },
-    ],
-  },
-  iz_dun00: {
-    name: "Caverna Submarina de Byalan",
-    region: "Arquipélago de Byalan",
-    description:
-      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
-    descriptionEntries: [
-      {
-        title: "Corredores alagados",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          "O primeiro nível mistura plataformas secas e poças profundas. Armas elementais e acessórios contra Água ajudam a sobrevivência.",
-      },
-    ],
-  },
-  treasure1: {
-    name: "Navio Fantasma",
-    region: "....",
-    description:
-      ".....",
-    descriptionEntries: [
-      {
-        title: "Acampamento orc",
-        images: [
-          {
-            src: "",
-          },
-        ],
-        text:
-          ".........",
-      },
-    ],
-  },
-
 };
 
 const EXPLORE_MAP_IMAGE_FALLBACKS = {
