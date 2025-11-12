@@ -897,7 +897,37 @@ body {
   }
 }
 
-.explore-map-details__entry-figure > img:not(.explore-map-details__entry-image-preview) {
+.explore-map-details__entry--monsters {
+  --monster-icon-size: clamp(28px, 6vw, 44px);
+}
+
+.explore-map-details__entry--monsters .explore-map-details__entry-media {
+  gap: 6px;
+}
+
+.explore-map-details__entry-figure--icon {
+  width: var(--monster-icon-size);
+  min-width: var(--monster-icon-size);
+  max-width: var(--monster-icon-size);
+  padding: 4px;
+  border-radius: var(--radius-sm);
+  background: rgba(8, 18, 32, 0.55);
+  box-shadow: inset 0 0 0 1px rgba(11, 223, 255, 0.22);
+  align-items: center;
+  justify-content: center;
+}
+
+.explore-map-details__entry-figure--icon > img:not(.explore-map-details__entry-image-preview) {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  box-shadow: none;
+  background: transparent;
+}
+
+.explore-map-details__entry-figure:not(.explore-map-details__entry-figure--icon)
+  > img:not(.explore-map-details__entry-image-preview) {
   width: 100%;
   border-radius: var(--radius-sm);
   object-fit: cover;
@@ -2903,14 +2933,14 @@ body {
   flex-direction: column;
   align-items: stretch;
   gap: 6px;
-  padding: 8px;
+  padding: 6px;
   margin: 6px;
   border-radius: var(--radius-md);
   background: rgba(4, 26, 44, 0.85);
   border: 1px solid rgba(11, 223, 255, 0.25);
   box-shadow: inset 0 0 12px rgba(0, 0, 0, 0.4);
-  min-width: 70px;
-  max-width: 70px;
+  min-width: 56px;
+  max-width: 56px;
   cursor: pointer;
   text-align: left;
   color: inherit;
@@ -2934,9 +2964,9 @@ body {
 }
 
 .monster-map-chip__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+  width: 90%;
+  height: 90%;
+  object-fit: contain;
   image-rendering: pixelated;
 }
 

@@ -347,7 +347,7 @@ const EXPLORE_MAP_VARIANTS = {
 . . . . . . . .
 . . mjolnir_01.gif mjolnir_02.gif mjolnir_03.gif mjolnir_04.gif mjolnir_05.gif . . . .
 gef_fild06.gif gef_fild05.gif gef_fild04.gif mjolnir_06.gif mjolnir_07.gif mjolnir_08.gif mjolnir_10.gif mjolnir_11.gif
-gef_fild08.gif gef_fild07.gif geffen.gif gef_fild00.gif prt_fild00.gif mjolnir_09.gif prt_fild01.gif prt_fild02.gif prt_fild03.gif
+gef_fild08.gif gef_fild07.gif geffen.gif . . mjolnir_09.gif prt_fild01.gif prt_fild02.gif prt_fild03.gif
 . gef_fild13.gif gef_fild09.gif gef_fild01.gif prt_fild04.gif gef_fild05.gif prontera.gif prt_fild06.gif . . . . izlu2dun.gif
 . . gef_fild10.gif gef_fild03.gif gef_fild02.gif prt_fild07.gif prt_fild08.gif izlude.gif . pay_arche.gif
 . . . . prt_fild10.gif prt_fild09.gif moc_fild01.gif pay_fild04.gif .  payon.gif pay_fild08.gif pay_fild09.gif
@@ -617,40 +617,6 @@ const EXPLORE_MAP_DETAILS = {
       },
     ],
   },
-  alb2trea: {
-    name: "Navio Fantasma",
-    region: "",
-    description: "Entrada para o calabouço de um navio naufragado.",
-                descriptionEntries: [
-      {
-        title: "Navio fantasma",
-        images: [
-          {
-            src: "assets/alb2trealarge.gif",
-          },
-        ],
-        text: "Entrada para o calabouço de um navio naufragado.",
-      },
-      {
-        title: "NPC Custom",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-    ],
-  },
   pay_arche: {
     name: "Guilda dos Arqueiros de Payon",
     region: "Treinamento de Arqueiros",
@@ -667,58 +633,6 @@ const EXPLORE_MAP_DETAILS = {
       },
       {
         title: "NPC Custom",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-    ],
-  },
-  glast_01: {
-    name: "Glast Heim Exterior",
-    region: "Ruínas Assombradas",
-    description: "Os portões do castelo amaldiçoado. Cavaleiros corrompidos e mortos-vivos patrulham cada corredor em ruínas.",
-                        descriptionEntries: [
-      {
-        title: "Glast Heim Exterior",
-        images: [
-          {
-            src: "assets/glast_01large.gif",
-          },
-        ],
-        text: "Os portões do castelo amaldiçoado. Cavaleiros corrompidos e mortos-vivos patrulham cada corredor em ruínas.",
-      },
-      {
-        title: "NPC Custom",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-            {
-        title: "Monstros",
         images: [
           {
             src: "",
@@ -790,39 +704,7 @@ descriptionEntries: [
     ],
     
   },
-    gef_fild00: {
-    region: "Campos de Geffen",
-    description: "Planícies férteis tingidas de magia. Goblins, orcs e flora arcana cercam as rotas que ligam Geffen à capital.",
-    descriptionEntries: [
-      {
-        title: "Campos de Geffen 00",
-        images: [
-          {
-            src: "assets/gef_fild00large.gif",
-          },
-        ],
-        text: "Planícies férteis tingidas de magia. Goblins, orcs e flora arcana cercam as rotas que ligam Geffen à capital.",
-      },
-            {
-        title: "Monstros",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-    ],
-  },
+    
     gef_fild01: {
     region: "Campos de Geffen",
     description: "Planícies férteis tingidas de magia. Goblins, orcs e flora arcana cercam as rotas que ligam Geffen à capital.",
@@ -1698,19 +1580,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1010.gif",
+          },
+          {
+            src: "assets/data/1014.gif",
+          },
+          {
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1084.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1731,19 +1619,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1013.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1014.gif",
+          },
+          {
+            src: "assets/data/1025.gif",
+          },
+          {
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1085.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1764,19 +1658,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1010.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1085.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1797,19 +1697,37 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
+          },
+          {
+            src: "assets/data/1090.gif",
+          },
+          {
+            src: "assets/data/1096.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
+          },
+          {
+            src: "assets/data/1120.gif",
+          },
+          {
+            src: "assets/data/1242.gif",
+          },
+          {
+            src: "assets/data/1582.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1830,19 +1748,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1077.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1321.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1863,19 +1781,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1014.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1024.gif",
+          },
+          {
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1053.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
+          },
+          {
+            src: "assets/data/1085.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1896,19 +1823,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1010.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1033.gif",
+          },
+          {
+            src: "assets/data/1060.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1116.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1929,19 +1862,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1010.gif",
+          },
+          {
+            src: "assets/data/1014.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1962,19 +1901,22 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1056.gif",
+          },
+          {
+            src: "assets/data/1060.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1995,19 +1937,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1077.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1079.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1110.gif",
+          },
+          {
+            src: "assets/data/1180.gif",
+          },
+          {
+            src: "assets/data/1277.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2028,19 +1976,22 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1085.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1115.gif",
+          },
+          {
+            src: "assets/data/1180.gif",
+          },
+          {
+            src: "assets/data/1277.gif",
+          },
+          {
+            src: "assets/data/1321.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2061,19 +2012,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1047.gif",
+          },
+          {
+            src: "assets/data/1049.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1097.gif",
+          },
+          {
+            src: "assets/data/1107.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2094,19 +2054,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1019.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1047.gif",
+          },
+          {
+            src: "assets/data/1049.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1097.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2127,19 +2096,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1010.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1033.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
+          },
+          {
+            src: "assets/data/1092.gif",
+          },
+          {
+            src: "assets/data/1116.gif",
+          },
+          {
+            src: "assets/data/1277.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -3656,6 +3634,13 @@ function renderExploreDetailEntries(container, detail) {
     const entryEl = document.createElement("article");
     entryEl.className = "explore-map-details__entry";
 
+    const entryTitle = typeof entry.title === "string" ? entry.title.trim() : "";
+    const isMonsterEntry = entryTitle.toLowerCase().includes("monst");
+
+    if (isMonsterEntry) {
+      entryEl.classList.add("explore-map-details__entry--monsters");
+    }
+
     if (entry.title) {
       const titleEl = document.createElement("h5");
       titleEl.className = "explore-map-details__entry-title";
@@ -3674,7 +3659,13 @@ function renderExploreDetailEntries(container, detail) {
 
         const figure = document.createElement("figure");
         figure.className = "explore-map-details__entry-figure";
-        figure.tabIndex = 0;
+
+        if (isMonsterEntry) {
+          figure.classList.add("explore-map-details__entry-figure--icon");
+          figure.tabIndex = -1;
+        } else {
+          figure.tabIndex = 0;
+        }
 
         const img = document.createElement("img");
         img.src = image.src;
@@ -3683,12 +3674,14 @@ function renderExploreDetailEntries(container, detail) {
 
         figure.appendChild(img);
 
-        const previewImg = img.cloneNode(true);
-        previewImg.classList.add("explore-map-details__entry-image-preview");
-        previewImg.setAttribute("aria-hidden", "true");
-        previewImg.alt = "";
-        previewImg.loading = "lazy";
-        figure.appendChild(previewImg);
+        if (!isMonsterEntry) {
+          const previewImg = img.cloneNode(true);
+          previewImg.classList.add("explore-map-details__entry-image-preview");
+          previewImg.setAttribute("aria-hidden", "true");
+          previewImg.alt = "";
+          previewImg.loading = "lazy";
+          figure.appendChild(previewImg);
+        }
 
         if (image.caption) {
           const caption = document.createElement("figcaption");
