@@ -260,6 +260,324 @@
       }
     },
     {
+      "id": 1040,
+      "name": "Golem",
+      "image": "assets/data/1040.gif",
+      "level": 25,
+      "race": "Amorfo",
+      "element": "Neutro",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3900,
+        "baseExp": 465,
+        "jobExp": 94
+      }
+    },
+    {
+      "id": 1055,
+      "name": "Muka",
+      "image": "assets/data/1055.gif",
+      "level": 17,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 610,
+        "baseExp": 273,
+        "jobExp": 120
+      }
+    },
+    {
+      "id": 1095,
+      "name": "Andre",
+      "image": "assets/data/1095.gif",
+      "level": 17,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 688,
+        "baseExp": 109,
+        "jobExp": 71
+      }
+    },
+    {
+      "id": 1095,
+      "name": "Deniro",
+      "image": "assets/data/1095.gif",
+      "level": 19,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 760,
+        "baseExp": 135,
+        "jobExp": 85
+      }
+    },
+    {
+      "id": 1160,
+      "name": "Piere",
+      "image": "assets/data/1160.gif",
+      "level": 18,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 733,
+        "baseExp": 122,
+        "jobExp": 78
+      }
+    },
+    {
+      "id": 1127,
+      "name": "Hode",
+      "image": "assets/data/1127.gif",
+      "level": 26,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2282,
+        "baseExp": 550,
+        "jobExp": 300
+      }
+    },
+     {
+      "id": 1138,
+      "name": "Magnolia",
+      "image": "assets/data/1138.gif",
+      "level": 26,
+      "race": "Demônio",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3195,
+        "baseExp": 393,
+        "jobExp": 248
+      }
+    },
+    {
+      "id": 1030,
+      "name": "Anaconda",
+      "image": "assets/data/1030.gif",
+      "level": 23,
+      "race": "Bruto",
+      "element": "Veneno",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1109,
+        "baseExp": 300,
+        "jobExp": 149
+      }
+    },
+    {
+      "id": 1037,
+      "name": "Sorrateiro",
+      "image": "assets/data/1037.gif",
+      "level": 26,
+      "race": "Bruto",
+      "element": "Veneno",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 4929,
+        "baseExp": 1996,
+        "jobExp": 993
+      }
+    },
+    {
+      "id": 1138,
+      "name": "Magnolia",
+      "image": "assets/data/1138.gif",
+      "level": 26,
+      "race": "Demônio",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3195,
+        "baseExp": 393,
+        "jobExp": 248
+      }
+    },
+    {
+      "id": 1106,
+      "name": "Lobo do Deserto",
+      "image": "assets/data/1106.gif",
+      "level": 27,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1716,
+        "baseExp": 427,
+        "jobExp": 266
+      }
+    },
+    {
+      "id": 1165,
+      "name": "Arenoso",
+      "image": "assets/data/1165.gif",
+      "level": 34,
+      "race": "Amorfo",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3413,
+        "baseExp": 810,
+        "jobExp": 492
+      }
+    },
+    {
       "id": 1008,
       "name": "Pupa",
       "image": "assets/data/1008.gif",
