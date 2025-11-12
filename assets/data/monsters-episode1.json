@@ -288,6 +288,28 @@
       }
     },
     {
+      "id": 1119,
+      "name": "Golem",
+      "image": "assets/data/1119.gif",
+      "level": 30,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2023,
+        "baseExp": 529,
+        "jobExp": 319
+      }
+    },
+    {
       "id": 1055,
       "name": "Muka",
       "image": "assets/data/1055.gif",
