@@ -424,7 +424,7 @@ const EXPLORE_MAP_VARIANTS = {
 . . mjolnir_01.gif mjolnir_02.gif mjolnir_03.gif mjolnir_04.gif mjolnir_05.gif . . . .
 gef_fild06.gif gef_fild05.gif gef_fild04.gif mjolnir_06.gif mjolnir_07.gif mjolnir_08.gif mjolnir_10.gif mjolnir_11.gif
 gef_fild08.gif gef_fild07.gif geffen.gif . . mjolnir_09.gif prt_fild01.gif prt_fild02.gif prt_fild03.gif
-. gef_fild13.gif gef_fild09.gif gef_fild01.gif prt_fild04.gif gef_fild05.gif prontera.gif prt_fild06.gif . . . . izlu2dun.gif
+. gef_fild13.gif gef_fild09.gif gef_fild01.gif prt_fild04.gif prt_fild05.gif prontera.gif prt_fild06.gif . . . . izlu2dun.gif
 . . gef_fild10.gif gef_fild03.gif gef_fild02.gif prt_fild07.gif prt_fild08.gif izlude.gif . pay_arche.gif
 . . . . prt_fild10.gif prt_fild09.gif moc_fild01.gif pay_fild04.gif .  payon.gif pay_fild08.gif pay_fild09.gif
 . . . . . moc_ruins.gif moc_fild07.gif  moc_fild02.gif moc_fild03.gif pay_fild01.gif pay_fild07.gif pay_fild10.gif
@@ -1437,19 +1437,28 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
           },
+          {
+            src: "assets/data/1048.gif",
+          },
+          {
+            src: "assets/data/1051.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1079.gif",
+          }, 
+          {
+            src: "assets/data/1080.gif",
+          }, 
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
