@@ -421,40 +421,6 @@
         "jobExp": 300
       }
     },
-     {
-      "id": 1138,
-      "name": "Magnolia",
-      "image": "assets/data/1138.gif",
-      "level": 26,
-      "race": "Demônio",
-      "element": "Água",
-      "size": "Pequeno",
-      "spawn": [
-        {
-          "map": "moc_fild11",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        },
-        {
-          "map": "moc_fild16",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        },
-        {
-          "map": "moc_fild17",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        }
-      ],
-      "stats": {
-        "hp": 3195,
-        "baseExp": 393,
-        "jobExp": 248
-      }
-    },
     {
       "id": 1030,
       "name": "Anaconda",
