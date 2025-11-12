@@ -443,6 +443,56 @@
         "jobExp": 149
       }
     },
+      {
+      "id": 1001,
+      "name": "Escorpião",
+      "image": "assets/data/1001.gif",
+      "level": 24,
+      "race": "Inseto",
+      "element": "Fogo",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1109,
+        "baseExp": 287,
+        "jobExp": 176
+      }
+    },
+      {
+      "id": 1042,
+      "name": "Chonchon de Aço",
+      "image": "assets/data/1042.gif",
+      "level": 17,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 530,
+        "baseExp": 109,
+        "jobExp": 71
+      }
+    },
     {
       "id": 1037,
       "name": "Sorrateiro",
@@ -2709,6 +2759,29 @@
         "hp": 152000,
         "baseExp": 25025,
         "jobExp": 12870
+      }
+    },
+    {
+      "id": 1039,
+      "name": "Bafomé",
+      "image": "assets/data/1039.gif",
+      "level": 81,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 668000,
+        "baseExp": 107250,
+        "jobExp": 37895
       }
     },
     {
