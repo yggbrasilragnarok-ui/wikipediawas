@@ -260,6 +260,260 @@
       }
     },
     {
+      "id": 1007,
+      "name": "Fabre",
+      "image": "assets/data/1007.gif",
+      "level": 2,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild04",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild07",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild01",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }    
+      ],
+      "stats": {
+        "hp": 63,
+        "baseExp": 3,
+        "jobExp": 2
+      }
+    },
+    {
+      "id": 1020,
+      "name": "Mandragora",
+      "image": "assets/data/1020.gif",
+      "level": 12,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }    
+      ],
+      "stats": {
+        "hp": 405,
+        "baseExp": 45,
+        "jobExp": 32
+      }
+    },
+    {
+      "id": 1093,
+      "name": "Eclípse",
+      "image": "assets/data/1093.gif",
+      "level": 6,
+      "race": "Bruto",
+      "element": "Neutro",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1800,
+        "baseExp": 60,
+        "jobExp": 55
+      }
+    },
+    {
+      "id": 1057,
+      "name": "Yoyo",
+      "image": "assets/data/1057.gif",
+      "level": 21,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 879,
+        "baseExp": 280,
+        "jobExp": 111
+      }
+    },
+    {
+      "id": 1214,
+      "name": "Choco",
+      "image": "assets/data/1214.gif",
+      "level": 43,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 4278,
+        "baseExp": 1265,
+        "jobExp": 1265
+      }
+    },
+    {
+      "id": 1018,
+      "name": "Creamy",
+      "image": "assets/data/1018.gif",
+      "level": 16,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild13",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_03",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 595,
+        "baseExp": 105,
+        "jobExp": 70
+      }
+    },
+    {
+      "id": 1052,
+      "name": "Rocker",
+      "image": "assets/data/1052.gif",
+      "level": 9,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild07",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 198,
+        "baseExp": 20,
+        "jobExp": 16
+      }
+    },
+    {
+      "id": 1088,
+      "name": "Vocal",
+      "image": "assets/data/1088.gif",
+      "level": 18,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild07",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3016,
+        "baseExp": 110,
+        "jobExp": 88
+      }
+    },
+    {
       "id": 1040,
       "name": "Golem",
       "image": "assets/data/1040.gif",
