@@ -4125,11 +4125,17 @@ field: {
         </div>
       </div>
       <section class="explore-route-track" id="exploreRouteTrack" aria-live="polite">
-        <h3 class="explore-route-track__title">Trilha planejada</h3>
-        <p class="explore-route-track__empty" id="exploreRouteEmpty">
-          Nenhuma rota planejada ainda. Adicione mapas para montar sua jornada.
-        </p>
-        <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
+        <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
+          <header class="explore-route-track__header">
+            <h3 class="explore-route-track__title">Trilha planejada</h3>
+          </header>
+          <div class="explore-route-track__body">
+            <p class="explore-route-track__empty" id="exploreRouteEmpty">
+              Nenhuma rota planejada ainda. Adicione mapas para montar sua jornada.
+            </p>
+            <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
+          </div>
+        </div>
       </section>
     `
 },

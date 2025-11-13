@@ -647,13 +647,6 @@ body {
   justify-items: start;
 }
 
-@media (min-width: 1024px) {
-  .explore-map-wrapper {
-    grid-template-columns: minmax(0, max-content) minmax(0, 1fr);
-    align-items: start;
-  }
-}
-
 .explore-dungeons {
   display: grid;
   gap: 24px;
@@ -1087,7 +1080,26 @@ body {
 .explore-route-track {
   margin-top: 28px;
   display: grid;
+}
+
+.explore-route-track__chat {
+  display: grid;
   gap: 16px;
+  padding: 18px;
+  border-radius: var(--radius-lg);
+  border: 1px solid rgba(11, 223, 255, 0.18);
+  background:
+    linear-gradient(165deg, rgba(4, 16, 32, 0.92), rgba(6, 18, 36, 0.72)),
+    rgba(3, 12, 26, 0.6);
+  box-shadow:
+    0 14px 32px rgba(0, 0, 0, 0.55),
+    inset 0 0 1px rgba(11, 223, 255, 0.18);
+}
+
+.explore-route-track__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .explore-route-track__title {
@@ -1095,6 +1107,19 @@ body {
   font-size: 1.1rem;
   font-weight: 600;
   color: var(--text-main);
+}
+
+.explore-route-track__hint {
+  margin-left: auto;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(219, 237, 255, 0.48);
+}
+
+.explore-route-track__body {
+  display: grid;
+  gap: 16px;
 }
 
 .explore-route-track__empty {
@@ -1106,6 +1131,39 @@ body {
 .explore-route-track__list {
   display: grid;
   gap: 18px;
+}
+
+@media (min-width: 1024px) {
+  .explore-route-track {
+    position: fixed;
+    bottom: 28px;
+    left: auto;
+    right: 28px;
+    width: min(360px, calc(100vw - 56px));
+    z-index: 15;
+    margin-top: 0;
+  }
+
+  .explore-route-track__chat {
+    max-height: 420px;
+    padding: 20px;
+  }
+
+  .explore-route-track__body {
+    overflow-y: auto;
+    max-height: 320px;
+    padding-right: 6px;
+  }
+
+  .explore-route-track__list {
+    gap: 16px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-route-track__hint {
+    display: none;
+  }
 }
 
 .explore-route-card {
