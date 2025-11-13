@@ -471,10 +471,10 @@ let activeDungeonSlug = null;
 
 const EXPLORE_ROUTE_VARIANT_KEY = "fields";
 const EXPLORE_ROUTE_COLORS = [
-  { key: "up", label: "Rota de Up", color: "#32b7ff" },
-  { key: "drop", label: "Caça a Drops", color: "#f9b64b" },
-  { key: "elite", label: "Rotas Desafiadoras", color: "#ff5f7a" },
-  { key: "farm", label: "Farm Seguro", color: "#4bd08a" },
+  { key: "up", label: "Rota 1", color: "#32b7ff" },
+  { key: "drop", label: "Rota 2", color: "#f9b64b" },
+  { key: "elite", label: "Rota 3", color: "#ff5f7a" },
+  { key: "farm", label: "Rota 4", color: "#4bd08a" },
 ];
 
 const exploreRouteState = {
@@ -3357,7 +3357,7 @@ function renderRoutePlannerIntel(intel) {
   intelEl.innerHTML = "";
 
   const title = document.createElement("h5");
-  title.textContent = "Assistente IA";
+  title.textContent = "Monstropédia";
   intelEl.appendChild(title);
 
   if (intel && intel.error) {
@@ -3369,7 +3369,7 @@ function renderRoutePlannerIntel(intel) {
 
   if (!intel || !Array.isArray(intel.monsters) || intel.monsters.length === 0) {
     const paragraph = document.createElement("p");
-    paragraph.textContent = "A IA ainda não encontrou monstros catalogados para este mapa.";
+    paragraph.textContent = "não foram encontrado monstros catalogados para este mapa.";
     intelEl.appendChild(paragraph);
     return;
   }
@@ -3377,15 +3377,6 @@ function renderRoutePlannerIntel(intel) {
   const levelParagraph = document.createElement("p");
   levelParagraph.innerHTML = `<strong>Nível recomendado:</strong> ${intel.recommendedLevelText}`;
   intelEl.appendChild(levelParagraph);
-
-  if (intel.dominantMonster) {
-    const dominantParagraph = document.createElement("p");
-    const raceText = intel.dominantMonster.race && intel.dominantMonster.race !== "—"
-      ? ` • Classe ${intel.dominantMonster.race}`
-      : "";
-    dominantParagraph.innerHTML = `<strong>Monstro predominante:</strong> ${intel.dominantMonster.name} • ${intel.dominantMonster.levelText} • ${intel.dominantMonster.baseExpText}${raceText}`;
-    intelEl.appendChild(dominantParagraph);
-  }
 
   const listIntro = document.createElement("p");
   listIntro.textContent = "Monstros identificados:";
