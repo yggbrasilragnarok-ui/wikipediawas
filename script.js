@@ -2256,20 +2256,23 @@ descriptionEntries: [
             {
         title: "Monstros",
         images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
+           {
+            src: "assets/data/1047.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1049.gif",
           },
-        ],
-        text: "",
+          {
+            src: "assets/data/1050.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
+          },
+         ],
+        text: " ",
       },
     ], 
   },
@@ -2289,20 +2292,35 @@ descriptionEntries: [
             {
         title: "Monstros",
         images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
+           {
+            src: "assets/data/1040.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1055.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
+          },
+          {
+            src: "assets/data/1095.gif",
+          },
+          {
+            src: "assets/data/1097.gif",
+          },
+          {
+            src: "assets/data/1105.gif",
+          },
+          {
+            src: "assets/data/1127.gif",
+          },
+           {
+            src: "assets/data/1138.gif",
+          },
+          {
+            src: "assets/data/1160.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2323,19 +2341,22 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1047.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1049.gif",
+          },
+          {
+            src: "assets/data/1050.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2356,19 +2377,31 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1025.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1030.gif",
+          },
+          {
+            src: "assets/data/1031.gif",
+          },
+          {
+            src: "assets/data/1037.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1085.gif",
+          },
+          {
+            src: "assets/data/1106.gif",
+          },
+           {
+            src: "assets/data/1113.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2389,19 +2422,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1095.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1097.gif",
+          },
+          {
+            src: "assets/data/1105.gif",
+          },
+          {
+            src: "assets/data/1127.gif",
+          },
+          {
+            src: "assets/data/1138.gif",
+          },
+          {
+            src: "assets/data/1165.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2422,19 +2461,37 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1001.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1042.gif",
+          },
+          {
+            src: "assets/data/1079.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1097.gif",
+          },
+          {
+            src: "assets/data/1119.gif",
+          },
+          {
+            src: "assets/data/1127.gif",
+          },
+           {
+            src: "assets/data/1138.gif",
+          },
+          {
+            src: "assets/data/1159.gif",
+          },
+           {
+            src: "assets/data/1039.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2447,39 +2504,6 @@ descriptionEntries: [
         images: [
           {
             src: "assets/moc_fild18large.gif",
-          },
-        ],
-        text: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
-      },
-            {
-        title: "Monstros",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-    ], 
-  },
-    moc_fild19: {
-    region: "Deserto de Sograt",
-    description: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
-     descriptionEntries: [
-      {
-        title: "Deserto de Sograt 19.",
-        images: [
-          {
-            src: "assets/moc_fild19large.gif",
           },
         ],
         text: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
