@@ -469,6 +469,23 @@ const EXPLORE_DUNGEON_BACKGROUNDS = {
 let hasInitializedExploreDungeons = false;
 let activeDungeonSlug = null;
 
+const EXPLORE_ROUTE_VARIANT_KEY = "fields";
+const EXPLORE_ROUTE_COLORS = [
+  { key: "up", label: "Rota de Up", color: "#32b7ff" },
+  { key: "drop", label: "Caça a Drops", color: "#f9b64b" },
+  { key: "elite", label: "Rotas Desafiadoras", color: "#ff5f7a" },
+  { key: "farm", label: "Farm Seguro", color: "#4bd08a" },
+];
+
+const exploreRouteState = {
+  selectedColorKey: EXPLORE_ROUTE_COLORS[0]?.key || "up",
+  selections: [],
+  selectionIndex: new Map(),
+  monsterIntelCache: new Map(),
+};
+
+let currentRouteIntelRequestId = 0;
+
 function createExploreMapVariant({ key, label, layout }) {
   const normalizedLayout = (layout || "").trim();
   const rows = normalizedLayout
@@ -3183,6 +3200,639 @@ const EXPLORE_MAP_DEFAULT_DETAIL = {
 let activeExploreTile = null;
 let currentExploreMapVariant = EXPLORE_DEFAULT_VARIANT;
 
+function getRouteColorOption(colorKey) {
+  const normalized = typeof colorKey === "string" ? colorKey.trim().toLowerCase() : "";
+  const fallback = EXPLORE_ROUTE_COLORS[0];
+  if (!normalized) {
+    return fallback;
+  }
+
+  return EXPLORE_ROUTE_COLORS.find(option => option.key === normalized) || fallback;
+}
+
+function rebuildRouteSelectionIndex() {
+  exploreRouteState.selectionIndex.clear();
+  exploreRouteState.selections.forEach((entry, index) => {
+    if (!entry || !entry.slug) {
+      return;
+    }
+    exploreRouteState.selectionIndex.set(String(entry.slug).toLowerCase(), index);
+  });
+}
+
+function updateRoutePlannerAddButtonLabel(button, colorOption) {
+  if (!button) {
+    return;
+  }
+
+  const option = colorOption || getRouteColorOption(exploreRouteState.selectedColorKey);
+  const baseLabel = "Adicionar à trilha";
+  if (option) {
+    button.textContent = `${baseLabel} (${option.label})`;
+  } else {
+    button.textContent = baseLabel;
+  }
+}
+
+function setActiveRouteColor(colorKey) {
+  const option = getRouteColorOption(colorKey);
+  exploreRouteState.selectedColorKey = option.key;
+
+  const container = document.getElementById("exploreRouteColorOptions");
+  if (container) {
+    Array.from(container.querySelectorAll(".route-color-chip")).forEach(button => {
+      const isActive = button.dataset.colorKey === option.key;
+      button.classList.toggle("is-selected", isActive);
+      if (isActive) {
+        button.setAttribute("aria-pressed", "true");
+      } else {
+        button.setAttribute("aria-pressed", "false");
+      }
+    });
+  }
+
+  const addBtn = document.getElementById("exploreRouteAddBtn");
+  updateRoutePlannerAddButtonLabel(addBtn, option);
+}
+
+function renderRouteColorOptions(container) {
+  if (!container) {
+    return;
+  }
+
+  container.innerHTML = "";
+
+  EXPLORE_ROUTE_COLORS.forEach(option => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "route-color-chip";
+    button.dataset.colorKey = option.key;
+    button.style.setProperty("--chip-color", option.color);
+    button.textContent = option.label;
+    button.setAttribute("role", "button");
+    button.setAttribute("aria-pressed", "false");
+    button.addEventListener("click", () => {
+      setActiveRouteColor(option.key);
+    });
+    container.appendChild(button);
+  });
+}
+
+function initExploreRoutePlanner() {
+  const planner = document.getElementById("exploreRoutePlanner");
+  const track = document.getElementById("exploreRouteTrack");
+
+  if (!planner || !track) {
+    return;
+  }
+
+  const colorContainer = document.getElementById("exploreRouteColorOptions");
+  renderRouteColorOptions(colorContainer);
+  setActiveRouteColor(exploreRouteState.selectedColorKey);
+
+  const addBtn = document.getElementById("exploreRouteAddBtn");
+  if (addBtn && !addBtn.dataset.routeBound) {
+    addBtn.addEventListener("click", handleAddActiveTileToRoute);
+    addBtn.dataset.routeBound = "true";
+  }
+
+  renderExploreRouteCards();
+
+  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY && activeExploreTile) {
+    const slug = activeExploreTile.dataset.map;
+    if (slug) {
+      updateRoutePlannerSelection(slug, activeExploreTile.getAttribute("aria-label") || formatExploreMapLabel(slug));
+    }
+  } else {
+    resetRoutePlannerSelection();
+  }
+
+  toggleRoutePlannerVisibility(currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY);
+}
+
+function toggleRoutePlannerVisibility(shouldShow) {
+  const planner = document.getElementById("exploreRoutePlanner");
+  const track = document.getElementById("exploreRouteTrack");
+
+  [planner, track].forEach(element => {
+    if (!element) {
+      return;
+    }
+    if (shouldShow) {
+      element.hidden = false;
+      element.setAttribute("aria-hidden", "false");
+    } else {
+      element.hidden = true;
+      element.setAttribute("aria-hidden", "true");
+    }
+  });
+}
+
+function resetRoutePlannerSelection() {
+  const statusEl = document.getElementById("exploreRouteStatus");
+  const intelEl = document.getElementById("exploreRouteIntel");
+  const addBtn = document.getElementById("exploreRouteAddBtn");
+
+  if (statusEl) {
+    statusEl.textContent = "Selecione um mapa no mosaico para começar.";
+  }
+
+  if (intelEl) {
+    intelEl.hidden = true;
+    intelEl.innerHTML = "";
+  }
+
+  if (addBtn) {
+    addBtn.disabled = true;
+  }
+}
+
+function renderRoutePlannerIntel(intel) {
+  const intelEl = document.getElementById("exploreRouteIntel");
+  if (!intelEl) {
+    return;
+  }
+
+  intelEl.hidden = false;
+  intelEl.innerHTML = "";
+
+  const title = document.createElement("h5");
+  title.textContent = "Assistente IA";
+  intelEl.appendChild(title);
+
+  if (intel && intel.error) {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = intel.recommendedLevelText || "Não foi possível consultar os dados de monstros.";
+    intelEl.appendChild(paragraph);
+    return;
+  }
+
+  if (!intel || !Array.isArray(intel.monsters) || intel.monsters.length === 0) {
+    const paragraph = document.createElement("p");
+    paragraph.textContent = "A IA ainda não encontrou monstros catalogados para este mapa.";
+    intelEl.appendChild(paragraph);
+    return;
+  }
+
+  const levelParagraph = document.createElement("p");
+  levelParagraph.innerHTML = `<strong>Nível recomendado:</strong> ${intel.recommendedLevelText}`;
+  intelEl.appendChild(levelParagraph);
+
+  if (intel.dominantMonster) {
+    const dominantParagraph = document.createElement("p");
+    const raceText = intel.dominantMonster.race && intel.dominantMonster.race !== "—"
+      ? ` • Classe ${intel.dominantMonster.race}`
+      : "";
+    dominantParagraph.innerHTML = `<strong>Monstro predominante:</strong> ${intel.dominantMonster.name} • ${intel.dominantMonster.levelText} • ${intel.dominantMonster.baseExpText}${raceText}`;
+    intelEl.appendChild(dominantParagraph);
+  }
+
+  const listIntro = document.createElement("p");
+  listIntro.textContent = "Monstros identificados:";
+  intelEl.appendChild(listIntro);
+
+  const list = document.createElement("ul");
+  const monstersToShow = intel.monsters.slice(0, 4);
+  monstersToShow.forEach(monster => {
+    const item = document.createElement("li");
+    const pieces = [monster.levelText, monster.baseExpText, monster.jobExpText].filter(Boolean);
+    const suffix = pieces.length ? ` • ${pieces.join(" • ")}` : "";
+    const race = monster.race && monster.race !== "—" ? ` • ${monster.race}` : "";
+    item.textContent = `${monster.name}${suffix}${race}`;
+    list.appendChild(item);
+  });
+
+  intelEl.appendChild(list);
+}
+
+function updateRoutePlannerSelection(slug, label) {
+  if (currentExploreMapVariant !== EXPLORE_ROUTE_VARIANT_KEY) {
+    return;
+  }
+
+  const statusEl = document.getElementById("exploreRouteStatus");
+  const addBtn = document.getElementById("exploreRouteAddBtn");
+  const intelEl = document.getElementById("exploreRouteIntel");
+
+  if (!slug) {
+    resetRoutePlannerSelection();
+    return;
+  }
+
+  if (statusEl) {
+    statusEl.textContent = `Mapa selecionado: ${label}`;
+  }
+
+  if (addBtn) {
+    addBtn.disabled = false;
+  }
+
+  if (intelEl) {
+    intelEl.hidden = false;
+    intelEl.innerHTML = "<h5>Assistente IA</h5><p>Consultando banco de monstros...</p>";
+  }
+
+  const requestId = ++currentRouteIntelRequestId;
+
+  resolveMapMonsterIntel(slug, label)
+    .then(intel => {
+      if (requestId !== currentRouteIntelRequestId) {
+        return;
+      }
+      renderRoutePlannerIntel(intel);
+    })
+    .catch(() => {
+      if (requestId !== currentRouteIntelRequestId) {
+        return;
+      }
+      if (intelEl) {
+        intelEl.hidden = false;
+        intelEl.innerHTML = "<h5>Assistente IA</h5><p>Não foi possível consultar os dados de monstros agora.</p>";
+      }
+    });
+}
+
+function createRouteCard(entry, index) {
+  const card = document.createElement("article");
+  card.className = "explore-route-card";
+  card.setAttribute("role", "listitem");
+  card.style.setProperty("--route-color", entry.color);
+
+  const header = document.createElement("header");
+  header.className = "explore-route-card__header";
+
+  const step = document.createElement("p");
+  step.className = "explore-route-card__step";
+  step.textContent = `Etapa ${index + 1}`;
+  header.appendChild(step);
+
+  const title = document.createElement("h4");
+  title.className = "explore-route-card__title";
+  title.textContent = entry.name;
+  header.appendChild(title);
+
+  const badge = document.createElement("span");
+  badge.className = "explore-route-card__badge";
+  badge.textContent = entry.colorLabel;
+  header.appendChild(badge);
+
+  card.appendChild(header);
+
+  const media = document.createElement("div");
+  media.className = "explore-route-card__media";
+
+  if (entry.image) {
+    const img = document.createElement("img");
+    img.className = "explore-route-card__image";
+    img.src = entry.image;
+    img.alt = `Prévia do mapa ${entry.name}`;
+    media.appendChild(img);
+  } else {
+    const placeholder = document.createElement("div");
+    placeholder.className = "explore-route-card__image-placeholder";
+    placeholder.textContent = "Sem imagem";
+    media.appendChild(placeholder);
+  }
+
+  const body = document.createElement("div");
+  body.className = "explore-route-card__body";
+
+  const meta = document.createElement("div");
+  meta.className = "explore-route-card__meta";
+
+  if (entry.region) {
+    const regionSpan = document.createElement("span");
+    regionSpan.textContent = `Região: ${entry.region}`;
+    meta.appendChild(regionSpan);
+  }
+
+  const levelSpan = document.createElement("span");
+  levelSpan.textContent = `Nível recomendado: ${entry.recommendedLevel}`;
+  meta.appendChild(levelSpan);
+
+  if (entry.dominantMonster) {
+    const dominantSpan = document.createElement("span");
+    const raceSuffix = entry.dominantMonster.race && entry.dominantMonster.race !== "—"
+      ? ` • Classe ${entry.dominantMonster.race}`
+      : "";
+    dominantSpan.textContent = `Monstro predominante: ${entry.dominantMonster.name} • ${entry.dominantMonster.levelText} • ${entry.dominantMonster.baseExpText}${raceSuffix}`;
+    meta.appendChild(dominantSpan);
+  }
+
+  body.appendChild(meta);
+
+  const summary = document.createElement("p");
+  summary.className = "explore-route-card__intel";
+  const hasMonsterIntel = Array.isArray(entry.monsters) && entry.monsters.length > 0;
+  if (hasMonsterIntel) {
+    const focusName = entry.dominantMonster ? entry.dominantMonster.name : "os monstros catalogados";
+    summary.textContent = `Sugestão IA: priorize ${focusName} para otimizar sua rota.`;
+  } else {
+    summary.textContent = "Sugestão IA: dados insuficientes para sugerir uma prioridade neste mapa.";
+  }
+  body.appendChild(summary);
+
+  if (hasMonsterIntel) {
+    const list = document.createElement("ul");
+    list.className = "explore-route-card__monsters";
+    entry.monsters.slice(0, 5).forEach(monster => {
+      const item = document.createElement("li");
+      const details = [monster.levelText, monster.baseExpText, monster.jobExpText].filter(Boolean);
+      const raceSuffix = monster.race && monster.race !== "—" ? ` • ${monster.race}` : "";
+      const detailText = details.length ? ` • ${details.join(" • ")}` : "";
+      item.textContent = `${monster.name}${detailText}${raceSuffix}`;
+      list.appendChild(item);
+    });
+    body.appendChild(list);
+  }
+
+  media.appendChild(body);
+  card.appendChild(media);
+
+  const footer = document.createElement("footer");
+  footer.className = "explore-route-card__footer";
+
+  const removeBtn = document.createElement("button");
+  removeBtn.type = "button";
+  removeBtn.className = "btn-secondary explore-route-card__remove";
+  removeBtn.textContent = "Remover da trilha";
+  removeBtn.addEventListener("click", () => {
+    removeRouteSelection(entry.slug);
+  });
+
+  footer.appendChild(removeBtn);
+  card.appendChild(footer);
+
+  return card;
+}
+
+function renderExploreRouteCards() {
+  const container = document.getElementById("exploreRouteCards");
+  const emptyStateEl = document.getElementById("exploreRouteEmpty");
+
+  if (!container) {
+    return;
+  }
+
+  const entries = exploreRouteState.selections.filter(entry => entry && entry.variant === EXPLORE_ROUTE_VARIANT_KEY);
+
+  container.innerHTML = "";
+
+  if (!entries.length) {
+    if (emptyStateEl) {
+      emptyStateEl.hidden = false;
+    }
+    return;
+  }
+
+  if (emptyStateEl) {
+    emptyStateEl.hidden = true;
+  }
+
+  entries.forEach((entry, index) => {
+    const card = createRouteCard(entry, index);
+    container.appendChild(card);
+  });
+}
+
+function syncExploreRouteHighlights() {
+  const gridEl = document.getElementById("exploreMapGrid");
+  if (!gridEl) {
+    return;
+  }
+
+  const highlightedTiles = gridEl.querySelectorAll(".explore-map__tile--route");
+  highlightedTiles.forEach(tile => {
+    tile.classList.remove("explore-map__tile--route");
+    tile.style.removeProperty("--route-color");
+  });
+
+  exploreRouteState.selections.forEach(entry => {
+    if (!entry || entry.variant !== EXPLORE_ROUTE_VARIANT_KEY) {
+      return;
+    }
+
+    const tile = gridEl.querySelector(`.explore-map__tile[data-map="${entry.slug}"]`);
+    if (!tile) {
+      return;
+    }
+
+    tile.classList.add("explore-map__tile--route");
+    tile.style.setProperty("--route-color", entry.color);
+  });
+}
+
+function addOrUpdateRouteSelection(entry) {
+  if (!entry || !entry.slug) {
+    return;
+  }
+
+  const normalizedSlug = String(entry.slug).toLowerCase();
+  if (exploreRouteState.selectionIndex.has(normalizedSlug)) {
+    const currentIndex = exploreRouteState.selectionIndex.get(normalizedSlug);
+    exploreRouteState.selections.splice(currentIndex, 1);
+  }
+
+  exploreRouteState.selections.push(entry);
+  rebuildRouteSelectionIndex();
+}
+
+function removeRouteSelection(slug) {
+  const normalizedSlug = typeof slug === "string" ? slug.toLowerCase() : "";
+  if (!normalizedSlug) {
+    return;
+  }
+
+  if (!exploreRouteState.selectionIndex.has(normalizedSlug)) {
+    return;
+  }
+
+  const index = exploreRouteState.selectionIndex.get(normalizedSlug);
+  exploreRouteState.selections.splice(index, 1);
+  rebuildRouteSelectionIndex();
+  renderExploreRouteCards();
+  syncExploreRouteHighlights();
+}
+
+async function handleAddActiveTileToRoute() {
+  if (!activeExploreTile || currentExploreMapVariant !== EXPLORE_ROUTE_VARIANT_KEY) {
+    return;
+  }
+
+  const slug = activeExploreTile.dataset.map;
+  if (!slug) {
+    return;
+  }
+
+  const detail = resolveExploreMapDetail(slug);
+  const label = detail?.name || formatExploreMapLabel(slug);
+  const colorOption = getRouteColorOption(exploreRouteState.selectedColorKey);
+  const addBtn = document.getElementById("exploreRouteAddBtn");
+  const originalLabel = addBtn ? addBtn.textContent : "";
+
+  try {
+    if (addBtn) {
+      addBtn.disabled = true;
+      addBtn.textContent = "Adicionando...";
+    }
+
+    const entry = await buildRouteEntry(slug, label, colorOption, activeExploreTile);
+    addOrUpdateRouteSelection(entry);
+    renderExploreRouteCards();
+    syncExploreRouteHighlights();
+  } catch (error) {
+    console.error("Não foi possível adicionar o mapa à trilha:", error);
+  } finally {
+    if (addBtn) {
+      addBtn.disabled = false;
+      addBtn.textContent = originalLabel || "Adicionar à trilha";
+      updateRoutePlannerAddButtonLabel(addBtn, colorOption);
+    }
+  }
+}
+
+async function buildRouteEntry(slug, label, colorOption, tile) {
+  const variant = currentExploreMapVariant;
+  const detail = resolveExploreMapDetail(slug, label);
+  const intel = await resolveMapMonsterIntel(slug, label);
+  const tileImage = tile?.querySelector("img");
+  const resolvedImage = resolveExploreMapImage(slug) || tileImage?.src || "";
+
+  return {
+    slug,
+    name: detail?.name || label,
+    region: detail?.region || "",
+    color: colorOption.color,
+    colorKey: colorOption.key,
+    colorLabel: colorOption.label,
+    image: resolvedImage,
+    variant,
+    recommendedLevel: intel?.recommendedLevelText || "Dados indisponíveis",
+    dominantMonster: intel?.dominantMonster || null,
+    monsters: intel?.monsters || [],
+  };
+}
+
+async function resolveMapMonsterIntel(slug, label) {
+  const normalizedSlug = String(slug || "").trim().toLowerCase();
+
+  if (!normalizedSlug) {
+    return {
+      slug: normalizedSlug,
+      label: label || "",
+      monsters: [],
+      recommendedLevelText: "Dados indisponíveis",
+      dominantMonster: null,
+    };
+  }
+
+  if (exploreRouteState.monsterIntelCache.has(normalizedSlug)) {
+    return exploreRouteState.monsterIntelCache.get(normalizedSlug);
+  }
+
+  let database;
+  try {
+    database = await fetchMonsterDatabase();
+  } catch (error) {
+    console.warn("Falha ao consultar o banco de monstros:", error);
+    return {
+      slug: normalizedSlug,
+      label: label || "",
+      monsters: [],
+      recommendedLevelText: "Não foi possível consultar os monstros.",
+      dominantMonster: null,
+      error: true,
+    };
+  }
+
+  const monsters = Array.isArray(database?.monsters) ? database.monsters : [];
+  const matches = monsters.filter(monster => {
+    if (!monster) {
+      return false;
+    }
+    const spawnList = Array.isArray(monster.spawn) ? monster.spawn : [];
+    return spawnList.some(spawn => String(spawn?.map || "").trim().toLowerCase() === normalizedSlug);
+  });
+
+  const intelMonsters = matches.map(monster => {
+    const level = typeof monster.level === "number" && !Number.isNaN(monster.level) ? monster.level : null;
+    const baseExp = Number(monster?.stats?.baseExp ?? 0);
+    const jobExp = Number(monster?.stats?.jobExp ?? 0);
+
+    return {
+      id: monster.id,
+      name: monster.name || `Monstro ${monster.id || "?"}`,
+      level,
+      levelText: level !== null ? `Nv. ${level}` : "Nível não informado",
+      baseExp,
+      baseExpText: baseExp > 0 ? `${formatNumberForLocale(baseExp)} EXP Base` : "EXP Base —",
+      jobExp,
+      jobExpText: jobExp > 0 ? `${formatNumberForLocale(jobExp)} EXP Classe` : "",
+      race: monster.race || "—",
+    };
+  });
+
+  intelMonsters.sort((a, b) => {
+    const levelA = typeof a.level === "number" ? a.level : Number.MAX_SAFE_INTEGER;
+    const levelB = typeof b.level === "number" ? b.level : Number.MAX_SAFE_INTEGER;
+
+    if (levelA !== levelB) {
+      return levelA - levelB;
+    }
+
+    const expA = Number.isFinite(a.baseExp) ? a.baseExp : 0;
+    const expB = Number.isFinite(b.baseExp) ? b.baseExp : 0;
+    if (expA !== expB) {
+      return expB - expA;
+    }
+
+    return a.name.localeCompare(b.name, "pt-BR");
+  });
+
+  const levelValues = intelMonsters
+    .map(monster => monster.level)
+    .filter(level => typeof level === "number" && !Number.isNaN(level));
+
+  let recommendedLevelText = "Dados de nível indisponíveis";
+  let levelRange = null;
+
+  if (levelValues.length) {
+    const minLevel = Math.min(...levelValues);
+    const maxLevel = Math.max(...levelValues);
+    levelRange = { min: minLevel, max: maxLevel };
+    recommendedLevelText = minLevel === maxLevel ? `Nv. ${minLevel}` : `Nv. ${minLevel} - ${maxLevel}`;
+  }
+
+  let dominantMonster = null;
+  if (intelMonsters.length) {
+    dominantMonster = intelMonsters.slice().sort((a, b) => {
+      const expDiff = (b.baseExp || 0) - (a.baseExp || 0);
+      if (expDiff !== 0) {
+        return expDiff;
+      }
+
+      const levelDiff = (b.level || 0) - (a.level || 0);
+      if (levelDiff !== 0) {
+        return levelDiff;
+      }
+
+      return a.name.localeCompare(b.name, "pt-BR");
+    })[0];
+  }
+
+  const intel = {
+    slug: normalizedSlug,
+    label: label || "",
+    monsters: intelMonsters,
+    recommendedLevelText,
+    levelRange,
+    dominantMonster,
+  };
+
+  exploreRouteState.monsterIntelCache.set(normalizedSlug, intel);
+  return intel;
+}
+
 function getExploreMapVariant(variantKey = currentExploreMapVariant) {
   if (variantKey && Object.prototype.hasOwnProperty.call(EXPLORE_MAP_VARIANTS, variantKey)) {
     return EXPLORE_MAP_VARIANTS[variantKey];
@@ -3258,6 +3908,11 @@ function toggleExploreVariantViews(activeVariantKey) {
     dungeonsView.hidden = !isDungeons;
     dungeonsView.setAttribute("aria-hidden", isDungeons ? "false" : "true");
   }
+
+  toggleRoutePlannerVisibility(!isDungeons);
+  if (isDungeons) {
+    resetRoutePlannerSelection();
+  }
 }
 
 function activateExploreVariant(variantKey, options = {}) {
@@ -3273,6 +3928,9 @@ function activateExploreVariant(variantKey, options = {}) {
     initExploreDungeons();
   } else {
     renderExploreMap(variant.key);
+    if (variant.key === EXPLORE_ROUTE_VARIANT_KEY) {
+      initExploreRoutePlanner();
+    }
   }
 
   updateExploreTabs(variant.key, options);
@@ -3573,6 +4231,7 @@ function initExploreMap() {
   } else {
     if (hasMapGrid) {
       renderExploreMap(EXPLORE_DEFAULT_VARIANT);
+      initExploreRoutePlanner();
     }
 
     if (hasDungeonView) {
@@ -3878,6 +4537,9 @@ function resetExploreMapDetails() {
     slugEl.textContent = parts.join(" • ");
   }
   setActiveExploreTile(null);
+  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY) {
+    resetRoutePlannerSelection();
+  }
 }
 
 function updateExploreMapDetails(slug, label) {
@@ -3914,6 +4576,9 @@ function updateExploreMapDetails(slug, label) {
 function handleExploreTileSelection(tile, slug, label) {
   setActiveExploreTile(tile);
   updateExploreMapDetails(slug, label);
+  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY) {
+    updateRoutePlannerSelection(slug, label);
+  }
 }
 
 function formatExploreMapLabel(slug) {
@@ -4014,6 +4679,10 @@ function renderExploreMap(variantKey = currentExploreMapVariant) {
       gridEl.appendChild(tile);
     });
   });
+
+  if (variant.key === EXPLORE_ROUTE_VARIANT_KEY) {
+    syncExploreRouteHighlights();
+  }
 }
 
 const PAGES = {
@@ -4837,10 +5506,28 @@ field: {
                 <div class="explore-map-details__description" id="exploreMapDetailsDescription"></div>
                 <p class="small" id="exploreMapDetailsSlug">${EXPLORE_MAP_DEFAULT_DETAIL.slugText}</p>
               </div>
+              <div class="explore-route-planner" id="exploreRoutePlanner">
+                <h4 class="explore-route-planner__title">Planejador de rota</h4>
+                <p class="explore-route-planner__status" id="exploreRouteStatus">
+                  Selecione um mapa no mosaico para começar.
+                </p>
+                <div class="explore-route-planner__intel" id="exploreRouteIntel" hidden></div>
+                <div class="explore-route-planner__colors" id="exploreRouteColorOptions" role="list"></div>
+                <button class="btn-glow explore-route-planner__add" id="exploreRouteAddBtn" type="button" disabled>
+                  Adicionar à trilha
+                </button>
+              </div>
             </div>
           </div>
         </div>
       </div>
+      <section class="explore-route-track" id="exploreRouteTrack" aria-live="polite">
+        <h3 class="explore-route-track__title">Trilha planejada</h3>
+        <p class="explore-route-track__empty" id="exploreRouteEmpty">
+          Nenhuma rota planejada ainda. Adicione mapas para montar sua jornada.
+        </p>
+        <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
+      </section>
     `
 },
 dungeon: {
