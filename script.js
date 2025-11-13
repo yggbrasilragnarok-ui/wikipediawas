@@ -3491,36 +3491,14 @@ function createRouteCard(entry, index) {
   const meta = document.createElement("div");
   meta.className = "explore-route-card__meta";
 
-  if (entry.region) {
-    const regionSpan = document.createElement("span");
-    regionSpan.textContent = `Região: ${entry.region}`;
-    meta.appendChild(regionSpan);
-  }
-
   const levelSpan = document.createElement("span");
   levelSpan.textContent = `Nível recomendado: ${entry.recommendedLevel}`;
   meta.appendChild(levelSpan);
-
-  if (entry.dominantMonster) {
-    const dominantSpan = document.createElement("span");
-    const raceSuffix = entry.dominantMonster.race && entry.dominantMonster.race !== "—"
-      ? ` • Classe ${entry.dominantMonster.race}`
-      : "";
-    dominantSpan.textContent = `Monstro predominante: ${entry.dominantMonster.name} • ${entry.dominantMonster.levelText} • ${entry.dominantMonster.baseExpText}${raceSuffix}`;
-    meta.appendChild(dominantSpan);
-  }
 
   body.appendChild(meta);
 
   const summary = document.createElement("p");
   summary.className = "explore-route-card__intel";
-  const hasMonsterIntel = Array.isArray(entry.monsters) && entry.monsters.length > 0;
-  if (hasMonsterIntel) {
-    const focusName = entry.dominantMonster ? entry.dominantMonster.name : "os monstros catalogados";
-    summary.textContent = `Sugestão IA: priorize ${focusName} para otimizar sua rota.`;
-  } else {
-    summary.textContent = "Sugestão IA: dados insuficientes para sugerir uma prioridade neste mapa.";
-  }
   body.appendChild(summary);
 
   if (hasMonsterIntel) {
