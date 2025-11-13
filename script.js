@@ -373,6 +373,10 @@ function enhanceKineticHover(scope = document) {
   const elements = scope.querySelectorAll(KINETIC_CARD_SELECTORS.join(", "));
 
   elements.forEach(card => {
+    if (card.classList.contains("hero-card--static")) {
+      return;
+    }
+
     if (card.dataset.kineticPrepared) {
       return;
     }
@@ -424,9 +428,9 @@ const EXPLORE_MAP_VARIANTS = {
 . . mjolnir_01.gif mjolnir_02.gif mjolnir_03.gif mjolnir_04.gif mjolnir_05.gif . . . .
 gef_fild06.gif gef_fild05.gif gef_fild04.gif mjolnir_06.gif mjolnir_07.gif mjolnir_08.gif mjolnir_10.gif mjolnir_11.gif
 gef_fild08.gif gef_fild07.gif geffen.gif . . mjolnir_09.gif prt_fild01.gif prt_fild02.gif prt_fild03.gif
-. gef_fild13.gif gef_fild09.gif gef_fild01.gif prt_fild04.gif prt_fild05.gif prontera.gif prt_fild06.gif . . . . izlu2dun.gif
+. gef_fild13.gif gef_fild09.gif gef_fild01.gif prt_fild04.gif gef_fild05.gif prontera.gif prt_fild06.gif . . . . izlu2dun.gif
 . . gef_fild10.gif gef_fild03.gif gef_fild02.gif prt_fild07.gif prt_fild08.gif izlude.gif . pay_arche.gif
-. . . . prt_fild10.gif prt_fild09.gif moc_fild01.gif pay_fild04.gif .  payon.gif pay_fild08.gif pay_fild09.gif
+. . gef_fild11.gif prt_fild11.gif prt_fild10.gif prt_fild09.gif moc_fild01.gif pay_fild04.gif .  payon.gif pay_fild08.gif pay_fild09.gif
 . . . . . moc_ruins.gif moc_fild07.gif  moc_fild02.gif moc_fild03.gif pay_fild01.gif pay_fild07.gif pay_fild10.gif
 . . . . . . morocc.gif moc_fild13.gif  pay_fild11.gif pay_fild02.gif pay_fild03.gif alberta.gif . .
 . . . . . . moc_fild12.gif moc_fild11.gif  . . 
@@ -743,6 +747,24 @@ descriptionEntries: [
       },
       {
         title: "NPC Custom",
+        images: [
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+        ],
+        text: "",
+      },
+            {
+        title: "Monstros",
         images: [
           {
             src: "",
@@ -1225,39 +1247,6 @@ descriptionEntries: [
       },
     ], 
   },
-    prt_fild00: { 
-    region: "Campos de Prontera",
-    description: "Pastos tranquilos que fazem a transição entre Prontera e seus vilarejos vizinhos, ideais para os primeiros passos de aventura.",
-    descriptionEntries: [
-      {
-        title: "Campos de Prontera 00",
-        images: [
-          {
-            src: "assets/prt_fild00large.gif",
-          },
-        ],
-        text: "Pastos tranquilos que fazem a transição entre Prontera e seus vilarejos vizinhos, ideais para os primeiros passos de aventura.",
-      },
-            {
-        title: "Monstros",
-        images: [
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-          {
-            src: "",
-            alt: "",
-            description:
-              "",
-          },
-        ],
-        text: "",
-      },
-    ], 
-  },
   prt_fild01: { 
     region: "Campos de Prontera",
     description: "Pastos tranquilos que fazem a transição entre Prontera e seus vilarejos vizinhos, ideais para os primeiros passos de aventura.",
@@ -1479,19 +1468,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1048.gif",
+          },
+          {
+            src: "assets/data/1051.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1080.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1512,19 +1507,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1052.gif",
+          },
+          {
+            src: "assets/data/1084.gif",
+          },
+          {
+            src: "assets/data/1088.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1545,19 +1540,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1002.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1008.gif",
+          },
+          {
+            src: "assets/data/1063.gif",
+          },
+          {
+            src: "assets/data/1113.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1578,19 +1573,25 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1009.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1047.gif",
           },
+          {
+            src: "assets/data/1049.gif",
+          },
+          {
+            src: "assets/data/1081.gif",
+          },
+          {
+            src: "assets/data/1107.gif",
+          },
+          {
+            src: "assets/data/1167.gif",
+          },          
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -1611,16 +1612,22 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1031.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1051.gif",
+          },
+          {
+            src: "assets/data/1083.gif",
+          },
+          {
+            src: "assets/data/1085.gif",
+          },
+          {
+            src: "assets/data/1166.gif",
+          },
+          {
+            src: "assets/data/1167.gif",
           },
         ],
         text: "",
@@ -1644,19 +1651,34 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1085.gif",
           },
           {
-            src: "",
-            alt: "",
-            description:
-              "",
+            src: "assets/data/1122.gif",
+          },
+          {
+            src: "assets/data/1123.gif",
+          },
+          {
+            src: "assets/data/1124.gif",
+          },
+          {
+            src: "assets/data/1125.gif",
+          },
+          {
+            src: "assets/data/1126.gif",
+          },
+          {
+            src: "assets/data/1258.gif",
+          },
+          {
+            src: "assets/data/1280.gif",
+          },
+          {
+            src: "assets/data/1308.gif",
           },
         ],
-        text: "",
+        text: " ",
       },
     ], 
   },
@@ -2235,22 +2257,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "assets/data/1047.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1049.gif",
-          },
-           {
-            src: "assets/data/1050.gif",
-          },
-          {
-            src: "assets/data/1081.gif",
-          },
-          {
-            src: "assets/data/1113.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
@@ -2271,34 +2290,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "assets/data/1040.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1055.gif",
-          },
-           {
-            src: "assets/data/1083.gif",
-          },
-          {
-            src: "assets/data/1095.gif",
-          },
-          {
-            src: "assets/data/1097.gif",
-          },
-          {
-            src: "assets/data/1105.gif",
-          },
-          {
-            src: "assets/data/1127.gif",
-          },
-           {
-            src: "assets/data/1138.gif",
-          },
-          {
-            src: "assets/data/1160.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
@@ -2318,23 +2322,20 @@ descriptionEntries: [
             {
         title: "Monstros",
         images: [
-         {
-            src: "assets/data/1047.gif",
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1049.gif",
-          },
-           {
-            src: "assets/data/1050.gif",
-          },
-          {
-            src: "assets/data/1081.gif",
-          },
-          {
-            src: "assets/data/1113.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
@@ -2354,32 +2355,20 @@ descriptionEntries: [
             {
         title: "Monstros",
         images: [
-           {
-            src: "assets/data/1025.gif",
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1030.gif",
-          },
-           {
-            src: "assets/data/1031.gif",
-          },
-          {
-            src: "assets/data/1037.gif",
-          },
-          {
-            src: "assets/data/1081.gif",
-          },
-           {
-            src: "assets/data/1085.gif",
-          },
-          {
-            src: "assets/data/1106.gif",
-          },
-          {
-            src: "assets/data/1113.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
@@ -2400,25 +2389,19 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "assets/data/1095.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1097.gif",
-          },
-           {
-            src: "assets/data/1105.gif",
-          },
-          {
-            src: "assets/data/1127.gif",
-          },
-          {
-            src: "assets/data/1138.gif",
-          },
-           {
-            src: "assets/data/1165.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
@@ -2439,41 +2422,88 @@ descriptionEntries: [
         title: "Monstros",
         images: [
           {
-            src: "assets/data/1001.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
           {
-            src: "assets/data/1042.gif",
-          },
-           {
-            src: "assets/data/1079.gif",
-          },
-          {
-            src: "assets/data/1081.gif",
-          },
-          {
-            src: "assets/data/1097.gif",
-          },
-           {
-            src: "assets/data/1119.gif",
-          },
-          {
-            src: "assets/data/1127.gif",
-          },
-          {
-            src: "assets/data/1138.gif",
-          },
-           {
-            src: "assets/data/1159.gif",
-          },
-          {
-            src: "assets/data/1039.gif",
+            src: "",
+            alt: "",
+            description:
+              "",
           },
         ],
-        text: " ",
+        text: "",
       },
     ], 
   },
-    
+    moc_fild18: {
+    region: "Deserto de Sograt",
+    description: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
+     descriptionEntries: [
+      {
+        title: "Deserto de Sograt 18",
+        images: [
+          {
+            src: "assets/moc_fild18large.gif",
+          },
+        ],
+        text: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
+      },
+            {
+        title: "Monstros",
+        images: [
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+        ],
+        text: "",
+      },
+    ], 
+  },
+    moc_fild19: {
+    region: "Deserto de Sograt",
+    description: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
+     descriptionEntries: [
+      {
+        title: "Deserto de Sograt 19.",
+        images: [
+          {
+            src: "assets/moc_fild19large.gif",
+          },
+        ],
+        text: "Os arredores áridos de Morroc misturam dunas, ruínas e criaturas acostumadas ao calor extremo do deserto.",
+      },
+            {
+        title: "Monstros",
+        images: [
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+        ],
+        text: "",
+      },
+    ], 
+  },
     mjolnir_01:{
     region: "Monte Mjolnir",
     description: "Encostas rochosas marcadas por tempestades. Kobolds, Golems e minérios raros aguardam os exploradores destemidos.",
@@ -2884,8 +2914,135 @@ descriptionEntries: [
         ],
         text: "Conjunto de ilhas e cavernas submersas. Monstros aquáticos protegem o acesso às profundezas marinhas.",
       },
+            {
+        title: "Monstros",
+        images: [
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+          {
+            src: "",
+            alt: "",
+            description:
+              "",
+          },
+        ],
+        text: "",
+      },
     ], 
   },
+  prt_sewb1: {
+    name: "Esgotos de Prontera",
+    region: "Subterrâneo de Prontera",
+    description:
+      "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
+    descriptionEntries: [
+      {
+        title: "Entrada pelos bueiros",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          "Bueiros espalhados pela capital levam aos túneis. É uma área recomendada para aprendizes treinarem antes das cavernas mais perigosas.",
+      },
+    ],
+  },
+  pay_dun00: {
+    name: "Caverna de Payon",
+    region: "Florestas de Payon",
+    description:
+      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
+    descriptionEntries: [
+      {
+        title: "Salões ancestrais",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          "O primeiro andar apresenta corredores amplos com armadilhas simples. A expedição exige tochas e cura para enfrentar mortos-vivos.",
+      },
+    ],
+  },
+  gef_dun00: {
+    name: "Torre de Geffen",
+    region: "Cidade dos Magos",
+    description:
+      "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
+    descriptionEntries: [
+      {
+        title: "Base da torre",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          "A torre fica no coração de Geffen. Portais mágicos controlam o acesso entre os andares e permitem treinos supervisionados.",
+      },
+    ],
+  },
+  moc_pryd01: {
+    name: "Pirâmides de Morroc",
+    region: "Deserto de Sograt",
+    description:
+      "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
+    descriptionEntries: [
+      {
+        title: "Salões arenosos",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          "Escadarias escondidas levam aos níveis inferiores. O calor seco mistura-se com energia mística deixada pelos antigos guardiões.",
+      },
+    ],
+  },
+  iz_dun00: {
+    name: "Caverna Submarina de Byalan",
+    region: "Arquipélago de Byalan",
+    description:
+      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
+    descriptionEntries: [
+      {
+        title: "Corredores alagados",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          "O primeiro nível mistura plataformas secas e poças profundas. Armas elementais e acessórios contra Água ajudam a sobrevivência.",
+      },
+    ],
+  },
+  treasure1: {
+    name: "Navio Fantasma",
+    region: "....",
+    description:
+      ".....",
+    descriptionEntries: [
+      {
+        title: "Acampamento orc",
+        images: [
+          {
+            src: "",
+          },
+        ],
+        text:
+          ".........",
+      },
+    ],
+  },
+
 };
 
 const EXPLORE_MAP_IMAGE_FALLBACKS = {
@@ -3840,7 +3997,7 @@ const PAGES = {
     title: " ",
     html: `
       <section class="server-section server-section--general hero-section" aria-labelledby="heroTitle">
-        <div class="server-general-card hero-card">
+        <div class="server-general-card hero-card hero-card--static">
           <div class="hero-card__background" aria-hidden="true">
             <img src="assets/mapraganrok.jpg" alt="" loading="lazy" decoding="async" />
             <div class="hero-card__background-overlay"></div>
@@ -3934,7 +4091,7 @@ const PAGES = {
     title: " ",
     html: `
       <section class="server-section server-section--general hero-section rules-hero" aria-labelledby="rulesHeroTitle">
-        <div class="hero-card rules-hero-card">
+        <div class="hero-card rules-hero-card hero-card--static">
           <div class="hero-card__background" aria-hidden="true">
             <img src="assets/unnamed.jpg" alt="Guardião do código de conduta" loading="lazy" decoding="async" />
             <div class="hero-card__background-overlay"></div>

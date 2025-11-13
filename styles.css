@@ -1613,6 +1613,7 @@ body {
   box-shadow: 0 36px 68px rgba(0, 0, 0, 0.82), 0 0 36px rgba(5, 192, 255, 0.25);
   display: grid;
   gap: clamp(24px, 3vw, 36px);
+  border-radius: 28px;
 }
 
 .hero-card {
@@ -1627,6 +1628,7 @@ body {
   --card-tilt-strength: 9deg;
   transition: box-shadow var(--hover-duration) var(--hover-ease),
     background var(--hover-duration) ease;
+  border-radius: 28px;
 }
 
 .hero-card__background {
