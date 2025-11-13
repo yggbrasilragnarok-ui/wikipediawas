@@ -2695,29 +2695,6 @@
       }
     },
     {
-      "id": 1115,
-      "name": "Eddga",
-      "image": "assets/data/1115.gif",
-      "level": 65,
-      "race": "Bruto",
-      "element": "Fogo",
-      "size": "Grande",
-      "isMvp": true,
-      "spawn": [
-        {
-          "map": "pay_fild11",
-          "name": "Campos de Payon",
-          "region": "Payon",
-          "type": "Campo"
-        }
-      ],
-      "stats": {
-        "hp": 152000,
-        "baseExp": 25025,
-        "jobExp": 12870
-      }
-    },
-    {
       "id": 1007,
       "name": "Fabre",
       "image": "assets/data/1007.gif",
@@ -3096,40 +3073,6 @@
         "hp": 2282,
         "baseExp": 550,
         "jobExp": 300
-      }
-    },
-     {
-      "id": 1138,
-      "name": "Magnolia",
-      "image": "assets/data/1138.gif",
-      "level": 26,
-      "race": "Demônio",
-      "element": "Água",
-      "size": "Pequeno",
-      "spawn": [
-        {
-          "map": "moc_fild11",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        },
-        {
-          "map": "moc_fild16",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        },
-        {
-          "map": "moc_fild17",
-          "name": "Deserto de Sograt",
-          "region": "Morroc",
-          "type": "Campo"
-        }
-      ],
-      "stats": {
-        "hp": 3195,
-        "baseExp": 393,
-        "jobExp": 248
       }
     },
     {
