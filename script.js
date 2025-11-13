@@ -3491,12 +3491,24 @@ function createRouteCard(entry, index) {
   const meta = document.createElement("div");
   meta.className = "explore-route-card__meta";
 
+  if (entry.region) {
+    const regionSpan = document.createElement("span");
+    regionSpan.textContent = `Região: ${entry.region}`;
+    meta.appendChild(regionSpan);
+  }
+
   const levelSpan = document.createElement("span");
   levelSpan.textContent = `Nível recomendado: ${entry.recommendedLevel}`;
   meta.appendChild(levelSpan);
 
+ 
+
+  body.appendChild(meta);
+
   const summary = document.createElement("p");
   summary.className = "explore-route-card__intel";
+  const hasMonsterIntel = Array.isArray(entry.monsters) && entry.monsters.length > 0;
+  
   body.appendChild(summary);
 
   if (hasMonsterIntel) {
