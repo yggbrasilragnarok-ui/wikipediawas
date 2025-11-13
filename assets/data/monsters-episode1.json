@@ -2718,6 +2718,696 @@
       }
     },
     {
+      "id": 1007,
+      "name": "Fabre",
+      "image": "assets/data/1007.gif",
+      "level": 2,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild04",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild07",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild01",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }    
+      ],
+      "stats": {
+        "hp": 63,
+        "baseExp": 3,
+        "jobExp": 2
+      }
+    },
+    {
+      "id": 1020,
+      "name": "Mandragora",
+      "image": "assets/data/1020.gif",
+      "level": 12,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }    
+      ],
+      "stats": {
+        "hp": 405,
+        "baseExp": 45,
+        "jobExp": 32
+      }
+    },
+    {
+      "id": 1093,
+      "name": "Eclípse",
+      "image": "assets/data/1093.gif",
+      "level": 6,
+      "race": "Bruto",
+      "element": "Neutro",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild02",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1800,
+        "baseExp": 60,
+        "jobExp": 55
+      }
+    },
+    {
+      "id": 1057,
+      "name": "Yoyo",
+      "image": "assets/data/1057.gif",
+      "level": 21,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 879,
+        "baseExp": 280,
+        "jobExp": 111
+      }
+    },
+    {
+      "id": 1119,
+      "name": "Frilldora",
+      "image": "assets/data/1119.gif",
+      "level": 30,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2023,
+        "baseExp": 529,
+        "jobExp": 319
+      }
+    },
+    {
+      "id": 1001,
+      "name": "Escorpião",
+      "image": "assets/data/1001.gif",
+      "level": 24,
+      "race": "Inseto",
+      "element": "Fogo",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1109,
+        "baseExp": 287,
+        "jobExp": 176
+      }
+    },
+      {
+      "id": 1042,
+      "name": "Chonchon de Aço",
+      "image": "assets/data/1042.gif",
+      "level": 17,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 530,
+        "baseExp": 109,
+        "jobExp": 71
+      }
+    },
+    {
+      "id": 1039,
+      "name": "Bafomé",
+      "image": "assets/data/1039.gif",
+      "level": 81,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 668000,
+        "baseExp": 107250,
+        "jobExp": 37895
+      }
+    },
+     {
+      "id": 1040,
+      "name": "Golem",
+      "image": "assets/data/1040.gif",
+      "level": 25,
+      "race": "Amorfo",
+      "element": "Neutro",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "gef_fild08",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3900,
+        "baseExp": 465,
+        "jobExp": 94
+      }
+    },
+    {
+      "id": 1055,
+      "name": "Muka",
+      "image": "assets/data/1055.gif",
+      "level": 17,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 610,
+        "baseExp": 273,
+        "jobExp": 120
+      }
+    },
+    {
+      "id": 1095,
+      "name": "Andre",
+      "image": "assets/data/1095.gif",
+      "level": 17,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 688,
+        "baseExp": 109,
+        "jobExp": 71
+      }
+    },
+    {
+      "id": 1095,
+      "name": "Deniro",
+      "image": "assets/data/1095.gif",
+      "level": 19,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 760,
+        "baseExp": 135,
+        "jobExp": 85
+      }
+    },
+    {
+      "id": 1160,
+      "name": "Piere",
+      "image": "assets/data/1160.gif",
+      "level": 18,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 733,
+        "baseExp": 122,
+        "jobExp": 78
+      }
+    },
+    {
+      "id": 1127,
+      "name": "Hode",
+      "image": "assets/data/1127.gif",
+      "level": 26,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2282,
+        "baseExp": 550,
+        "jobExp": 300
+      }
+    },
+     {
+      "id": 1138,
+      "name": "Magnolia",
+      "image": "assets/data/1138.gif",
+      "level": 26,
+      "race": "Demônio",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3195,
+        "baseExp": 393,
+        "jobExp": 248
+      }
+    },
+    {
+      "id": 1030,
+      "name": "Anaconda",
+      "image": "assets/data/1030.gif",
+      "level": 23,
+      "race": "Bruto",
+      "element": "Veneno",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1109,
+        "baseExp": 300,
+        "jobExp": 149
+      }
+    },
+    {
+      "id": 1037,
+      "name": "Sorrateiro",
+      "image": "assets/data/1037.gif",
+      "level": 26,
+      "race": "Bruto",
+      "element": "Veneno",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 4929,
+        "baseExp": 1996,
+        "jobExp": 993
+      }
+    },
+    {
+      "id": 1138,
+      "name": "Magnolia",
+      "image": "assets/data/1138.gif",
+      "level": 26,
+      "race": "Demônio",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_fild11",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        },
+        {
+          "map": "moc_fild17",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3195,
+        "baseExp": 393,
+        "jobExp": 248
+      }
+    },
+    {
+      "id": 1106,
+      "name": "Lobo do Deserto",
+      "image": "assets/data/1106.gif",
+      "level": 27,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild13",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1716,
+        "baseExp": 427,
+        "jobExp": 266
+      }
+    },
+    {
+      "id": 1165,
+      "name": "Arenoso",
+      "image": "assets/data/1165.gif",
+      "level": 34,
+      "race": "Amorfo",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_fild16",
+          "name": "Deserto de Sograt",
+          "region": "Morroc",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3413,
+        "baseExp": 810,
+        "jobExp": 492
+      }
+    },
+    {
+      "id": 1214,
+      "name": "Choco",
+      "image": "assets/data/1214.gif",
+      "level": 43,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild02",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild03",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 4278,
+        "baseExp": 1265,
+        "jobExp": 1265
+      }
+    },
+    {
+      "id": 1018,
+      "name": "Creamy",
+      "image": "assets/data/1018.gif",
+      "level": 16,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_fild13",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_03",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 595,
+        "baseExp": 105,
+        "jobExp": 70
+      }
+    },
+    {
+      "id": 1052,
+      "name": "Rocker",
+      "image": "assets/data/1052.gif",
+      "level": 9,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild07",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 198,
+        "baseExp": 20,
+        "jobExp": 16
+      }
+    },
+    {
+      "id": 1088,
+      "name": "Vocal",
+      "image": "assets/data/1088.gif",
+      "level": 18,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "prt_fild04",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_fild07",
+          "name": "Campos de Prontera",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 3016,
+        "baseExp": 110,
+        "jobExp": 88
+      }
+    },
+    {
+      "id": 1115,
+      "name": "Eddga",
+      "image": "assets/data/1115.gif",
+      "level": 65,
+      "race": "Bruto",
+      "element": "Fogo",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "pay_fild11",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 152000,
+        "baseExp": 25025,
+        "jobExp": 12870
+      }
+    },
+    {
       "id": 1112,
       "name": "Drake",
       "image": "assets/data/1112.gif",
