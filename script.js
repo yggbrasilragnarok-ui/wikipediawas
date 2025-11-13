@@ -3495,8 +3495,6 @@ function createRouteCard(entry, index) {
   levelSpan.textContent = `Nível recomendado: ${entry.recommendedLevel}`;
   meta.appendChild(levelSpan);
 
-  body.appendChild(meta);
-
   const summary = document.createElement("p");
   summary.className = "explore-route-card__intel";
   body.appendChild(summary);
