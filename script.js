@@ -2065,82 +2065,50 @@ function updateRoutePlannerSelection(slug, label) {
     });
 }
 
-function createRouteCard(entry, index) {
+function createRouteCard(entry) {
   const card = document.createElement("article");
   card.className = "explore-route-card";
   card.setAttribute("role", "listitem");
   card.style.setProperty("--route-color", entry.color);
 
-  const header = document.createElement("header");
-  header.className = "explore-route-card__header";
+  const info = document.createElement("div");
+  info.className = "explore-route-card__info";
 
-  const step = document.createElement("p");
-  step.className = "explore-route-card__step";
-  step.textContent = `Etapa ${index + 1}`;
-  header.appendChild(step);
-
-  const title = document.createElement("h4");
-  title.className = "explore-route-card__title";
-  title.textContent = entry.name;
-  header.appendChild(title);
-
-  const badge = document.createElement("span");
-  badge.className = "explore-route-card__badge";
-  badge.textContent = entry.colorLabel;
-  header.appendChild(badge);
-
-  card.appendChild(header);
-
-  const media = document.createElement("div");
-  media.className = "explore-route-card__media";
-
-
-
-  const body = document.createElement("div");
-  body.className = "explore-route-card__body";
-
-  const meta = document.createElement("div");
-  meta.className = "explore-route-card__meta";
-
-
-  const levelSpan = document.createElement("span");
-  meta.appendChild(levelSpan);
-
- 
-
-  body.appendChild(meta);
-
-  const summary = document.createElement("p");
-  summary.className = "explore-route-card__intel";
-  const hasMonsterIntel = Array.isArray(entry.monsters) && entry.monsters.length > 0;
-  
-  body.appendChild(summary);
-
-  if (hasMonsterIntel) {
-    const list = document.createElement("ul");
-    list.className = "explore-route-card__monsters explore-route-monster-list";
-    entry.monsters.forEach(monster => {
-      list.appendChild(createRouteMonsterListItem(monster));
-    });
-    body.appendChild(list);
+  const imageSrc = ensureAssetPath(entry.image);
+  if (imageSrc) {
+    const thumbnail = document.createElement("img");
+    thumbnail.className = "explore-route-card__thumbnail";
+    thumbnail.src = imageSrc;
+    thumbnail.alt = "";
+    thumbnail.loading = "lazy";
+    thumbnail.setAttribute("aria-hidden", "true");
+    info.appendChild(thumbnail);
   }
 
-  media.appendChild(body);
-  card.appendChild(media);
+  const title = document.createElement("span");
+  title.className = "explore-route-card__title";
+  title.textContent = entry.name;
+  info.appendChild(title);
 
-  const footer = document.createElement("footer");
-  footer.className = "explore-route-card__footer";
+  card.appendChild(info);
+
+  const colorChip = document.createElement("span");
+  colorChip.className = "route-color-chip explore-route-card__color";
+  colorChip.style.setProperty("--chip-color", entry.color);
+  colorChip.textContent = entry.colorLabel;
+  colorChip.setAttribute("role", "img");
+  colorChip.setAttribute("aria-label", `Cor da rota: ${entry.colorLabel}`);
+  card.appendChild(colorChip);
 
   const removeBtn = document.createElement("button");
   removeBtn.type = "button";
   removeBtn.className = "btn-secondary explore-route-card__remove";
-  removeBtn.textContent = "Remover da trilha";
+  removeBtn.textContent = "Remover";
+  removeBtn.setAttribute("aria-label", `Remover ${entry.name} da trilha planejada`);
   removeBtn.addEventListener("click", () => {
     removeRouteSelection(entry.slug);
   });
-
-  footer.appendChild(removeBtn);
-  card.appendChild(footer);
+  card.appendChild(removeBtn);
 
   return card;
 }
@@ -2168,8 +2136,8 @@ function renderExploreRouteCards() {
     emptyStateEl.hidden = true;
   }
 
-  entries.forEach((entry, index) => {
-    const card = createRouteCard(entry, index);
+  entries.forEach(entry => {
+    const card = createRouteCard(entry);
     container.appendChild(card);
   });
 }
@@ -4119,7 +4087,7 @@ field: {
       <div class="explore-variant-panel" id="exploreVariantPanel" role="region" aria-label="Mosaico de cidades e campos">
         <div class="explore-fields" id="exploreFieldsView">
           <h3 class="explore-subtitle" id="exploreFieldsSubtitle">Atlas de Midgard</h3>
-          <div class="explore-map-wrapper">
+          <div class="explore-map-layout">
             <div class="explore-map-scroll">
               <div
                 class="explore-map"
@@ -4128,6 +4096,19 @@ field: {
                 aria-label="Mosaico de cidades e campos"
               ></div>
             </div>
+            <section class="server-section explore-route-track" id="exploreRouteTrack" aria-live="polite">
+              <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
+                <header class="explore-route-track__header">
+                  <h3 class="explore-route-track__title">Trilha planejada</h3>
+                </header>
+                <div class="explore-route-track__body">
+                  <p class="explore-route-track__empty" id="exploreRouteEmpty">
+                    Nenhuma rota planejada ainda. Adicione mapas para montar sua jornada.
+                  </p>
+                  <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
+                </div>
+              </div>
+            </section>
             <div
               class="callout-glow explore-map-legend"
               id="exploreMapDetails"
@@ -4168,19 +4149,6 @@ field: {
           </div>
         </div>
       </div>
-      <section class="server-section explore-route-track" id="exploreRouteTrack" aria-live="polite">
-        <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
-          <header class="explore-route-track__header">
-            <h3 class="explore-route-track__title">Trilha planejada</h3>
-          </header>
-          <div class="explore-route-track__body">
-            <p class="explore-route-track__empty" id="exploreRouteEmpty">
-              Nenhuma rota planejada ainda. Adicione mapas para montar sua jornada.
-            </p>
-            <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
-          </div>
-        </div>
-      </section>
     `
 },
 dungeon: {
