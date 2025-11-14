@@ -652,11 +652,13 @@ body {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
     grid-template-rows: auto auto;
     align-items: start;
+    justify-items: center;
   }
 
   .explore-map-layout .explore-map-scroll {
     grid-column: 1;
     grid-row: 1;
+    justify-self: center;
   }
 
   .explore-map-layout .explore-route-track {
@@ -669,6 +671,7 @@ body {
     margin: 0;
     width: 100%;
     align-self: stretch;
+    justify-self: stretch;
     grid-column: 2;
     grid-row: 1 / span 2;
   }
@@ -1049,7 +1052,7 @@ body {
 
 .explore-map-legend__status-row .explore-route-planner__status {
   margin: 0;
-  flex: 1 1 0px;
+  flex: 1 1 220px;
   font-size: 0.85rem;
   color: rgba(219, 237, 255, 0.86);
 }
