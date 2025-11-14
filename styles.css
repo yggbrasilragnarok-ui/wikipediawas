@@ -674,6 +674,42 @@ body {
   }
 }
 
+@media (max-width: 1023px) {
+  .explore-map-layout {
+    width: 100%;
+  }
+
+  .explore-map-layout .explore-map-scroll,
+  .explore-map-layout .explore-route-track,
+  .explore-map-layout .callout-glow {
+    width: 100%;
+  }
+
+  .explore-map-layout .callout-glow {
+    max-width: none;
+    margin-bottom: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-map-layout {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .explore-map-layout .explore-map-scroll {
+    order: 1;
+  }
+
+  .explore-map-layout .callout-glow {
+    order: 2;
+  }
+
+  .explore-map-layout .explore-route-track {
+    order: 3;
+  }
+}
+
 .explore-dungeons {
   display: grid;
   gap: 24px;
@@ -890,6 +926,22 @@ body {
   max-width: 100%;
 }
 
+@media (max-width: 768px) {
+  .explore-map-scroll {
+    display: block;
+    width: 100%;
+    padding: 12px 10px;
+  }
+
+  .explore-map-layout {
+    gap: 20px;
+  }
+
+  .explore-map-layout .callout-glow {
+    padding: 16px;
+  }
+}
+
 .explore-map {
   --tile-size: clamp(12px, 3vw, 35px);
   display: grid;
@@ -898,6 +950,12 @@ body {
   gap: 4px;
   min-width: max-content;
   justify-content: start;
+}
+
+@media (max-width: 600px) {
+  .explore-map {
+    --tile-size: clamp(28px, 14vw, 38px);
+  }
 }
 
 .explore-map__tile {
@@ -1192,6 +1250,13 @@ body {
   justify-items: center;
 }
 
+@media (max-width: 900px) {
+  .explore-route-track {
+    justify-items: stretch;
+    width: 100%;
+  }
+}
+
 .explore-route-track__chat {
   display: grid;
   gap: 16px;
@@ -1261,6 +1326,31 @@ body {
 
   .explore-route-track__list {
     gap: 12px;
+  }
+}
+
+@media (max-width: 768px) {
+  .explore-route-track {
+    margin-top: 24px;
+  }
+
+  .explore-route-track__chat {
+    padding: 16px;
+  }
+
+  .explore-route-track__body {
+    max-height: min(55vh, 280px);
+  }
+}
+
+@media (max-width: 600px) {
+  .explore-route-track__header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .explore-route-track__title {
+    font-size: 1rem;
   }
 }
 
