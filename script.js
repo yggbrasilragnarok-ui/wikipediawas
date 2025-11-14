@@ -352,9 +352,6 @@ const KINETIC_CARD_SELECTORS = [
   ".server-cta-card",
   ".nostalgia-card",
   ".server-stat",
-  ".table-card",
-  ".rules-penalties-card",
-  ".dungeon-select-card",
   ".monster-card__header"
 ];
 
@@ -4100,7 +4097,6 @@ field: {
               <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
                 <header class="explore-route-track__header">
                   <h3 class="explore-route-track__title">Trilha planejada</h3>
-                  <span class="explore-route-track__hint">Novos mapas aparecem como mensagens aqui.</span>
                 </header>
                 <div class="explore-route-track__body">
                   <p class="explore-route-track__empty" id="exploreRouteEmpty">

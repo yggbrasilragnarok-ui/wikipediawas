@@ -737,8 +737,8 @@ body {
 
 .dungeon-select-card:hover,
 .dungeon-select-card:focus-within {
-  border-color: rgba(5, 192, 255, 0.35);
-  box-shadow: 0 28px 48px rgba(0, 0, 0, 0.78), 0 0 26px rgba(11, 223, 255, 0.22);
+  border-color: var(--line-outer);
+  box-shadow: var(--shadow-card);
 }
 
 @media (min-width: 768px) {
@@ -3290,8 +3290,8 @@ body {
 
 .table-card:hover,
 .table-card:focus-within {
-  border-color: rgba(11, 223, 255, 0.4);
-  box-shadow: 0 32px 56px rgba(0, 0, 0, 0.82), 0 0 30px rgba(11, 223, 255, 0.26);
+  border-color: rgba(11, 223, 255, 0.28);
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.78), 0 0 28px rgba(11, 223, 255, 0.24);
 }
 
 .rules-penalties {
