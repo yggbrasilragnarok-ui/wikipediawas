@@ -2010,14 +2010,9 @@ function renderRoutePlannerIntel(intel) {
   intelEl.appendChild(listIntro);
 
   const list = document.createElement("ul");
-  const monstersToShow = intel.monsters.slice(0, 4);
-  monstersToShow.forEach(monster => {
-    const item = document.createElement("li");
-    const pieces = [monster.levelText, monster.baseExpText, monster.jobExpText].filter(Boolean);
-    const suffix = pieces.length ? ` • ${pieces.join(" • ")}` : "";
-    const race = monster.race && monster.race !== "—" ? ` • ${monster.race}` : "";
-    item.textContent = `${monster.name}${suffix}${race}`;
-    list.appendChild(item);
+  list.className = "explore-route-monster-list";
+  intel.monsters.forEach(monster => {
+    list.appendChild(createRouteMonsterListItem(monster));
   });
 
   intelEl.appendChild(list);
@@ -2099,18 +2094,7 @@ function createRouteCard(entry, index) {
   const media = document.createElement("div");
   media.className = "explore-route-card__media";
 
-  if (entry.image) {
-    const img = document.createElement("img");
-    img.className = "explore-route-card__image";
-    img.src = entry.image;
-    img.alt = `Prévia do mapa ${entry.name}`;
-    media.appendChild(img);
-  } else {
-    const placeholder = document.createElement("div");
-    placeholder.className = "explore-route-card__image-placeholder";
-    placeholder.textContent = "Sem imagem";
-    media.appendChild(placeholder);
-  }
+
 
   const body = document.createElement("div");
   body.className = "explore-route-card__body";
@@ -2118,14 +2102,8 @@ function createRouteCard(entry, index) {
   const meta = document.createElement("div");
   meta.className = "explore-route-card__meta";
 
-  if (entry.region) {
-    const regionSpan = document.createElement("span");
-    regionSpan.textContent = `Região: ${entry.region}`;
-    meta.appendChild(regionSpan);
-  }
 
   const levelSpan = document.createElement("span");
-  levelSpan.textContent = `Nível recomendado: ${entry.recommendedLevel}`;
   meta.appendChild(levelSpan);
 
  
@@ -2140,14 +2118,9 @@ function createRouteCard(entry, index) {
 
   if (hasMonsterIntel) {
     const list = document.createElement("ul");
-    list.className = "explore-route-card__monsters";
-    entry.monsters.slice(0, 5).forEach(monster => {
-      const item = document.createElement("li");
-      const details = [monster.levelText, monster.baseExpText, monster.jobExpText].filter(Boolean);
-      const raceSuffix = monster.race && monster.race !== "—" ? ` • ${monster.race}` : "";
-      const detailText = details.length ? ` • ${details.join(" • ")}` : "";
-      item.textContent = `${monster.name}${detailText}${raceSuffix}`;
-      list.appendChild(item);
+    list.className = "explore-route-card__monsters explore-route-monster-list";
+    entry.monsters.forEach(monster => {
+      list.appendChild(createRouteMonsterListItem(monster));
     });
     body.appendChild(list);
   }
@@ -2375,6 +2348,7 @@ async function resolveMapMonsterIntel(slug, label) {
       jobExp,
       jobExpText: jobExp > 0 ? `${formatNumberForLocale(jobExp)} EXP Classe` : "",
       race: monster.race || "—",
+      image: resolveMonsterImage(monster),
     };
   });
 
@@ -2437,6 +2411,61 @@ async function resolveMapMonsterIntel(slug, label) {
 
   exploreRouteState.monsterIntelCache.set(normalizedSlug, intel);
   return intel;
+}
+
+function formatRouteMonsterSummary(monster) {
+  if (!monster) {
+    return "Monstro desconhecido";
+  }
+
+  const name = monster.name || "Monstro desconhecido";
+  const details = [];
+  if (monster.levelText) {
+    details.push(monster.levelText);
+  }
+  if (monster.baseExpText) {
+    details.push(monster.baseExpText);
+  }
+  if (monster.jobExpText) {
+    details.push(monster.jobExpText);
+  }
+
+  const detailSuffix = details.length ? ` • ${details.join(" • ")}` : "";
+  const raceSuffix = monster.race && monster.race !== "—" ? ` • ${monster.race}` : "";
+
+  return `${name}${detailSuffix}${raceSuffix}`;
+}
+
+function createRouteMonsterListItem(monster) {
+  const item = document.createElement("li");
+  item.className = "explore-route-monster";
+
+  const iconWrapper = document.createElement("span");
+  iconWrapper.className = "explore-route-monster__icon";
+
+  if (monster && monster.image) {
+    const iconImage = document.createElement("img");
+    iconImage.className = "explore-route-monster__icon-image";
+    iconImage.src = monster.image;
+    iconImage.alt = "";
+    iconImage.loading = "lazy";
+    iconImage.decoding = "async";
+    iconWrapper.appendChild(iconImage);
+  } else {
+    const fallbackLetter = monster && monster.name ? monster.name.charAt(0).toUpperCase() : "?";
+    iconWrapper.textContent = fallbackLetter;
+    iconWrapper.classList.add("explore-route-monster__icon--placeholder");
+    iconWrapper.setAttribute("aria-hidden", "true");
+  }
+
+  item.appendChild(iconWrapper);
+
+  const text = document.createElement("span");
+  text.className = "explore-route-monster__text";
+  text.textContent = formatRouteMonsterSummary(monster);
+  item.appendChild(text);
+
+  return item;
 }
 
 function getExploreMapVariant(variantKey = currentExploreMapVariant) {
@@ -4109,22 +4138,37 @@ field: {
                 <div class="explore-map-details__description" id="exploreMapDetailsDescription"></div>
                 <p class="small" id="exploreMapDetailsSlug">${EXPLORE_MAP_DEFAULT_DETAIL.slugText}</p>
               </div>
-              <div class="explore-route-planner" id="exploreRoutePlanner">
-                <h4 class="explore-route-planner__title">Planejador de rota</h4>
-                <p class="explore-route-planner__status" id="exploreRouteStatus">
-                  Selecione um mapa no mosaico para começar.
-                </p>
+              <div
+                class="explore-map-legend__actions explore-route-planner"
+                id="exploreRoutePlanner"
+                role="group"
+                aria-label="Adicionar mapas à trilha"
+              >
+                <div class="explore-map-legend__status-row">
+                  <p class="explore-route-planner__status" id="exploreRouteStatus">
+                    Selecione um mapa no mosaico para começar.
+                  </p>
+                  <button
+                    class="btn-glow explore-map-legend__add explore-route-planner__add"
+                    id="exploreRouteAddBtn"
+                    type="button"
+                    disabled
+                  >
+                    Adicionar à trilha
+                  </button>
+                </div>
+                <div
+                  class="explore-route-planner__colors explore-map-legend__colors"
+                  id="exploreRouteColorOptions"
+                  role="list"
+                ></div>
                 <div class="explore-route-planner__intel" id="exploreRouteIntel" hidden></div>
-                <div class="explore-route-planner__colors" id="exploreRouteColorOptions" role="list"></div>
-                <button class="btn-glow explore-route-planner__add" id="exploreRouteAddBtn" type="button" disabled>
-                  Adicionar à trilha
-                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
-      <section class="explore-route-track" id="exploreRouteTrack" aria-live="polite">
+      <section class="server-section explore-route-track" id="exploreRouteTrack" aria-live="polite">
         <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
           <header class="explore-route-track__header">
             <h3 class="explore-route-track__title">Trilha planejada</h3>
