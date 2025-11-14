@@ -1049,7 +1049,7 @@ body {
 
 .explore-map-legend__status-row .explore-route-planner__status {
   margin: 0;
-  flex: 1 1 220px;
+  flex: 1 1 0px;
   font-size: 0.85rem;
   color: rgba(219, 237, 255, 0.86);
 }
