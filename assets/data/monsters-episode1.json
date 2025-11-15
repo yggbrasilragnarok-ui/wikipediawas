@@ -260,6 +260,330 @@
       }
     },
     {
+      "id": 1103,
+      "name": "Caramelo",
+      "image": "assets/data/1103.gif",
+      "level": 23,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_06",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1424,
+        "baseExp": 264,
+        "jobExp": 162
+      }
+    },
+    {
+      "id": 1104,
+      "name": "Koko",
+      "image": "assets/data/1104.gif",
+      "level": 17,
+      "race": "Bruto",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_06",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_09",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 817,
+        "baseExp": 120,
+        "jobExp": 78
+      }
+    },
+    {
+      "id": 1128,
+      "name": "Besouro-Chifre",
+      "image": "assets/data/1128.gif",
+      "level": 18,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_06",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_09",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 659,
+        "baseExp": 134,
+        "jobExp": 86
+      }
+    },
+    {
+      "id": 1174,
+      "name": "Percevejo",
+      "image": "assets/data/1174.gif",
+      "level": 16,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_01",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_06",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_09",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 538,
+        "baseExp": 105,
+        "jobExp": 70
+      }
+    },
+    {
+      "id": 1004,
+      "name": "Zangão",
+      "image": "assets/data/1004.gif",
+      "level": 8,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_04",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 169,
+        "baseExp": 19,
+        "jobExp": 15
+      }
+    },
+    {
+      "id": 1118,
+      "name": "Flora",
+      "image": "assets/data/1118.gif",
+      "level": 26,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_04",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 2092,
+        "baseExp": 357,
+        "jobExp": 226
+      }
+    },
+    {
+      "id": 1155,
+      "name": "Petite",
+      "image": "assets/data/1155.gif",
+      "level": 44,
+      "race": "Dragão",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_10",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 6881,
+        "baseExp": 1677,
+        "jobExp": 1034
+      }
+    },
+    {
+      "id": 1100,
+      "name": "Argos",
+      "image": "assets/data/1100.gif",
+      "level": 25,
+      "race": "Inseto",
+      "element": "Veneno",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "mjolnir_03",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_05",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_08",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_10",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1117,
+        "baseExp": 388,
+        "jobExp": 188
+      }
+    },
+    {
+      "id": 1139,
+      "name": "Louva-a-Deus",
+      "image": "assets/data/1139.gif",
+      "level": 26,
+      "race": "Inseto",
+      "element": "Terra",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_03",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_04",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_05",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_08",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_10",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 1117,
+        "baseExp": 388,
+        "jobExp": 188
+      }
+    },
+    {
       "id": 1009,
       "name": "Condor",
       "image": "assets/data/1009.gif",
@@ -2744,6 +3068,12 @@
       "size": "Médio",
       "spawn": [
         {
+          "map": "mjolnir_11",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
           "map": "pay_dun02",
           "name": "Caverna de Payon",
           "region": "Payon",
@@ -2766,6 +3096,40 @@
         "hp": 405,
         "baseExp": 45,
         "jobExp": 32
+      }
+    },
+    {
+      "id": 1054,
+      "name": "Besouro-Ladrão Macho",
+      "image": "assets/data/1054.gif",
+      "level": 19,
+      "race": "Inseto",
+      "element": "Sombrio",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "mjolnir_11",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 583,
+        "baseExp": 223,
+        "jobExp": 93
       }
     },
     {
@@ -3098,6 +3462,138 @@
       }
     },
     {
+      "id": 1099,
+      "name": "Argiope",
+      "image": "assets/data/1099.gif",
+      "level": 41,
+      "race": "Inseto",
+      "element": "Veneno",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "mjolnir_04",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_05",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_08",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_11",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 4382,
+        "baseExp": 1797,
+        "jobExp": 849
+      }
+    },
+    {
+      "id": 1094,
+      "name": "Ambernite",
+      "image": "assets/data/1094.gif",
+      "level": 13,
+      "race": "Inseto",
+      "element": "Água",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "gef_fild09",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "gef_fild13",
+          "name": "Campos de Geffen",
+          "region": "Geffen",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_07",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 495,
+        "baseExp": 57,
+        "jobExp": 38
+      }
+    },
+    {
+      "id": 1078,
+      "name": "Planta Vermelha",
+      "image": "assets/data/1078.gif",
+      "level": 1,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "mjolnir_02",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "mjolnir_05",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_dun00",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 10,
+        "baseExp": 0,
+        "jobExp": 0
+      }
+    },
+    {
       "id": 1037,
       "name": "Sorrateiro",
       "image": "assets/data/1037.gif",
@@ -3348,6 +3844,29 @@
         "hp": 152000,
         "baseExp": 25025,
         "jobExp": 12870
+      }
+    },
+    {
+      "id": 1059,
+      "name": "Abelha Rainha",
+      "image": "assets/data/1059.gif",
+      "level": 74,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "mjolnir_04",
+          "name": "Monte de Mjolnir",
+          "region": "Prontera",
+          "type": "Campo"
+        }
+      ],
+      "stats": {
+        "hp": 212000,
+        "baseExp": 39325,
+        "jobExp": 27170
       }
     },
     {
