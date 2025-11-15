@@ -639,8 +639,8 @@ body {
     display: block;
     grid-column: 1;
     grid-row: 1 / span 2;
-    align-self: stretch;
-    justify-self: stretch;
+    align-self: start;
+    justify-self: center;
   }
 
   .explore-map-layout .explore-map-scroll {
@@ -754,7 +754,16 @@ body {
 
   .dungeon-side-illustration {
     display: block;
+    align-self: start;
+    justify-self: center;
   }
+}
+
+.explore-map-side-illustration,
+.dungeon-side-illustration {
+  width: 320px;
+  height: 460px;
+  max-width: 100%;
 }
 
 .dungeon-select-card__list {
