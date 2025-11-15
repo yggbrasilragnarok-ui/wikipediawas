@@ -110,42 +110,6 @@
   border: 0;
 }
 
-/* efeito de entrada tipo dobra temporal */
-.time-warp-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  pointer-events: none;
-  overflow: hidden;
-  background: rgba(4, 10, 20, 0.92);
-  opacity: 0;
-  transform: scale(1);
-  transition: opacity 0.9s ease, transform 1.4s ease;
-}
-
-.time-warp-overlay.is-active {
-  opacity: 1;
-  animation: warpOverlayAutofade 4s forwards;
-}
-
-.time-warp-overlay.is-fading {
-  opacity: 0;
-  transform: scale(1.05);
-  animation: none;
-}
-
-.time-warp-overlay__canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: block;
-  filter: blur(0.3px);
-}
-
 .particle-canvas {
   position: fixed;
   inset: 0;
@@ -154,32 +118,6 @@
   pointer-events: none;
   z-index: 1;
   mix-blend-mode: screen;
-}
-
-@keyframes warpOverlayAutofade {
-  0% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  75% {
-    opacity: 1;
-    transform: scale(1);
-  }
-  100% {
-    opacity: 0;
-    transform: scale(1.05);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .time-warp-overlay {
-    animation: none !important;
-    transition-duration: 0.3s;
-  }
-
-  .time-warp-overlay {
-    opacity: 0 !important;
-  }
 }
 
 /* leve textura / glow mágico global */
@@ -647,6 +585,20 @@ body {
   justify-items: start;
 }
 
+.explore-map-side-illustration {
+  display: none;
+}
+
+.explore-map-side-illustration img,
+.dungeon-side-illustration img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--line-outer);
+  box-shadow: var(--shadow-card);
+}
+
 @media (min-width: 1024px) {
   .explore-map-layout {
     grid-template-columns: minmax(0, 1fr) minmax(320px, 380px);
@@ -673,6 +625,37 @@ body {
     align-self: stretch;
     justify-self: stretch;
     grid-column: 2;
+    grid-row: 1 / span 2;
+  }
+}
+
+@media (min-width: 1440px) {
+  .explore-map-layout {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr) minmax(320px, 380px);
+    justify-items: stretch;
+  }
+
+  .explore-map-side-illustration {
+    display: block;
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    align-self: stretch;
+    justify-self: stretch;
+  }
+
+  .explore-map-layout .explore-map-scroll {
+    grid-column: 2;
+    grid-row: 1;
+    justify-self: center;
+  }
+
+  .explore-map-layout .explore-route-track {
+    grid-column: 2;
+    grid-row: 2;
+  }
+
+  .explore-map-layout .callout-glow {
+    grid-column: 3;
     grid-row: 1 / span 2;
   }
 }
@@ -718,6 +701,15 @@ body {
   gap: 24px;
 }
 
+.dungeon-layout {
+  display: grid;
+  gap: 24px;
+}
+
+.dungeon-side-illustration {
+  display: none;
+}
+
 .dungeon-select-card {
   display: grid;
   gap: 24px;
@@ -751,6 +743,17 @@ body {
   .dungeon-select-card {
     grid-template-columns: minmax(0, 260px) minmax(0, 1fr);
     padding: 28px 32px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .dungeon-layout {
+    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+    align-items: stretch;
+  }
+
+  .dungeon-side-illustration {
+    display: block;
   }
 }
 

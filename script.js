@@ -2,194 +2,6 @@
 // A ideia: você pode registrar novas páginas aqui sem mexer no HTML.
 // Depois, no futuro, dá pra trocar isso por fetch() em arquivos .md externos.
 
-// ===== Efeito de entrada "dobra temporal" =====
-function initTimeWarpEffect() {
-  const overlay = document.getElementById("timeWarpOverlay");
-  const canvas = document.getElementById("timeWarpCanvas");
-
-  if (!overlay || !canvas) {
-    return null;
-  }
-
-  const prefersReducedMotion = window
-    .matchMedia("(prefers-reduced-motion: reduce)")
-    .matches;
-
-  const isMobileViewport = window.matchMedia("(max-width: 768px)").matches;
-  const hasMobileUserAgent = /Mobi|Android|iPhone|iPad|iPod/i.test(
-    navigator.userAgent || ""
-  );
-  const isMobileExperience = isMobileViewport || hasMobileUserAgent;
-
-  if (isMobileExperience) {
-    overlay.remove();
-    return null;
-  }
-
-  if (prefersReducedMotion) {
-    overlay.classList.add("is-fading");
-    overlay.addEventListener(
-      "transitionend",
-      () => {
-        overlay.remove();
-      },
-      { once: true }
-    );
-
-    window.setTimeout(() => {
-      if (overlay.parentElement) {
-        overlay.remove();
-      }
-    }, 400);
-
-    return null;
-  }
-
-  const ctx = canvas.getContext("2d", { alpha: true });
-
-  if (!ctx) {
-    overlay.classList.add("is-fading");
-    overlay.addEventListener(
-      "transitionend",
-      () => {
-        overlay.remove();
-      },
-      { once: true }
-    );
-    return null;
-  }
-
-  const PARTICLE_COUNT = 160;
-  const particles = [];
-
-  let width = 0;
-  let height = 0;
-  let centerX = 0;
-  let centerY = 0;
-  let dpr = window.devicePixelRatio || 1;
-
-  function resizeCanvas() {
-    dpr = window.devicePixelRatio || 1;
-    width = window.innerWidth;
-    height = window.innerHeight;
-    canvas.width = width * dpr;
-    canvas.height = height * dpr;
-    canvas.style.width = `${width}px`;
-    canvas.style.height = `${height}px`;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.scale(dpr, dpr);
-    centerX = width / 2;
-    centerY = height / 2;
-  }
-
-  function createParticle() {
-    return {
-      angle: Math.random() * Math.PI * 2,
-      radius: Math.random() * 12,
-      speed: 0.6 + Math.random() * 1.6,
-      angularVelocity: 0.04 + Math.random() * 0.08,
-      opacity: 0.4 + Math.random() * 0.45,
-      size: 1 + Math.random() * 2.4,
-    };
-  }
-
-  for (let i = 0; i < PARTICLE_COUNT; i += 1) {
-    particles.push(createParticle());
-  }
-
-  resizeCanvas();
-
-  const TIME_WARP_DURATION = 3200;
-  let hasFaded = false;
-  let animationFrameId = null;
-  const startTime = performance.now();
-
-  function cleanupOverlay() {
-    window.removeEventListener("resize", resizeCanvas);
-    if (overlay.parentElement) {
-      overlay.remove();
-    }
-  }
-
-  function scheduleFadeOut() {
-    overlay.classList.add("is-fading");
-    overlay.addEventListener(
-      "transitionend",
-      () => {
-        cleanupOverlay();
-      },
-      { once: true }
-    );
-    window.setTimeout(() => {
-      cleanupOverlay();
-    }, 1500);
-  }
-
-  function render(now) {
-    const elapsed = now - startTime;
-    const progress = Math.min(elapsed / TIME_WARP_DURATION, 1);
-
-    ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "rgba(4, 12, 24, 0.32)";
-    ctx.fillRect(0, 0, width, height);
-    ctx.globalCompositeOperation = "lighter";
-    ctx.shadowBlur = 18;
-    ctx.shadowColor = "rgba(110, 228, 255, 0.75)";
-
-    const spiralAmplifier = 1 + progress * 1.8;
-    const outwardForce = 1 + progress * 2.1;
-
-    for (let index = 0; index < particles.length; index += 1) {
-      const particle = particles[index];
-
-      particle.radius += particle.speed * outwardForce;
-      particle.angle += particle.angularVelocity * spiralAmplifier;
-
-      const spiralRadius = particle.radius * (1 + progress * 0.75);
-      const x = centerX + Math.cos(particle.angle) * spiralRadius;
-      const y = centerY + Math.sin(particle.angle) * spiralRadius * 0.9;
-
-      const fadeTail = progress > 0.72 ? Math.max(0, 1 - (progress - 0.72) / 0.28) : 1;
-
-      ctx.globalAlpha = particle.opacity * fadeTail;
-      ctx.beginPath();
-      ctx.arc(x, y, particle.size * (1 + progress * 1.4), 0, Math.PI * 2);
-      ctx.fillStyle = "#8cf3ff";
-      ctx.fill();
-
-      if (spiralRadius > Math.max(width, height) * 0.75) {
-        particles[index] = createParticle();
-        particles[index].radius = 0;
-      }
-    }
-
-    ctx.shadowBlur = 0;
-    ctx.shadowColor = "transparent";
-    ctx.globalAlpha = 1;
-    ctx.globalCompositeOperation = "source-over";
-
-    if (elapsed >= TIME_WARP_DURATION && !hasFaded) {
-      hasFaded = true;
-      animationFrameId = null;
-      scheduleFadeOut();
-      return;
-    }
-
-    animationFrameId = window.requestAnimationFrame(render);
-  }
-
-  animationFrameId = window.requestAnimationFrame(render);
-
-  window.addEventListener("resize", resizeCanvas);
-
-  return () => {
-    if (animationFrameId) {
-      window.cancelAnimationFrame(animationFrameId);
-    }
-    cleanupOverlay();
-  };
-}
-
 function initAmbientParticles() {
   const canvas = document.getElementById("particleCanvas");
 
@@ -436,8 +248,18 @@ gef_fild08.gif gef_fild07.gif geffen.gif . . mjolnir_09.gif prt_fild01.gif prt_f
   }),
   dungeons: createExploreMapVariant({
     key: "dungeons",
-    label: "Calabouço",
-    layout: "",
+    label: "Calabouços",
+    layout: `
+    treasure2::assets/treasure02large.gif . . . pay_dun00::assets/pay_dun00large.gif pay_dun01::assets/pay_dun01large.gif pay_dun02::assets/pay_dun02large.gif pay_dun03::assets/pay_dun03large.gif
+    treasure1::assets/treasure01large.gif . . . . . . pay_dun04::assets/pay_dun04large.gif
+    . . . . . 
+    moc_pryd02::assets/moc_pryd02large.gif . . . . . . prt_sewb3::assets/prt_sewb3.gif
+    moc_pryd01::assets/moc_pryd01large.gif moc_pryd03::assets/moc_pryd03large.gif moc_pryd04::assets/moc_pryd04large.gif . . prt_sewb1::assets/prt_sewb1.gif prt_sewb2::assets/prt_sewb2.gif prt_sewb4::assets/prt_sewb4.gif
+     .
+    gef_dun01::assets/gef_dun01large.gif . . .  iz_dun00::assets/iz_dun00large.gif
+    gef_dun00::assets/gef_dun00large.gif gef_dun02::assets/gef_dun02large.gif . . iz_dun01::assets/iz_dun01large.gif iz_dun02::assets/iz_dun02large.gif iz_dun03::assets/iz_dun03large.gif iz_dun04::assets/iz_dun04large.gif
+  
+    `,
   }),
 };
 
@@ -454,19 +276,23 @@ const EXPLORE_DUNGEON_ORDER = [
 ];
 
 const EXPLORE_DUNGEON_BACKGROUNDS = {
-  prt_sewb1: "",
-  pay_dun00: "",
-  gef_dun00: "",
+  prt_sewb1: "assets/prt_sewb2large.gif",
+  pay_dun00: "assets/pay_dun00large.gif",
+  gef_dun00: "assets/gef_dun00large.gif",
   prt_maze01: "",
-  moc_pryd01: "",
-  iz_dun00: "",
-  treasure1: "",
+  moc_pryd01: "assets/moc_pryd01large.gif",
+  iz_dun00: "assets/iz_dun00large.gif",
+  treasure1: "assets/treasure01large.gif",
 };
 
 let hasInitializedExploreDungeons = false;
 let activeDungeonSlug = null;
 
 const EXPLORE_ROUTE_VARIANT_KEY = "fields";
+const EXPLORE_ROUTE_SUPPORTED_VARIANTS = new Set([
+  EXPLORE_ROUTE_VARIANT_KEY,
+  EXPLORE_DUNGEON_VARIANT_KEY,
+]);
 const EXPLORE_ROUTE_COLORS = [
   { key: "up", label: "Rota de Up", color: "#32b7ff" },
   { key: "drop", label: "Caça a Drops", color: "#f9b64b" },
@@ -1597,14 +1423,68 @@ descriptionEntries: [
       "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
     descriptionEntries: [
       {
-        title: "Entrada pelos bueiros",
+        title: "Esgotos de Prontera 1",
         images: [
           {
-            src: "",
+            src: "assets/prt_sewb1.gif",
           },
         ],
         text:
           "Bueiros espalhados pela capital levam aos túneis. É uma área recomendada para aprendizes treinarem antes das cavernas mais perigosas.",
+      },
+    ],
+  },
+  prt_sewb2: {
+    name: "Esgotos de Prontera",
+    region: "Subterrâneo de Prontera",
+    description:
+      "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
+    descriptionEntries: [
+      {
+        title: "Esgotos de Prontera 2",
+        images: [
+          {
+            src: "assets/prt_sewb2.gif",
+          },
+        ],
+        text:
+          "Bueiros espalhados pela capital levam aos túneis.",
+      },
+    ],
+  },
+  prt_sewb3: {
+    name: "Esgotos de Prontera",
+    region: "Subterrâneo de Prontera",
+    description:
+      "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
+    descriptionEntries: [
+      {
+        title: "Esgotos de Prontera 3",
+        images: [
+          {
+            src: "assets/prt_sewb3.gif",
+          },
+        ],
+        text:
+          "Bueiros espalhados pela capital levam aos túneis.",
+      },
+    ],
+  },
+  prt_sewb4: {
+    name: "Esgotos de Prontera",
+    region: "Subterrâneo de Prontera",
+    description:
+      "Primeiro nível da rede de esgotos da capital. Iniciantes enfrentam Ratts, Tarântulas e ladrões que se escondem nas sombras.",
+    descriptionEntries: [
+      {
+        title: "Esgotos de Prontera 4",
+        images: [
+          {
+            src: "assets/prt_sewb4.gif",
+          },
+        ],
+        text:
+          "Bueiros espalhados pela capital levam aos túneis.",
       },
     ],
   },
@@ -1615,14 +1495,86 @@ descriptionEntries: [
       "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
     descriptionEntries: [
       {
-        title: "Salões ancestrais",
+        title: "Caverna de Payon 1",
         images: [
           {
-            src: "",
+            src: "assets/pay_dun00large.gif",
           },
         ],
         text:
           "O primeiro andar apresenta corredores amplos com armadilhas simples. A expedição exige tochas e cura para enfrentar mortos-vivos.",
+      },
+    ],
+  },
+  pay_dun01: {
+    name: "Caverna de Payon",
+    region: "Florestas de Payon",
+    description:
+      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
+    descriptionEntries: [
+      {
+        title: "Caverna de Payon 2",
+        images: [
+          {
+            src: "assets/pay_dun01large.gif",
+          },
+        ],
+        text:
+          "A expedição exige tochas e cura para enfrentar mortos-vivos.",
+      },
+    ],
+  },
+  pay_dun02: {
+    name: "Caverna de Payon",
+    region: "Florestas de Payon",
+    description:
+      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
+    descriptionEntries: [
+      {
+        title: "Caverna de Payon 3",
+        images: [
+          {
+            src: "assets/pay_dun02large.gif",
+          },
+        ],
+        text:
+          "A expedição exige tochas e cura para enfrentar mortos-vivos.",
+      },
+    ],
+  },
+  pay_dun03: {
+    name: "Caverna de Payon",
+    region: "Florestas de Payon",
+    description:
+      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
+    descriptionEntries: [
+      {
+        title: "Caverna de Payon 4",
+        images: [
+          {
+            src: "assets/pay_dun03large.gif",
+          },
+        ],
+        text:
+          "A expedição exige tochas e cura para enfrentar mortos-vivos.",
+      },
+    ],
+  },
+  pay_dun04: {
+    name: "Caverna de Payon",
+    region: "Florestas de Payon",
+    description:
+      "Galerias escavadas na montanha onde os habitantes veneram os espíritos ancestrais. Morcegos e zumbis vagam pelos corredores.",
+    descriptionEntries: [
+      {
+        title: "Caverna de Payon 5",
+        images: [
+          {
+            src: "assets/pay_dun04large.gif",
+          },
+        ],
+        text:
+          "A expedição exige tochas e cura para enfrentar mortos-vivos.",
       },
     ],
   },
@@ -1633,10 +1585,46 @@ descriptionEntries: [
       "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
     descriptionEntries: [
       {
-        title: "Base da torre",
+        title: "Torre de Geffen 1",
         images: [
           {
-            src: "",
+            src: "assets/gef_dun00large.gif",
+          },
+        ],
+        text:
+          "A torre fica no coração de Geffen. Portais mágicos controlam o acesso entre os andares e permitem treinos supervisionados.",
+      },
+    ],
+  },
+  gef_dun01: {
+    name: "Torre de Geffen",
+    region: "Cidade dos Magos",
+    description:
+      "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
+    descriptionEntries: [
+      {
+        title: "Torre de Geffen 2",
+        images: [
+          {
+            src: "assets/gef_dun01large.gif",
+          },
+        ],
+        text:
+          "A torre fica no coração de Geffen. Portais mágicos controlam o acesso entre os andares e permitem treinos supervisionados.",
+      },
+    ],
+  },
+  gef_dun02: {
+    name: "Torre de Geffen",
+    region: "Cidade dos Magos",
+    description:
+      "Entrada da torre amaldiçoada. Aprendizes testam suas magias contra Verits e Kobolds enquanto descem os pavimentos.",
+    descriptionEntries: [
+      {
+        title: "Torre de Geffen 3",
+        images: [
+          {
+            src: "assets/gef_dun02large.gif",
           },
         ],
         text:
@@ -1651,10 +1639,64 @@ descriptionEntries: [
       "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
     descriptionEntries: [
       {
-        title: "Salões arenosos",
+        title: "Pirâmide 1",
         images: [
           {
-            src: "",
+            src: "assets/moc_pryd01large.gif",
+          },
+        ],
+        text:
+          "Escadarias escondidas levam aos níveis inferiores. O calor seco mistura-se com energia mística deixada pelos antigos guardiões.",
+      },
+    ],
+  },
+  moc_pryd02: {
+    name: "Pirâmides de Morroc",
+    region: "Deserto de Sograt",
+    description:
+      "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
+    descriptionEntries: [
+      {
+        title: "Pirâmide 2",
+        images: [
+          {
+            src: "assets/moc_pryd02large.gif",
+          },
+        ],
+        text:
+          "Escadarias escondidas levam aos níveis inferiores. O calor seco mistura-se com energia mística deixada pelos antigos guardiões.",
+      },
+    ],
+  },
+  moc_pryd03: {
+    name: "Pirâmides de Morroc",
+    region: "Deserto de Sograt",
+    description:
+      "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
+    descriptionEntries: [
+      {
+        title: "Pirâmide 3",
+        images: [
+          {
+            src: "assets/moc_pryd03large.gif",
+          },
+        ],
+        text:
+          "Escadarias escondidas levam aos níveis inferiores. O calor seco mistura-se com energia mística deixada pelos antigos guardiões.",
+      },
+    ],
+  },
+  moc_pryd04: {
+    name: "Pirâmides de Morroc",
+    region: "Deserto de Sograt",
+    description:
+      "Ruínas antigas erguidas pelo povo do deserto. Múmias e soldados amaldiçoados protegem tesouros enterrados sob Morroc.",
+    descriptionEntries: [
+      {
+        title: "Pirâmide 4",
+        images: [
+          {
+            src: "assets/moc_pryd04large.gif",
           },
         ],
         text:
@@ -1663,16 +1705,16 @@ descriptionEntries: [
     ],
   },
   iz_dun00: {
-    name: "Caverna Submarina de Byalan",
+    name: "Túnel Submarino de Byalan",
     region: "Arquipélago de Byalan",
     description:
       "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
     descriptionEntries: [
       {
-        title: "Corredores alagados",
+        title: "Túnel Submarino 1",
         images: [
           {
-            src: "",
+            src: "assets/iz_dun00large.gif",
           },
         ],
         text:
@@ -1680,25 +1722,114 @@ descriptionEntries: [
       },
     ],
   },
-  treasure1: {
-    name: "Navio Fantasma",
-    region: "....",
+  iz_dun01: {
+    name: "Túnel Submarino de Byalan",
+    region: "Arquipélago de Byalan",
     description:
-      ".....",
+      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
     descriptionEntries: [
       {
-        title: "Acampamento orc",
+        title: "Túnel Submarino 2",
         images: [
           {
-            src: "",
+            src: "assets/iz_dun01large.gif",
           },
         ],
         text:
-          ".........",
+          "Armas elementais e acessórios contra Água ajudam a sobrevivência.",
       },
     ],
   },
-
+  iz_dun02: {
+    name: "Túnel Submarino de Byalan",
+    region: "Arquipélago de Byalan",
+    description:
+      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
+    descriptionEntries: [
+      {
+        title: "Túnel Submarino 3",
+        images: [
+          {
+            src: "assets/iz_dun02large.gif",
+          },
+        ],
+        text:
+          "Armas elementais e acessórios contra Água ajudam a sobrevivência.",
+      },
+    ],
+  },
+  iz_dun03: {
+    name: "Túnel Submarino de Byalan",
+    region: "Arquipélago de Byalan",
+    description:
+      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
+    descriptionEntries: [
+      {
+        title: "Túnel Submarino 4",
+        images: [
+          {
+            src: "assets/iz_dun03large.gif",
+          },
+        ],
+        text:
+          "Armas elementais e acessórios contra Água ajudam a sobrevivência.",
+      },
+    ],
+  },
+  iz_dun04: {
+    name: "Túnel Submarino de Byalan",
+    region: "Arquipélago de Byalan",
+    description:
+      "Passagens inundadas conectam as grutas da ilha. Hidras e criaturas aquáticas protegem o caminho para o interior do calabouço.",
+    descriptionEntries: [
+      {
+        title: "Túnel Submarino 5",
+        images: [
+          {
+            src: "assets/iz_dun04large.gif",
+          },
+        ],
+        text:
+          "Armas elementais e acessórios contra Água ajudam a sobrevivência.",
+      },
+    ],
+  },
+  treasure1: {
+    name: "Navio Fantasma",
+    region: "Alberta",
+    description:
+      "Um navio amaldiçoado que vaga pelos mares envolto em névoa. Seus corredores escuros abrigam espíritos inquietos e mortos-vivos que guardam os segredos e tragédias de uma tripulação perdida para sempre.",
+    descriptionEntries: [
+      {
+        title: "Navio Fantasma 1",
+        images: [
+          {
+            src: "assets/treasure01large.gif",
+          },
+        ],
+        text:
+          "Um navio amaldiçoado que vaga pelos mares envolto em névoa. Seus corredores escuros abrigam espíritos inquietos e mortos-vivos que guardam os segredos e tragédias de uma tripulação perdida para sempre.",
+      },
+    ],
+  },
+treasure2: {
+    name: "Navio Fantasma",
+    region: "Alberta",
+    description:
+      "Um navio amaldiçoado que vaga pelos mares envolto em névoa. Seus corredores escuros abrigam espíritos inquietos e mortos-vivos que guardam os segredos e tragédias de uma tripulação perdida para sempre.",
+    descriptionEntries: [
+      {
+        title: "Navio Fantasma 2",
+        images: [
+          {
+            src: "assets/treasure02large.gif",
+          },
+        ],
+        text:
+          "Um navio amaldiçoado que vaga pelos mares envolto em névoa. Seus corredores escuros abrigam espíritos inquietos e mortos-vivos que guardam os segredos e tragédias de uma tripulação perdida para sempre.",
+      },
+    ],
+  },
 };
 
 const EXPLORE_MAP_IMAGE_FALLBACKS = {
@@ -1791,22 +1922,23 @@ const EXPLORE_MAP_IMAGE_FALLBACKS = {
   "prt_fild09": "assets/prt_fild09large.gif",
   "prt_fild10": "assets/prt_fild10large.gif",
   "prt_fild11": "assets/prt_fild11large.gif",
-  "prt_sewb1": "assets/prt_sewb1large.gif",
+  "prt_sewb1": "assets/prt_sewb2large.gif",
   "prt_sewb2": "assets/prt_sewb2large.gif",
   "prt_sewb3": "assets/prt_sewb3large.gif",
   "prt_sewb4": "assets/prt_sewb4large.gif",
   "treasure01": "assets/treasure01large.gif",
+  "treasure1": "assets/treasure01large.gif",
   "treasure02": "assets/treasure02large.gif",
 };
 
 const EXPLORE_MAP_DEFAULT_DETAIL = {
   title: "Detalhes do mapa",
   description:
-    "Clique em um campo do mosaico para visualizar a descrição completa daquela região.",
+    "Clique em um mapa do mosaico para visualizar a descrição completa daquela região.",
   slugText: "Nenhum mapa selecionado.",
   entries: [
     {
-      text: "Clique em um tile para ver a descrição daquela área.",
+      text: "Clique em um mapa para ver a descrição daquela área.",
       images: [],
     },
   ],
@@ -1814,6 +1946,14 @@ const EXPLORE_MAP_DEFAULT_DETAIL = {
 
 let activeExploreTile = null;
 let currentExploreMapVariant = EXPLORE_DEFAULT_VARIANT;
+
+function isRoutePlannerSupported(variantKey = currentExploreMapVariant) {
+  if (typeof variantKey !== "string") {
+    return false;
+  }
+
+  return EXPLORE_ROUTE_SUPPORTED_VARIANTS.has(variantKey);
+}
 
 function getRouteColorOption(colorKey) {
   const normalized = typeof colorKey === "string" ? colorKey.trim().toLowerCase() : "";
@@ -1825,13 +1965,24 @@ function getRouteColorOption(colorKey) {
   return EXPLORE_ROUTE_COLORS.find(option => option.key === normalized) || fallback;
 }
 
+function getRouteSelectionKey(slug, variant = currentExploreMapVariant) {
+  const normalizedSlug = typeof slug === "string" ? slug.trim().toLowerCase() : "";
+  if (!normalizedSlug) {
+    return "";
+  }
+  const normalizedVariant = typeof variant === "string" ? variant.trim().toLowerCase() : "";
+
+  return `${normalizedVariant}::${normalizedSlug}`;
+}
+
 function rebuildRouteSelectionIndex() {
   exploreRouteState.selectionIndex.clear();
   exploreRouteState.selections.forEach((entry, index) => {
     if (!entry || !entry.slug) {
       return;
     }
-    exploreRouteState.selectionIndex.set(String(entry.slug).toLowerCase(), index);
+    const key = getRouteSelectionKey(entry.slug, entry.variant);
+    exploreRouteState.selectionIndex.set(key, index);
   });
 }
 
@@ -1913,7 +2064,7 @@ function initExploreRoutePlanner() {
 
   renderExploreRouteCards();
 
-  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY && activeExploreTile) {
+  if (isRoutePlannerSupported(currentExploreMapVariant) && activeExploreTile) {
     const slug = activeExploreTile.dataset.map;
     if (slug) {
       updateRoutePlannerSelection(slug, activeExploreTile.getAttribute("aria-label") || formatExploreMapLabel(slug));
@@ -1922,7 +2073,7 @@ function initExploreRoutePlanner() {
     resetRoutePlannerSelection();
   }
 
-  toggleRoutePlannerVisibility(currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY);
+  toggleRoutePlannerVisibility(isRoutePlannerSupported(currentExploreMapVariant));
 }
 
 function toggleRoutePlannerVisibility(shouldShow) {
@@ -1949,7 +2100,8 @@ function resetRoutePlannerSelection() {
   const addBtn = document.getElementById("exploreRouteAddBtn");
 
   if (statusEl) {
-    statusEl.textContent = "Selecione um mapa no mosaico para começar.";
+    const noun = currentExploreMapVariant === EXPLORE_DUNGEON_VARIANT_KEY ? "calabouço" : "mapa";
+    statusEl.textContent = `Selecione um ${noun} no mosaico para começar.`;
   }
 
   if (intelEl) {
@@ -2016,7 +2168,7 @@ function renderRoutePlannerIntel(intel) {
 }
 
 function updateRoutePlannerSelection(slug, label) {
-  if (currentExploreMapVariant !== EXPLORE_ROUTE_VARIANT_KEY) {
+  if (!isRoutePlannerSupported(currentExploreMapVariant)) {
     return;
   }
 
@@ -2030,7 +2182,8 @@ function updateRoutePlannerSelection(slug, label) {
   }
 
   if (statusEl) {
-    statusEl.textContent = `Mapa selecionado: ${label}`;
+    const noun = currentExploreMapVariant === EXPLORE_DUNGEON_VARIANT_KEY ? "Calabouço" : "Mapa";
+    statusEl.textContent = `${noun} selecionado: ${label}`;
   }
 
   if (addBtn) {
@@ -2103,7 +2256,7 @@ function createRouteCard(entry) {
   removeBtn.textContent = "Remover";
   removeBtn.setAttribute("aria-label", `Remover ${entry.name} da trilha planejada`);
   removeBtn.addEventListener("click", () => {
-    removeRouteSelection(entry.slug);
+    removeRouteSelection(entry.slug, entry.variant);
   });
   card.appendChild(removeBtn);
 
@@ -2118,7 +2271,9 @@ function renderExploreRouteCards() {
     return;
   }
 
-  const entries = exploreRouteState.selections.filter(entry => entry && entry.variant === EXPLORE_ROUTE_VARIANT_KEY);
+  const entries = exploreRouteState.selections.filter(
+    entry => entry && entry.variant === currentExploreMapVariant,
+  );
 
   container.innerHTML = "";
 
@@ -2152,7 +2307,7 @@ function syncExploreRouteHighlights() {
   });
 
   exploreRouteState.selections.forEach(entry => {
-    if (!entry || entry.variant !== EXPLORE_ROUTE_VARIANT_KEY) {
+    if (!entry || entry.variant !== currentExploreMapVariant) {
       return;
     }
 
@@ -2171,9 +2326,12 @@ function addOrUpdateRouteSelection(entry) {
     return;
   }
 
-  const normalizedSlug = String(entry.slug).toLowerCase();
-  if (exploreRouteState.selectionIndex.has(normalizedSlug)) {
-    const currentIndex = exploreRouteState.selectionIndex.get(normalizedSlug);
+  const selectionKey = getRouteSelectionKey(entry.slug, entry.variant);
+  if (!selectionKey) {
+    return;
+  }
+  if (exploreRouteState.selectionIndex.has(selectionKey)) {
+    const currentIndex = exploreRouteState.selectionIndex.get(selectionKey);
     exploreRouteState.selections.splice(currentIndex, 1);
   }
 
@@ -2181,17 +2339,17 @@ function addOrUpdateRouteSelection(entry) {
   rebuildRouteSelectionIndex();
 }
 
-function removeRouteSelection(slug) {
-  const normalizedSlug = typeof slug === "string" ? slug.toLowerCase() : "";
-  if (!normalizedSlug) {
+function removeRouteSelection(slug, variant = currentExploreMapVariant) {
+  const selectionKey = getRouteSelectionKey(slug, variant);
+  if (!selectionKey) {
     return;
   }
 
-  if (!exploreRouteState.selectionIndex.has(normalizedSlug)) {
+  if (!exploreRouteState.selectionIndex.has(selectionKey)) {
     return;
   }
 
-  const index = exploreRouteState.selectionIndex.get(normalizedSlug);
+  const index = exploreRouteState.selectionIndex.get(selectionKey);
   exploreRouteState.selections.splice(index, 1);
   rebuildRouteSelectionIndex();
   renderExploreRouteCards();
@@ -2199,7 +2357,7 @@ function removeRouteSelection(slug) {
 }
 
 async function handleAddActiveTileToRoute() {
-  if (!activeExploreTile || currentExploreMapVariant !== EXPLORE_ROUTE_VARIANT_KEY) {
+  if (!activeExploreTile || !isRoutePlannerSupported(currentExploreMapVariant)) {
     return;
   }
 
@@ -2509,8 +2667,9 @@ function toggleExploreVariantViews(activeVariantKey) {
     dungeonsView.setAttribute("aria-hidden", isDungeons ? "false" : "true");
   }
 
-  toggleRoutePlannerVisibility(!isDungeons);
-  if (isDungeons) {
+  const shouldShowRoutePlanner = isRoutePlannerSupported(activeVariantKey);
+  toggleRoutePlannerVisibility(shouldShowRoutePlanner);
+  if (!shouldShowRoutePlanner) {
     resetRoutePlannerSelection();
   }
 }
@@ -2528,9 +2687,10 @@ function activateExploreVariant(variantKey, options = {}) {
     initExploreDungeons();
   } else {
     renderExploreMap(variant.key);
-    if (variant.key === EXPLORE_ROUTE_VARIANT_KEY) {
-      initExploreRoutePlanner();
-    }
+  }
+
+  if (isRoutePlannerSupported(variant.key)) {
+    initExploreRoutePlanner();
   }
 
   updateExploreTabs(variant.key, options);
@@ -2752,7 +2912,12 @@ function initExploreDungeons() {
 }
 
 function initExploreMap() {
-  currentExploreMapVariant = EXPLORE_DEFAULT_VARIANT;
+  const contentContainer = document.getElementById("pageContent");
+  const activePageKey = contentContainer?.dataset?.page || "";
+  const initialVariantKey =
+    activePageKey === "dungeon" ? EXPLORE_DUNGEON_VARIANT_KEY : EXPLORE_DEFAULT_VARIANT;
+
+  currentExploreMapVariant = initialVariantKey;
 
   const tabButtons = Array.from(document.querySelectorAll(".explore-tab"));
   const panel = document.getElementById("exploreVariantPanel");
@@ -2777,7 +2942,7 @@ function initExploreMap() {
 
     tabButtons.forEach((tab, index) => {
       if (!tab.dataset.variant) {
-        tab.dataset.variant = index === 0 ? EXPLORE_DEFAULT_VARIANT : "";
+        tab.dataset.variant = index === 0 ? initialVariantKey : "";
       }
 
       if (!tab.id) {
@@ -2823,15 +2988,17 @@ function initExploreMap() {
 
     const initialActiveTab = tabButtons.find(tab => tab.classList.contains("is-active"));
     const initialVariant = getExploreMapVariant(
-      initialActiveTab?.dataset.variant || tabButtons[0].dataset.variant || EXPLORE_DEFAULT_VARIANT,
+      initialActiveTab?.dataset.variant || tabButtons[0].dataset.variant || initialVariantKey,
     );
 
     currentExploreMapVariant = initialVariant.key;
     activateExploreVariant(initialVariant.key);
   } else {
     if (hasMapGrid) {
-      renderExploreMap(EXPLORE_DEFAULT_VARIANT);
-      initExploreRoutePlanner();
+      renderExploreMap(currentExploreMapVariant);
+      if (isRoutePlannerSupported(currentExploreMapVariant)) {
+        initExploreRoutePlanner();
+      }
     }
 
     if (hasDungeonView) {
@@ -3137,7 +3304,7 @@ function resetExploreMapDetails() {
     slugEl.textContent = parts.join(" • ");
   }
   setActiveExploreTile(null);
-  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY) {
+  if (isRoutePlannerSupported(currentExploreMapVariant)) {
     resetRoutePlannerSelection();
   }
 }
@@ -3176,7 +3343,10 @@ function updateExploreMapDetails(slug, label) {
 function handleExploreTileSelection(tile, slug, label) {
   setActiveExploreTile(tile);
   updateExploreMapDetails(slug, label);
-  if (currentExploreMapVariant === EXPLORE_ROUTE_VARIANT_KEY) {
+  if (currentExploreMapVariant === EXPLORE_DUNGEON_VARIANT_KEY) {
+    setActiveDungeonSlug(slug);
+  }
+  if (isRoutePlannerSupported(currentExploreMapVariant)) {
     updateRoutePlannerSelection(slug, label);
   }
 }
@@ -3280,7 +3450,7 @@ function renderExploreMap(variantKey = currentExploreMapVariant) {
     });
   });
 
-  if (variant.key === EXPLORE_ROUTE_VARIANT_KEY) {
+  if (isRoutePlannerSupported(variant.key)) {
     syncExploreRouteHighlights();
   }
 }
@@ -4085,6 +4255,14 @@ field: {
         <div class="explore-fields" id="exploreFieldsView">
           <h3 class="explore-subtitle" id="exploreFieldsSubtitle">Atlas de Midgard</h3>
           <div class="explore-map-layout">
+            <aside class="explore-map-side-illustration" aria-hidden="true">
+              <img
+                src="assets/maparagna.jpg"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </aside>
             <div class="explore-map-scroll">
               <div
                 class="explore-map"
@@ -4097,6 +4275,7 @@ field: {
               <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
                 <header class="explore-route-track__header">
                   <h3 class="explore-route-track__title">Trilha planejada</h3>
+                  <span class="explore-route-track__hint">Novos mapas aparecem como mensagens aqui.</span>
                 </header>
                 <div class="explore-route-track__body">
                   <p class="explore-route-track__empty" id="exploreRouteEmpty">
@@ -4149,37 +4328,83 @@ field: {
     `
 },
 dungeon: {
-    title: "Calabouços",
+    title: " ",
     html: `
-      <p class="lead">
-        Veja abaixo os calabouços atualmente disponíveis e descubra o que esperar de cada um.
-      </p>
-      <div class="explore-dungeons" id="exploreDungeonsView">
-        <h3 class="explore-subtitle" id="exploreDungeonsSubtitle">Calabouços</h3>
-        <div class="dungeon-select-card" id="dungeonSelectCard">
-          <div class="dungeon-select-card__list">
-            <h4 class="dungeon-select-title">Calabouços disponíveis</h4>
-            <p class="dungeon-select-empty" id="dungeonEmptyState" hidden>Nenhum calabouço disponível.</p>
-            <ul
-              class="dungeon-select-list"
-              id="dungeonList"
-              role="listbox"
-              aria-label="Calabouços disponíveis"
-            ></ul>
-          </div>
-          <div class="dungeon-select-card__details" id="dungeonDetails" aria-live="polite">
-            <div class="dungeon-select-details__media">
-              <img id="dungeonPreviewImage" alt="" hidden />
-              <div class="dungeon-select-details__placeholder" id="dungeonPreviewPlaceholder">
-                Selecione um calabouço para ver detalhes.
-              </div>
+      <div
+        class="explore-variant-panel"
+        id="exploreVariantPanel"
+        role="region"
+        aria-label="Mosaico de calabouços"
+      >
+        <div class="explore-dungeons" id="exploreDungeonsView">
+          <h3 class="explore-subtitle" id="exploreDungeonsSubtitle">Calabouços de Midgard</h3>
+          <div class="explore-map-layout">
+            <aside class="explore-map-side-illustration" aria-hidden="true">
+              <img
+                src="assets/maparagna.jpg"
+                alt=""
+                loading="lazy"
+                decoding="async"
+              />
+            </aside>
+            <div class="explore-map-scroll">
+              <div
+                class="explore-map"
+                id="exploreMapGrid"
+                role="grid"
+                aria-label="Mosaico de calabouços"
+              ></div>
             </div>
-            <div class="dungeon-select-details__text">
-              <h4 class="dungeon-select-details__title" id="dungeonDetailsTitle">Selecione um calabouço</h4>
-              <p class="dungeon-select-details__region" id="dungeonDetailsRegion"></p>
-              <p class="dungeon-select-details__description" id="dungeonDetailsDescription">
-                Escolha um calabouço na lista para ver suas informações principais.
-              </p>
+            <section class="server-section explore-route-track" id="exploreRouteTrack" aria-live="polite">
+              <div class="explore-route-track__chat" role="group" aria-label="Trilha planejada em formato de chat">
+                <header class="explore-route-track__header">
+                  <h3 class="explore-route-track__title">Trilha planejada</h3>
+                  <span class="explore-route-track__hint">Novos calabouços aparecem como mensagens aqui.</span>
+                </header>
+                <div class="explore-route-track__body">
+                  <p class="explore-route-track__empty" id="exploreRouteEmpty">
+                    Nenhum calabouço planejado ainda. Adicione opções para montar sua jornada.
+                  </p>
+                  <div class="explore-route-track__list" id="exploreRouteCards" role="list"></div>
+                </div>
+              </div>
+            </section>
+            <div
+              class="callout-glow explore-map-legend"
+              id="exploreMapDetails"
+              aria-live="polite"
+            >
+              <div class="explore-map-details__text">
+                <h4 id="exploreMapDetailsTitle">${EXPLORE_MAP_DEFAULT_DETAIL.title}</h4>
+                <div class="explore-map-details__description" id="exploreMapDetailsDescription"></div>
+                <p class="small" id="exploreMapDetailsSlug">${EXPLORE_MAP_DEFAULT_DETAIL.slugText}</p>
+              </div>
+              <div
+                class="explore-map-legend__actions explore-route-planner"
+                id="exploreRoutePlanner"
+                role="group"
+                aria-label="Adicionar calabouços à trilha"
+              >
+                <div class="explore-map-legend__status-row">
+                  <p class="explore-route-planner__status" id="exploreRouteStatus">
+                    Selecione um calabouço no mosaico para começar.
+                  </p>
+                  <button
+                    class="btn-glow explore-map-legend__add explore-route-planner__add"
+                    id="exploreRouteAddBtn"
+                    type="button"
+                    disabled
+                  >
+                    Adicionar à trilha
+                  </button>
+                </div>
+                <div
+                  class="explore-route-planner__colors explore-map-legend__colors"
+                  id="exploreRouteColorOptions"
+                  role="list"
+                ></div>
+                <div class="explore-route-planner__intel" id="exploreRouteIntel" hidden></div>
+              </div>
             </div>
           </div>
         </div>
@@ -5266,6 +5491,7 @@ function loadPage(pageKey) {
   `;
 
   // conteúdo
+  pageContent.dataset.page = pageKey;
   pageContent.innerHTML = titleEl + page.html;
 
   if (["explore", "field", "dungeon"].includes(pageKey)) {
@@ -5409,8 +5635,6 @@ searchInput.addEventListener("keydown", e => {
   }
 });
 
-// efeito de entrada
-initTimeWarpEffect();
 initAmbientParticles();
 
 // carrega página inicial na abertura
