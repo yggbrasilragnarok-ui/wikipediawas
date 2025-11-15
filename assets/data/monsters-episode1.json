@@ -1485,13 +1485,13 @@
           "type": "Calabouço"
         },
         {
-          "map": "treasure01",
+          "map": "treasure1",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1526,13 +1526,13 @@
           "type": "Calabouço"
         },
         {
-          "map": "treasure01",
+          "map": "treasure1",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1554,13 +1554,13 @@
       "size": "Médio",
       "spawn": [
         {
-          "map": "treasure01",
+          "map": "treasure1",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1624,7 +1624,7 @@
           "type": "Calabouço"
         },
         {
-          "map": "treasure01",
+          "map": "treasure1",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1680,13 +1680,13 @@
           "type": "Calabouço"
         },
         {
-          "map": "treasure01",
+          "map": "treasure1",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1730,7 +1730,7 @@
       "size": "Médio",
       "spawn": [
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1758,7 +1758,7 @@
           "type": "Campo"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1786,7 +1786,7 @@
           "type": "Calabouço"
         },
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -1808,7 +1808,7 @@
       "size": "Médio",
       "spawn": [
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
@@ -3880,7 +3880,7 @@
       "isMvp": true,
       "spawn": [
         {
-          "map": "treasure02",
+          "map": "treasure2",
           "name": "Navio Fantasma",
           "region": "Navio Fantasma",
           "type": "Calabouço"
