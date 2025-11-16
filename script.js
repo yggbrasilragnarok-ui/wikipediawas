@@ -164,8 +164,559 @@ const KINETIC_CARD_SELECTORS = [
   ".server-cta-card",
   ".nostalgia-card",
   ".server-stat",
-  ".monster-card__header"
+  ".monster-card__header",
+  ".class-hero-card",
+  ".class-codex__overview",
+  ".class-role-card",
+  ".class-build-card",
+  ".class-synergy__card",
+  ".class-timeline__tier",
+  ".class-insight-card"
 ];
+
+const CLASS_SYSTEM_DATA = {
+  classes: [
+    {
+      id: "swordsman",
+      name: "Espadachim",
+      icon: "espadachim.png",
+      tagline: "Abre caminho para o grupo ",
+      description:
+        "Especialista em absorver dano e abrir caminho para o grupo.",
+      difficulty: 2,
+      mastery: {
+        stats: "FOR • VIT • AGI",
+        weapons: "Espadas de 1M/2M, Lanças, Escudos",
+        resource: "HP massivo e dano",
+      },
+      roles: [
+        {
+          title: "Linha de frente",
+          description: "...",
+        },
+        {
+          title: "Controle de ameaça",
+          description: "...",
+        },
+        {
+          title: "Burst físico",
+          description: "...",
+        },
+      ],
+      builds: [
+        {
+          name: "nome da build",
+          focus: "FOR • AGI • DEX",
+          rotation: ["habilidade 1", "habilidade 2", "habilidade 3"],
+          highlights: "Objetivo da build.",
+          equipment: "equipamento 1, Equipamento 2, Equipamento 3.",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+    {
+      id: "mage",
+      name: "Mago",
+      icon: "mago.png",
+      tagline: "Dano elemental",
+      description:
+        "Manipula elementos para derreter mobs à distância, travar MVPs e garantir utilidades únicas ao grupo.",
+      difficulty: 4,
+      mastery: {
+        stats: "INT • DEX • VIT",
+        weapons: "Cajados, Livros",
+        resource: "Gestão de SP e temporização de conjurações",
+      },
+      roles: [
+        {
+          title: "Controle de campo",
+          description: "...",
+        },
+        {
+          title: "Burst elemental",
+          description: "...",
+        },
+        {
+          title: "Suporte utilitário",
+          description: "...",
+        },
+      ],
+      builds: [
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+    {
+      id: "archer",
+      name: "Arqueiro",
+      icon: "Arqueiro.png",
+      tagline: "Ataque à distância",
+      description:
+        "Controla o ritmo das batalhas a longa distância.",
+      difficulty: 3,
+      mastery: {
+        stats: "DEX • AGI • LUK",
+        weapons: "Arcos compostos",
+        resource: "Gestão de flechas elementais",
+      },
+      roles: [
+        {
+          title: "Atirador crítico",
+          description: "...",
+        },
+      ],
+      builds: [
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+    {
+      id: "thief",
+      name: "Gatuno",
+      icon: "Gatuna.png",
+      tagline: "Ataque duplo e roubo",
+      description:
+        "Especialista em ataque duplo, venenos e controle situacional.",
+      difficulty: 4,
+      mastery: {
+        stats: "AGI • LUK • DES",
+        weapons: "Adagas duplas",
+        resource: "Gestão de venenos e SP",
+      },
+      roles: [
+        {
+          title: "Dano crítico",
+          description: "...",
+        },
+      ],
+      builds: [
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+    {
+      id: "acolyte",
+      name: "Noviço",
+      icon: "Novica.png",
+      tagline: " Cura e Buff",
+      description:
+        "Dedicado a manter o grupo vivo.",
+      difficulty: 3,
+      mastery: {
+        stats: "INT • VIT • DEX",
+        weapons: "Cajados, Rosários",
+        resource: "Gestão de SP, bênçãos e cooldowns",
+      },
+      roles: [
+        {
+          title: "Curador principal",
+          description: "...",
+        },
+        {
+          title: "Suporte defensivo",
+          description: "....",
+        },
+      ],
+      builds: [
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+    {
+      id: "merchant",
+      name: "Mercador",
+      icon: "Mercador.png",
+      tagline: "Essêncial para venda e compra de itens",
+      description:
+        "Especialista em administração de recursos.",
+      difficulty: 3,
+      mastery: {
+        stats: "FOR • DEX • VIT",
+        weapons: "Machados, Martelos",
+        resource: "Gestão de zeny",
+      },
+      roles: [
+        {
+          title: "DPS",
+          description: "...",
+        },
+        {
+          title: "Compra & Vendas",
+          description: "...",
+        },
+      ],
+      builds: [
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+        {
+          name: " ",
+          focus: "xx • xx • xx",
+          rotation: [" ", " ", " "],
+          highlights: " ",
+          equipment: " ",
+        },
+      ],
+    },
+  ],
+};
+
+function renderClassDifficulty(value) {
+  const max = 5;
+  const normalized = Math.max(1, Math.min(typeof value === "number" ? value : 1, max));
+  const stars = Array.from({ length: max }, (_, index) => {
+    const isActive = index < normalized;
+    return `<span class="class-difficulty__star${isActive ? " is-active" : ""}" aria-hidden="true">★</span>`;
+  }).join("");
+
+  return `<span class="class-difficulty" aria-label="Dificuldade ${normalized} de ${max}">${stars}</span>`;
+}
+
+function renderClassIconMarkup(iconValue, variant = "pill") {
+  const fallback = "★";
+
+  if (typeof iconValue !== "string") {
+    return fallback;
+  }
+
+  const trimmedIcon = iconValue.trim();
+  if (!trimmedIcon) {
+    return fallback;
+  }
+
+  const imagePattern = /\.(png|jpe?g|gif|webp|svg)$/i;
+  if (!imagePattern.test(trimmedIcon)) {
+    return trimmedIcon;
+  }
+
+  const normalizedIcon = trimmedIcon.replace(/^\.\/?/, "");
+  if (normalizedIcon.includes("..")) {
+    return fallback;
+  }
+  const src = normalizedIcon.startsWith("assets/") ? normalizedIcon : `assets/${normalizedIcon}`;
+  const sizeModifier = variant === "badge" ? "badge" : variant === "glyph" ? "glyph" : "pill";
+
+  return `<img src="${src}" alt="" class="class-icon class-icon--${sizeModifier}" loading="lazy" decoding="async" />`;
+}
+
+function initClassSystem() {
+  const menu = document.getElementById("classCodexMenu");
+  const detailPanel = document.getElementById("classDetailPanel");
+
+  if (!menu || !detailPanel) {
+    return;
+  }
+
+  menu.innerHTML = "";
+  detailPanel.innerHTML = "";
+
+  const orderedClasses = Array.isArray(CLASS_SYSTEM_DATA.classes)
+    ? CLASS_SYSTEM_DATA.classes.slice()
+    : [];
+
+  if (!orderedClasses.length) {
+    detailPanel.innerHTML = "<p class=\"class-codex__empty\">Dados de classes indisponíveis.</p>";
+    return;
+  }
+
+  const buttonMap = new Map();
+  let activeClassId = "";
+
+  function renderClassDetails(job) {
+    const metaItems = [
+      { label: "Papel principal", value: job.tagline || "—" },
+      { label: "Dificuldade", value: renderClassDifficulty(job.difficulty) },
+      { label: "Atributos-chave", value: job.mastery?.stats || "—" },
+      { label: "Armas favoritas", value: job.mastery?.weapons || "—" },
+    ];
+
+    if (job.mastery?.resource) {
+      metaItems.push({ label: "Gestão", value: job.mastery.resource });
+    }
+
+    const metaMarkup = metaItems
+      .map(item => {
+        return `<div class="class-codex__meta-item"><dt>${item.label}</dt><dd>${item.value}</dd></div>`;
+      })
+      .join("");
+
+    const timelineMarkup = (job.progression || [])
+      .map(stage => {
+        const jobs = Array.isArray(stage.jobs) ? stage.jobs.join(" • ") : stage.jobs || "";
+        const focus = stage.focus ? `<p class="class-timeline__focus">${stage.focus}</p>` : "";
+        return `
+          <article class="class-timeline__tier" data-kinetic-card>
+            <h5 class="class-timeline__title">${stage.tier || "Evolução"}</h5>
+            <p class="class-timeline__jobs">${jobs}</p>
+            ${focus}
+          </article>
+        `;
+      })
+      .join("");
+
+    const rolesMarkup = (job.roles || [])
+      .map(role => {
+        return `
+          <article class="class-role-card" data-kinetic-card>
+            <h5 class="class-role-card__title">${role.title}</h5>
+            <p class="class-role-card__description">${role.description || ""}</p>
+          </article>
+        `;
+      })
+      .join("");
+
+    const skillsMarkup = (job.signatureSkills || [])
+      .map(skill => {
+        return `
+          <li class="class-skills__item">
+            <h5 class="class-skills__name">${skill.name}</h5>
+            <p class="class-skills__description">${skill.description || ""}</p>
+          </li>
+        `;
+      })
+      .join("");
+
+    const buildsMarkup = (job.builds || [])
+      .map(build => {
+        const rotationList = (build.rotation || [])
+          .map(step => `<li>${step}</li>`)
+          .join("");
+
+        return `
+          <article class="class-build-card" data-kinetic-card>
+            <header class="class-build-card__header">
+              <h5 class="class-build-card__title">${build.name}</h5>
+              <p class="class-build-card__focus">Foco: ${build.focus || "—"}</p>
+            </header>
+            <div class="class-build-card__body">
+              <div class="class-build-card__rotation">
+                <span class="class-build-card__label">Rotação de habilidade</span>
+                <ul>${rotationList}</ul>
+              </div>
+              ${build.highlights ? `<p class="class-build-card__highlights">${build.highlights}</p>` : ""}
+              ${build.equipment ? `<p class="class-build-card__equipment"><strong>Equipamentos:</strong> ${build.equipment}</p>` : ""}
+            </div>
+          </article>
+        `;
+      })
+      .join("");
+
+    const synergyItems = (job.synergies || [])
+      .map(entry => {
+        return `<li><strong>${entry.partner}</strong><span>${entry.bonus || ""}</span></li>`;
+      })
+      .join("");
+
+    const trainingItems = (job.training || [])
+      .map(tip => `<li>${tip}</li>`)
+      .join("");
+
+    const synergySection = synergyItems || trainingItems
+      ? `
+        <section class="class-synergy" aria-label="Sinergias e preparação">
+          <h4 class="class-subtitle">Sinergias &amp; Preparação</h4>
+          <div class="class-synergy__content">
+            ${
+              synergyItems
+                ? `<div class="class-synergy__card" data-kinetic-card><h5>Parceiros ideais</h5><ul class="class-synergy__list">${synergyItems}</ul></div>`
+                : ""
+            }
+            ${
+              trainingItems
+                ? `<div class="class-synergy__card class-synergy__card--training" data-kinetic-card><h5>Rotina de treinamento</h5><ul class="class-synergy__list">${trainingItems}</ul></div>`
+                : ""
+            }
+          </div>
+        </section>
+      `
+      : "";
+
+    return `
+      <div class="class-codex__overview" data-kinetic-card>
+        <header class="class-codex__overview-header">
+          <span class="class-codex__glyph" aria-hidden="true">${renderClassIconMarkup(job.icon, "glyph")}</span>
+          <div>
+            <h3 class="class-codex__title">${job.name}</h3>
+            <p class="class-codex__description">${job.description || ""}</p>
+          </div>
+        </header>
+        <dl class="class-codex__meta">${metaMarkup}</dl>
+        ${job.powerCurve ? `<p class="class-codex__power">${job.powerCurve}</p>` : ""}
+      </div>
+      ${
+        timelineMarkup
+          ? `<section class="class-timeline" aria-label="Linhas de evolução">${timelineMarkup}</section>`
+          : ""
+      }
+      ${
+        rolesMarkup
+          ? `<section class="class-roles" aria-label="Papéis recomendados"><h4 class="class-subtitle">Papéis no grupo</h4><div class="class-roles__grid">${rolesMarkup}</div></section>`
+          : ""
+      }
+      ${
+        skillsMarkup
+          ? `<section class="class-skills" aria-label="Habilidades assinatura"><h4 class="class-subtitle">Assinaturas que definem o estilo</h4><ul class="class-skills__list">${skillsMarkup}</ul></section>`
+          : ""
+      }
+      ${
+        buildsMarkup
+          ? `<section class="class-builds" aria-label="Construções sugeridas"><h4 class="class-subtitle">Builds sugeridas</h4><div class="class-builds__grid">${buildsMarkup}</div></section>`
+          : ""
+      }
+      ${synergySection}
+    `;
+  }
+
+  function selectClass(classId, focusButton = false) {
+    if (classId === activeClassId) {
+      return;
+    }
+
+    const job = orderedClasses.find(item => item.id === classId);
+    if (!job) {
+      return;
+    }
+
+    activeClassId = classId;
+
+    buttonMap.forEach((button, id) => {
+      const isActive = id === classId;
+      button.classList.toggle("is-active", isActive);
+      button.setAttribute("aria-selected", isActive ? "true" : "false");
+      button.setAttribute("tabindex", isActive ? "0" : "-1");
+      if (isActive && focusButton) {
+        button.focus();
+      }
+    });
+
+    detailPanel.setAttribute("aria-labelledby", `classTab-${classId}`);
+    detailPanel.dataset.classId = classId;
+    detailPanel.innerHTML = renderClassDetails(job);
+
+    window.requestAnimationFrame(() => {
+      enhanceKineticHover(detailPanel);
+    });
+  }
+
+  orderedClasses.forEach((job, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.className = "class-codex__pill";
+    button.id = `classTab-${job.id}`;
+    button.dataset.classId = job.id;
+    button.setAttribute("role", "tab");
+    button.setAttribute("aria-controls", "classDetailPanel");
+    button.setAttribute("aria-selected", "false");
+    button.setAttribute("tabindex", "-1");
+    button.innerHTML = `
+      <span class="class-codex__pill-label">${job.name}</span>
+      <span class="class-codex__pill-tag">${job.tagline || ""}</span>
+    `;
+
+    button.addEventListener("click", () => {
+      selectClass(job.id, false);
+    });
+
+    buttonMap.set(job.id, button);
+    menu.appendChild(button);
+
+    if (index === 0) {
+      selectClass(job.id, false);
+    }
+  });
+
+  menu.addEventListener("keydown", event => {
+    const keys = ["ArrowRight", "ArrowDown", "ArrowLeft", "ArrowUp", "Home", "End"];
+    if (!keys.includes(event.key)) {
+      return;
+    }
+
+    event.preventDefault();
+
+    const currentIndex = orderedClasses.findIndex(job => job.id === activeClassId);
+    const total = orderedClasses.length;
+    if (total === 0) {
+      return;
+    }
+
+    let nextIndex = currentIndex >= 0 ? currentIndex : 0;
+
+    if (event.key === "ArrowRight" || event.key === "ArrowDown") {
+      nextIndex = (nextIndex + 1) % total;
+    } else if (event.key === "ArrowLeft" || event.key === "ArrowUp") {
+      nextIndex = (nextIndex - 1 + total) % total;
+    } else if (event.key === "Home") {
+      nextIndex = 0;
+    } else if (event.key === "End") {
+      nextIndex = total - 1;
+    }
+
+    const nextClass = orderedClasses[nextIndex];
+    if (!nextClass) {
+      return;
+    }
+
+    selectClass(nextClass.id, true);
+  });
+}
 
 const kineticPointerQuery = window.matchMedia("(pointer: fine)");
 const kineticReduceMotionQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -4243,8 +4794,64 @@ const PAGES = {
     `
   },
 class: {
-    title: " ",
+    title: "Classes",
     html: `
+      <section class="server-section server-section--general hero-section class-hero" aria-labelledby="classHeroTitle">
+        <div class="hero-card class-hero-card hero-card--static">
+          <div class="hero-card__background" aria-hidden="true">
+            <img src="assets/prontera.gif" alt="" loading="lazy" decoding="async" />
+            <div class="hero-card__background-overlay"></div>
+          </div>
+
+          <header class="hero-card__content">
+            <h2 class="page-title rune-text hero-card__title" id="classHeroTitle">
+              Domine as rotas de Midgard
+            </h2>
+            <p class="hero-card__lede">
+              Construa sua party com perfis táticos, evoluções completas e sinergias pensadas para cada classe base.
+            </p>
+
+            <div class="hero-card__actions">
+              <a class="btn-secondary hero-card__cta" href="#classCodex">Explorar enciclopédia</a>
+              <a class="btn-glow" href="https://wasrag.com.br" target="_blank" rel="noopener noreferrer">Fórum de Builds</a>
+            </div>
+          </header>
+
+          <dl class="hero-card__highlight-grid">
+            <div class="hero-card__highlight">
+              <dt>Classes base</dt>
+              <dd>
+                <span class="hero-card__highlight-value">6 arquétipos</span>
+                <span class="hero-card__highlight-note">Rotas completas da 1ª à 3ª evolução</span>
+              </dd>
+            </div>
+            <div class="hero-card__highlight">
+              <dt>Sinergias</dt>
+              <dd>
+                <span class="hero-card__highlight-value">Party-ready</span>
+                <span class="hero-card__highlight-note">Sugestões de combos de grupo</span>
+              </dd>
+            </div>
+            <div class="hero-card__highlight">
+              <dt>Builds</dt>
+              <dd>
+                <span class="hero-card__highlight-value">Meta &amp; fun</span>
+                <span class="hero-card__highlight-note">Rotação, atributos e equipamentos chave</span>
+              </dd>
+            </div>
+          </dl>
+        </div>
+      </section>
+
+      <section class="server-section class-codex" id="classCodex" aria-labelledby="classCodexTitle">
+        <div class="section-header">
+          <h3 class="section-title" id="classCodexTitle">Enciclopédia de Classes</h3>
+        </div>
+        <div class="class-codex__layout">
+          <nav class="class-codex__menu" id="classCodexMenu" role="tablist" aria-label="Classes base" aria-orientation="vertical"></nav>
+          <article class="class-codex__details" id="classDetailPanel" role="tabpanel" tabindex="0" aria-live="polite"></article>
+        </div>
+      </section>
     `
 },
 field: {
@@ -5511,6 +6118,13 @@ function loadPage(pageKey) {
   if (pageKey === "monster") {
     window.requestAnimationFrame(() => {
       initMonsterDatabase();
+      enhanceKineticHover(pageContent);
+    });
+  }
+
+  if (pageKey === "class") {
+    window.requestAnimationFrame(() => {
+      initClassSystem();
       enhanceKineticHover(pageContent);
     });
   }
