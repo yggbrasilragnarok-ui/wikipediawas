@@ -2334,6 +2334,312 @@
       }
     },
     {
+      "id": 1066,
+      "name": "Vadon",
+      "image": "assets/data/1066.gif",
+      "level": 19,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1017,
+        "baseExp": 135,
+        "jobExp": 85
+      }
+    },
+    {
+      "id": 1141,
+      "name": "Marina",
+      "image": "assets/data/1141.gif",
+      "level": 21,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 2087,
+        "baseExp": 218,
+        "jobExp": 140
+      }
+    },
+    {
+      "id": 1067,
+      "name": "Cornutus",
+      "image": "assets/data/1067.gif",
+      "level": 23,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1620,
+        "baseExp": 240,
+        "jobExp": 149
+      }
+    },
+    {
+      "id": 1044,
+      "name": "Obeaune",
+      "image": "assets/data/1044.gif",
+      "level": 31,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3952,
+        "baseExp": 644,
+        "jobExp": 407
+      }
+    },
+    {
+      "id": 1264,
+      "name": "Tritão",
+      "image": "assets/data/1264.gif",
+      "level": 53,
+      "race": "Humanóide",
+      "element": "Água",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 14690,
+        "baseExp": 4500,
+        "jobExp": 3000
+      }
+    },
+    {
+      "id": 1144,
+      "name": "Marte",
+      "image": "assets/data/1144.gif",
+      "level": 31,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5034,
+        "baseExp": 586,
+        "jobExp": 370
+      }
+    },
+    {
+      "id": 1045,
+      "name": "Cavalo Marinho",
+      "image": "assets/data/1045.gif",
+      "level": 36,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 6900,
+        "baseExp": 988,
+        "jobExp": 625
+      }
+    },
+    {
+      "id": 1142,
+      "name": "Esfera Marinha",
+      "image": "assets/data/1142.gif",
+      "level": 28,
+      "race": "Planta",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+         {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3518,
+        "baseExp": 461,
+        "jobExp": 284
+      }
+    },
+    {
+      "id": 1069,
+      "name": "Peixe-Espada",
+      "image": "assets/data/1069.gif",
+      "level": 30,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+         {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 4299,
+        "baseExp": 1251,
+        "jobExp": 638
+      }
+    },
+    {
+      "id": 1158,
+      "name": "Fen",
+      "image": "assets/data/1158.gif",
+      "level": 26,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "iz_dun03",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3347,
+        "baseExp": 357,
+        "jobExp": 226
+      }
+    },
+    {
+      "id": 1065,
+      "name": "Strouf",
+      "image": "assets/data/1065.gif",
+      "level": 48,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 11990,
+        "baseExp": 3080,
+        "jobExp": 2098
+      }
+    },
+    {
+      "id": 1108,
+      "name": "Deviace",
+      "image": "assets/data/1108.gif",
+      "level": 47,
+      "race": "Peixe",
+      "element": "Água",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "iz_dun04",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 20090,
+        "baseExp": 9988,
+        "jobExp": 7207
+      }
+    },
+    {
       "id": 1014,
       "name": "Esporo",
       "image": "assets/data/1014.gif",
@@ -2422,6 +2728,24 @@
           "map": "gef_dun01",
           "name": "Torre de Geffen",
           "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun02",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
           "type": "Calabouço"
         }
       ],
