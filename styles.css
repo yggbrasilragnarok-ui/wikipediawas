@@ -631,7 +631,7 @@ body {
 
 @media (min-width: 1440px) {
   .explore-map-layout {
-    grid-template-columns: minmax(260px, 320px) minmax(0, 1fr) minmax(320px, 380px);
+    grid-template-columns: auto minmax(0, 1fr) minmax(320px, 380px);
     justify-items: stretch;
   }
 

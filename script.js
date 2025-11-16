@@ -4817,7 +4817,7 @@ field: {
           <div class="explore-map-layout">
             <aside class="explore-map-side-illustration" aria-hidden="true">
               <img
-                src="assets/maparagna.jpg"
+                src="assets/aprendiz.gif"
                 alt=""
                 loading="lazy"
                 decoding="async"
