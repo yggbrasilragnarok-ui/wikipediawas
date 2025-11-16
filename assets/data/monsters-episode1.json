@@ -260,6 +260,160 @@
       }
     },
     {
+      "id": 1051,
+      "name": "Besouro-Ladrão",
+      "image": "assets/data/1051.gif",
+      "level": 6,
+      "race": "Inseto",
+      "element": "Neutro",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "pay_fild01",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild05",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild06",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "pay_fild10",
+          "name": "Campos de Payon",
+          "region": "Payon",
+          "type": "Campo"
+        },
+        {
+          "map": "prt_sewb1",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 126,
+        "baseExp": 17,
+        "jobExp": 5
+      }
+    },
+    {
+      "id": 1175,
+      "name": "Tarou",
+      "image": "assets/data/1175.gif",
+      "level": 11,
+      "race": "Bruto",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "prt_sewb1",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 284,
+        "baseExp": 57,
+        "jobExp": 28
+      }
+    },
+    {
+      "id": 1161,
+      "name": "Plâncton",
+      "image": "assets/data/1161.gif",
+      "level": 10,
+      "race": "Planta",
+      "element": "Água",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "iz_dun00",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "iz_dun01",
+          "name": "Túnel Submarino",
+          "region": "Izlude",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 354,
+        "baseExp": 23,
+        "jobExp": 18
+      }
+    },
+    {
+      "id": 1209,
+      "name": "Cãibra",
+      "image": "assets/data/1209.gif",
+      "level": 56,
+      "race": "Bruto",
+      "element": "Veneno",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 4720,
+        "baseExp": 2300,
+        "jobExp": 1513
+      }
+    },
+    {
       "id": 1103,
       "name": "Caramelo",
       "image": "assets/data/1103.gif",
@@ -4872,6 +5026,29 @@
         "hp": 120000,
         "baseExp": 27500,
         "jobExp": 14300
+      }
+    },
+    {
+      "id": 1086,
+      "name": "Besouro-Ladrão Dourado",
+      "image": "assets/data/1086.gif",
+      "level": 64,
+      "race": "Inseto",
+      "element": "Fogo",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 126000,
+        "baseExp": 14300,
+        "jobExp": 7150
       }
     },
     {
