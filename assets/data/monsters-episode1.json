@@ -3217,6 +3217,456 @@
       }
     },
     {
+      "id": 1005,
+      "name": "Familiar",
+      "image": "assets/data/1005.gif",
+      "level": 8,
+      "race": "Bruto",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "moc_pryd01",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun00",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb1",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb2",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb3",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 155,
+        "baseExp": 25,
+        "jobExp": 15
+      }
+    },
+    {
+      "id": 1015,
+      "name": "Zombie",
+      "image": "assets/data/1015.gif",
+      "level": 15,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun00",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 534,
+        "baseExp": 50,
+        "jobExp": 33
+      }
+    },
+    {
+      "id": 1076,
+      "name": "Esqueleto",
+      "image": "assets/data/1076.gif",
+      "level": 10,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun00",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 234,
+        "baseExp": 18,
+        "jobExp": 14
+      }
+    },
+    {
+      "id": 1016,
+      "name": "Esqueleto Arqueiro",
+      "image": "assets/data/1016.gif",
+      "level": 31,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3040,
+        "baseExp": 483,
+        "jobExp": 283
+      }
+    },
+     {
+      "id": 1111,
+      "name": "Drainiliar",
+      "image": "assets/data/1111.gif",
+      "level": 31,
+      "race": "Bruto",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "moc_pryd03",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "prt_sewb4",
+          "name": "Esgoto de Prontera",
+          "region": "Prontera",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1162,
+        "baseExp": 431,
+        "jobExp": 176
+      }
+    },
+    {
+      "id": 1082,
+      "name": "Planta Branca",
+      "image": "assets/data/1082.gif",
+      "level": 1,
+      "race": "Planta",
+      "element": "Terra",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_dun03",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 10,
+        "baseExp": 0,
+        "jobExp": 0
+      }
+    },
+    {
+      "id": 1026,
+      "name": "Munak",
+      "image": "assets/data/1026.gif",
+      "level": 30,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 2872,
+        "baseExp": 601,
+        "jobExp": 318
+      }
+    },
+    {
+      "id": 1188,
+      "name": "Bongun",
+      "image": "assets/data/1188.gif",
+      "level": 32,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3520,
+        "baseExp": 424,
+        "jobExp": 242
+      }
+    },
+    {
+      "id": 1186,
+      "name": "Cochicho",
+      "image": "assets/data/1186.gif",
+      "level": 34,
+      "race": "Demônio",
+      "element": "Fantasma",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5040,
+        "baseExp": 537,
+        "jobExp": 545
+      }
+    },
+    {
+      "id": 1170,
+      "name": "Sohee",
+      "image": "assets/data/1170.gif",
+      "level": 33,
+      "race": "Demônio",
+      "element": "Água",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun03",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5628,
+        "baseExp": 739,
+        "jobExp": 455
+      }
+    },
+    {
+      "id": 1129,
+      "name": "Horong",
+      "image": "assets/data/1129.gif",
+      "level": 34,
+      "race": "Amorfo",
+      "element": "Fogo",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 1939,
+        "baseExp": 786,
+        "jobExp": 479
+      }
+    },
+    {
+      "id": 1290,
+      "name": "Esqueleto General",
+      "image": "assets/data/1290.gif",
+      "level": 73,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 17402,
+        "baseExp": 8170,
+        "jobExp": 3370
+      }
+    },
+    {
+      "id": 1301,
+      "name": "Am Mut",
+      "image": "assets/data/1301.gif",
+      "level": 61,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 12099,
+        "baseExp": 7709,
+        "jobExp": 2690
+      }
+    },
+    {
+      "id": 1307,
+      "name": "Gato de Nove Caudas",
+      "image": "assets/data/1307.gif",
+      "level": 76,
+      "race": "Demônio",
+      "element": "Fogo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 64512,
+        "baseExp": 10869,
+        "jobExp": 4283
+      }
+    },
+    {
+      "id": 1028,
+      "name": "Esqueleto Soldado",
+      "image": "assets/data/1028.gif",
+      "level": 29,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun01",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        },
+        {
+          "map": "pay_dun02",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 2334,
+        "baseExp": 372,
+        "jobExp": 226
+      }
+    },
+    {
       "id": 1057,
       "name": "Yoyo",
       "image": "assets/data/1057.gif",
@@ -4194,9 +4644,9 @@
       }
     },
     {
-      "id": 1059,
+      "id": 1087,
       "name": "Orc Herói",
-      "image": "assets/data/1059.gif",
+      "image": "assets/data/1087.gif",
       "level": 77,
       "race": "Humanóide",
       "element": "Terra",
@@ -4237,6 +4687,29 @@
         "hp": 783000,
         "baseExp": 62205,
         "jobExp": 8580
+      }
+    },
+    {
+      "id": 1150,
+      "name": "Flor do Luar",
+      "image": "assets/data/1150.gif",
+      "level": 67,
+      "race": "Demônio",
+      "element": "Fogo",
+      "size": "Médio",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "pay_dun04",
+          "name": "Caverna de Payon",
+          "region": "Payon",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 120000,
+        "baseExp": 27500,
+        "jobExp": 14300
       }
     },
     {
