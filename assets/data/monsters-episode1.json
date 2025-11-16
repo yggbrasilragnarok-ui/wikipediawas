@@ -4390,6 +4390,168 @@
       }
     },
     {
+      "id": 1029,
+      "name": "Isis",
+      "image": "assets/data/1029.gif",
+      "level": 47,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+         {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 7003,
+        "baseExp": 3709,
+        "jobExp": 1550  
+      }
+    },
+    {
+      "id": 1041,
+      "name": "Múmia",
+      "image": "assets/data/1041.gif",
+      "level": 37,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd02",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "moc_pryd03",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+         {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5176,
+        "baseExp": 800,
+        "jobExp": 602  
+      }
+    },
+    {
+      "id": 1032,
+      "name": "Verit",
+      "image": "assets/data/1032.gif",
+      "level": 38,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd03",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5272,
+        "baseExp": 835,
+        "jobExp": 517  
+      }
+    },
+    {
+      "id": 1146,
+      "name": "Martyr",
+      "image": "assets/data/1146.gif",
+      "level": 38,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd03",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 2585,
+        "baseExp": 967,
+        "jobExp": 407  
+      }
+    },
+    {
+      "id": 1191,
+      "name": "Mímico",
+      "image": "assets/data/1191.gif",
+      "level": 61,
+      "race": "Amorfo",
+      "element": "Neutro",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd03",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        },
+        {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 6120,
+        "baseExp": 165,
+        "jobExp": 165  
+      }
+    },
+    {
+      "id": 1297,
+      "name": "Múmia Anciã",
+      "image": "assets/data/1297.gif",
+      "level": 64,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 40599,
+        "baseExp": 8040,
+        "jobExp": 3499  
+      }
+    },
+    {
       "id": 1138,
       "name": "Magnolia",
       "image": "assets/data/1138.gif",
@@ -4710,6 +4872,29 @@
         "hp": 120000,
         "baseExp": 27500,
         "jobExp": 14300
+      }
+    },
+    {
+      "id": 1150,
+      "name": "Osiris",
+      "image": "assets/data/1150.gif",
+      "level": 78,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "moc_pryd04",
+          "name": "Pirâmide",
+          "region": "Morroc",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 415400,
+        "baseExp": 71500,
+        "jobExp": 28600
       }
     },
     {
