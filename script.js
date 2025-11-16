@@ -4796,54 +4796,7 @@ const PAGES = {
 class: {
     title: "Classes",
     html: `
-      <section class="server-section server-section--general hero-section class-hero" aria-labelledby="classHeroTitle">
-        <div class="hero-card class-hero-card hero-card--static">
-          <div class="hero-card__background" aria-hidden="true">
-            <img src="assets/prontera.gif" alt="" loading="lazy" decoding="async" />
-            <div class="hero-card__background-overlay"></div>
-          </div>
-
-          <header class="hero-card__content">
-            <h2 class="page-title rune-text hero-card__title" id="classHeroTitle">
-              Domine as rotas de Midgard
-            </h2>
-            <p class="hero-card__lede">
-              Construa sua party com perfis táticos, evoluções completas e sinergias pensadas para cada classe base.
-            </p>
-
-            <div class="hero-card__actions">
-              <a class="btn-secondary hero-card__cta" href="#classCodex">Explorar enciclopédia</a>
-              <a class="btn-glow" href="https://wasrag.com.br" target="_blank" rel="noopener noreferrer">Fórum de Builds</a>
-            </div>
-          </header>
-
-          <dl class="hero-card__highlight-grid">
-            <div class="hero-card__highlight">
-              <dt>Classes base</dt>
-              <dd>
-                <span class="hero-card__highlight-value">6 arquétipos</span>
-                <span class="hero-card__highlight-note">Rotas completas da 1ª à 3ª evolução</span>
-              </dd>
-            </div>
-            <div class="hero-card__highlight">
-              <dt>Sinergias</dt>
-              <dd>
-                <span class="hero-card__highlight-value">Party-ready</span>
-                <span class="hero-card__highlight-note">Sugestões de combos de grupo</span>
-              </dd>
-            </div>
-            <div class="hero-card__highlight">
-              <dt>Builds</dt>
-              <dd>
-                <span class="hero-card__highlight-value">Meta &amp; fun</span>
-                <span class="hero-card__highlight-note">Rotação, atributos e equipamentos chave</span>
-              </dd>
-            </div>
-          </dl>
-        </div>
-      </section>
-
-      <section class="server-section class-codex" id="classCodex" aria-labelledby="classCodexTitle">
+            <section class="server-section class-codex" id="classCodex" aria-labelledby="classCodexTitle">
         <div class="section-header">
           <h3 class="section-title" id="classCodexTitle">Enciclopédia de Classes</h3>
         </div>
