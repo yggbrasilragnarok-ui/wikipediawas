@@ -179,7 +179,7 @@ const CLASS_SYSTEM_DATA = {
     {
       id: "swordsman",
       name: "Espadachim",
-      icon: "espadachim.png",
+      icon: "Espadachim.png",
       tagline: "Abre caminho para o grupo ",
       description:
         "Especialista em absorver dano e abrir caminho para o grupo.",
@@ -267,7 +267,7 @@ const CLASS_SYSTEM_DATA = {
     {
       id: "archer",
       name: "Arqueiro",
-      icon: "Arqueiro.png",
+      icon: "arqueiro.png",
       tagline: "Ataque à distância",
       description:
         "Controla o ritmo das batalhas a longa distância.",
@@ -303,7 +303,7 @@ const CLASS_SYSTEM_DATA = {
     {
       id: "thief",
       name: "Gatuno",
-      icon: "Gatuna.png",
+      icon: "gatuna.png",
       tagline: "Ataque duplo e roubo",
       description:
         "Especialista em ataque duplo, venenos e controle situacional.",
@@ -339,7 +339,7 @@ const CLASS_SYSTEM_DATA = {
     {
       id: "acolyte",
       name: "Noviço",
-      icon: "Novica.png",
+      icon: "novica.png",
       tagline: " Cura e Buff",
       description:
         "Dedicado a manter o grupo vivo.",
@@ -379,7 +379,7 @@ const CLASS_SYSTEM_DATA = {
     {
       id: "merchant",
       name: "Mercador",
-      icon: "Mercador.png",
+      icon: "mercador.png",
       tagline: "Essêncial para venda e compra de itens",
       description:
         "Especialista em administração de recursos.",
