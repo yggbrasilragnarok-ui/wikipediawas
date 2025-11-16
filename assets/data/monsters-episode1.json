@@ -2640,6 +2640,156 @@
       }
     },
     {
+      "id": 1035,
+      "name": "Mosca Caçadora",
+      "image": "assets/data/1035.gif",
+      "level": 42,
+      "race": "Inseto",
+      "element": "Vento",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun00",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5242,
+        "baseExp": 1517,
+        "jobExp": 952
+      }
+    },
+    {
+      "id": 1036,
+      "name": "Carniçal",
+      "image": "assets/data/1036.gif",
+      "level": 40,
+      "race": "Morto-Vivo",
+      "element": "Morto-Vivo",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 5418,
+        "baseExp": 1088,
+        "jobExp": 622
+      }
+    },
+    {
+      "id": 1130,
+      "name": "Jakk",
+      "image": "assets/data/1130.gif",
+      "level": 38,
+      "race": "Amorfo",
+      "element": "Fogo",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 3581,
+        "baseExp": 1408,
+        "jobExp": 1408
+      }
+    },
+    {
+      "id": 1204,
+      "name": "Tirfing",
+      "image": "assets/data/1204.gif",
+      "level": 71,
+      "race": "Amorfo",
+      "element": "Sombrio",
+      "size": "Médio",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 29900,
+        "baseExp": 5412,
+        "jobExp": 4235
+      }
+    },
+    {
+      "id": 1109,
+      "name": "Deviruchi",
+      "image": "assets/data/1109.gif",
+      "level": 46,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Pequeno",
+      "spawn": [
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 6666,
+        "baseExp": 2662,
+        "jobExp": 1278
+      }
+    },
+    {
+      "id": 1061,
+      "name": "Pesadelo",
+      "image": "assets/data/1061.gif",
+      "level": 49,
+      "race": "Demônio",
+      "element": "Fantasma",
+      "size": "Grande",
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        },
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 4437,
+        "baseExp": 1912,
+        "jobExp": 1912
+      }
+    },
+    {
       "id": 1014,
       "name": "Esporo",
       "image": "assets/data/1014.gif",
@@ -5258,6 +5408,52 @@
         "hp": 152000,
         "baseExp": 25025,
         "jobExp": 12870
+      }
+    },
+     {
+      "id": 1046,
+      "name": "Doppelganger",
+      "image": "assets/data/1046.gif",
+      "level": 72,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Médio",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "gef_dun02",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 249000,
+        "baseExp": 51480,
+        "jobExp": 10725
+      }
+    },
+    {
+      "id": 1389,
+      "name": "Drácula",
+      "image": "assets/data/1389.gif",
+      "level": 85,
+      "race": "Demônio",
+      "element": "Sombrio",
+      "size": "Grande",
+      "isMvp": true,
+      "spawn": [
+        {
+          "map": "gef_dun01",
+          "name": "Torre de Geffen",
+          "region": "Geffen",
+          "type": "Calabouço"
+        }
+      ],
+      "stats": {
+        "hp": 320096,
+        "baseExp": 120157,
+        "jobExp": 38870
       }
     },
     {
