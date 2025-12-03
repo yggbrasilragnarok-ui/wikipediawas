@@ -1,230 +1,1568 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Wikipédia da Was</title>
-  <link rel="stylesheet" href="styles.css" />
-  <script defer src="script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wiki Lazuli - A Enciclopédia Pokémon</title>
+    
+    <!-- React & ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        lazuli: {
+                            50: '#eef0f6',
+                            100: '#dce0ed',
+                            200: '#b8c1db',
+                            300: '#95a2c8',
+                            400: '#7483b6',
+                            500: '#324b98', // Cor Principal
+                            600: '#2d4388',
+                            700: '#263872',
+                            800: '#202e5c',
+                            900: '#1a2447',
+                        },
+                        sienna: {
+                            50: '#1a2447',
+                            100: '#ead9c0',
+                            200: '#d8b788',
+                            300: '#c79667',
+                            400: '#c08253',
+                            500: '#be8746', // Cor Secundária
+                            600: '#a8703c',
+                            700: '#8d5c32',
+                            800: '#724828',
+                            900: '#593820',
+                        },
+                        alola: {
+                            50: '#f5f3ff',
+                            100: '#ede9fe',
+                            500: '#8b5cf6',
+                            700: '#6d28d9',
+                        },
+                        galar: {
+                            50: '#fdf2f8',
+                            100: '#fce7f3',
+                            500: '#ec4899',
+                            700: '#be185d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --theme-color: #be8746;
+            --surface-color: #e5e7eb;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #324b98;
+            background-image:
+                radial-gradient(circle at 10% 20%, rgba(50, 75, 152, 0.08), transparent 30%),
+                radial-gradient(circle at 80% 0%, rgba(190, 135, 70, 0.08), transparent 25%),
+                radial-gradient(circle at 40% 80%, rgba(128, 128, 128, 0.08), transparent 30%),
+                linear-gradient(135deg, rgba(229, 231, 235, 0.85) 0%, rgba(214, 216, 220, 0.85) 50%, rgba(229, 231, 235, 0.85) 100%);
+            background-blend-mode: multiply;
+            color: var(--theme-color);
+        }
+        body, body * {
+            color: var(--theme-color) !important;
+        }
+        .bg-app { background-color: transparent; }
+        .wiki-shadow {
+            box-shadow: 0 4px 6px -1px rgba(50, 75, 152, 0.12), 0 2px 4px -1px rgba(50, 75, 152, 0.08);
+        }
+
+        .card-border,
+        .golden-card,
+        .wiki-shadow,
+        .homepage-card,
+        .home-feature-card,
+        .sidebar-tab,
+        .bg-white,
+        .bg-slate-50,
+        .bg-slate-50\/50 {
+            background-color: var(--surface-color) !important;
+            border: 2px solid var(--theme-color) !important;
+            color: var(--theme-color);
+        }
+
+        .sidebar-tab {
+            background-color: var(--surface-color);
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(128, 128, 128, 0.15), transparent 28%),
+                radial-gradient(circle at 75% 15%, rgba(128, 128, 128, 0.12), transparent 26%),
+                radial-gradient(circle at 35% 70%, rgba(128, 128, 128, 0.1), transparent 30%),
+                linear-gradient(135deg, rgba(229, 231, 235, 0.95), rgba(210, 213, 219, 0.9));
+            background-blend-mode: screen;
+            transition: box-shadow 0.2s ease, transform 0.2s ease;
+        }
+
+        .bg-white\/80 { background-color: rgba(229, 231, 235, 0.8) !important; }
+        .bg-white\/20 { background-color: rgba(229, 231, 235, 0.2) !important; }
+        .bg-white\/10 { background-color: rgba(229, 231, 235, 0.1) !important; }
+
+        .sidebar-tab:hover {
+            box-shadow: 0 10px 18px -10px rgba(50, 75, 152, 0.35);
+            transform: translateY(-1px);
+        }
+
+        .sidebar-tab-active {
+            box-shadow: 0 12px 22px -10px rgba(50, 75, 152, 0.45), 0 0 0 1px rgba(190, 135, 70, 0.4);
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #b9a082; }
+        ::-webkit-scrollbar-thumb { background: #be8746; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #324b98; }
+        
+        .animate-fade-in { animation: fadeIn 0.5s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+        .pixel-art { image-rendering: pixelated; }
+
+        .homepage-card {
+            position: relative;
+            border-color: #be8746;
+            overflow: hidden;
+        }
+
+        .home-feature-card {
+            position: relative;
+            border-color: #be8746;
+            overflow: hidden;
+        }
+
+        .homepage-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #be8746;
+            transform-origin: top;
+            transform: scaleY(0.35);
+            transition: transform 0.3s ease;
+        }
+
+        .homepage-card:hover::before {
+            transform: scaleY(1.3);
+        }
+
+        .home-feature-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 12%;
+            right: 12%;
+            height: 8px;
+            background: #be8746;
+            transform-origin: center;
+            transform: scaleX(0);
+            transition: transform 0.25s ease;
+        }
+
+        .home-feature-card:hover::before {
+            transform: scaleX(1);
+        }
+    </style>
 </head>
 <body>
-  <canvas
-    class="particle-canvas"
-    id="particleCanvas"
-    aria-hidden="true"
-  ></canvas>
-  <!-- GLOW BACKGROUND -->
-  <div class="bg-glow"></div>
+    <div id="root"></div>
 
-  <header class="topbar">
-    <button
-      class="menu-toggle"
-      id="menuToggle"
-      aria-label="Abrir menu de navegação"
-      aria-controls="sidebarNavigation"
-      aria-expanded="false"
-    >
-      <span class="menu-bar"></span>
-      <span class="menu-bar"></span>
-      <span class="menu-bar"></span>
-      <span class="menu-label">Menu</span>
-    </button>
-    <div class="brand">
-      <div class="brand-icon"><IMG src="assets/logo.png"></div>
-      <div class="brand-text">
-        <h1>Wikipédia da Was</h1>
-        <span class="subtitle">O inicio de uma aventura • Episódio 1</span>
-      </div>
-    </div>
+    <script type="text/babel">
+        const { useState, useEffect, useRef } = React;
 
-    <div class="search-wrapper">
-      <input
-        type="text"
-        id="searchInput"
-        placeholder="Buscar: classes, mapas, MVPs..."
-        aria-label="Buscar na wiki"
-      />
-      <button id="searchBtn" class="btn-glow">Buscar</button>
-    </div>
-  </header>
-
-  <main class="layout">
-    <!-- SIDEBAR -->
-    <aside class="sidebar" id="sidebarNavigation">
-      <nav class="nav-sections">
-        <h2 class="nav-title">Wikipédia</h2>
-        <ul>
-          <li class="nav-item active" data-page="home">Início</li>
-          <li class="nav-item" data-page="rules">Regras</li>
-          <li class="nav-item" data-page="server">Sobre o Servidor</li>
-          <li class="nav-item" data-page="roadmap">RoadMap</li>
-          <li class="nav-item" data-page="changelog">Changelog</li>
-          <li class="nav-item" data-page="faq">FAQ</li>
-        </ul>
-
-        <h2 class="nav-title">Sistemas</h2>
-        <ul>
-          <li class="nav-item" data-page="teleport">Sistema de Teleporte</li>
-          <li class="nav-item" data-page="seasons">Sistema de Temporada</li>
-          <li class="nav-item" data-page="explore">Sistema de Exploração</li>
-          
-        </ul>
-        <h2 class="nav-title">Database</h2>
-        <ul>
-          <li class="nav-item" data-page="class">Classes</li>
-          <li class="nav-item" data-page="field">Atlas de Midgard</li>
-          <li class="nav-item" data-page="dungeon">Calabouços</li>
-          <li class="nav-item" data-page="loot">Itens</li>
-          <li class="nav-item" data-page="monster">Monstros</li>
-          
-        </ul>
+        // --- DADOS ESTÁTICOS ---
         
-      </nav>
+        const typeTranslations = {
+            normal: "Normal", fire: "Fogo", water: "Água", grass: "Grama",
+            electric: "Elétrico", ice: "Gelo", fighting: "Lutador", poison: "Venenoso",
+            ground: "Terrestre", flying: "Voador", psychic: "Psíquico", bug: "Inseto",
+            rock: "Pedra", ghost: "Fantasma", dragon: "Dragão", steel: "Aço", fairy: "Fada"
+        };
 
-      <footer class="sidebar-footer">
-        <p class="version-label">Was Rag • Ep 1</p>
-        <p class="disclaimer">Fan server • não oficial da Gravity</p>
-      </footer>
-    </aside>
-    <div class="sidebar-backdrop" id="sidebarBackdrop" hidden></div>
+        const alolaMapping = {
+            19: 10091, 20: 10092, 26: 10100, 27: 10101, 28: 10102, 37: 10103, 38: 10104,
+            50: 10105, 51: 10106, 52: 10107, 53: 10108, 74: 10109, 75: 10110, 76: 10111,
+            88: 10112, 89: 10113, 103: 10114, 105: 10115
+        };
 
-    <!-- CONTENT AREA -->
-    <section class="content-area">
-      <!-- dynamic content goes here -->
-      <article id="pageContent">
-        <!-- Página inicial carregada por padrão -->
-        <section class="server-section server-section--general hero-section" aria-labelledby="heroTitle">
-          <div class="server-general-card hero-card hero-card--static">
-            <div class="hero-card__background" aria-hidden="true">
-              <img src="assets/mapraganrok.jpg" alt="" loading="lazy" decoding="async" />
-              <div class="hero-card__background-overlay"></div>
+        const galarMapping = {
+            52: 10161, 77: 10162, 78: 10163, 79: 10164, 80: 10165, 83: 10166,
+            110: 10167, 122: 10168, 144: 10169, 145: 10170, 146: 10171,
+            863: true // Perrserker
+        };
+
+        const naturesData = [
+            { name: "Bold", buff: "Defesa", debuff: "Ataque" },
+            { name: "Timid", buff: "Velocidade", debuff: "Ataque" },
+            { name: "Brave", buff: "Ataque", debuff: "Velocidade" },
+            { name: "Hasty", buff: "Velocidade", debuff: "Defesa" },
+            { name: "Lonely", buff: "Ataque", debuff: "Defesa" },
+            { name: "Relaxed", buff: "Defesa", debuff: "Velocidade" },
+        ];
+
+            const gymData = [
+            { leader: "Brock", type: "Pedra", badge: "Boulder Badge", location: "Pewter City", team: [74, 95] },
+            { leader: "Misty", type: "Água", badge: "Cascade Badge", location: "Cerulean City", team: [120, 121] },
+            { leader: "Lt. Surge", type: "Elétrico", badge: "Thunder Badge", location: "Vermilion City", team: [100, 25, 26] },
+            { leader: "Erika", type: "Grama", badge: "Rainbow Badge", location: "Celadon City", team: [71, 114, 45] },
+            { leader: "Koga", type: "Venenoso", badge: "Soul Badge", location: "Fuchsia City", team: [109, 89, 110, 49] },
+            { leader: "Sabrina", type: "Psíquico", badge: "Marsh Badge", location: "Saffron City", team: [64, 122, 49, 65] },
+            { leader: "Blaine", type: "Fogo", badge: "Volcano Badge", location: "Cinnabar Island", team: [58, 77, 78, 59] },
+            { leader: "Giovanni", type: "Terrestre", badge: "Earth Badge", location: "Viridian City", team: [111, 51, 31, 34, 112] }
+        ];
+
+        const eliteFourData = [
+            { name: "Lorelei", type: "Gelo", team: [87, 91, 80, 124, 131] },
+            { name: "Bruno", type: "Lutador", team: [95, 107, 106, 95, 68] },
+            { name: "Agatha", type: "Fantasma", team: [94, 42, 93, 24, 94] },
+            { name: "Lance", type: "Dragão", team: [130, 148, 148, 142, 149] }
+        ];
+
+        const heldItemsExample = [
+            { name: "Leftovers", desc: "Cura um pouco de HP a cada turno.", tierA: "1/16 HP", tierB: "1/20 HP", tierC: "1/24 HP" },
+            { name: "Choice Band", desc: "Aumenta Ataque, mas trava em um golpe.", tierA: "+50% Atk", tierB: "+30% Atk", tierC: "+15% Atk" },
+            { name: "Rocky Helmet", desc: "Causa dano ao contato físico.", tierA: "1/6 Dano", tierB: "1/8 Dano", tierC: "1/10 Dano" },
+            { name: "Life Orb", desc: "Aumenta dano, mas perde HP ao atacar.", tierA: "+30% Dano", tierB: "+20% Dano", tierC: "+10% Dano" },
+        ];
+
+        // --- COMPONENTES AUXILIARES ---
+
+        const Icon = ({ name, size = 20, className = "" }) => {
+            useEffect(() => {
+                if (window.lucide) window.lucide.createIcons();
+            });
+            return <i data-lucide={name} className={className} style={{ width: size, height: size, display: 'inline-block', verticalAlign: 'middle' }}></i>;
+        };
+
+        const TypeBadge = ({ type }) => {
+            if (!type) return null;
+            const colors = {
+                "Grama": "bg-green-100 text-green-700 border-green-200",
+                "Venenoso": "bg-purple-100 text-purple-700 border-purple-200",
+                "Fogo": "bg-orange-100 text-orange-700 border-orange-200",
+                "Água": "bg-blue-100 text-blue-700 border-blue-200",
+                "Elétrico": "bg-yellow-100 text-yellow-700 border-yellow-200",
+                "Normal": "bg-gray-100 text-gray-700 border-gray-200",
+                "Psíquico": "bg-pink-100 text-pink-700 border-pink-200",
+                "Lutador": "bg-red-100 text-red-700 border-red-200",
+                "Aço": "bg-slate-300 text-slate-700 border-slate-400",
+                "Fada": "bg-pink-200 text-pink-800 border-pink-300",
+                "Inseto": "bg-lime-100 text-lime-700 border-lime-200",
+                "Voador": "bg-sky-100 text-sky-700 border-sky-200",
+                "Terrestre": "bg-amber-100 text-amber-700 border-amber-200",
+                "Pedra": "bg-stone-200 text-stone-700 border-stone-300",
+                "Fantasma": "bg-indigo-100 text-indigo-700 border-indigo-200",
+                "Gelo": "bg-cyan-100 text-cyan-700 border-cyan-200",
+                "Dragão": "bg-violet-100 text-violet-700 border-violet-200"
+            };
+            const style = colors[type] || "bg-gray-100 text-gray-700 border-gray-200";
+            return <span className={`px-2 py-0.5 rounded-full text-xs font-semibold border ${style} mr-1 mb-1 inline-block`}>{type}</span>;
+        };
+
+        const NavButton = ({ active, onClick, icon, label }) => (
+            <button
+                onClick={onClick}
+                className={`sidebar-tab flex items-center space-x-3 w-full p-3 rounded-lg transition-all duration-200 border-2 border-[#be8746] text-[#be8746] ${
+                    active
+                    ? 'bg-[#be8746]/10 shadow-md sidebar-tab-active'
+                    : 'hover:bg-[#be8746]/10'
+                }`}
+            >
+                <Icon name={icon} size={20} />
+                <span className="font-medium">{label}</span>
+            </button>
+        );
+
+        const PokemonCard = ({ pokemon, onClick }) => (
+            <div
+                onClick={() => onClick(pokemon)}
+                className="bg-white rounded-xl p-4 cursor-pointer hover:shadow-xl transition-all duration-300 group wiki-shadow h-full homepage-card golden-card"
+            >
+                <div className="relative bg-slate-50 rounded-lg p-4 mb-3 group-hover:bg-lazuli-50 transition-colors">
+                    <img
+                        src={pokemon.image}
+                        alt={pokemon.name}
+                        className="w-32 h-32 mx-auto object-contain drop-shadow-sm group-hover:scale-110 transition-transform duration-300"
+                        loading="lazy"
+                    />
+                    <span className="absolute top-2 right-2 text-xs font-bold text-[#be8746]">#{String(pokemon.id).padStart(3, '0')}</span>
+                </div>
+                <h3 className="text-lg font-bold text-[#be8746] mb-1 capitalize">{pokemon.name}</h3>
+                <div className="flex flex-wrap gap-1 min-h-[24px] mb-2">
+                    {pokemon.types.length > 0 ? (
+                        pokemon.types.map(t => <TypeBadge key={t} type={t} />)
+                    ) : (
+                        <span className="text-xs text-slate-400">Carregando...</span>
+                    )}
+                </div>
+                
+                <div className="flex flex-wrap gap-2 mt-2">
+                    {alolaMapping[pokemon.id] && (
+                        <span className="text-[10px] font-bold text-alola-700 bg-alola-50 border border-alola-100 px-2 py-0.5 rounded-full flex items-center">
+                            <Icon name="globe" size={10} className="mr-1" /> Alola
+                        </span>
+                    )}
+                    {galarMapping[pokemon.id] && (
+                        <span className="text-[10px] font-bold text-galar-700 bg-galar-50 border border-galar-100 px-2 py-0.5 rounded-full flex items-center">
+                            <Icon name="shield" size={10} className="mr-1" /> Galar
+                        </span>
+                    )}
+                </div>
             </div>
+        );
 
-            <header class="hero-card__content">
-              <h2 class="page-title rune-text hero-card__title" id="heroTitle">
-                O retorno a Rune-Midgard começa aqui
-              </h2>
-              <p class="hero-card__lede">
-                Respire o ar nostálgico de <strong>Ragnarok Online</strong> com um toque moderno.
-                Monte seu grupo, reviva Prontera ao luar e acompanhe cada passo do servidor em um único lugar.
-              </p>
+        const StatBar = ({ label, value, max, color }) => (
+            <div className="flex items-center">
+                <span className="w-20 text-xs font-bold text-slate-600 uppercase">{label}</span>
+                <div className="flex-1 bg-slate-200 rounded-full h-2 overflow-hidden mx-2">
+                    <div className={`h-2 rounded-full ${color}`} style={{ width: `${Math.min((value / max) * 100, 100)}%` }}></div>
+                </div>
+                <span className="w-8 text-right text-xs font-bold text-slate-700">{value}</span>
+            </div>
+        );
 
-              <div class="hero-card__actions">
-                <a class="btn-glow" href="https://wasrag.com.br" target="_blank" rel="noopener noreferrer">Entre no Site</a>
-                <a class="btn-secondary" href="https://discord.gg/wasrag" target="_blank" rel="noopener noreferrer">
-                   Entre no Discord
-                </a>
-                <a class="btn-glow hero-card__cta" href="https://download" target="_blank" rel="noopener noreferrer">Faça o Download</a>
+        const InfoRow = ({ label, value }) => (
+            <div className="flex justify-between border-b border-slate-100 pb-2 last:border-0"><span className="font-bold text-slate-700">{label}</span><span className="text-slate-600 text-right max-w-[150px] truncate" title={value}>{value}</span></div>
+        );
 
-              </div>
-            </header>
+        // --- VIEWS ---
 
-            <dl class="hero-card__highlight-grid">
-              <div class="hero-card__highlight">
-                <dt>Episódio atual</dt>
-                <dd>
-                  <span class="hero-card__highlight-value">Episódio 1</span>
-                  <span class="hero-card__highlight-note">Prontera renasce e abre as portas da aventura</span>
-                </dd>
-              </div>
-              <div class="hero-card__highlight">
-                <dt>Estilo de progressão</dt>
-                <dd>
-                  <span class="hero-card__highlight-value">Temporadas escaláveis</span>
-                  <span class="hero-card__highlight-note">Do casual ao impossível, escolha seu desafio</span>
-                </dd>
-              </div>
-              <div class="hero-card__highlight">
-                <dt>Missões do mundo</dt>
-                <dd>
-                  <span class="hero-card__highlight-value">Eventos em tempo real</span>
-                  <span class="hero-card__highlight-note">Reviva raids clássicas com recompensas inéditas</span>
-                </dd>
-              </div>
-            </dl>
+        const DetailView = ({ pokemon, onBack }) => {
+            const [fullData, setFullData] = useState(null);
+            const [alolaData, setAlolaData] = useState(null);
+            const [galarData, setGalarData] = useState(null);
+            const [loading, setLoading] = useState(true);
 
-        <section class="server-section" aria-labelledby="wikiHighlightsTitle">
-          <div class="section-header">
-            <h3 class="section-title" id="wikiHighlightsTitle">O que você encontrará aqui...</h3>
-          </div>
+            useEffect(() => {
+                if(!pokemon) return;
+                setLoading(true);
+                setAlolaData(null);
+                setGalarData(null);
 
-          <div class="feature-grid" role="list">
-            <article class="feature-card" role="listitem">
-              <span class="feature-card__icon" aria-hidden="true">✨</span>
-              <h4 class="feature-card__title">Guias cinematográficos</h4>
-              <p class="feature-card__description">
-                Cada sistema — teleporte, temporadas ou exploração — ganha painéis passo a passo com âncoras, mapas e
-                infográficos em pixel art.
-              </p>
-            </article>
-            <article class="feature-card" role="listitem">
-              <span class="feature-card__icon" aria-hidden="true">📚</span>
-              <h4 class="feature-card__title">Database viva</h4>
-              <p class="feature-card__description">
-                Consulte monstros, itens e cidades alinhados ao episódio vigente com filtros rápidos e chips de mapa
-                para copiar o /where.
-              </p>
-            </article>
-            <article class="feature-card" role="listitem">
-              <span class="feature-card__icon" aria-hidden="true">🛡️</span>
-              <h4 class="feature-card__title">Regra clara, diversão justa</h4>
-              <p class="feature-card__description">
-                Roadmap transparente, changelog elegante e painéis de temporada ajudam seu clã a se organizar sem
-                perder o clima nostálgico.
-              </p>
-            </article>
-            <article class="feature-card" role="listitem">
-              <span class="feature-card__icon" aria-hidden="true">🎵</span>
-              <h4 class="feature-card__title">Atmosfera sonora</h4>
-              <p class="feature-card__description">
-                Sugestões de playlists e efeitos sonoros temáticos acompanham os guias para trazer de volta a sensação
-                de logar no começo dos anos 2000.
-              </p>
-            </article>
-        <section class="wiki-preview" aria-labelledby="previewHeading">
-          <div class="wiki-preview__header">
-            <h3 class="section-title" id="previewHeading">O que você encontra por aqui</h3>
-            <p class="section-subtitle">
-              Use a navegação lateral para mergulhar em sistemas, regras e banco de dados sempre alinhados ao episódio atual.
-            </p>
-          </div>
-          <div class="wiki-preview__grid">
-            <article class="wiki-panel">
-              <h4 class="wiki-panel__title">Guias de sistemas</h4>
-              <p class="wiki-panel__body">Entenda teleporte, temporadas, exploração e recursos exclusivos do Was Rag.</p>
-            </article>
-            <article class="wiki-panel">
-              <h4 class="wiki-panel__title">Database atualizada</h4>
-              <p class="wiki-panel__body">Classes, mapas, monstros e itens revisados para o conteúdo vigente.</p>
-            </article>
-            <article class="wiki-panel">
-              <h4 class="wiki-panel__title">Roadmap transparente</h4>
-              <p class="wiki-panel__body">Veja o que está em construção e organize seu clã para o próximo episódio.</p>
-            </article>
-            <article class="wiki-panel">
-              <h4 class="wiki-panel__title">Atualizações e regras</h4>
-              <p class="wiki-panel__body">Consulte changelog, normas e políticas para garantir partidas justas.</p>
-            </article>
-          </div>
-        </section>
+                fetch(`https://pokeapi.co/api/v2/pokemon/${pokemon.id}`)
+                    .then(r => r.json())
+                    .then(pokeData => {
+                        setFullData({
+                            ...pokemon,
+                            stats: {
+                                hp: pokeData.stats[0].base_stat,
+                                atk: pokeData.stats[1].base_stat,
+                                def: pokeData.stats[2].base_stat,
+                                spAtk: pokeData.stats[3].base_stat,
+                                spDef: pokeData.stats[4].base_stat,
+                                spd: pokeData.stats[5].base_stat
+                            },
+                            types: pokeData.types.map(t => typeTranslations[t.type.name] || t.type.name),
+                            height: pokeData.height / 10 + " m",
+                            weight: pokeData.weight / 10 + " kg",
+                        });
+                        setLoading(false);
 
-        <section class="cta-banner" aria-label="Convite para jogar">
-          <div class="cta-banner__content">
-            <h3 class="cta-banner__title">Pronto para reunir a party?</h3>
-            <p class="cta-banner__subtitle">Baixe o cliente atualizado e embarque com a comunidade no universo do Was Rag.</p>
-          </div>
-          <a class="btn-pill" href="https://wasrag.com/download" target="_blank" rel="noopener noreferrer">
-            <span class="btn-pill__label">Download do jogo</span>
-            <span class="btn-pill__hint">Instale e comece já</span>
-          </a>
-        </section>
-      </article>
-    </section>
-  </main>
+                        const alolaId = alolaMapping[pokemon.id];
+                        if (alolaId) {
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${alolaId}`)
+                                .then(r => r.json())
+                                .then(aData => {
+                                    setAlolaData({
+                                        id: alolaId,
+                                        name: aData.name,
+                                        image: aData.sprites.other['official-artwork'].front_default,
+                                        types: aData.types.map(t => typeTranslations[t.type.name] || t.type.name),
+                                        height: aData.height / 10 + " m",
+                                        weight: aData.weight / 10 + " kg",
+                                        stats: {
+                                            hp: aData.stats[0].base_stat,
+                                            atk: aData.stats[1].base_stat,
+                                            def: aData.stats[2].base_stat,
+                                            spAtk: aData.stats[3].base_stat,
+                                            spDef: aData.stats[4].base_stat,
+                                            spd: aData.stats[5].base_stat
+                                        }
+                                    });
+                                });
+                        }
 
-  <footer class="bottom-footer">
-    <p>&copy; Was Rag. Servidor fã, sem fins comerciais oficiais. Ragnarok Online é propriedade da Gravity Co., Ltd.</p>
-  </footer>
+                        const galarId = galarMapping[pokemon.id];
+                        if (galarId) {
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${galarId}`)
+                                .then(r => r.json())
+                                .then(gData => {
+                                    setGalarData({
+                                        id: galarId,
+                                        name: gData.name,
+                                        image: gData.sprites.other['official-artwork'].front_default,
+                                        types: gData.types.map(t => typeTranslations[t.type.name] || t.type.name),
+                                        height: gData.height / 10 + " m",
+                                        weight: gData.weight / 10 + " kg",
+                                        stats: {
+                                            hp: gData.stats[0].base_stat,
+                                            atk: gData.stats[1].base_stat,
+                                            def: gData.stats[2].base_stat,
+                                            spAtk: gData.stats[3].base_stat,
+                                            spDef: gData.stats[4].base_stat,
+                                            spd: gData.stats[5].base_stat
+                                        }
+                                    });
+                                });
+                        }
+                    })
+                    .catch(err => {
+                        console.error(err);
+                        setLoading(false);
+                    });
+            }, [pokemon]);
+
+            if (!pokemon) return null;
+
+            return (
+                <div className="animate-fade-in pb-10 space-y-8">
+                    <button onClick={onBack} className="mb-4 flex items-center text-lazuli-600 hover:underline">
+                        <Icon name="arrow-left" className="mr-1" /> Voltar
+                    </button>
+                    
+                    <div className="flex flex-col lg:flex-row gap-6">
+                        <div className="flex-1">
+                            <h1 className="text-4xl font-extrabold text-slate-800 mb-2 capitalize">{pokemon.name} <span className="text-lg text-slate-400 font-normal">(Kanto)</span></h1>
+                            {loading ? <div className="h-4 bg-slate-200 rounded w-full animate-pulse mb-6"></div> : null}
+
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow mb-6">
+                                <h2 className="text-xl font-bold text-lazuli-900 mb-4 flex items-center"><Icon name="bar-chart-2" className="mr-2" /> Stats Base</h2>
+                                {loading || !fullData ? <div className="text-center text-slate-400">Carregando stats...</div> : (
+                                    <div className="space-y-3">
+                                        <StatBar label="HP" value={fullData.stats.hp} max={255} color="bg-green-500" />
+                                        <StatBar label="Ataque" value={fullData.stats.atk} max={190} color="bg-red-500" />
+                                        <StatBar label="Defesa" value={fullData.stats.def} max={230} color="bg-blue-500" />
+                                        <StatBar label="Speed" value={fullData.stats.spd} max={180} color="bg-yellow-500" />
+                                    </div>
+                                )}
+                            </div>
+
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow mb-6">
+                                <h2 className="text-xl font-bold text-lazuli-900 mb-4 flex items-center"><Icon name="map" className="mr-2" /> Localização e Habitat</h2>
+                                <div className="bg-lazuli-50 p-4 rounded-lg border border-lazuli-100">
+                                    <div className="w-full h-48 bg-white border-2 border-dashed border-lazuli-300 rounded-lg mb-4 flex flex-col items-center justify-center text-lazuli-400 cursor-pointer hover:bg-lazuli-50 transition">
+                                        <Icon name="image" size={32} className="mb-2" />
+                                        <span className="text-sm font-medium">Clique para adicionar Mapa/Imagem</span>
+                                    </div>
+                                    <div className="space-y-2">
+                                        <h3 className="font-bold text-slate-700 text-sm uppercase tracking-wide">Onde encontrar:</h3>
+                                        <p className="text-base text-slate-600 italic bg-white p-3 rounded border border-lazuli-100">
+                                            Este Pokémon pode ser encontrado em áreas de grama alta próximas à Cidade de [Nome] ou em cavernas escuras. (Editar Manualmente)
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="w-full lg:w-80 shrink-0">
+                            <div className="bg-white border border-lazuli-200 rounded-xl overflow-hidden shadow-sm card-border">
+                                <div className="bg-lazuli-500 text-white p-3 text-center font-bold text-lg capitalize">{pokemon.name}</div>
+                                <div className="p-4 bg-slate-50 flex justify-center border-b border-slate-100">
+                                    <img src={pokemon.image} className="w-48 h-48 object-contain pixel-art" />
+                                </div>
+                                <div className="p-4 space-y-3 text-sm">
+                                    <InfoRow label="ID" value={`#${String(pokemon.id).padStart(3, '0')}`} />
+                                    <InfoRow label="Tipo" value={fullData?.types?.join(" / ") || "..."} />
+                                    <InfoRow label="Altura" value={fullData?.height || "..."} />
+                                    <InfoRow label="Peso" value={fullData?.weight || "..."} />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {alolaData && (
+                        <div className="mt-8 pt-8 border-t-4 border-alola-100">
+                            <div className="flex items-center mb-6">
+                                <h1 className="text-3xl font-extrabold text-alola-700 capitalize mr-3">{pokemon.name} Alola</h1>
+                                <span className="bg-alola-500 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Forma Regional</span>
+                            </div>
+                            <div className="flex flex-col lg:flex-row gap-6">
+                                <div className="flex-1">
+                                    <div className="bg-white p-6 rounded-xl border border-alola-100 wiki-shadow mb-6">
+                                        <h2 className="text-xl font-bold text-alola-700 mb-4 flex items-center"><Icon name="bar-chart-2" className="mr-2" /> Stats Base (Alola)</h2>
+                                        <div className="space-y-3">
+                                            <StatBar label="HP" value={alolaData.stats.hp} max={255} color="bg-green-500" />
+                                            <StatBar label="Ataque" value={alolaData.stats.atk} max={190} color="bg-red-500" />
+                                            <StatBar label="Defesa" value={alolaData.stats.def} max={230} color="bg-blue-500" />
+                                            <StatBar label="Speed" value={alolaData.stats.spd} max={180} color="bg-yellow-500" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="w-full lg:w-80 shrink-0">
+                                    <div className="bg-white border border-alola-200 rounded-xl overflow-hidden shadow-sm card-border">
+                                        <div className="bg-alola-500 text-white p-3 text-center font-bold text-lg capitalize">{pokemon.name} Alola</div>
+                                        <div className="p-4 bg-alola-50 flex justify-center border-b border-slate-100">
+                                            <img src={alolaData.image} className="w-48 h-48 object-contain pixel-art" />
+                                        </div>
+                                        <div className="p-4 space-y-3 text-sm">
+                                            <InfoRow label="ID Alola" value={`#${alolaData.id}`} />
+                                            <InfoRow label="Tipo" value={alolaData.types.join(" / ")} />
+                                            <InfoRow label="Altura" value={alolaData.height} />
+                                            <InfoRow label="Peso" value={alolaData.weight} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {galarData && (
+                        <div className="mt-8 pt-8 border-t-4 border-galar-100">
+                            <div className="flex items-center mb-6">
+                                <h1 className="text-3xl font-extrabold text-galar-700 capitalize mr-3">{pokemon.name} Galar</h1>
+                                <span className="bg-galar-500 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-wide">Forma Regional</span>
+                            </div>
+                            <div className="flex flex-col lg:flex-row gap-6">
+                                <div className="flex-1">
+                                    <div className="bg-white p-6 rounded-xl border border-galar-100 wiki-shadow mb-6">
+                                        <h2 className="text-xl font-bold text-galar-700 mb-4 flex items-center"><Icon name="bar-chart-2" className="mr-2" /> Stats Base (Galar)</h2>
+                                        <div className="space-y-3">
+                                            <StatBar label="HP" value={galarData.stats.hp} max={255} color="bg-green-500" />
+                                            <StatBar label="Ataque" value={galarData.stats.atk} max={190} color="bg-red-500" />
+                                            <StatBar label="Defesa" value={galarData.stats.def} max={230} color="bg-blue-500" />
+                                            <StatBar label="Speed" value={galarData.stats.spd} max={180} color="bg-yellow-500" />
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div className="w-full lg:w-80 shrink-0">
+                                    <div className="bg-white border border-galar-200 rounded-xl overflow-hidden shadow-sm card-border">
+                                        <div className="bg-galar-500 text-white p-3 text-center font-bold text-lg capitalize">{pokemon.name} Galar</div>
+                                        <div className="p-4 bg-galar-50 flex justify-center border-b border-slate-100">
+                                            <img src={galarData.image} className="w-48 h-48 object-contain pixel-art" />
+                                        </div>
+                                        <div className="p-4 space-y-3 text-sm">
+                                            <InfoRow label="ID Galar" value={`#${galarData.id}`} />
+                                            <InfoRow label="Tipo" value={galarData.types.join(" / ")} />
+                                            <InfoRow label="Altura" value={galarData.height} />
+                                            <InfoRow label="Peso" value={galarData.weight} />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+        const HeldItemsView = () => {
+            return (
+                <div className="animate-fade-in space-y-8">
+                    <div className="bg-[#202e5c] rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-extrabold mb-4 flex items-center">
+                                <Icon name="backpack" className="mr-3 text-yellow-200" size={32} />
+                                Held Itens & Tiers
+                            </h1>
+                            <p className="text-orange-50 text-lg leading-relaxed max-w-2xl">
+                                Estratégia é tudo. Um único item pode mudar o rumo da batalha, mas nem todos os itens são forjados igualmente.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                        <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                            <Icon name="swords" className="mr-2 text-lazuli-600" />
+                            A Escolha Estratégica
+                        </h2>
+                        <div className="text-slate-600 leading-relaxed space-y-4 text-justify">
+                            <p>
+                                Nós chamamos isso de <strong>Held Items</strong>. Seu Pokémon pode segurar <strong>apenas um objeto</strong> durante a batalha. Apenas um! Isso significa que você tem que tomar uma decisão difícil: você quer que seu Squirtle aguente mais pancadas? Ou quer que ele bata com força total?
+                            </p>
+                            <p>
+                                Uma <em>Leftovers</em> pode garantir que ele se cure sozinho, enquanto uma <em>Choice Band</em> pode fazer o soco dele quebrar pedras. Os itens seguem a lógica clássica dos consoles, mas aqui existe um detalhe crucial: <strong>a qualidade da fabricação</strong>.
+                            </p>
+                            <p>
+                                Eles são divididos em 3 Tiers: <strong>Classe A, B e C</strong>. Onde A é superior a B, e B é superior a C.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-xl border border-slate-200 wiki-shadow overflow-hidden">
+                        <div className="bg-lazuli-50 p-4 border-b border-lazuli-100 flex items-center">
+                            <Icon name="shield-alert" className="text-lazuli-600 mr-2" size={20} />
+                            <h2 className="text-lg font-bold text-lazuli-900">A Diferença de Classe: Exemplo Rocky Helmet</h2>
+                        </div>
+                        <div className="grid md:grid-cols-2">
+                            <div className="p-6 border-b md:border-b-0 md:border-r border-slate-100 bg-slate-50/50">
+                                <div className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Iniciante</div>
+                                <h3 className="text-xl font-bold text-slate-600 mb-2">Classe C (Nerfada)</h3>
+                                <p className="text-sm text-slate-500 mb-4 italic">"Todo arranhado e desgastado."</p>
+                                <p className="text-slate-700 text-sm">
+                                    Ele ajuda, claro. Machuca um pouco quem te ataca (apenas <strong>1/10</strong> do dano). É o que você encontrará no começo de sua jornada. Melhor que nada, mas longe do ideal.
+                                </p>
+                            </div>
+                            <div className="p-6 bg-yellow-50/30">
+                                <div className="text-xs font-bold text-yellow-600 uppercase tracking-widest mb-2">Elite</div>
+                                <h3 className="text-xl font-bold text-yellow-700 mb-2">Classe A (Obra-Prima)</h3>
+                                <p className="text-sm text-yellow-600 mb-4 italic">"Material denso e pontas afiadas."</p>
+                                <p className="text-slate-700 text-sm">
+                                    O material é tão denso que quem ousar tocar no seu Pokémon vai se arrepender amargamente (retorna <strong>1/6</strong> do dano). A diferença de poder entre um item Classe C e um Classe A pode definir o vencedor de um torneio.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="bg-white rounded-xl border border-slate-200 wiki-shadow overflow-hidden">
+                        <div className="bg-slate-100 p-4 border-b border-slate-200 font-bold text-slate-700">
+                            Escala de Poder dos Itens
+                        </div>
+                        <div className="overflow-x-auto">
+                            <table className="w-full text-left text-sm text-slate-600">
+                                <thead className="bg-slate-50 text-slate-500 uppercase font-bold text-xs">
+                                    <tr>
+                                        <th className="px-6 py-3">Item</th>
+                                        <th className="px-6 py-3">Efeito Base</th>
+                                        <th className="px-6 py-3 text-slate-400">Classe C</th>
+                                        <th className="px-6 py-3 text-slate-500">Classe B</th>
+                                        <th className="px-6 py-3 text-green-600 bg-green-50">Classe A</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    {heldItemsExample.map((item, idx) => (
+                                        <tr key={idx} className="hover:bg-slate-50">
+                                            <td className="px-6 py-4 font-bold text-slate-800">{item.name}</td>
+                                            <td className="px-6 py-4 text-xs">{item.desc}</td>
+                                            <td className="px-6 py-4 text-slate-500">{item.tierC}</td>
+                                            <td className="px-6 py-4 font-medium">{item.tierB}</td>
+                                            <td className="px-6 py-4 font-bold text-green-700 bg-green-50/50">{item.tierA}</td>
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const PersistenceView = () => {
+            return (
+                <div className="animate-fade-in space-y-8">
+                    {/* Header */}
+                    <div className="bg-[#202e5c] rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-extrabold mb-2 flex items-center">
+                                <Icon name="repeat" className="mr-3 text-yellow-300" size={32} />
+                                Lei da Persistência
+                            </h1>
+                            <p className="text-teal-50 text-lg leading-relaxed max-w-2xl">
+                                Quando a sorte falha, a teimosia prevalece. Entenda o sistema que garante que nenhum esforço seja em vão.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Lore & Explanation */}
+                    <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                        <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                            <Icon name="link" className="mr-2 text-lazuli-600" />
+                            O Vínculo do Destino
+                        </h2>
+                        <div className="text-slate-600 leading-relaxed space-y-4 text-justify">
+                            <p>
+                                Aqui, a natureza recompensa a teimosia. Nós chamamos de <strong>Lei da Persistência</strong>. Entenda: cada vez que uma Pokébola falha, você não está perdendo... está criando um vínculo, sintonizando sua energia com a daquele Pokémon.
+                            </p>
+                            <p>
+                                Se você não desistir, chegará um momento em que a captura deixa de ser sorte e vira destino! Pode demorar, mas se você se mantiver firme, o universo conspira a seu favor e a captura será inevitável. A persistência sempre vence o azar aqui.
+                            </p>
+                            <div className="bg-lazuli-50 border-l-4 border-lazuli-500 p-4 rounded-r-lg mt-4">
+                                <h3 className="font-bold text-lazuli-900 mb-1">Mecânica de Piedade (Pity System):</h3>
+                                <p className="text-sm">
+                                    Cada pokémon tem um <strong>número máximo de tentativas</strong> que garante a captura em 100%. Por exemplo, se um pokémon tem uma chance baixa de captura e o treinador está azarado, ele pode apelar para este sistema.
+                                </p>
+                                <p className="text-sm mt-2">
+                                    Supondo que um Pokémon não esteja num tier muito elevado, ele precisaria de ao menos <strong>150 tentativas</strong> para garantir a captura. A captura pode ocorrer antes dependendo da sorte, mas o sistema assegura o sucesso ao atingir o limite de falhas.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Visualization */}
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                            <h3 className="font-bold text-slate-800 mb-4 flex items-center">
+                                <Icon name="bar-chart" className="mr-2 text-slate-500" />
+                                Probabilidade vs. Persistência
+                            </h3>
+                            <div className="space-y-4">
+                                <div className="relative pt-6 pb-2">
+                                    <div className="flex justify-between text-xs font-bold text-slate-500 mb-1">
+                                        <span>Tentativa 1 (Sorte Pura)</span>
+                                        <span>Tentativa 150 (Destino)</span>
+                                    </div>
+                                    <div className="h-4 bg-slate-100 rounded-full overflow-hidden flex">
+                                        <div className="w-5 bg-red-400"></div> {/* Base chance */}
+                                        <div className="flex-1 bg-gradient-to-r from-red-400 via-yellow-400 to-green-500"></div> {/* Pity buildup */}
+                                    </div>
+                                    <div className="flex justify-between text-[10px] text-slate-400 mt-1">
+                                        <span>Chance Base</span>
+                                        <span>100% Garantido</span>
+                                    </div>
+                                </div>
+                                <p className="text-xs text-slate-500 text-center italic">
+                                    "A cada falha, a barra invisível do destino se preenche um pouco mais."
+                                </p>
+                            </div>
+                        </div>
+
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                            <h3 className="font-bold text-slate-800 mb-4 flex items-center">
+                                <Icon name="list" className="mr-2 text-slate-500" />
+                                Tabela de Garantia (Estimada)
+                            </h3>
+                            <table className="w-full text-sm text-left text-slate-600">
+                                <thead className="bg-slate-50 text-slate-700 font-bold">
+                                    <tr>
+                                        <th className="px-3 py-2">Raridade</th>
+                                        <th className="px-3 py-2 text-right">Falhas Necessárias</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-slate-100">
+                                    <tr>
+                                        <td className="px-3 py-2">Comum (Tier 1)</td>
+                                        <td className="px-3 py-2 text-right font-bold text-lazuli-600">50</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-3 py-2">Incomum (Tier 2)</td>
+                                        <td className="px-3 py-2 text-right font-bold text-lazuli-600">150</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-3 py-2">Raro (Tier 3)</td>
+                                        <td className="px-3 py-2 text-right font-bold text-lazuli-600">300</td>
+                                    </tr>
+                                    <tr>
+                                        <td className="px-3 py-2 text-yellow-600 font-bold">Lendário</td>
+                                        <td className="px-3 py-2 text-right font-bold text-yellow-600">600+</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            );
+        };
+
+        const PotentialView = () => {
+            const [activeTab, setActiveTab] = useState('base'); // base, nature, alola, shiny
+
+            return (
+                <div className="animate-fade-in space-y-8">
+                    {/* Header */}
+                    <div className="bg-[#202e5c] rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                        <div className="relative z-10">
+                            <h1 className="text-3xl font-extrabold mb-2 flex items-center">
+                                <Icon name="zap" className="mr-3 text-yellow-300" size={32} />
+                                Potencial Oculto
+                            </h1>
+                            <p className="text-indigo-100 text-lg leading-relaxed max-w-2xl">
+                                Descubra as mecânicas que separam os comuns das lendas.
+                            </p>
+                        </div>
+                        {/* Sub-tabs Navigation */}
+                        <div className="flex mt-6 bg-black/20 rounded-lg p-1 backdrop-blur-sm w-fit relative z-10 overflow-x-auto">
+                            <button onClick={() => setActiveTab('base')} className={`px-4 py-2 rounded-md text-sm font-bold transition whitespace-nowrap ${activeTab === 'base' ? 'bg-white text-indigo-700 shadow' : 'text-white/70 hover:text-white'}`}>Status Base</button>
+                            <button onClick={() => setActiveTab('nature')} className={`px-4 py-2 rounded-md text-sm font-bold transition whitespace-nowrap ${activeTab === 'nature' ? 'bg-white text-indigo-700 shadow' : 'text-white/70 hover:text-white'}`}>Natureza</button>
+                            <button onClick={() => setActiveTab('alola')} className={`px-4 py-2 rounded-md text-sm font-bold transition whitespace-nowrap ${activeTab === 'alola' ? 'bg-white text-indigo-700 shadow' : 'text-white/70 hover:text-white'}`}>Alola</button>
+                            <button onClick={() => setActiveTab('shiny')} className={`px-4 py-2 rounded-md text-sm font-bold transition whitespace-nowrap ${activeTab === 'shiny' ? 'bg-white text-indigo-700 shadow' : 'text-white/70 hover:text-white'}`}>Shiny</button>
+                        </div>
+                    </div>
+
+                    {/* Conteúdo das Abas */}
+                    {activeTab === 'base' && (
+                        <div className="space-y-6">
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                    <Icon name="activity" className="mr-2 text-lazuli-600" />
+                                    A Genética do Poder
+                                </h2>
+                                <div className="text-slate-600 leading-relaxed space-y-4 text-justify">
+                                    <p>
+                                        Cada pokémon tem um <strong>status base máximo</strong> que pode atingir, mas quando ele nasce na natureza ou no daycare é raro chegar a esse máximo de status. Normalmente, o poder varia com um valor bem inferior, como por exemplo <strong>60%</strong> do valor máximo (Gap Genético).
+                                    </p>
+                                    <p>
+                                        Entretanto, ocorre um milagre genético quando se atinge <strong>95% ou mais</strong> desse valor: o pokémon aparece sendo <strong>Shiny</strong> (coloração diferente da normal).
+                                    </p>
+                                    <p>
+                                        Escute bem: Isso não é só uma cor bonita! A energia extra rompe os limites da espécie. Um <strong>Pokémon Shiny</strong> é, naturalmente, <strong>30% mais poderoso</strong> que um normal, ultrapassando até mesmo o que a ciência achava possível! E não para por aí.
+                                    </p>
+                                    <p>
+                                        Os ventos do continente perdido trouxeram as <strong>Formas Alola</strong>. Devido ao ambiente hostil de onde vieram, eles já nascem com uma estrutura de combate superior, cerca de <strong>10% mais fortes</strong> que seus primos normais e com elementos alterados.
+                                    </p>
+                                    <p>
+                                        Agora, imagine o impensável... Um Pokémon de Alola que também nasceu com a genética perfeita de 95%. Um <strong>Alola Shiny</strong>. Isso, meu jovem, é o ápice da cadeia alimentar. Eles são <strong>10% mais fortes que um Shiny comum</strong>. Se você encontrar um desses, não hesite. Use tudo o que tiver. É uma lenda viva caminhando na sua frente.
+                                    </p>
+                                </div>
+                            </div>
+                            
+                            {/* Visualização de Escala - CHARIZARD COMPLETO (Estilo Clean) */}
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                                <h3 className="font-bold text-slate-800 mb-6 flex items-center">
+                                    <Icon name="bar-chart-2" className="mr-2 text-lazuli-600" />
+                                    Stats Base (Charizard)
+                                </h3>
+                                
+                                <div className="space-y-4">
+                                    {[
+                                        { label: "HP", base: 78, color: "bg-green-500", shadow: "bg-green-200" },
+                                        { label: "Ataque", base: 84, color: "bg-red-500", shadow: "bg-red-200" },
+                                        { label: "Defesa", base: 78, color: "bg-blue-500", shadow: "bg-blue-200" },
+                                        { label: "Sp. Atk", base: 109, color: "bg-purple-500", shadow: "bg-purple-200" },
+                                        { label: "Sp. Def", base: 85, color: "bg-indigo-500", shadow: "bg-indigo-200" },
+                                        { label: "Speed", base: 100, color: "bg-yellow-500", shadow: "bg-yellow-200" }
+                                    ].map((stat) => {
+                                        const commonValue = Math.floor(stat.base * 0.6);
+                                        const shinyValue = Math.floor(stat.base * 1.3);
+                                        // Max value for bar scaling (considering shiny buff fits inside)
+                                        const maxScale = 160; 
+                                        
+                                        return (
+                                            <div key={stat.label} className="flex items-center text-sm group">
+                                                {/* Label */}
+                                                <div className="w-20 font-bold text-slate-500 uppercase text-xs tracking-wider shrink-0">
+                                                    {stat.label}
+                                                </div>
+                                                
+                                                {/* Bar Container */}
+                                                <div className="flex-1 mx-3 relative h-4 bg-slate-100 rounded-full overflow-hidden">
+                                                    {/* Shiny Ghost Bar (130%) */}
+                                                    <div 
+                                                        className={`absolute top-0 left-0 h-full ${stat.shadow} opacity-60`} 
+                                                        style={{width: `${(shinyValue / maxScale) * 100}%`}}
+                                                    ></div>
+                                                    
+                                                    {/* Base Stat Bar (100%) */}
+                                                    <div 
+                                                        className={`absolute top-0 left-0 h-full ${stat.color} rounded-full`} 
+                                                        style={{width: `${(stat.base / maxScale) * 100}%`}}
+                                                    ></div>
+
+                                                    {/* Common Stat Bar (60%) - Overlay Escuro */}
+                                                    <div 
+                                                        className="absolute top-0 left-0 h-full bg-black/20 border-r border-white/20" 
+                                                        style={{width: `${(commonValue / maxScale) * 100}%`}}
+                                                    ></div>
+                                                </div>
+                                                
+                                                {/* Value Display */}
+                                                <div className="w-24 text-right flex items-center justify-end space-x-2 shrink-0">
+                                                    <span className="text-[10px] text-slate-400 line-through decoration-slate-300" title="Média Comum (60%)">
+                                                        {commonValue}
+                                                    </span>
+                                                    <span className="font-bold text-slate-700" title="Base Natural (100%)">
+                                                        {stat.base}
+                                                    </span>
+                                                    <span className="text-xs font-bold text-yellow-600 bg-yellow-100 px-1 rounded" title="Shiny God Mode (+30%)">
+                                                        {shinyValue}
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+
+                                <div className="mt-6 flex flex-wrap justify-end gap-4 text-[10px] uppercase font-bold text-slate-400">
+                                    <div className="flex items-center"><div className="w-3 h-3 bg-slate-300 rounded-sm mr-1 bg-black/20"></div> Comum (60%)</div>
+                                    <div className="flex items-center"><div className="w-3 h-3 bg-lazuli-500 rounded-sm mr-1"></div> Natural (100%)</div>
+                                    <div className="flex items-center"><div className="w-3 h-3 bg-lazuli-200 rounded-sm mr-1"></div> Shiny (+30%)</div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'nature' && (
+                        <div className="space-y-6 animate-fade-in">
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                    <Icon name="sprout" className="mr-3 text-green-500" size={24} />
+                                    A Influência da Natureza
+                                </h2>
+                                <p className="text-slate-600 mb-6">
+                                    A Natureza define a personalidade de um Pokémon e aplica modificadores diretos aos seus atributos.
+                                    Cada natureza (exceto as neutras) aumenta um status em <strong className="text-green-600">+10%</strong> e diminui outro em <strong className="text-red-600">-10%</strong>.
+                                </p>
+                                
+                                <div className="grid md:grid-cols-2 gap-4 mb-6">
+                                    <div className="bg-lazuli-50 p-4 rounded-lg border border-lazuli-100">
+                                        <h3 className="font-bold text-lazuli-800 mb-2 flex items-center"><Icon name="trending-up" size={16} className="mr-2"/> Buff (+10%)</h3>
+                                        <p className="text-sm text-slate-600">Indicado em <span className="text-green-600 font-bold">verde</span> ou vermelho (dependendo do jogo). Foca no ponto forte do seu Pokémon.</p>
+                                    </div>
+                                    <div className="bg-red-50 p-4 rounded-lg border border-red-100">
+                                        <h3 className="font-bold text-red-800 mb-2 flex items-center"><Icon name="trending-down" size={16} className="mr-2"/> Debuff (-10%)</h3>
+                                        <p className="text-sm text-slate-600">Indicado em <span className="text-red-600 font-bold">vermelho</span> ou azul. Geralmente sacrifica um status inútil (ex: Atq em mago).</p>
+                                    </div>
+                                </div>
+
+                                <div className="bg-slate-50 rounded-xl border border-slate-200 overflow-hidden card-border">
+                                    <table className="w-full text-left text-sm text-slate-600">
+                                        <thead className="bg-slate-100 text-slate-700 uppercase font-bold text-xs">
+                                            <tr>
+                                                <th className="px-6 py-3">Natureza</th>
+                                                <th className="px-6 py-3 text-green-600">Buff</th>
+                                                <th className="px-6 py-3 text-red-600">Debuff</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className="divide-y divide-slate-100">
+                                            {naturesData.map((n, i) => (
+                                                <tr key={i} className="hover:bg-white transition-colors">
+                                                    <td className="px-6 py-2 font-bold">{n.name}</td>
+                                                    <td className="px-6 py-2 text-green-700 font-medium">{n.buff !== '-' ? n.buff : <span className="text-slate-400 font-normal">Neutro</span>}</td>
+                                                    <td className="px-6 py-2 text-red-700 font-medium">{n.debuff !== '-' ? n.debuff : <span className="text-slate-400 font-normal">Neutro</span>}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'alola' && (
+                        <div className="space-y-6 animate-fade-in">
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                    <Icon name="globe" className="mr-2 text-cyan-600" />
+                                    Formas de Alola
+                                </h2>
+                                <p className="text-slate-600 mb-4">
+                                    Originários de um arquipélago tropical distante, estes Pokémon se adaptaram a ambientes únicos. Essa adaptação os tornou biologicamente superiores aos seus primos de Kanto.
+                                </p>
+                                <div className="grid md:grid-cols-2 gap-4">
+                                    <div className="bg-cyan-50 p-4 rounded-lg border border-cyan-100">
+                                        <h3 className="font-bold text-cyan-800 mb-2">Bônus Regional</h3>
+                                        <p className="text-sm text-cyan-700">+10% em todos os status base em relação à forma normal.</p>
+                                    </div>
+                                    <div className="bg-cyan-50 p-4 rounded-lg border border-cyan-100">
+                                        <h3 className="font-bold text-cyan-800 mb-2">Mutação Elemental</h3>
+                                        <p className="text-sm text-cyan-700">Tipagens alteradas (ex: Vulpix torna-se Gelo, Raichu torna-se Elétrico/Psíquico).</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+
+                    {activeTab === 'shiny' && (
+                        <div className="space-y-6 animate-fade-in">
+                            <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow relative overflow-hidden">
+                                <div className="absolute top-0 right-0 bg-yellow-100 w-32 h-32 rounded-full blur-2xl opacity-50 -mr-10 -mt-10"></div>
+                                <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                    <Icon name="star" className="mr-2 text-yellow-500" />
+                                    A Lenda Shiny
+                                </h2>
+                                <p className="text-slate-600 mb-6">
+                                    O fenômeno Shiny ocorre apenas quando um Pokémon nasce com <strong>95% a 100%</strong> de seu potencial genético. É a manifestação física da perfeição.
+                                </p>
+                                
+                                <div className="space-y-4">
+                                    <div className="flex items-center p-4 bg-yellow-50 rounded-lg border border-yellow-200">
+                                        <div className="bg-yellow-100 p-2 rounded-full mr-4 text-yellow-600"><Icon name="zap" /></div>
+                                        <div>
+                                            <h3 className="font-bold text-yellow-800">God Mode (+30%)</h3>
+                                            <p className="text-sm text-yellow-700">Um bônus massivo que quebra o teto natural de força da espécie.</p>
+                                        </div>
+                                    </div>
+                                    <div className="flex items-center p-4 bg-purple-50 rounded-lg border border-purple-200">
+                                        <div className="bg-purple-100 p-2 rounded-full mr-4 text-purple-600"><Icon name="crown" /></div>
+                                        <div>
+                                            <h3 className="font-bold text-purple-800">Alola Shiny (Apex)</h3>
+                                            <p className="text-sm text-purple-700">A combinação suprema. +10% sobre o bônus Shiny. O ser mais forte possível.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    )}
+                </div>
+            );
+        };
+
+           const DungeonView = () => {
+            const [activeRotation, setActiveRotation] = useState('water');
+            const rotations = {
+                water: [{ tier: "Tier 1", ids: [129, 118], pokes: "Magikarp / Goldeen", normal: 50, shiny: 5 }, { tier: "Tier 2", ids: [60, 98], pokes: "Poliwag / Krabby", normal: 35, shiny: 3 }, { tier: "Tier 3", ids: [7], pokes: "Squirtle", normal: 20, shiny: 2 }, { tier: "Tier 4", ids: [119, 99], pokes: "Seaking / Kingler", normal: 10, shiny: 1 }],
+                fire: [{ tier: "Tier 1", ids: [37, 58], pokes: "Vulpix / Growlithe", normal: 50, shiny: 5 }, { tier: "Tier 2", ids: [77, 126], pokes: "Ponyta / Magmar", normal: 35, shiny: 3 }, { tier: "Tier 3", ids: [4], pokes: "Charmander", normal: 20, shiny: 2 }, { tier: "Tier 4", ids: [38, 78], pokes: "Ninetales / Rapidash", normal: 10, shiny: 1 }],
+                grass: [{ tier: "Tier 1", ids: [43, 69], pokes: "Oddish / Bellsprout", normal: 50, shiny: 5 }, { tier: "Tier 2", ids: [102, 114], pokes: "Exeggcute / Tangela", normal: 35, shiny: 3 }, { tier: "Tier 3", ids: [1], pokes: "Bulbasaur", normal: 20, shiny: 2 }, { tier: "Tier 4", ids: [45, 71], pokes: "Vileplume / Victreebel", normal: 10, shiny: 1 }]
+            };
+            const floorSpawns = rotations[activeRotation];
+            return (
+                <div className="animate-fade-in space-y-8">
+                    {/* Header */}
+                    <div className="bg-[#202e5c] rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+                        <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-10 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                        <div className="relative z-10 flex flex-col md:flex-row justify-between items-start md:items-center">
+                            <div>
+                                <div className="flex items-center mb-2">
+                                    <span className="bg-white/20 text-white text-xs font-bold px-2 py-1 rounded uppercase tracking-widest mr-2">Evento Diário</span>
+                                    <span className="bg-lazuli-800 text-white text-xs font-bold px-2 py-1 rounded flex items-center"><Icon name="clock" size={12} className="mr-1"/> 1 Hora Limite</span>
+                                </div>
+                                <h1 className="text-4xl font-extrabold mb-2 flex items-center">
+                                    <Icon name="help-circle" className="mr-3" size={36} />
+                                    Dungeon Elemental
+                                </h1>
+                                <p className="text-lazuli-50 max-w-xl">
+                                    Um portal instável se abriu. A energia elemental lá dentro muda constantemente.
+                                    Entre para descobrir qual elemento domina a dungeon hoje.
+                                </p>
+                            </div>
+                            <div className="mt-6 md:mt-0 bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+                                <div className="text-center">
+                                    <div className="text-xs text-white/80 uppercase font-bold mb-1">Custo de Entrada</div>
+                                    <div className="flex items-center justify-center font-bold text-xl">
+                                        <Icon name="key" className="mr-2 text-yellow-300" />
+                                        1x Chave Misteriosa
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Rules & Rewards */}
+                    <div className="grid md:grid-cols-2 gap-6">
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow">
+                            <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                <Icon name="alert-triangle" className="mr-2 text-orange-500" />
+                                Regras de Sobrevivência
+                            </h2>
+                            <ul className="space-y-3 text-sm text-slate-700">
+                                <li className="flex items-start">
+                                    <Icon name="x-circle" size={16} className="text-red-500 mr-2 mt-0.5 shrink-0" />
+                                    <span><strong>Sem Ouro:</strong> A energia caótica impede o drop de moedas.</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Icon name="check-circle" size={16} className="text-green-500 mr-2 mt-0.5 shrink-0" />
+                                    <span><strong>Itens Normais:</strong> Drops de materiais e berries funcionam.</span>
+                                </li>
+                                <li className="flex items-start">
+                                    <Icon name="refresh-cw" size={16} className="text-lazuli-500 mr-2 mt-0.5 shrink-0" />
+                                    <span><strong>Sincronia Estável:</strong> Se desconectar, o portal permanece aberto por 1 hora.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div className="bg-white p-6 rounded-xl border border-slate-200 wiki-shadow relative overflow-hidden">
+                            <div className="absolute top-0 right-0 bg-yellow-400 w-20 h-20 transform rotate-45 translate-x-10 -translate-y-10"></div>
+                            <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center">
+                                <Icon name="gift" className="mr-2 text-purple-600" />
+                                Recompensa do Andar 1
+                            </h2>
+                            <p className="text-sm text-slate-500 mb-4">Complete o desafio para receber o Baú do Aventureiro:</p>
+                            <div className="flex gap-4">
+                                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 flex flex-col items-center justify-center text-center">
+                                    <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center mb-2 text-red-600">
+                                        <Icon name="circle-dot" />
+                                    </div>
+                                    <div className="font-bold text-slate-800">25x Poké Balls</div>
+                                    <div className="text-xs text-slate-500">(Vinculado)</div>
+                                </div>
+                                <div className="flex-1 bg-slate-50 border border-slate-200 rounded-lg p-3 flex flex-col items-center justify-center text-center">
+                                    <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center mb-2 text-yellow-600">
+                                        <Icon name="heart-pulse" />
+                                    </div>
+                                    <div className="font-bold text-slate-800">20x Revives</div>
+                                    <div className="text-xs text-slate-500">(Vinculado)</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Spawn Table */}
+                <div className="bg-white rounded-xl border border-slate-200 wiki-shadow overflow-hidden">
+                <div className="bg-lazuli-50 p-2 border-b border-lazuli-100 flex flex-col sm:flex-row items-center justify-between gap-2">
+                    <div className="flex gap-2 p-1">
+                        <button onClick={() => setActiveRotation('water')} 
+                            className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeRotation === 'water' ? 'bg-blue-500 text-white' : 'text-blue-500 hover:bg-blue-100'}`}>Água</button>
+                        <button onClick={() => setActiveRotation('fire')} 
+                            className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeRotation === 'fire' ? 'bg-red-500 text-white' : 'text-red-500 hover:bg-red-100'}`}>Fogo</button>
+                        <button onClick={() => setActiveRotation('grass')} 
+                            className={`px-4 py-2 rounded-lg text-sm font-bold transition ${activeRotation === 'grass' ? 'bg-green-500 text-white' : 'text-green-500 hover:bg-green-100'}`}>Grama</button>
+                            </div>
+                            <div className="text-xs font-bold bg-white text-lazuli-800 px-3 py-1 rounded-full border border-lazuli-200 mr-2">Inimigos: 126
+                        </div>
+                        </div>
+                        <table className="w-full text-left text-sm text-slate-600">
+                            <thead className="bg-lazuli-50/50 text-slate-700 uppercase font-bold text-xs">
+                        <tr>
+                        <th className="px-6 py-4">Pokémon</th>
+                        <th className="px-6 py-4">Nome</th>
+                        <th className="px-6 py-4 text-center">Normal</th>
+                        <th className="px-6 py-4 text-center text-yellow-600">Shiny</th>
+                        <th className="px-6 py-4 text-right">Total</th></tr></thead><tbody className="divide-y divide-slate-100">
+                            {floorSpawns.map((row, i) => <tr key={i}><td className="px-6 py-3 flex gap-1">{row.ids.map(id => 
+                                <img key={id} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} 
+                                className="w-8 h-8 pixel-art"/>)}</td><td className="px-6 py-3">{row.pokes}</td><td className="px-4 py-2 text-center">{row.normal}
+                                    </td>
+                                    <td className="px-4 py-2 text-center font-bold text-yellow-600">{row.shiny}</td>
+                                    <td className="px-4 py-2 text-right font-bold">{row.normal+row.shiny}</td></tr>)}
+                                    </tbody>
+                                    </table>
+                                    </div>
+
+                </div>
+            );
+        };
+
+       
+
+               
+const GymView = () => (
+            <div className="animate-fade-in space-y-8">
+                 <div className="bg-[#202e5c] rounded-2xl p-8 text-white shadow-lg relative overflow-hidden">
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -mr-16 -mt-16 blur-3xl"></div>
+                    <h1 className="text-3xl font-extrabold mb-4 flex items-center">
+                        <Icon name="award" className="mr-3 text-yellow-400" size={32}/>                            Ginásios & Liga</h1>
+                        <p className="text-lazuli-50 text-lg leading-relaxed max-w-2xl">Em Wiki Lazuli, a jornada é sua. Enfrente os 8 Ginásios na ordem que preferir. 
+                            Os Líderes de Ginásio utilizam um sistema de <strong>Nível Dinâmico</strong>: 
+                            seus times ficarão mais fortes conforme você obtém mais insígnias.</p></div>
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                    {gymData.map((gym, idx) => (
+                        <div key={idx} className="bg-white p-5 rounded-xl wiki-shadow hover:scale-105 transition golden-card">
+                            <div className="flex justify-between items-start mb-3">
+                                <TypeBadge type={gym.type} />
+                                <Icon name="shield" size={16} className="text-slate-400" />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746]">{gym.leader}</h3>
+                            <p className="text-sm text-[#be8746] mb-2">{gym.location}</p>
+                            <div className="text-xs font-bold bg-slate-100 text-[#be8746] px-2 py-1 rounded inline-block">{gym.badge}</div>
+                            {/* Time do Líder */}
+                            <div className="mt-3 pt-3 border-t border-slate-100">
+                                <div className="text-[10px] uppercase font-bold text-[#be8746] mb-1">Time</div>
+                                <div className="flex space-x-1">
+                                    {gym.team.map(id => (
+                                        <img key={id} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} className="w-8 h-8 pixel-art" />
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+                <div className="bg-white rounded-xl border border-slate-200 wiki-shadow overflow-hidden"><div className="bg-lazuli-50 p-4 border-b border-lazuli-100 flex items-center"><Icon name="unlock" className="text-lazuli-600 mr-2" size={20} />
+                        <h2 className="text-lg font-bold text-lazuli-900">Sistema de Progressão por Insígnias</h2></div>
+                <table className="w-full text-left text-sm border-2 border-[#be8746] text-[#be8746]">
+                    <thead className="bg-white uppercase font-bold text-xs">
+                            <tr>
+                                <th className="px-6 py-4 border-b border-[#be8746]">Insígnias</th>
+                                <th className="px-6 py-4 border-b border-[#be8746]">Funcionalidades Liberadas</th>
+                            </tr>
+                        </thead>
+                    <tbody className="divide-y divide-[#be8746]">
+                    <tr><td className="px-6 py-3 font-bold">1 Insígnia</td>
+                        <td className="px-6 py-4">Loja Tier 1</td>
+                        </tr>
+                        <tr><td className="px-6 py-3 font-bold">3 Insígnias</td>
+                            <td className="px-6 py-4">Daycare</td></tr><tr><td className="px-6 py-3 font-bold">5 Insígnias</td>
+                            <td className="px-6 py-4">HMs</td></tr><tr><td className="px-6 py-3 font-bold">7 Insígnias</td>
+                            <td className="px-6 py-4">Mega Evolução</td></tr><tr className="bg-yellow-50">
+                            <td className="px-6 py-4 font-bold text-[#be8746]">8 Insígnias</td>
+                            <td className="px-6 py-4 text-[#be8746] font-medium">Liga Pokémon</td></tr>
+                            </tbody></table></div>
+                <div className="border-2 border-yellow-400 bg-white text-[#be8746] rounded-xl p-8 text-center relative overflow-hidden shadow-2xl">
+                    <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-transparent to-[#be8746]/10 z-0"></div>
+                    <h2 className="text-4xl font-extrabold text-[#be8746] mb-4 flex justify-center items-center">A Elite Quatro</h2>
+                    <p className="text-[#be8746] max-w-2xl mx-auto mb-8 text-lg">Após conquistar as 8 insígnias, use sua Chave de Acesso para desafiar a Elite Quatro.
+                            Prepare-se para a batalha mais difícil da sua vida.</p>
+                    <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
+                        {[
+                             { name: "Lorelei", type: "Gelo", team: [87, 91, 80, 124, 131] },
+                             { name: "Bruno", type: "Lutador", team: [95, 107, 106, 95, 68] },
+                             { name: "Agatha", type: "Fantasma", team: [94, 42, 93, 24, 94] },
+                             { name: "Lance", type: "Dragão", team: [130, 148, 148, 142, 149] }
+                        ].map((member, idx) => (
+                            <div key={idx} className="bg-[#324b98] p-4 rounded border border-[#324b98] text-white">
+                                <h3 className="font-bold text-[#be8746] mb-1">{member.name}</h3>
+                                <div className="text-xs text-[#be8746] mb-2">{member.type}</div>
+                                <div className="flex flex-wrap gap-1">
+                                    {member.team.map((id, i) => (
+                                        <img key={i} src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${id}.png`} className="w-8 h-8 pixel-art" />
+                                    ))}
+                                </div>
+                                
+                            </div>
+                        ))}
+                        
+                    </div>
+                </div>
+            </div>
+        );
+                
+
+        // HOME VIEW ATUALIZADA
+        const WikiHome = ({ onSelect, onNavigate }) => (
+            <div className="space-y-8 animate-fade-in">
+                {/* Hero Banner como Imagem Rica */}
+                <div className="relative rounded-3xl p-8 md:p-12 text-white shadow-2xl overflow-hidden group">
+                    {/* Background Layer (Imagem Abstrata/Blur) */}
+                    <div className="absolute inset-0 bg-lazuli-900">
+                        <img
+                            src="./imagem/misty1.jpg"
+                            className="absolute w-[150%] h-[150%] -top-1/4 -left-1/4 opacity-10 blur-3xl scale-150"
+                            alt="Background Texture"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-r from-lazuli-900/95 via-lazuli-800/90 to-transparent"></div>
+                        
+                        {/* Partículas Decorativas */}
+                        <div className="absolute top-10 right-20 w-4 h-4 bg-cyan-400 rounded-full opacity-50 blur-sm animate-pulse"></div>
+                        <div className="absolute bottom-20 left-1/2 w-2 h-2 bg-white rounded-full opacity-30 blur-[1px]"></div>
+                    </div>
+
+                    <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-8">
+                        {/* Texto e Call to Action */}
+                        <div className="text-center md:text-left max-w-xl">
+                            <div className="inline-flex items-center bg-white/10 backdrop-blur-md px-3 py-1 rounded-full text-xs font-bold mb-6 border border-white/20 shadow-sm text-cyan-200">
+                                <Icon name="sparkles" size={12} className="mr-2" /> A Jornada Definitiva
+                            </div>
+                            
+                            <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight leading-tight">
+                                Wiki Lazuli <br/>
+                                <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-white filter drop-shadow-lg">Lazuli</span>
+                            </h1>
+                            
+                            <p className="text-lazuli-100 text-lg leading-relaxed mb-8 font-medium max-w-md mx-auto md:mx-0">
+                                Explore segredos antigos, domine masmorras elementais e desperte o verdadeiro potencial oculto dos seus parceiros.
+                            </p>
+                        </div>
+
+                        {/* Mascote / Imagem de Destaque */}
+                        <div className="relative hidden md:block w-80 h-80 lg:w-96 lg:h-96 shrink-0 transform transition-transform duration-700 hover:scale-105">
+                             <div className="absolute inset-0 bg-gradient-to-tr from-cyan-500 to-blue-600 rounded-full opacity-20 blur-[80px] animate-pulse"></div>
+                             <img
+                                src="./imagem/misty1.jpg"
+                                className="w-full h-full object-contain drop-shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative z-10"
+                                alt="Misty em destaque"
+                             />
+                        </div>
+                    </div>
+                </div>
+
+                {/* Ícones de Redes Sociais */}
+                <div className="flex flex-wrap items-center justify-center gap-4 md:gap-6">
+                    {["instagram", "twitter", "facebook", "youtube", "twitch"].map((icon) => (
+                        <div
+                            key={icon}
+                            className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-white shadow-md border border-slate-200 flex items-center justify-center hover:-translate-y-1 transition-transform duration-200"
+                            title={icon.charAt(0).toUpperCase() + icon.slice(1)}
+                        >
+                            <Icon name={icon} size={18} className="text-lazuli-600" />
+                        </div>
+                    ))}
+                </div>
+
+                {/* CARDS DE RESUMO PARA CADA ABA */}
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {/* Card Pokédex */}
+                    <div onClick={() => onNavigate('pokedex')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         {/* Placeholder Imagem Card */}
+                        <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração da Pokédex" className="w-full h-full object-cover" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Pokédex</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="book-open" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Pokédex Nacional</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Lista completa dos 151 originais, incluindo formas regionais de Alola e Galar.</p>
+                        </div>
+                    </div>
+
+                    {/* Card Ginásios */}
+                    <div onClick={() => onNavigate('gym')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração dos Ginásios" className="w-full h-full object-cover" loading="lazy" />
+                             <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Ginásio</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-yellow-100 rounded-lg flex items-center justify-center text-yellow-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="award" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Ginásios & Liga</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Guia dos líderes de Kanto, sistema de progressão e o desafio final da Elite Quatro.</p>
+                        </div>
+                    </div>
+
+                     {/* Card Held Items */}
+                    <div onClick={() => onNavigate('helditems')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração dos Held Items" className="w-full h-full object-cover" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Itens</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="backpack" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Held Items</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Estratégias de itens equipáveis e o sistema exclusivo de Tiers (A, B, C).</p>
+                        </div>
+                    </div>
+
+                    {/* Card Dungeon */}
+                    <div onClick={() => onNavigate('dungeon')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração da Dungeon" className="w-full h-full object-cover" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Dungeon</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-indigo-100 rounded-lg flex items-center justify-center text-indigo-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="droplets" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Dungeon Elemental</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Desafios diários sem ouro com regras de sobrevivência e rotação misteriosa.</p>
+                        </div>
+                    </div>
+
+                    {/* Card Potencial */}
+                    <div onClick={() => onNavigate('potential')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração de Potencial" className="w-full h-full object-cover" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Potencial</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="zap" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Potencial Oculto</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Entenda IVs, Shinies God Mode (+30%) e Formas Regionais (Alola/Galar).</p>
+                        </div>
+                    </div>
+
+                    {/* Card Persistência */}
+                    <div onClick={() => onNavigate('persistence')} className="cursor-pointer group bg-white rounded-2xl wiki-shadow overflow-hidden hover:shadow-xl transition-all duration-300 hover:-translate-y-1 home-feature-card golden-card">
+                         <div className="h-32 bg-slate-100 relative overflow-hidden">
+                            <img src="./imagem/misty1.jpg" alt="Ilustração de Persistência" className="w-full h-full object-cover" loading="lazy" />
+                            <span className="absolute bottom-2 right-2 text-[10px] text-slate-800 bg-white/80 px-2 rounded">Img Persistência</span>
+                        </div>
+                        <div className="p-6">
+                            <div className="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center text-teal-600 mb-4 group-hover:scale-110 transition-transform">
+                                <Icon name="repeat" size={20} />
+                            </div>
+                            <h3 className="text-lg font-bold text-[#be8746] mb-2">Lei da Persistência</h3>
+                            <p className="text-sm text-[#be8746] leading-relaxed">Sistema de piedade que garante sua captura lendária após tentativas.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        );
+
+        const App = () => {
+            const [view, setView] = useState('home');
+            const [selectedPokemon, setSelectedPokemon] = useState(null);
+            const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+            const [pokemonList, setPokemonList] = useState([]);
+            const [isLoading, setIsLoading] = useState(true);
+            const [loadingProgress, setLoadingProgress] = useState(0);
+            const [searchTerm, setSearchTerm] = useState('');
+            const [typeFilter, setTypeFilter] = useState('todos');
+            const [regionFilter, setRegionFilter] = useState('todos');
+
+            // BATCH LOADING LOGIC - Mantém a interface leve enquanto carrega tudo
+            useEffect(() => {
+                const loadAllPokemon = async () => {
+                    setIsLoading(true);
+
+                    const baseIds = Array.from({length: 151}, (_, i) => i + 1);
+                    const extraIds = [863]; // Perrserker
+                    const allPokemonIds = [...baseIds, ...extraIds];
+                    const idToIndex = new Map(allPokemonIds.map((id, index) => [id, index]));
+
+                    // 1. Create base list immediately so UI appears
+                    const baseList = allPokemonIds.map((id) => ({
+                        id,
+                        name: 'Loading...',
+                        image: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`,
+                        types: []
+                    }));
+                    setPokemonList(baseList);
+
+                    // 2. Fetch basic data in chunks to prevent freeze
+                    const chunkSize = 20;
+                    for (let i = 0; i < allPokemonIds.length; i += chunkSize) {
+                        const chunk = allPokemonIds.slice(i, i + chunkSize);
+
+                        const chunkData = await Promise.all(chunk.map(id =>
+                            fetch(`https://pokeapi.co/api/v2/pokemon/${id}`).then(r => r.json()).catch(() => null)
+                        ));
+
+                        setPokemonList(prev => {
+                            const newList = [...prev];
+                            chunkData.forEach((data) => {
+                                if (data) {
+                                    const idx = idToIndex.get(data.id);
+                                    if (idx !== undefined) {
+                                        newList[idx] = {
+                                            id: data.id,
+                                            name: data.name,
+                                            image: data.sprites.other['official-artwork'].front_default,
+                                            types: data.types.map(t => typeTranslations[t.type.name] || t.type.name)
+                                        };
+                                    }
+                                }
+                            });
+                            return newList;
+                        });
+
+                        setLoadingProgress(Math.round((Math.min(i + chunkSize, allPokemonIds.length) / allPokemonIds.length) * 100));
+                        await new Promise(r => setTimeout(r, 50)); // Small delay for UI breathe
+                    }
+                    setIsLoading(false);
+                };
+                loadAllPokemon();
+            }, []);
+
+            const handleSelectPokemon = (pokemon) => {
+                setSelectedPokemon(pokemon);
+                setView('detail');
+                window.scrollTo(0, 0);
+            };
+
+            const typeOptions = Array.from(new Set(Object.values(typeTranslations)));
+
+            const displayedPokemon = pokemonList.filter((p) => {
+                const matchesSearch = p.name.toLowerCase().includes(searchTerm.toLowerCase());
+                const matchesType = typeFilter === 'todos' || (p.types && p.types.includes(typeFilter));
+
+                const hasAlola = Boolean(alolaMapping[p.id]);
+                const hasGalar = Boolean(galarMapping[p.id]);
+
+                const matchesRegion = regionFilter === 'todos'
+                    ? true
+                    : regionFilter === 'alola'
+                        ? hasAlola
+                        : regionFilter === 'galar'
+                            ? hasGalar
+                            : !hasAlola && !hasGalar;
+
+                return matchesSearch && matchesType && matchesRegion;
+            });
+
+            return (
+                <div className="flex min-h-screen bg-app text-slate-800 font-sans">
+                    {isMobileMenuOpen && <div className="fixed inset-0 bg-black bg-opacity-50 z-20 md:hidden" onClick={() => setIsMobileMenuOpen(false)}></div>}
+                    
+                    <aside className={`fixed md:sticky top-0 h-screen w-64 bg-lazuli-600 text-white border-r border-lazuli-700 shadow-sm z-30 transform transition-transform duration-300 md:translate-x-0 ${isMobileMenuOpen ? 'translate-x-0' : '-translate-x-full'}`}>
+                        <div className="p-6 border-b border-lazuli-500 flex items-center justify-between">
+                            <div className="flex items-center space-x-2 text-white font-extrabold text-xl">
+                                <Icon name="book-open" /> <span>Wiki Lazuli</span>
+                            </div>
+                            <button onClick={() => setIsMobileMenuOpen(false)} className="md:hidden text-white/70"><Icon name="x" /></button>
+                        </div>
+                        <div className="p-4 space-y-2">
+                            <div className="text-xs font-bold text-white/70 uppercase px-3 mb-2">Navegação</div>
+                            <NavButton icon="home" label="Início" active={view === 'home'} onClick={() => setView('home')} />
+                            <NavButton icon="grid" label="Pokédex" active={view === 'pokedex'} onClick={() => setView('pokedex')} />
+                            <NavButton icon="award" label="Ginásios" active={view === 'gym'} onClick={() => setView('gym')} />
+                            <NavButton icon="backpack" label="Held Itens" active={view === 'helditems'} onClick={() => setView('helditems')} />
+                            <NavButton icon="droplets" label="Dungeon" active={view === 'dungeon'} onClick={() => setView('dungeon')} />
+                            <NavButton icon="sparkles" label="Potencial Oculto" active={view === 'potential'} onClick={() => setView('potential')} />
+                            <NavButton icon="repeat" label="Lei da Persistência" active={view === 'persistence'} onClick={() => setView('persistence')} />
+                        </div>
+                    </aside>
+
+                    <main className="flex-1 min-w-0">
+                        <div className="md:hidden p-4">
+                            <button
+                                onClick={() => setIsMobileMenuOpen(true)}
+                                className="flex items-center gap-2 px-4 py-2 rounded-lg border border-slate-200 text-lazuli-600 font-semibold shadow-sm"
+                            >
+                                <Icon name="menu" />
+                                <span>Abrir menu</span>
+                            </button>
+                        </div>
+
+                        {isLoading && <div className="h-1 w-full bg-slate-200"><div className="h-full bg-lazuli-500 transition-all duration-300" style={{width: `${loadingProgress}%`}}></div></div>}
+
+                        <div className="p-4 md:p-8 max-w-6xl mx-auto">
+                            {view === 'home' && <WikiHome onSelect={handleSelectPokemon} onNavigate={setView} />}
+                            {view === 'pokedex' && (
+                                <div className="animate-fade-in">
+                                    <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between mb-6">
+                                        <div>
+                                            <h1 className="text-2xl font-bold text-slate-800">Pokédex Nacional</h1>
+                                            <p className="text-sm text-slate-500">Filtre por tipo elemental, forma regional ou busque pelo nome.</p>
+                                        </div>
+                                        <div className="flex flex-col gap-3 w-full md:w-auto">
+                                            <div className="relative w-full md:w-72">
+                                                <Icon name="search" className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                                                <input
+                                                    type="text"
+                                                    value={searchTerm}
+                                                    onChange={(e) => setSearchTerm(e.target.value)}
+                                                    placeholder="Buscar Pokémon por nome"
+                                                    className="w-full pl-10 pr-3 py-2 border border-slate-200 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-lazuli-400"
+                                                />
+                                            </div>
+                                            <div className="flex flex-wrap gap-3">
+                                                <select
+                                                    value={typeFilter}
+                                                    onChange={(e) => setTypeFilter(e.target.value)}
+                                                    className="w-full md:w-72 px-3 py-2 border border-slate-200 rounded-lg shadow-sm text-sm bg-white focus:outline-none focus:ring-2 focus:ring-lazuli-400"
+                                                >
+                                                    <option value="todos">Todos os tipos</option>
+                                                    {typeOptions.map(type => (
+                                                        <option key={type} value={type}>{type}</option>
+                                                    ))}
+                                                </select>
+                                                <select
+                                                    value={regionFilter}
+                                                    onChange={(e) => setRegionFilter(e.target.value)}
+                                                    className="w-full md:w-72 px-3 py-2 border border-slate-200 rounded-lg shadow-sm text-sm bg-white focus:outline-none focus:ring-2 focus:ring-lazuli-400"
+                                                >
+                                                    <option value="todos">Todas as regiões</option>
+                                                    <option value="kanto">Kanto</option>
+                                                    <option value="alola">Com forma Alola</option>
+                                                    <option value="galar">Com forma Galar</option>
+                                                </select>
+                                            </div>
+                                            <span className="text-sm text-slate-500 text-left">{displayedPokemon.length} Pokémons encontrados</span>
+                                        </div>
+                                    </div>
+                                    {displayedPokemon.length > 0 ? (
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                                            {displayedPokemon.map(p => <PokemonCard key={p.id} pokemon={p} onClick={handleSelectPokemon} />)}
+                                        </div>
+                                    ) : (
+                                        <div className="bg-white border border-slate-200 rounded-xl p-6 text-center text-[#be8746] shadow-sm card-border">
+                                            Nenhum Pokémon encontrado com esses filtros.
+                                        </div>
+                                    )}
+                                </div>
+                            )}
+                            {view === 'detail' && <DetailView pokemon={selectedPokemon} onBack={() => setView('pokedex')} />}
+                            {view === 'gym' && <GymView />}
+                            {view === 'helditems' && <HeldItemsView />}
+                            {view === 'dungeon' && <DungeonView />}
+                            {view === 'potential' && <PotentialView />}
+                            {view === 'persistence' && <PersistenceView />}
+                        </div>
+                    </main>
+                </div>
+            );
+        };
+
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
 </body>
 </html>
-
